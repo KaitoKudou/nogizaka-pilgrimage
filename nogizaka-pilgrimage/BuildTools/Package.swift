@@ -1,8 +1,10 @@
-//
-//  Package.swift
-//  nogizaka-pilgrimage
-//
-//  Created by 工藤 海斗 on 2022/12/27.
-//
+// swift-tools-version:5.6
+import PackageDescription
 
-import Foundation
+let package = Package(
+    name: "BuildTools",
+    dependencies: [
+        .package(url: "https://github.com/mac-cain13/R.swift", from: "6.1.0")],
+    targets: [.target(name: "BuildTools", path: "")]
+)
+
