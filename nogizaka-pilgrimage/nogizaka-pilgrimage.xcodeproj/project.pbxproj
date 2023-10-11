@@ -1,0 +1,766 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E7235A72297D75D500E1339A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7235A71297D75D500E1339A /* Theme.swift */; };
+		E73E09122965C21E00A1204E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09112965C21E00A1204E /* MainView.swift */; };
+		E73E09182965C43000A1204E /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09172965C43000A1204E /* CheckInView.swift */; };
+		E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E73E091A2965C77E00A1204E /* Colors.xcassets */; };
+		E73E091E2965CACA00A1204E /* PilgrimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E091D2965CACA00A1204E /* PilgrimageView.swift */; };
+		E73E092E2965D18700A1204E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E73E09302965D18700A1204E /* Localizable.strings */; };
+		E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */; };
+		E749344A2959F2120045AE39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E74934492959F2120045AE39 /* Assets.xcassets */; };
+		E749344D2959F2120045AE39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E749344C2959F2120045AE39 /* Preview Assets.xcassets */; };
+		E74934572959F2120045AE39 /* nogizaka_pilgrimageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934562959F2120045AE39 /* nogizaka_pilgrimageTests.swift */; };
+		E74934612959F2120045AE39 /* nogizaka_pilgrimageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934602959F2120045AE39 /* nogizaka_pilgrimageUITests.swift */; };
+		E74934632959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934622959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift */; };
+		E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */; };
+		E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */; };
+		E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C11D3F295AF19A0051A1B9 /* R.generated.swift */; };
+		E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = E7FD73D32959FCD400347BA4 /* Rswift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E74934532959F2120045AE39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E749343A2959F20E0045AE39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E74934412959F20E0045AE39;
+			remoteInfo = "nogizaka-pilgrimage";
+		};
+		E749345D2959F2120045AE39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E749343A2959F20E0045AE39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E74934412959F20E0045AE39;
+			remoteInfo = "nogizaka-pilgrimage";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E7235A71297D75D500E1339A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		E73E09112965C21E00A1204E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		E73E09172965C43000A1204E /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
+		E73E091A2965C77E00A1204E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		E73E091D2965CACA00A1204E /* PilgrimageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageView.swift; sourceTree = "<group>"; };
+		E73E092F2965D18700A1204E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nogizaka-pilgrimage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageApp.swift; sourceTree = "<group>"; };
+		E74934492959F2120045AE39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E749344C2959F2120045AE39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E74934522959F2120045AE39 /* nogizaka-pilgrimageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nogizaka-pilgrimageTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E74934562959F2120045AE39 /* nogizaka_pilgrimageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageTests.swift; sourceTree = "<group>"; };
+		E749345C2959F2120045AE39 /* nogizaka-pilgrimageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nogizaka-pilgrimageUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E74934602959F2120045AE39 /* nogizaka_pilgrimageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageUITests.swift; sourceTree = "<group>"; };
+		E74934622959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnvironmentKey.swift; sourceTree = "<group>"; };
+		E767E10F295AF38C002DB619 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
+		E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+BarAppearance.swift"; sourceTree = "<group>"; };
+		E7C11D3B295AEE400051A1B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		E7C11D3F295AF19A0051A1B9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E749343F2959F20E0045AE39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E749344F2959F2120045AE39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E74934592959F2120045AE39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E7235A70297D75B000E1339A /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				E7235A71297D75D500E1339A /* Theme.swift */,
+				E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */,
+				E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		E73E090F2965C1FC00A1204E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E73E09102965C20600A1204E /* Main */,
+				E73E09142965C36700A1204E /* CheckIn */,
+				E73E09132965C2E200A1204E /* Pilgrimage */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E73E09102965C20600A1204E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E73E09112965C21E00A1204E /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		E73E09132965C2E200A1204E /* Pilgrimage */ = {
+			isa = PBXGroup;
+			children = (
+				E73E091D2965CACA00A1204E /* PilgrimageView.swift */,
+			);
+			path = Pilgrimage;
+			sourceTree = "<group>";
+		};
+		E73E09142965C36700A1204E /* CheckIn */ = {
+			isa = PBXGroup;
+			children = (
+				E73E09172965C43000A1204E /* CheckInView.swift */,
+			);
+			path = CheckIn;
+			sourceTree = "<group>";
+		};
+		E73E091C2965CA0A00A1204E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				E74934492959F2120045AE39 /* Assets.xcassets */,
+				E73E091A2965C77E00A1204E /* Colors.xcassets */,
+				E73E09302965D18700A1204E /* Localizable.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		E74934392959F20E0045AE39 = {
+			isa = PBXGroup;
+			children = (
+				E7C11D38295AEDF30051A1B9 /* BuildTools */,
+				E74934442959F20E0045AE39 /* nogizaka-pilgrimage */,
+				E74934552959F2120045AE39 /* nogizaka-pilgrimageTests */,
+				E749345F2959F2120045AE39 /* nogizaka-pilgrimageUITests */,
+				E74934432959F20E0045AE39 /* Products */,
+				E7FD73D52959FDD000347BA4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E74934432959F20E0045AE39 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */,
+				E74934522959F2120045AE39 /* nogizaka-pilgrimageTests.xctest */,
+				E749345C2959F2120045AE39 /* nogizaka-pilgrimageUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E74934442959F20E0045AE39 /* nogizaka-pilgrimage */ = {
+			isa = PBXGroup;
+			children = (
+				E7C11D3D295AF19A0051A1B9 /* GeneratedByTools */,
+				E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */,
+				E7235A70297D75B000E1339A /* Utility */,
+				E73E091C2965CA0A00A1204E /* Resource */,
+				E73E090F2965C1FC00A1204E /* View */,
+				E749344B2959F2120045AE39 /* Preview Content */,
+			);
+			path = "nogizaka-pilgrimage";
+			sourceTree = "<group>";
+		};
+		E749344B2959F2120045AE39 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E749344C2959F2120045AE39 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E74934552959F2120045AE39 /* nogizaka-pilgrimageTests */ = {
+			isa = PBXGroup;
+			children = (
+				E74934562959F2120045AE39 /* nogizaka_pilgrimageTests.swift */,
+			);
+			path = "nogizaka-pilgrimageTests";
+			sourceTree = "<group>";
+		};
+		E749345F2959F2120045AE39 /* nogizaka-pilgrimageUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E74934602959F2120045AE39 /* nogizaka_pilgrimageUITests.swift */,
+				E74934622959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift */,
+			);
+			path = "nogizaka-pilgrimageUITests";
+			sourceTree = "<group>";
+		};
+		E7C11D38295AEDF30051A1B9 /* BuildTools */ = {
+			isa = PBXGroup;
+			children = (
+				E7C11D3B295AEE400051A1B9 /* Package.swift */,
+				E767E10F295AF38C002DB619 /* Empty.swift */,
+			);
+			path = BuildTools;
+			sourceTree = "<group>";
+		};
+		E7C11D3D295AF19A0051A1B9 /* GeneratedByTools */ = {
+			isa = PBXGroup;
+			children = (
+				E7C11D3E295AF19A0051A1B9 /* Rswift */,
+			);
+			path = GeneratedByTools;
+			sourceTree = "<group>";
+		};
+		E7C11D3E295AF19A0051A1B9 /* Rswift */ = {
+			isa = PBXGroup;
+			children = (
+				E7C11D3F295AF19A0051A1B9 /* R.generated.swift */,
+			);
+			path = Rswift;
+			sourceTree = "<group>";
+		};
+		E7FD73D52959FDD000347BA4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E74934412959F20E0045AE39 /* nogizaka-pilgrimage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E74934662959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimage" */;
+			buildPhases = (
+				E7FD73D62959FEEF00347BA4 /* Run R.swift */,
+				E749343E2959F20E0045AE39 /* Sources */,
+				E749343F2959F20E0045AE39 /* Frameworks */,
+				E74934402959F20E0045AE39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "nogizaka-pilgrimage";
+			packageProductDependencies = (
+				E7FD73D32959FCD400347BA4 /* Rswift */,
+			);
+			productName = "nogizaka-pilgrimage";
+			productReference = E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E74934512959F2120045AE39 /* nogizaka-pilgrimageTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E74934692959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimageTests" */;
+			buildPhases = (
+				E749344E2959F2120045AE39 /* Sources */,
+				E749344F2959F2120045AE39 /* Frameworks */,
+				E74934502959F2120045AE39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E74934542959F2120045AE39 /* PBXTargetDependency */,
+			);
+			name = "nogizaka-pilgrimageTests";
+			productName = "nogizaka-pilgrimageTests";
+			productReference = E74934522959F2120045AE39 /* nogizaka-pilgrimageTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E749345B2959F2120045AE39 /* nogizaka-pilgrimageUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E749346C2959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimageUITests" */;
+			buildPhases = (
+				E74934582959F2120045AE39 /* Sources */,
+				E74934592959F2120045AE39 /* Frameworks */,
+				E749345A2959F2120045AE39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E749345E2959F2120045AE39 /* PBXTargetDependency */,
+			);
+			name = "nogizaka-pilgrimageUITests";
+			productName = "nogizaka-pilgrimageUITests";
+			productReference = E749345C2959F2120045AE39 /* nogizaka-pilgrimageUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E749343A2959F20E0045AE39 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					E74934412959F20E0045AE39 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					E74934512959F2120045AE39 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = E74934412959F20E0045AE39;
+					};
+					E749345B2959F2120045AE39 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = E74934412959F20E0045AE39;
+					};
+				};
+			};
+			buildConfigurationList = E749343D2959F20E0045AE39 /* Build configuration list for PBXProject "nogizaka-pilgrimage" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ja,
+			);
+			mainGroup = E74934392959F20E0045AE39;
+			packageReferences = (
+				E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
+			);
+			productRefGroup = E74934432959F20E0045AE39 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E74934412959F20E0045AE39 /* nogizaka-pilgrimage */,
+				E74934512959F2120045AE39 /* nogizaka-pilgrimageTests */,
+				E749345B2959F2120045AE39 /* nogizaka-pilgrimageUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E74934402959F20E0045AE39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */,
+				E73E092E2965D18700A1204E /* Localizable.strings in Resources */,
+				E749344D2959F2120045AE39 /* Preview Assets.xcassets in Resources */,
+				E749344A2959F2120045AE39 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E74934502959F2120045AE39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E749345A2959F2120045AE39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E7FD73D62959FEEF00347BA4 /* Run R.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run R.swift";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/$TARGET_NAME/GeneratedByTools/Rswift/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd BuildTools\nSDKROOT=$(xcrun --sdk macosx --show-sdk-path)\nswift run -c release rswift generate \"$SRCROOT/$TARGET_NAME/GeneratedByTools/Rswift/R.generated.swift\"\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E749343E2959F20E0045AE39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E73E09182965C43000A1204E /* CheckInView.swift in Sources */,
+				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
+				E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */,
+				E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */,
+				E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */,
+				E73E091E2965CACA00A1204E /* PilgrimageView.swift in Sources */,
+				E7235A72297D75D500E1339A /* Theme.swift in Sources */,
+				E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E749344E2959F2120045AE39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E74934572959F2120045AE39 /* nogizaka_pilgrimageTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E74934582959F2120045AE39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E74934612959F2120045AE39 /* nogizaka_pilgrimageUITests.swift in Sources */,
+				E74934632959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E74934542959F2120045AE39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E74934412959F20E0045AE39 /* nogizaka-pilgrimage */;
+			targetProxy = E74934532959F2120045AE39 /* PBXContainerItemProxy */;
+		};
+		E749345E2959F2120045AE39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E74934412959F20E0045AE39 /* nogizaka-pilgrimage */;
+			targetProxy = E749345D2959F2120045AE39 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E73E09302965D18700A1204E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E73E092F2965D18700A1204E /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E74934642959F2120045AE39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E74934652959F2120045AE39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E74934672959F2120045AE39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"nogizaka-pilgrimage/Preview Content\"";
+				DEVELOPMENT_TEAM = DX3FKMWYLL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimage";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E74934682959F2120045AE39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"nogizaka-pilgrimage/Preview Content\"";
+				DEVELOPMENT_TEAM = DX3FKMWYLL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimage";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E749346A2959F2120045AE39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DX3FKMWYLL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/nogizaka-pilgrimage.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/nogizaka-pilgrimage";
+			};
+			name = Debug;
+		};
+		E749346B2959F2120045AE39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DX3FKMWYLL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/nogizaka-pilgrimage.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/nogizaka-pilgrimage";
+			};
+			name = Release;
+		};
+		E749346D2959F2120045AE39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DX3FKMWYLL;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "nogizaka-pilgrimage";
+			};
+			name = Debug;
+		};
+		E749346E2959F2120045AE39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DX3FKMWYLL;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "nogizaka-pilgrimage";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E749343D2959F20E0045AE39 /* Build configuration list for PBXProject "nogizaka-pilgrimage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E74934642959F2120045AE39 /* Debug */,
+				E74934652959F2120045AE39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E74934662959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E74934672959F2120045AE39 /* Debug */,
+				E74934682959F2120045AE39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E74934692959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E749346A2959F2120045AE39 /* Debug */,
+				E749346B2959F2120045AE39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E749346C2959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimageUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E749346D2959F2120045AE39 /* Debug */,
+				E749346E2959F2120045AE39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift.Library.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E7FD73D32959FCD400347BA4 /* Rswift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */;
+			productName = Rswift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = E749343A2959F20E0045AE39 /* Project object */;
+}
