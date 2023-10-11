@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  nogizaka-pilgrimage
+
+  Created by 工藤 海斗 on 2023/01/05.
+  
+*/
+
+// MARK: - TabViewのテキスト
+"tabbar_pilgrimage" = "マップ";
+"tabbar_check_in" = "チェックイン";
