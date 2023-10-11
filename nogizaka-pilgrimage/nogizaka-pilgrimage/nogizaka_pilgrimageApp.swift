@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct nogizaka_pilgrimageApp: App {
+    @Environment(\.theme) private var theme
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environment(\.theme, .system)
         }
     }
 }
