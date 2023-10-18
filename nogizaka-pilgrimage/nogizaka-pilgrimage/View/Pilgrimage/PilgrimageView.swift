@@ -11,9 +11,8 @@ struct PilgrimageView: View {
     @Environment(\.theme) private var theme
 
     var body: some View {
-        VStack {
-            Text("PilgrimageView")
-                .font(theme.fonts.title)
+        ZStack {
+            PilgrimageMapView()
         }
         .navigationTitle(R.string.localizable.tabbar_pilgrimage())
         .navigationBarTitleDisplayMode(.inline)
