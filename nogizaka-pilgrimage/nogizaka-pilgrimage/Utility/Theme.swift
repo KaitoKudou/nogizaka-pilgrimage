@@ -40,6 +40,9 @@ extension Theme {
 
         /// 32pt
         let spacing_xl: CGFloat = 32
+
+        /// 40pt
+        let spacing_xxl: CGFloat = 40
     }
 }
 
