@@ -11,15 +11,15 @@ import MapKit
 // MARK: 聖地マップで使用する定数
 enum PilgrimageMapConstant {
     /// 中心点から東西軸に沿った境界までの距離として指定される、領域の東西方向の長さ (メートル単位)
-    static let initialLatitudinalMeters: CLLocationDistance = 2500
+    static let initialLatitudinalMeters: CLLocationDistance = 1000
     /// 中心点から南北軸に沿った境界までの距離として指定される、領域の南北方向の長さ (メートル単位)
-    static let initialLongitudinalMeters: CLLocationDistance = 2500
+    static let initialLongitudinalMeters: CLLocationDistance = 1000
 
     /// マップのリージョンの初期値
-    /// 表参道店を指定。
+    /// 乃木坂駅を指定。
     static let initialRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
-            latitude: 35.666827 - 0.0089,
+            latitude: 35.666827 - 0.0049,
             longitude: 139.726497
         ),
         latitudinalMeters: initialLatitudinalMeters,

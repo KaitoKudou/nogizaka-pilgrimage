@@ -16,11 +16,31 @@ struct PilgrimageView: View {
         }
         .navigationTitle(R.string.localizable.tabbar_pilgrimage())
         .navigationBarTitleDisplayMode(.inline)
+        .overlay(alignment: .topTrailing) {
+            CurrentLocationButton {}
+        }
+        .toolbar {
+            pilgrimageListToolBarItem
+        }
     }
 }
 
-struct PilgrimageView_Previews: PreviewProvider {
-    static var previews: some View {
-        PilgrimageView()
+// MARK: Extension PilgrimageView
+extension PilgrimageView {
+    /// NavigationBarの聖地一覧遷移ボタン
+    private var pilgrimageListToolBarItem: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                // TODO: 聖地リスト画面へ遷移
+                print("聖地リスト画面へ遷移")
+            } label: {
+                Image(systemName: "list.bullet")
+                    .foregroundStyle(.white)
+            }
+        }
     }
+}
+
+#Preview {
+    PilgrimageView()
 }
