@@ -26,6 +26,7 @@
 		E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = E7FD73D32959FCD400347BA4 /* Rswift */; };
 		E7FDAA002ADFDDFB0056AA5B /* PilgrimageInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDA9FF2ADFDDFB0056AA5B /* PilgrimageInformation.swift */; };
 		E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */; };
+		E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		E7C11D3F295AF19A0051A1B9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		E7FDA9FF2ADFDDFB0056AA5B /* PilgrimageInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageInformation.swift; sourceTree = "<group>"; };
 		E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapConstant.swift; sourceTree = "<group>"; };
+		E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				E70B48132AD6EC2800C951A9 /* PilgrimageMapView.swift */,
 				E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */,
+				E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */,
 			);
 			path = PilgrimageMap;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				E73E091E2965CACA00A1204E /* PilgrimageView.swift in Sources */,
 				E7235A72297D75D500E1339A /* Theme.swift in Sources */,
 				E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */,
+				E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */,
 				E7FDAA002ADFDDFB0056AA5B /* PilgrimageInformation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
