@@ -30,10 +30,7 @@ extension PilgrimageView {
     /// NavigationBarの聖地一覧遷移ボタン
     private var pilgrimageListToolBarItem: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button {
-                // TODO: 聖地リスト画面へ遷移
-                print("聖地リスト画面へ遷移")
-            } label: {
+            NavigationLink(destination: PilgrimageListView()) {
                 Image(systemName: "list.bullet")
                     .foregroundStyle(.white)
             }
