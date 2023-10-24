@@ -16,9 +16,6 @@ struct PilgrimageListView: View {
         GeometryReader { geometry in
             VStack {
                 searchTextField
-                    .background(.white)
-                    .border(.gray, width: 1)
-                    .cornerRadius(8.0)
                     .padding(.top, theme.margins.spacing_xxs)
                     .padding(.bottom, theme.margins.spacing_m)
                     .padding(.horizontal, theme.margins.spacing_m)
@@ -54,6 +51,9 @@ struct PilgrimageListView: View {
                 print("検索予定ワード: \(searchWord)")
             }
         }
+        .background(.white)
+        .border(R.color.tab_primary()!.color, width: 1)
+        .cornerRadius(8.0)
     }
 }
 
