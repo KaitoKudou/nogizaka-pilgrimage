@@ -19,7 +19,7 @@ enum PilgrimageMapConstant {
     /// 乃木坂駅を指定。
     static let initialRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
-            latitude: 35.666827 - 0.0049,
+            latitude: 35.666827 - 0.0029,
             longitude: 139.726497
         ),
         latitudinalMeters: initialLatitudinalMeters,

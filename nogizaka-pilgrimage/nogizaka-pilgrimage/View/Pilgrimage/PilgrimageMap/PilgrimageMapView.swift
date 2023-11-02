@@ -14,19 +14,41 @@ struct PilgrimageMapView: View {
     let pilgrimage = dummyPilgrimageList
 
     var body: some View {
-        Map(
-            coordinateRegion: $region,
-            annotationItems: dummyPilgrimageList,
-            annotationContent: { item in
-                MapAnnotation(coordinate: CLLocationCoordinate2D(
-                    latitude: item.coordinate.latitude,
-                    longitude: item.coordinate.longitude
-                )) {
-                    Image(uiImage: R.image.map_pin()!)
+        GeometryReader { geometry in
+            Map(
+                coordinateRegion: $region,
+                annotationItems: dummyPilgrimageList,
+                annotationContent: { item in
+                    MapAnnotation(coordinate: CLLocationCoordinate2D(
+                        latitude: item.coordinate.latitude,
+                        longitude: item.coordinate.longitude
+                    )) {
+                        Image(uiImage: R.image.map_pin()!)
+                    }
                 }
+            )
+            .edgesIgnoringSafeArea(.all)
+            .overlay(alignment: .bottom) {
+                pilgrimageCardsView(geometry: geometry)
+                    .padding(.bottom, theme.margins.spacing_xl)
             }
+        }
+    }
+
+    private func pilgrimageCardsView(geometry: GeometryProxy) -> some View {
+
+        TabView {
+            ForEach(Array(dummyPilgrimageList.enumerated()), id: \.element.id) { index, pilgrimage in
+                PilgrimageCardView(pilgrimage: pilgrimage)
+                    .frame(
+                        width: max(0, geometry.size.width - theme.margins.spacing_l * 2)
+                    )
+            }
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .frame(
+            height: max(0, geometry.size.width / 2 - theme.margins.spacing_m)
         )
-        .edgesIgnoringSafeArea(.all)
     }
 }
 

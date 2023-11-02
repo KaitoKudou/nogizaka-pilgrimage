@@ -56,6 +56,8 @@ extension Theme {
         let bodyMedium = Font.system(size: 16)
         /// CaptionMedium/  注釈・補足文
         let caption = Font.system(size: 12)
+        /// CaptionSmall/  注釈・補足文
+        let captionSmall = Font.system(size: 8)
     }
 
     struct UIFonts {

@@ -17,3 +17,7 @@
 
 // MARK: - TextField
 "pilgrimage_list_placeholder" = "検索ワードを入力してください。";
+
+// MARK: - common button
+"common_btn_route_search_text" = "経路";
+"common_btn_detail_text" = "詳細";
