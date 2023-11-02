@@ -87,6 +87,6 @@ let dummyPilgrimageList: [PilgrimageInformation] = [
         longitude: "139.772645",
         address: "東京都千代田区外神田４丁目１４−１",
         imageURL: nil,
-        copyright: ""
+        copyright: nil
     ),
 ]
