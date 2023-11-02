@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E70B48142AD6EC2800C951A9 /* PilgrimageMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70B48132AD6EC2800C951A9 /* PilgrimageMapView.swift */; };
+		E71D093B2AF39076009C132E /* PilgrimageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */; };
 		E7235A72297D75D500E1339A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7235A71297D75D500E1339A /* Theme.swift */; };
 		E73E09122965C21E00A1204E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09112965C21E00A1204E /* MainView.swift */; };
 		E73E09182965C43000A1204E /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09172965C43000A1204E /* CheckInView.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		E70B48132AD6EC2800C951A9 /* PilgrimageMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapView.swift; sourceTree = "<group>"; };
+		E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageDetailView.swift; sourceTree = "<group>"; };
 		E7235A71297D75D500E1339A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		E73E09112965C21E00A1204E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E73E09172965C43000A1204E /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 			path = PilgrimageMap;
 			sourceTree = "<group>";
 		};
+		E71D09392AF39038009C132E /* PilgrimageDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */,
+			);
+			path = PilgrimageDetail;
+			sourceTree = "<group>";
+		};
 		E7235A70297D75B000E1339A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +169,7 @@
 				E73E091D2965CACA00A1204E /* PilgrimageView.swift */,
 				E70B48122AD6EB6F00C951A9 /* PilgrimageMap */,
 				E7FDAA072AE172B70056AA5B /* PilgrimageList */,
+				E71D09392AF39038009C132E /* PilgrimageDetail */,
 			);
 			path = Pilgrimage;
 			sourceTree = "<group>";
@@ -492,6 +503,7 @@
 				E7C431FA2AEF9F53003E6946 /* PilgrimageCardView.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E7FDAA152AE22EC90056AA5B /* NavigationBarBackButtonTextHidden.swift in Sources */,
+				E71D093B2AF39076009C132E /* PilgrimageDetailView.swift in Sources */,
 				E7FDAA172AE230310056AA5B /* UINavigationControllerExtension.swift in Sources */,
 				E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */,
 				E73E091E2965CACA00A1204E /* PilgrimageView.swift in Sources */,

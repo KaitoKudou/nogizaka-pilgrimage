@@ -21,3 +21,6 @@
 // MARK: - common button
 "common_btn_route_search_text" = "経路";
 "common_btn_detail_text" = "詳細";
+
+// MARK: - 聖地詳細画面のテキスト
+"navbar_pilgrimage_detail" = "聖地詳細";
