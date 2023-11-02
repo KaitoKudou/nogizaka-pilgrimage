@@ -61,10 +61,7 @@ struct PilgrimageCardView: View {
 
                         }
 
-                        Button {
-                            // TODO: 聖地詳細画面に遷移
-                            print("TODO: 詳細")
-                        } label: {
+                        NavigationLink(destination: PilgrimageDetailView(pilgrimage: pilgrimage)) {
                             Text(R.string.localizable.common_btn_detail_text())
                         }
                     }
