@@ -25,6 +25,29 @@ struct PilgrimageListView: View {
                     type: $pilgrimageListType,
                     screenWidth: geometry.size.width
                 )
+
+                switch(pilgrimageListType) {
+                case .all:
+                    NavigationView {
+                        List {
+                            ForEach(dummyPilgrimageList, id: \.code) { pilgrimage in
+                                ZStack {
+                                    NavigationLink(destination: PilgrimageDetailView(pilgrimage: pilgrimage)) {
+                                        EmptyView()
+                                    }
+                                    .opacity(0)
+
+                                    PilgrimageListContentView(pilgrimage: pilgrimage)
+                                        .frame(maxHeight: geometry.size.width / 3)
+                                }
+                            }
+                            .listRowSeparator(.hidden)
+                        }
+                        .listStyle(.plain)
+                    }
+                case.favorite:
+                    Text("お気に入り")
+                }
             }
         }
         .navigationTitle(R.string.localizable.navbar_pilgrimage_list())
