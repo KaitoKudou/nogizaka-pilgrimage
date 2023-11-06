@@ -45,6 +45,7 @@ struct PilgrimageListView: View {
                         }
                         .listStyle(.plain)
                     }
+                    .navigationViewStyle(StackNavigationViewStyle())
                 case.favorite:
                     Text("お気に入り")
                 }
