@@ -9,6 +9,7 @@
 // MARK: - TabViewのテキスト
 "tabbar_pilgrimage" = "マップ";
 "tabbar_check_in" = "チェックイン";
+"tabbar_menu" = "メニュー";
 
 // MARK: - 聖地一覧画面のテキスト
 "navbar_pilgrimage_list" = "聖地リスト";

@@ -16,7 +16,7 @@ struct MainView: View {
                 PilgrimageView()
             }
             .tabItem {
-                Image(R.image.icn_map.name)
+                Image(systemName: "map")
                 Text(R.string.localizable.tabbar_pilgrimage())
             }
 
@@ -26,6 +26,14 @@ struct MainView: View {
             .tabItem {
                 Image(R.image.icn_check_in.name)
                 Text(R.string.localizable.tabbar_check_in())
+            }
+
+            NavigationStack {
+                MenuView()
+            }
+            .tabItem {
+                Image(systemName: "line.3.horizontal")
+                Text(R.string.localizable.tabbar_menu())
             }
         }
         .onAppear {
