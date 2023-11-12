@@ -11,44 +11,80 @@ import SwiftUI
 struct PilgrimageMapView: View {
     @Environment(\.theme) private var theme
     @State private var region = PilgrimageMapConstant.initialRegion
-    let pilgrimage = dummyPilgrimageList
+    @State private var selectedIndex: Int = 0
 
     var body: some View {
         GeometryReader { geometry in
-            Map(
-                coordinateRegion: $region,
-                annotationItems: dummyPilgrimageList,
-                annotationContent: { item in
-                    MapAnnotation(coordinate: CLLocationCoordinate2D(
-                        latitude: item.coordinate.latitude,
-                        longitude: item.coordinate.longitude
-                    )) {
-                        Image(uiImage: R.image.map_pin()!)
+            mapView
+                .ignoresSafeArea(edges: [.bottom])
+                .overlay(alignment: .bottom) {
+                    pilgrimageCardsView(geometry: geometry)
+                        .padding(.bottom, theme.margins.spacing_xl)
+                }
+                .onAppear {
+                    region.center = offsetAppliedCenter(
+                        to: dummyPilgrimageList[0].coordinate,
+                        geometry: geometry
+                    )
+                }
+                .onChange(of: selectedIndex) { _ in
+                    withAnimation {
+                        region.center = offsetAppliedCenter(
+                            to: dummyPilgrimageList[selectedIndex].coordinate,
+                            geometry: geometry
+                        )
                     }
                 }
-            )
-            .edgesIgnoringSafeArea(.all)
-            .overlay(alignment: .bottom) {
-                pilgrimageCardsView(geometry: geometry)
-                    .padding(.bottom, theme.margins.spacing_xl)
-            }
         }
     }
 
-    private func pilgrimageCardsView(geometry: GeometryProxy) -> some View {
+    private var mapView: some View {
+        Map(
+            coordinateRegion: $region,
+            annotationItems: dummyPilgrimageList,
+            annotationContent: { item in
+                let coordinate = CLLocationCoordinate2D(
+                    latitude: item.coordinate.latitude,
+                    longitude: item.coordinate.longitude
+                )
+                let index = dummyPilgrimageList.firstIndex(where: { $0.code == item.code }) ?? 0
 
-        TabView {
+                return MapAnnotation(coordinate: coordinate) {
+                    Image(uiImage: R.image.map_pin()!)
+                        .onTapGesture {
+                            selectedIndex = index
+                        }
+                }
+            }
+        )
+    }
+
+    private func pilgrimageCardsView(geometry: GeometryProxy) -> some View {
+        TabView(selection: $selectedIndex) {
             ForEach(Array(dummyPilgrimageList.enumerated()), id: \.element.id) { index, pilgrimage in
                 PilgrimageCardView(pilgrimage: pilgrimage)
+                    .tag(index)
                     .frame(
                         width: max(0, geometry.size.width - theme.margins.spacing_l * 2)
                     )
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .frame(
-            height: max(0, geometry.size.width / 2 - theme.margins.spacing_m)
+        .frame(height: cardsHeight(geometry: geometry))
+    }
+
+    private func cardsHeight(geometry: GeometryProxy) -> CGFloat {
+        return max(0, geometry.size.width / 2 - theme.margins.spacing_m)
+    }
+
+    private func offsetAppliedCenter(to center: CLLocationCoordinate2D, geometry: GeometryProxy) -> CLLocationCoordinate2D {
+        let ratio = (cardsHeight(geometry: geometry) / 2) / geometry.size.height
+        let latitudeOffset = ratio * region.span.latitudeDelta
+        let coordinate = CLLocationCoordinate2D(
+            latitude: center.latitude - latitudeOffset,
+            longitude: center.longitude
         )
+        return coordinate
     }
 }
 

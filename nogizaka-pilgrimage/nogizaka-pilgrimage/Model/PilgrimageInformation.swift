@@ -8,8 +8,7 @@
 import CoreLocation
 import Foundation
 
-struct PilgrimageInformation: Identifiable {
-    let id = UUID()
+struct PilgrimageInformation: Equatable {
     let code: String
     let name: String
     let description: String
@@ -34,6 +33,12 @@ struct PilgrimageInformation: Identifiable {
         self.address = address
         self.imageURL = imageURL
         self.copyright = copyright
+    }
+}
+
+extension PilgrimageInformation: Identifiable {
+    var id: String {
+        return code
     }
 }
 
