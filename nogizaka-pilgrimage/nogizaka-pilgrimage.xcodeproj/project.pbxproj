@@ -27,6 +27,7 @@
 		E78D446A2AF8EBBD008D5550 /* PilgrimageListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78D44692AF8EBBD008D5550 /* PilgrimageListContentView.swift */; };
 		E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C11D3F295AF19A0051A1B9 /* R.generated.swift */; };
 		E7C431FA2AEF9F53003E6946 /* PilgrimageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C431F92AEF9F53003E6946 /* PilgrimageCardView.swift */; };
+		E7CB5D5B2B021BCB001A1CDB /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E7CB5D5A2B021BCB001A1CDB /* ComposableArchitecture */; };
 		E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = E7FD73D32959FCD400347BA4 /* Rswift */; };
 		E7FDAA002ADFDDFB0056AA5B /* PilgrimageInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDA9FF2ADFDDFB0056AA5B /* PilgrimageInformation.swift */; };
 		E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */; };
@@ -98,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7CB5D5B2B021BCB001A1CDB /* ComposableArchitecture in Frameworks */,
 				E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +364,7 @@
 			name = "nogizaka-pilgrimage";
 			packageProductDependencies = (
 				E7FD73D32959FCD400347BA4 /* Rswift */,
+				E7CB5D5A2B021BCB001A1CDB /* ComposableArchitecture */,
 			);
 			productName = "nogizaka-pilgrimage";
 			productReference = E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */;
@@ -437,6 +440,7 @@
 			mainGroup = E74934392959F20E0045AE39;
 			packageReferences = (
 				E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
+				E7CB5D592B021BCB001A1CDB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = E74934432959F20E0045AE39 /* Products */;
 			projectDirPath = "";
@@ -864,6 +868,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E7CB5D592B021BCB001A1CDB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 		E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift.Library.git";
@@ -875,6 +887,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E7CB5D5A2B021BCB001A1CDB /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7CB5D592B021BCB001A1CDB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
 		E7FD73D32959FCD400347BA4 /* Rswift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */;
