@@ -5,6 +5,7 @@
 //  Created by 工藤 海斗 on 2023/10/11.
 //
 
+import ComposableArchitecture
 import MapKit
 import SwiftUI
 
@@ -12,6 +13,9 @@ struct PilgrimageMapView: View {
     @Environment(\.theme) private var theme
     @State private var region = PilgrimageMapConstant.initialRegion
     @State private var selectedIndex: Int = 0
+    @State var store = Store(initialState: FavoriteFeature.State()) {
+        FavoriteFeature()
+    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -62,7 +66,7 @@ struct PilgrimageMapView: View {
     private func pilgrimageCardsView(geometry: GeometryProxy) -> some View {
         TabView(selection: $selectedIndex) {
             ForEach(Array(dummyPilgrimageList.enumerated()), id: \.element.id) { index, pilgrimage in
-                PilgrimageCardView(pilgrimage: pilgrimage)
+                PilgrimageCardView(pilgrimage: pilgrimage, store: store)
                     .tag(index)
                     .frame(
                         width: max(0, geometry.size.width - theme.margins.spacing_l * 2)
