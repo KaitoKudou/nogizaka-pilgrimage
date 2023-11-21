@@ -5,50 +5,69 @@
 //  Created by 工藤 海斗 on 2023/11/06.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 struct PilgrimageListContentView: View {
     @Environment(\.theme) private var theme
+    @State private var isFavorite = false
     let pilgrimage: PilgrimageInformation
+    let store: StoreOf<FavoriteFeature>
+
 
     var body: some View {
-        HStack(alignment: .top, spacing: theme.margins.spacing_m) {
-            VStack {
-                AsyncImage(url: nil) { image in
-                    // TODO: 聖地の画像を表示
-                } placeholder: {
-                    // 画像取得中のプレースホルダー表示
-                    Image(R.image.no_image.name)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            HStack(alignment: .top, spacing: theme.margins.spacing_m) {
+                VStack {
+                    AsyncImage(url: nil) { image in
+                        // TODO: 聖地の画像を表示
+                    } placeholder: {
+                        // 画像取得中のプレースホルダー表示
+                        Image(R.image.no_image.name)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
+
+                    if let copyright = pilgrimage.copyright {
+                        Text(copyright)
+                            .font(theme.fonts.captionSmall)
+                    }
                 }
 
-                if let copyright = pilgrimage.copyright {
-                    Text(copyright)
-                        .font(theme.fonts.captionSmall)
+                VStack(alignment: .leading) {
+                    HStack(alignment: .top) {
+                        Text(pilgrimage.name)
+                            .font(theme.fonts.bodyMedium)
+
+                        Spacer()
+
+                        Button {
+                            viewStore.send(.updateFavoriteList(pilgrimage))
+                            viewStore.send(.toggleFavorite(pilgrimage))
+                            withAnimation {
+                                self.isFavorite = viewStore.state.isFavorite
+                            }
+                        } label: {
+                            if isFavorite {
+                                Image(systemName: "heart.fill")
+                                    .foregroundStyle(.red)
+                            } else {
+                                Image(systemName: "heart")
+                                    .foregroundStyle(R.color.tab_primar_off()!.color)
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                    .padding(.bottom, theme.margins.spacing_m)
+
+                    Text(pilgrimage.address)
+                        .font(theme.fonts.caption)
                 }
             }
-
-            VStack(alignment: .leading) {
-                HStack(alignment: .top) {
-                    Text(pilgrimage.name)
-                        .font(theme.fonts.bodyMedium)
-
-                    Spacer()
-
-                    Button {
-                        // TODO: お気に入り登録
-                        print("TODO: お気に入り登録")
-                    } label: {
-                        Image(systemName: "heart")
-                            .foregroundStyle(R.color.tab_primar_off()!.color)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                }
-                .padding(.bottom, theme.margins.spacing_m)
-
-                Text(pilgrimage.address)
-                    .font(theme.fonts.caption)
+            .onAppear {
+                viewStore.send(.toggleFavorite(pilgrimage))
+                viewStore.send(.fetchFavorites)
+                self.isFavorite = viewStore.state.isFavorite
             }
         }
         .padding()
@@ -61,7 +80,11 @@ struct PilgrimageListContentView: View {
 
 struct PilgrimageListContentView_Previews: PreviewProvider {
     static var previews: some View {
-        PilgrimageListContentView(pilgrimage: dummyPilgrimageList[0])
+        PilgrimageListContentView(
+            pilgrimage: dummyPilgrimageList[0],
+            store: StoreOf<FavoriteFeature>(initialState: FavoriteFeature.State()) {
+                FavoriteFeature()
+            })
             .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width / 3)
             .previewLayout(.sizeThatFits)
     }
