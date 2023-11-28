@@ -16,35 +16,58 @@ struct PilgrimageMapView: View {
     @State var store = Store(initialState: FavoriteFeature.State()) {
         FavoriteFeature()
     }
+    private let locationManager = LocationManager.shared
+    let userLocationFeature: StoreOf<UserLocationFeature>
 
     var body: some View {
-        GeometryReader { geometry in
-            mapView
-                .ignoresSafeArea(edges: [.bottom])
-                .overlay(alignment: .bottom) {
-                    pilgrimageCardsView(geometry: geometry)
-                        .padding(.bottom, theme.margins.spacing_xl)
-                }
-                .onAppear {
-                    region.center = offsetAppliedCenter(
-                        to: dummyPilgrimageList[0].coordinate,
-                        geometry: geometry
-                    )
-                }
-                .onChange(of: selectedIndex) { _ in
-                    withAnimation {
-                        region.center = offsetAppliedCenter(
-                            to: dummyPilgrimageList[selectedIndex].coordinate,
-                            geometry: geometry
-                        )
+        WithViewStore(userLocationFeature, observe: { $0 }) { viewStore in
+            GeometryReader { geometry in
+                mapView
+                    .ignoresSafeArea(edges: [.bottom])
+                    .overlay(alignment: .topTrailing) {
+                        CurrentLocationButton {
+                            viewStore.send(.getCurrentLocationButtonTapped)
+
+                            if !viewStore.isLocationPermissionDenied {
+                                withAnimation {
+                                    region.center = offsetAppliedCenter(
+                                        to: viewStore.location!.coordinate,
+                                        geometry: geometry
+                                    )
+                                }
+                            }
+                        }
                     }
-                }
+                    .alert(
+                        store: userLocationFeature.scope(
+                            state: \.$alert,
+                            action: UserLocationFeature.Action.alert
+                        )
+                    )
+                    .overlay(alignment: .bottom) {
+                        pilgrimageCardsView(geometry: geometry)
+                            .padding(.bottom, theme.margins.spacing_xl)
+                    }
+                    .onAppear {
+                        locationManager.setViewStore(viewStore)
+                        viewStore.send(.requestLocationPermission)
+                    }
+                    .onChange(of: selectedIndex) { _ in
+                        withAnimation {
+                            region.center = offsetAppliedCenter(
+                                to: dummyPilgrimageList[selectedIndex].coordinate,
+                                geometry: geometry
+                            )
+                        }
+                    }
+            }
         }
     }
 
     private var mapView: some View {
         Map(
             coordinateRegion: $region,
+            showsUserLocation: true,
             annotationItems: dummyPilgrimageList,
             annotationContent: { item in
                 let coordinate = CLLocationCoordinate2D(
@@ -93,5 +116,9 @@ struct PilgrimageMapView: View {
 }
 
 #Preview {
-    PilgrimageMapView()
+    PilgrimageMapView(
+        userLocationFeature: StoreOf<UserLocationFeature>(initialState: UserLocationFeature.State()) {
+            UserLocationFeature()
+        }
+    )
 }
