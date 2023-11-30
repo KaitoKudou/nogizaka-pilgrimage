@@ -14,8 +14,6 @@ struct CurrentLocationButton: View {
 
     var body: some View {
         Button {
-            // TODO: ボタン押下時に現在地を表示
-            print("現在地ボタン押下")
             didTap()
         } label: {
             Image(systemName: "location")

@@ -16,20 +16,40 @@ struct PilgrimageMapView: View {
     @State var store = Store(initialState: FavoriteFeature.State()) {
         FavoriteFeature()
     }
+    @State private var isShowAlert = false
+    @StateObject private var locationManager = LocationManager()
 
     var body: some View {
         GeometryReader { geometry in
             mapView
                 .ignoresSafeArea(edges: [.bottom])
+                .overlay(alignment: .topTrailing) {
+                    CurrentLocationButton {
+                        let isAuthorized = !locationManager.isLocationPermissionDenied
+                        guard isAuthorized else {
+                            // 位置情報が許可されなかった場合
+                            isShowAlert.toggle()
+                            return
+                        }
+                        guard let location = locationManager.userLocation else {
+                            return
+                        }
+                        withAnimation {
+                            self.region.center = offsetAppliedCenter(to: location, geometry: geometry)
+                        }
+                    }
+                    .alert(R.string.localizable.alert_location(), isPresented: $isShowAlert) {
+                    } message: {
+                        EmptyView()
+                    }
+
+                }
                 .overlay(alignment: .bottom) {
                     pilgrimageCardsView(geometry: geometry)
                         .padding(.bottom, theme.margins.spacing_xl)
                 }
                 .onAppear {
-                    region.center = offsetAppliedCenter(
-                        to: dummyPilgrimageList[0].coordinate,
-                        geometry: geometry
-                    )
+                    locationManager.requestLocation()
                 }
                 .onChange(of: selectedIndex) { _ in
                     withAnimation {
@@ -45,6 +65,7 @@ struct PilgrimageMapView: View {
     private var mapView: some View {
         Map(
             coordinateRegion: $region,
+            showsUserLocation: true,
             annotationItems: dummyPilgrimageList,
             annotationContent: { item in
                 let coordinate = CLLocationCoordinate2D(

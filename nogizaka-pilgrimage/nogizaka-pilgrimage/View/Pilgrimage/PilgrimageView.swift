@@ -16,9 +16,6 @@ struct PilgrimageView: View {
         }
         .navigationTitle(R.string.localizable.tabbar_pilgrimage())
         .navigationBarTitleDisplayMode(.inline)
-        .overlay(alignment: .topTrailing) {
-            CurrentLocationButton {}
-        }
         .toolbar {
             pilgrimageListToolBarItem
         }
