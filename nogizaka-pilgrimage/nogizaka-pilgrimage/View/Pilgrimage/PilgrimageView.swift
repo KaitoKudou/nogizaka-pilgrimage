@@ -5,18 +5,14 @@
 //  Created by 工藤 海斗 on 2023/01/04.
 //
 
-import ComposableArchitecture
 import SwiftUI
 
 struct PilgrimageView: View {
     @Environment(\.theme) private var theme
-    @State private var store = Store(initialState: UserLocationFeature.State()) {
-        UserLocationFeature()
-    }
 
     var body: some View {
         ZStack {
-            PilgrimageMapView(userLocationFeature: store)
+            PilgrimageMapView()
         }
         .navigationTitle(R.string.localizable.tabbar_pilgrimage())
         .navigationBarTitleDisplayMode(.inline)

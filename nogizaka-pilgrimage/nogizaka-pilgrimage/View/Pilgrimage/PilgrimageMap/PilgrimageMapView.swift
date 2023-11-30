@@ -16,51 +16,49 @@ struct PilgrimageMapView: View {
     @State var store = Store(initialState: FavoriteFeature.State()) {
         FavoriteFeature()
     }
-    private let locationManager = LocationManager.shared
-    let userLocationFeature: StoreOf<UserLocationFeature>
+    @State private var isShowAlert = false
+    @StateObject private var locationManager = LocationManager()
 
     var body: some View {
-        WithViewStore(userLocationFeature, observe: { $0 }) { viewStore in
-            GeometryReader { geometry in
-                mapView
-                    .ignoresSafeArea(edges: [.bottom])
-                    .overlay(alignment: .topTrailing) {
-                        CurrentLocationButton {
-                            viewStore.send(.getCurrentLocationButtonTapped)
-
-                            if !viewStore.isLocationPermissionDenied {
-                                withAnimation {
-                                    region.center = offsetAppliedCenter(
-                                        to: viewStore.location!.coordinate,
-                                        geometry: geometry
-                                    )
-                                }
-                            }
+        GeometryReader { geometry in
+            mapView
+                .ignoresSafeArea(edges: [.bottom])
+                .overlay(alignment: .topTrailing) {
+                    CurrentLocationButton {
+                        let isAuthorized = !locationManager.isLocationPermissionDenied
+                        guard isAuthorized else {
+                            // 位置情報が許可されなかった場合
+                            isShowAlert.toggle()
+                            return
                         }
-                    }
-                    .alert(
-                        store: userLocationFeature.scope(
-                            state: \.$alert,
-                            action: UserLocationFeature.Action.alert
-                        )
-                    )
-                    .overlay(alignment: .bottom) {
-                        pilgrimageCardsView(geometry: geometry)
-                            .padding(.bottom, theme.margins.spacing_xl)
-                    }
-                    .onAppear {
-                        locationManager.setViewStore(viewStore)
-                        viewStore.send(.requestLocationPermission)
-                    }
-                    .onChange(of: selectedIndex) { _ in
+                        guard let location = locationManager.userLocation else {
+                            return
+                        }
                         withAnimation {
-                            region.center = offsetAppliedCenter(
-                                to: dummyPilgrimageList[selectedIndex].coordinate,
-                                geometry: geometry
-                            )
+                            self.region.center = offsetAppliedCenter(to: location, geometry: geometry)
                         }
                     }
-            }
+                    .alert(R.string.localizable.alert_location(), isPresented: $isShowAlert) {
+                    } message: {
+                        EmptyView()
+                    }
+
+                }
+                .overlay(alignment: .bottom) {
+                    pilgrimageCardsView(geometry: geometry)
+                        .padding(.bottom, theme.margins.spacing_xl)
+                }
+                .onAppear {
+                    locationManager.requestLocation()
+                }
+                .onChange(of: selectedIndex) { _ in
+                    withAnimation {
+                        region.center = offsetAppliedCenter(
+                            to: dummyPilgrimageList[selectedIndex].coordinate,
+                            geometry: geometry
+                        )
+                    }
+                }
         }
     }
 
@@ -116,9 +114,5 @@ struct PilgrimageMapView: View {
 }
 
 #Preview {
-    PilgrimageMapView(
-        userLocationFeature: StoreOf<UserLocationFeature>(initialState: UserLocationFeature.State()) {
-            UserLocationFeature()
-        }
-    )
+    PilgrimageMapView()
 }

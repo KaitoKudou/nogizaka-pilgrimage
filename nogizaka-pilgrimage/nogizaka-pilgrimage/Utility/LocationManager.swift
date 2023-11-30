@@ -5,31 +5,26 @@
 //  Created by 工藤 海斗 on 2023/11/22.
 //
 
-import ComposableArchitecture
 import CoreLocation
 
-final class LocationManager: NSObject {
-    private var locationManager = CLLocationManager()
-    private var viewStore: ViewStore<UserLocationFeature.State, UserLocationFeature.Action>?
-    static let shared = LocationManager()
+final class LocationManager: NSObject, ObservableObject {
+    /// ユーザーの現在地の位置座標
+    @Published private(set) var userLocation: CLLocationCoordinate2D?
+    /// 位置情報の利用許可状態
+    @Published private(set) var isLocationPermissionDenied: Bool = true
 
-    private override init() {
+    private let locationManager = CLLocationManager()
+
+    override init() {
         super.init()
-        configureLocationManager()
-    }
-
-    private func configureLocationManager() {
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 1000
-        locationManager.delegate = self
-    }
-
-    func setViewStore(_ viewStore: ViewStore<UserLocationFeature.State, UserLocationFeature.Action>) {
-        self.viewStore = viewStore
     }
 
     func requestLocation() {
         // initで設定を書くと，アプリ起動時に許可ダイアログが出てしまうためここ設定を行う
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 1000
+        locationManager.delegate = self
+
         if locationManager.authorizationStatus == .notDetermined {
             // 位置情報を利用するか未設定の場合に利用許可を求めるアラートを表示
             locationManager.requestWhenInUseAuthorization()
@@ -50,13 +45,12 @@ extension LocationManager: CLLocationManagerDelegate {
         case .restricted, .denied:
             // .restricted: 位置情報を利用する権限がない
             // .denied: ユーザが明示的に位置情報の利用を拒否
-            // 位置情報利用が拒否がされたらStateに通知
-            viewStore?.send(.locationPermissionDenied)
+            isLocationPermissionDenied = true
         case .authorizedWhenInUse:
             // アプリを使用している間のみ位置情報の利用を許可
             // 位置情報利用が許可がされたらStateに通知
             locationManager.startUpdatingLocation()
-            viewStore?.send(.locationPermissionGranted)
+            isLocationPermissionDenied = false
         case .authorizedAlways:
             // 位置情報の利用を常に許可
             break
@@ -67,10 +61,11 @@ extension LocationManager: CLLocationManagerDelegate {
 
     /// 位置情報取得成功時に呼ばれる
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Locationが更新されたら、Stateに通知
-        if let location = locations.last {
-            viewStore?.send(.locationUpdated(location))
+        guard let location = locations.last else {
+            locationManager.stopUpdatingLocation()
+            return
         }
+        userLocation = location.coordinate
     }
 
     /// 位置情報取得失敗時に呼ばれる
