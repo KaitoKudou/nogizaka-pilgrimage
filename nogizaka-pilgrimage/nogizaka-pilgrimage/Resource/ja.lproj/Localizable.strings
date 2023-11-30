@@ -25,3 +25,6 @@
 
 // MARK: - 聖地詳細画面のテキスト
 "navbar_pilgrimage_detail" = "聖地詳細";
+
+// MARK: - 位置情報関連のAlert
+"alert_location" = "位置情報がオフになっているため、現在位置を表示できません。";
