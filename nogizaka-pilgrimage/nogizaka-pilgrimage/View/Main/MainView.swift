@@ -21,6 +21,14 @@ struct MainView: View {
             }
 
             NavigationStack {
+                FavoritePilgrimageView()
+            }
+            .tabItem {
+                Image(systemName: "heart.fill")
+                Text(R.string.localizable.tabbar_favorite())
+            }
+
+            NavigationStack {
                 CheckInView()
             }
             .tabItem {
