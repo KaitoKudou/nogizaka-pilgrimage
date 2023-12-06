@@ -49,7 +49,6 @@ struct SearchCandidateFeature: Reducer {
 
             case .searchAllPilgrimages:
                 let filteredPilgrimages = searchPilgrimages(with: state.searchText, searchTarget: dummyPilgrimageList)
-                print("検索結果候補: \(filteredPilgrimages)")
                 return .run { send in
                     await send(.searchPilgrimagesResponse(filteredPilgrimages))
                     await send(.stopLoading)
@@ -64,10 +63,7 @@ struct SearchCandidateFeature: Reducer {
     }
 
     private func searchPilgrimages(with searchText: String, searchTarget: [PilgrimageInformation]) -> [PilgrimageInformation] {
-        print("検索ワード: \(searchText)")
-        print("検索対象配列: \(searchTarget)")
         let normalizedSearchText = searchText.normalizedString
-        print("正規化済み検索ワード: \(normalizedSearchText)")
         return searchTarget.filter { pilgrimage in
             let normalizedSearchCandidates = pilgrimage.searchCandidateList.map { $0.normalizedString }
 
@@ -75,7 +71,6 @@ struct SearchCandidateFeature: Reducer {
             let matchingCandidates = normalizedSearchCandidates.filter {
                 $0.range(of: normalizedSearchText, options: .caseInsensitive) != nil
             }
-            print("部分一致: \(matchingCandidates)")
 
             return !matchingCandidates.isEmpty
         }
