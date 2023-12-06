@@ -8,7 +8,7 @@
 import CoreLocation
 import Foundation
 
-struct PilgrimageInformation: Equatable {
+struct PilgrimageInformation: Hashable {
     let code: String
     let name: String
     let description: String
@@ -17,6 +17,7 @@ struct PilgrimageInformation: Equatable {
     let address: String
     let imageURL: URL?
     let copyright: String?
+    let searchCandidateList: [String]
 
     /// 位置座標
     var coordinate: CLLocationCoordinate2D {
@@ -24,7 +25,9 @@ struct PilgrimageInformation: Equatable {
         return CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude)!, longitude: CLLocationDegrees(longitude)!)
     }
 
-    init(code: String, name: String, description: String, latitude: String, longitude: String, address: String, imageURL: URL?, copyright: String?) {
+    init(code: String, name: String, description: String,
+         latitude: String,longitude: String, address: String,
+         imageURL: URL?, copyright: String?, searchCandidateList: [String]) {
         self.code = code
         self.name = name
         self.description = description
@@ -33,6 +36,7 @@ struct PilgrimageInformation: Equatable {
         self.address = address
         self.imageURL = imageURL
         self.copyright = copyright
+        self.searchCandidateList = searchCandidateList
     }
 }
 
@@ -52,7 +56,8 @@ let dummyPilgrimageList: [PilgrimageInformation] = [
         longitude: "139.726497",
         address: "東京都港区南青山１丁目２５−８",
         imageURL: nil,
-        copyright: "@2023 Google, 画像提供：たく"
+        copyright: "@2023 Google, 画像提供：たく",
+        searchCandidateList: ["乃木坂駅", "のぎざかえき", "ノギザカエキ", "nogizakaeki"]
     ),
     PilgrimageInformation(
         code: "002",
@@ -62,7 +67,8 @@ let dummyPilgrimageList: [PilgrimageInformation] = [
         longitude: "139.727961",
         address: "東京都港区赤坂８丁目１１−２７",
         imageURL: nil,
-        copyright: "@2023 Google, 画像提供：ゆるバップ"
+        copyright: "@2023 Google, 画像提供：ゆるバップ", 
+        searchCandidateList: ["乃木神社", "のぎじんじゃ", "ノギジンジャ", "nogijinjya"]
     ),
     PilgrimageInformation(
         code: "003",
@@ -72,7 +78,8 @@ let dummyPilgrimageList: [PilgrimageInformation] = [
         longitude: "139.701636",
         address: "東京都渋谷区渋谷２丁目",
         imageURL: nil,
-        copyright: "@2023 Google, 画像提供：cana kei"
+        copyright: "@2023 Google, 画像提供：cana kei",
+        searchCandidateList: ["渋谷駅", "しぶやえき", "シブヤエキ", "sibuyaeki"]
     ),
     PilgrimageInformation(
         code: "004",
@@ -82,7 +89,8 @@ let dummyPilgrimageList: [PilgrimageInformation] = [
         longitude: "139.698851",
         address: "東京都渋谷区宇田川町１６−１５",
         imageURL: nil,
-        copyright: "@2023 Google, 画像提供：I Ar"
+        copyright: "@2023 Google, 画像提供：I Ar",
+        searchCandidateList: ["スペイン坂", "すぺいんざか", "スペインザカ", "supeinzaka"]
     ),
     PilgrimageInformation(
         code: "005",
@@ -92,6 +100,7 @@ let dummyPilgrimageList: [PilgrimageInformation] = [
         longitude: "139.772645",
         address: "東京都千代田区外神田４丁目１４−１",
         imageURL: nil,
-        copyright: nil
+        copyright: nil,
+        searchCandidateList: ["秋葉原UDX", "あきはばら", "アキハバラ", "akihabara"]
     ),
 ]

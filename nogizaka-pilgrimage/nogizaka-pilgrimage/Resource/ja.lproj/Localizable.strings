@@ -10,11 +10,11 @@
 "tabbar_pilgrimage" = "マップ";
 "tabbar_check_in" = "チェックイン";
 "tabbar_menu" = "メニュー";
+"tabbar_favorite" = "お気に入り";
 
 // MARK: - 聖地一覧画面のテキスト
 "navbar_pilgrimage_list" = "聖地リスト";
 "list_type_all" = "聖地一覧";
-"list_type_favorite" = "お気に入り";
 
 // MARK: - TextField
 "pilgrimage_list_placeholder" = "検索ワードを入力してください。";
