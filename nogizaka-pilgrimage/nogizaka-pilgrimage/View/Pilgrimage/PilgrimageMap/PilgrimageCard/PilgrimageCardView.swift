@@ -11,6 +11,7 @@ import SwiftUI
 struct PilgrimageCardView: View {
     @Environment(\.theme) private var theme
     @State private var isFavorite = false
+    @EnvironmentObject private var locationManager: LocationManager
     let pilgrimage: PilgrimageInformation
     let store: StoreOf<FavoriteFeature>
 
@@ -73,7 +74,13 @@ struct PilgrimageCardView: View {
                                 
                             }
                             
-                            NavigationLink(destination: PilgrimageDetailView(pilgrimage: pilgrimage, store: store)) {
+                            NavigationLink(
+                                destination:
+                                    PilgrimageDetailView(
+                                        pilgrimage: pilgrimage, store: store
+                                    )
+                                    .environmentObject(locationManager)
+                            ) {
                                 Text(R.string.localizable.common_btn_detail_text())
                             }
                         }

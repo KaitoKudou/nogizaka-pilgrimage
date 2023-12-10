@@ -17,7 +17,7 @@ struct PilgrimageMapView: View {
         FavoriteFeature()
     }
     @State private var isShowAlert = false
-    @StateObject private var locationManager = LocationManager()
+    @EnvironmentObject private var locationManager: LocationManager
 
     var body: some View {
         GeometryReader { geometry in
@@ -92,6 +92,7 @@ struct PilgrimageMapView: View {
                     .frame(
                         width: max(0, geometry.size.width - theme.margins.spacing_l * 2)
                     )
+                    .environmentObject(locationManager)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PilgrimageListView: View {
     @Environment(\.theme) private var theme
+    @EnvironmentObject private var locationManager: LocationManager
     @State private var searchWord = ""
     @State var store = Store(initialState: SearchCandidateFeature.State()) {
         SearchCandidateFeature()
@@ -28,6 +29,7 @@ struct PilgrimageListView: View {
                     PilgrimageListNavigationView(
                         pilgrimageList: viewStore.allSearchCandidatePilgrimages
                     )
+                    .environmentObject(locationManager)
                 }
                 .onAppear {
                     viewStore.send(.resetPilgrimages)

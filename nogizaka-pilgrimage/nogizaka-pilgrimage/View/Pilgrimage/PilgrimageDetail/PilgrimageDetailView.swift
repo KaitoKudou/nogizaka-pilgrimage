@@ -11,6 +11,8 @@ import SwiftUI
 struct PilgrimageDetailView: View {
     @Environment(\.theme) private var theme
     @State private var isFavorite = false
+    @State private var isShowAlert = false
+    @EnvironmentObject private var locationManager: LocationManager
     let pilgrimage: PilgrimageInformation
     let store: StoreOf<FavoriteFeature>
 
@@ -54,10 +56,22 @@ struct PilgrimageDetailView: View {
 
                     Button {
                         // TODO: チェックイン処理
+
+                        // 位置情報許可ステータスをチェック
+                        let isAuthorized = !locationManager.isLocationPermissionDenied
+                        guard isAuthorized else {
+                            // 位置情報が許可されなかった場合
+                            isShowAlert.toggle()
+                            return
+                        }
                         print("TODO: チェックイン処理")
                     } label: {
                         Text(R.string.localizable.tabbar_check_in())
                             .frame(height: theme.margins.spacing_xl)
+                    }
+                    .alert(R.string.localizable.alert_location(), isPresented: $isShowAlert) {
+                    } message: {
+                        EmptyView()
                     }
                     .frame(maxWidth: .infinity)
                     .background(R.color.text_secondary()!.color)
