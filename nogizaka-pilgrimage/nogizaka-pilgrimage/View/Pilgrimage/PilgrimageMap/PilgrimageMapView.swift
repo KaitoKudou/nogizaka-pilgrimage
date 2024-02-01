@@ -116,4 +116,5 @@ struct PilgrimageMapView: View {
 
 #Preview {
     PilgrimageMapView()
+        .environmentObject(LocationManager())
 }

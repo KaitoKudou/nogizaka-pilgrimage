@@ -13,7 +13,6 @@ struct PilgrimageListNavigationView: View {
     @State var store = Store(initialState: FavoriteFeature.State()) {
         FavoriteFeature()
     }
-    @EnvironmentObject private var locationManager: LocationManager
 
     var body: some View {
         GeometryReader { geometry in
@@ -27,7 +26,7 @@ struct PilgrimageListNavigationView: View {
                                         pilgrimage: pilgrimage,
                                         store: store
                                     )
-                                    .environmentObject(locationManager)
+                                    .environmentObject(LocationManager())
                             ) {
                                 EmptyView()
                             }

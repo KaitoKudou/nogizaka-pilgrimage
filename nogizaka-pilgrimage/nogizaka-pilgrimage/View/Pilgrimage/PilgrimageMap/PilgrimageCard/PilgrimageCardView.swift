@@ -109,6 +109,7 @@ struct PilgrimageCardView_Previews: PreviewProvider {
                 FavoriteFeature()
             }
         )
+        .environmentObject(LocationManager())
         .frame(width: UIScreen.main.bounds.width - 64, height: UIScreen.main.bounds.width / 2 - 32)
         .previewLayout(.sizeThatFits)
     }
