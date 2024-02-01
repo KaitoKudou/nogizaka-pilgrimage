@@ -24,6 +24,7 @@
 		E74934572959F2120045AE39 /* nogizaka_pilgrimageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934562959F2120045AE39 /* nogizaka_pilgrimageTests.swift */; };
 		E74934612959F2120045AE39 /* nogizaka_pilgrimageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934602959F2120045AE39 /* nogizaka_pilgrimageUITests.swift */; };
 		E74934632959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934622959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift */; };
+		E74BA3D62B31E237008C75FE /* CheckInContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74BA3D52B31E237008C75FE /* CheckInContentView.swift */; };
 		E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */; };
 		E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */; };
 		E78D446A2AF8EBBD008D5550 /* PilgrimageListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78D44692AF8EBBD008D5550 /* PilgrimageListContentView.swift */; };
@@ -82,6 +83,7 @@
 		E749345C2959F2120045AE39 /* nogizaka-pilgrimageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nogizaka-pilgrimageUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74934602959F2120045AE39 /* nogizaka_pilgrimageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageUITests.swift; sourceTree = "<group>"; };
 		E74934622959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E74BA3D52B31E237008C75FE /* CheckInContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInContentView.swift; sourceTree = "<group>"; };
 		E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnvironmentKey.swift; sourceTree = "<group>"; };
 		E767E10F295AF38C002DB619 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+BarAppearance.swift"; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				E73E09172965C43000A1204E /* CheckInView.swift */,
+				E74BA3D52B31E237008C75FE /* CheckInContentView.swift */,
 			);
 			path = CheckIn;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */,
 				E78D446A2AF8EBBD008D5550 /* PilgrimageListContentView.swift in Sources */,
 				E7CAE0E72B1E1D580024EB40 /* PilgrimageListNavigationView.swift in Sources */,
+				E74BA3D62B31E237008C75FE /* CheckInContentView.swift in Sources */,
 				E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */,
 				E7FDAA002ADFDDFB0056AA5B /* PilgrimageInformation.swift in Sources */,
 			);
