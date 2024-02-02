@@ -26,7 +26,6 @@ struct PilgrimageListNavigationView: View {
                                         pilgrimage: pilgrimage,
                                         store: store
                                     )
-                                    .environmentObject(LocationManager())
                             ) {
                                 EmptyView()
                             }
