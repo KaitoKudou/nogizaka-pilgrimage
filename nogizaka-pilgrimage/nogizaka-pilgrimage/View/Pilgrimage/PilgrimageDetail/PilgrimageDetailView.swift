@@ -7,14 +7,17 @@
 
 import ComposableArchitecture
 import SwiftUI
+import CoreLocation
 
 struct PilgrimageDetailView: View {
     @Environment(\.theme) private var theme
     @State private var isFavorite = false
-    @State private var isShowAlert = false
+    @State private var isShowAuthorizationAlert = false
+    @State private var isNotNearbyAlert = false
     @EnvironmentObject private var locationManager: LocationManager
     let pilgrimage: PilgrimageInformation
     let store: StoreOf<FavoriteFeature>
+    let distanceThreshold: Double = 100.0
 
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -55,21 +58,32 @@ struct PilgrimageDetailView: View {
                     .padding(.bottom, theme.margins.spacing_xs)
 
                     Button {
-                        // TODO: チェックイン処理
-
                         // 位置情報許可ステータスをチェック
                         let isAuthorized = !locationManager.isLocationPermissionDenied
                         guard isAuthorized else {
                             // 位置情報が許可されなかった場合
-                            isShowAlert.toggle()
+                            isShowAuthorizationAlert.toggle()
                             return
                         }
-                        print("TODO: チェックイン処理")
+                        let distance = calculateDistance(userCoordinate: locationManager.userLocation!, pilgrimageCoordinate: pilgrimage.coordinate)
+                        print("現在位置から\(pilgrimage.name)までの距離：\(distance)")
+                        if distance <= distanceThreshold {
+                            // TODO: チェックイン処理
+                            print("TODO: チェックイン処理")
+                        } else {
+                            // 50m以内に聖地がない場合
+                            isNotNearbyAlert.toggle()
+                        }
                     } label: {
                         Text(R.string.localizable.tabbar_check_in())
                             .frame(height: theme.margins.spacing_xl)
                     }
-                    .alert(R.string.localizable.alert_location(), isPresented: $isShowAlert) {
+                    .alert(R.string.localizable.alert_location(), isPresented: $isShowAuthorizationAlert) {
+                    } message: {
+                        EmptyView()
+                    }
+                    .alert(R.string.localizable.alert_not_nearby(),
+                           isPresented: $isNotNearbyAlert) {
                     } message: {
                         EmptyView()
                     }
@@ -102,6 +116,13 @@ struct PilgrimageDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonTextHidden()
         }
+    }
+
+    func calculateDistance(userCoordinate: CLLocationCoordinate2D, pilgrimageCoordinate: CLLocationCoordinate2D) -> CLLocationDistance {
+        let userLocation = CLLocation(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
+        let pilgrimageLocation = CLLocation(latitude: pilgrimageCoordinate.latitude, longitude: pilgrimageCoordinate.longitude)
+
+        return userLocation.distance(from: pilgrimageLocation)
     }
 }
 
