@@ -16,7 +16,7 @@ struct PilgrimageDetailView: View {
     @State private var isNotNearbyAlert = false
     @EnvironmentObject private var locationManager: LocationManager
     let pilgrimage: PilgrimageInformation
-    let store: StoreOf<FavoriteFeature>
+    let store: StoreOf<PilgrimageDetailFeature>
     let distanceThreshold: Double = 100.0
 
     var body: some View {
@@ -40,10 +40,10 @@ struct PilgrimageDetailView: View {
                         Spacer()
 
                         Button {
-                            viewStore.send(.updateFavoriteList(pilgrimage))
-                            viewStore.send(.toggleFavorite(pilgrimage))
+                            viewStore.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
+                            viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
                             withAnimation {
-                                self.isFavorite = viewStore.state.isFavorite
+                                self.isFavorite = viewStore.state.favoriteState.isFavorite
                             }
                         } label: {
                             if isFavorite {
@@ -107,8 +107,8 @@ struct PilgrimageDetailView: View {
                 }
             }
             .onAppear {
-                viewStore.send(.toggleFavorite(pilgrimage))
-                self.isFavorite = viewStore.state.isFavorite
+                viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
+                self.isFavorite = viewStore.state.favoriteState.isFavorite
             }
             .padding(.leading, theme.margins.spacing_m)
             .padding(.trailing, theme.margins.spacing_m)
@@ -129,8 +129,14 @@ struct PilgrimageDetailView: View {
 #Preview {
     PilgrimageDetailView(
         pilgrimage: dummyPilgrimageList[0],
-        store: StoreOf<FavoriteFeature>(initialState: FavoriteFeature.State()) {
-            FavoriteFeature()
+        store: StoreOf<PilgrimageDetailFeature>(
+            initialState:
+                PilgrimageDetailFeature.State(
+                    favoriteState: FavoriteFeature.State(),
+                    checkInState: CheckInFeature.State()
+                )
+        ) {
+            PilgrimageDetailFeature()
         }
     )
 }

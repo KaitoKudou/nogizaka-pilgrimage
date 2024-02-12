@@ -12,7 +12,7 @@ struct PilgrimageCardView: View {
     @Environment(\.theme) private var theme
     @State private var isFavorite = false
     let pilgrimage: PilgrimageInformation
-    let store: StoreOf<FavoriteFeature>
+    let store: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -41,10 +41,10 @@ struct PilgrimageCardView: View {
                         Spacer()
 
                         Button {
-                            viewStore.send(.updateFavoriteList(pilgrimage))
-                            viewStore.send(.toggleFavorite(pilgrimage))
+                            viewStore.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
+                            viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
                             withAnimation {
-                                self.isFavorite = viewStore.state.isFavorite
+                                self.isFavorite = viewStore.state.favoriteState.isFavorite
                             }
                         } label: {
                             if isFavorite {
@@ -90,8 +90,8 @@ struct PilgrimageCardView: View {
                 }
             }
             .onAppear {
-                viewStore.send(.toggleFavorite(pilgrimage))
-                self.isFavorite = viewStore.state.isFavorite
+                viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
+                self.isFavorite = viewStore.state.favoriteState.isFavorite
             }
         }
         .padding(.all)
@@ -103,8 +103,14 @@ struct PilgrimageCardView_Previews: PreviewProvider {
     static var previews: some View {
         PilgrimageCardView(
             pilgrimage: dummyPilgrimageList[0],
-            store: StoreOf<FavoriteFeature>(initialState: FavoriteFeature.State()) {
-                FavoriteFeature()
+            store: StoreOf<PilgrimageDetailFeature>(
+                initialState:
+                    PilgrimageDetailFeature.State(
+                        favoriteState: FavoriteFeature.State(),
+                        checkInState: CheckInFeature.State()
+                    )
+            ) {
+                PilgrimageDetailFeature()
             }
         )
         .frame(width: UIScreen.main.bounds.width - 64, height: UIScreen.main.bounds.width / 2 - 32)

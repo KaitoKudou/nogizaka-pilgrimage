@@ -10,8 +10,13 @@ import SwiftUI
 
 struct PilgrimageListNavigationView: View {
     let pilgrimageList: [PilgrimageInformation]
-    @State var store = Store(initialState: FavoriteFeature.State()) {
-        FavoriteFeature()
+    @State var store = Store(
+        initialState: PilgrimageDetailFeature.State(
+            favoriteState: FavoriteFeature.State(),
+            checkInState: CheckInFeature.State()
+        )
+    ) {
+        PilgrimageDetailFeature()
     }
 
     var body: some View {
@@ -48,8 +53,14 @@ struct PilgrimageListNavigationView: View {
 #Preview {
     PilgrimageListNavigationView(
         pilgrimageList: dummyPilgrimageList,
-        store: StoreOf<FavoriteFeature>(initialState: FavoriteFeature.State()) {
-            FavoriteFeature()
+        store: StoreOf<PilgrimageDetailFeature>(
+            initialState:
+                PilgrimageDetailFeature.State(
+                    favoriteState: FavoriteFeature.State(),
+                    checkInState: CheckInFeature.State()
+                )
+        ) {
+            PilgrimageDetailFeature()
         }
     )
 }
