@@ -8,33 +8,35 @@
 import Foundation
 
 class UserDefaultsManager {
-    private enum Keys: String {
+    enum Keys: String {
         case favorite = "favoriteCodes"
+        case checkedIn = "checkedInCodes"
     }
 
     static let shared = UserDefaultsManager()
     private let userDefaults = UserDefaults.standard
 
-    func updateFavoriteList(code: String) {
-        var favoriteCodes = userDefaults.stringArray(forKey: Keys.favorite.rawValue) ?? []
+    func updateList(code: String, userDefaultsKey: Keys) {
+        var codes = userDefaults.stringArray(forKey: userDefaultsKey.rawValue) ?? []
 
-        if !favoriteCodes.contains(code) {
-            favoriteCodes.append(code)
+        if !codes.contains(code) {
+            codes.append(code)
         } else {
-            favoriteCodes.removeAll { $0 == code }
+            if userDefaultsKey == .favorite {
+                codes.removeAll { $0 == code }
+            }
         }
 
-        userDefaults.set(favoriteCodes, forKey: Keys.favorite.rawValue)
+        userDefaults.set(codes, forKey: userDefaultsKey.rawValue)
     }
 
-    func fetchFavorites() -> [PilgrimageInformation] {
-        let favoriteCodes = userDefaults.stringArray(forKey: Keys.favorite.rawValue) ?? []
-        let favoritePilgrimages = dummyPilgrimageList.filter { favoriteCodes.contains($0.code) }
-        return favoritePilgrimages
+    func fetchList(userDefaultsKey: Keys) -> [PilgrimageInformation] {
+        let codes = userDefaults.stringArray(forKey: userDefaultsKey.rawValue) ?? []
+        return dummyPilgrimageList.filter { codes.contains($0.code) }
     }
 
-    func isFavorite(code: String) -> Bool {
-        let favoriteCodes = userDefaults.stringArray(forKey: Keys.favorite.rawValue) ?? []
-        return favoriteCodes.contains(code)
+    func isContainedInList(code: String, userDefaultsKey: Keys) -> Bool {
+        let codes = userDefaults.stringArray(forKey: userDefaultsKey.rawValue) ?? []
+        return codes.contains(code)
     }
 }
