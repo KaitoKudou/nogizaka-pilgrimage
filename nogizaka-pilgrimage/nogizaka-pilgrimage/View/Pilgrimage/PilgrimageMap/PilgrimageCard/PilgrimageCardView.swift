@@ -11,7 +11,6 @@ import SwiftUI
 struct PilgrimageCardView: View {
     @Environment(\.theme) private var theme
     @State private var isFavorite = false
-    @EnvironmentObject private var locationManager: LocationManager
     let pilgrimage: PilgrimageInformation
     let store: StoreOf<FavoriteFeature>
 
@@ -79,7 +78,6 @@ struct PilgrimageCardView: View {
                                     PilgrimageDetailView(
                                         pilgrimage: pilgrimage, store: store
                                     )
-                                    .environmentObject(locationManager)
                             ) {
                                 Text(R.string.localizable.common_btn_detail_text())
                             }
@@ -109,7 +107,6 @@ struct PilgrimageCardView_Previews: PreviewProvider {
                 FavoriteFeature()
             }
         )
-        .environmentObject(LocationManager())
         .frame(width: UIScreen.main.bounds.width - 64, height: UIScreen.main.bounds.width / 2 - 32)
         .previewLayout(.sizeThatFits)
     }

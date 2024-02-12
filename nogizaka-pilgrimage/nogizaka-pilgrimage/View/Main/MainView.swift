@@ -9,12 +9,14 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.theme) private var theme
+    @StateObject private var locationManager = LocationManager()
 
     var body: some View {
         TabView {
             NavigationStack {
                 PilgrimageView()
             }
+            .environmentObject(locationManager)
             .tabItem {
                 Image(systemName: "map")
                 Text(R.string.localizable.tabbar_pilgrimage())
@@ -27,6 +29,7 @@ struct MainView: View {
                 Image(systemName: "heart.fill")
                 Text(R.string.localizable.tabbar_favorite())
             }
+            .environmentObject(locationManager)
 
             NavigationStack {
                 CheckInView()

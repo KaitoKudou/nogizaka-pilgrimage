@@ -92,7 +92,6 @@ struct PilgrimageMapView: View {
                     .frame(
                         width: max(0, geometry.size.width - theme.margins.spacing_l * 2)
                     )
-                    .environmentObject(locationManager)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
