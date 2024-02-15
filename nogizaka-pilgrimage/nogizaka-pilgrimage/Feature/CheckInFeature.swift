@@ -10,8 +10,9 @@ import CoreLocation
 
 struct CheckInFeature: Reducer {
     struct State: Equatable {
-        var distance: Double = 0.0
-        var isCheckedIn: Bool = false
+        var distance: Double = 0.0 // 現在地から聖地までの距離
+        var hasCheckedIn: Bool = true // チェックインしているかどうか
+        var checkedInPilgrimages: [PilgrimageInformation] = []
     }
 
     enum Action: Equatable {
@@ -23,15 +24,21 @@ struct CheckInFeature: Reducer {
                 lhsUser.longitude == rhsUser.longitude &&
                 lhsPilgrimage.latitude == rhsPilgrimage.latitude &&
                 lhsPilgrimage.longitude == rhsPilgrimage.longitude
-            case (.addCheckInList, .addCheckInList):
+            case (.addCheckedInList, .addCheckedInList):
+                return true
+            case (.fetchCheckedInList, .fetchCheckedInList):
+                return true
+            case (.verifyCheckedIn(pilgrimage: _), .verifyCheckedIn(pilgrimage: _)):
                 return true
             default:
                 return false
             }
         }
-        
+
         case calculateDistance(userCoordinate: CLLocationCoordinate2D, pilgrimageCoordinate: CLLocationCoordinate2D)
-        case addCheckInList
+        case addCheckedInList(pilgrimage: PilgrimageInformation)
+        case fetchCheckedInList
+        case verifyCheckedIn(pilgrimage: PilgrimageInformation)
     }
 
     var body: some Reducer<State, Action> {
@@ -43,8 +50,15 @@ struct CheckInFeature: Reducer {
 
                 state.distance = userLocation.distance(from: pilgrimageLocation)
                 return .none
-            case .addCheckInList:
-                print("チェックイン済みのリストに聖地を追加")
+            case .addCheckedInList(let pilgrimage):
+                UserDefaultsManager.shared.updateList(code: pilgrimage.code, userDefaultsKey: .checkedIn)
+                state.checkedInPilgrimages = UserDefaultsManager.shared.fetchList(userDefaultsKey: .checkedIn)
+                return .none
+            case .fetchCheckedInList:
+                state.checkedInPilgrimages = UserDefaultsManager.shared.fetchList(userDefaultsKey: .checkedIn)
+                return .none
+            case .verifyCheckedIn(let pilgrimage):
+                state.hasCheckedIn = UserDefaultsManager.shared.isContainedInList(code: pilgrimage.code, userDefaultsKey: .checkedIn)
                 return .none
             }
         }
