@@ -50,7 +50,7 @@ extension Theme {
 
     private func tabBarItemAppearanceConfiguration() -> UITabBarItemAppearance {
         let itemAppearance = UITabBarItemAppearance()
-        let normalColor = R.color.tab_primar_off()!
+        let normalColor = R.color.tab_primary_off()!
         let selectedColor = R.color.tab_primary()!
 
         // 通常状態

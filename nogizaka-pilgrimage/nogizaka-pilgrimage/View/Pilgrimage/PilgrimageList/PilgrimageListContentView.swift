@@ -56,7 +56,7 @@ struct PilgrimageListContentView: View {
                                     .foregroundStyle(.red)
                             } else {
                                 Image(systemName: "heart")
-                                    .foregroundStyle(R.color.tab_primar_off()!.color)
+                                    .foregroundStyle(R.color.tab_primary_off()!.color)
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
