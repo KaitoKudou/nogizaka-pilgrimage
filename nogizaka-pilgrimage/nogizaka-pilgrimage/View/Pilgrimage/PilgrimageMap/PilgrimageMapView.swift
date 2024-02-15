@@ -13,8 +13,13 @@ struct PilgrimageMapView: View {
     @Environment(\.theme) private var theme
     @State private var region = PilgrimageMapConstant.initialRegion
     @State private var selectedIndex: Int = 0
-    @State var store = Store(initialState: FavoriteFeature.State()) {
-        FavoriteFeature()
+    @State var store = Store(
+        initialState: PilgrimageDetailFeature.State(
+            favoriteState: FavoriteFeature.State(),
+            checkInState: CheckInFeature.State()
+        )
+    ) {
+        PilgrimageDetailFeature()
     }
     @State private var isShowAlert = false
     @EnvironmentObject private var locationManager: LocationManager

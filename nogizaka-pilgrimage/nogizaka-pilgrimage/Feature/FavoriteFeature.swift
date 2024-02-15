@@ -23,14 +23,14 @@ struct FavoriteFeature: Reducer {
         Reduce { state, action in
             switch action {
             case .fetchFavorites:
-                state.favoritePilgrimages = UserDefaultsManager.shared.fetchFavorites()
+                state.favoritePilgrimages = UserDefaultsManager.shared.fetchList(userDefaultsKey: .favorite)
                 return .none
             case let .updateFavoriteList(pilgrimage):
-                UserDefaultsManager.shared.updateFavoriteList(code: pilgrimage.code)
-                state.favoritePilgrimages = UserDefaultsManager.shared.fetchFavorites()
+                UserDefaultsManager.shared.updateList(code: pilgrimage.code, userDefaultsKey: .favorite)
+                state.favoritePilgrimages = UserDefaultsManager.shared.fetchList(userDefaultsKey: .favorite)
                 return .none
             case let .toggleFavorite(pilgrimage):
-                state.isFavorite = UserDefaultsManager.shared.isFavorite(code: pilgrimage.code)
+                state.isFavorite = UserDefaultsManager.shared.isContainedInList(code: pilgrimage.code, userDefaultsKey: .favorite)
                 return .none
             }
         }

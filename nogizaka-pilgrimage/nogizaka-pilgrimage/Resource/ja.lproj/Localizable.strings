@@ -25,6 +25,8 @@
 
 // MARK: - 聖地詳細画面のテキスト
 "navbar_pilgrimage_detail" = "聖地詳細";
+"has_check_in" = "チェックイン済み";
 
 // MARK: - 位置情報関連のAlert
 "alert_location" = "位置情報がオフになっているため、現在位置を表示できません。";
+"alert_not_nearby" = "近くに聖地がありません。もう少し近づいてみましょう。";

@@ -12,7 +12,7 @@ struct PilgrimageListContentView: View {
     @Environment(\.theme) private var theme
     @State private var isFavorite = false
     let pilgrimage: PilgrimageInformation
-    let store: StoreOf<FavoriteFeature>
+    let store: StoreOf<PilgrimageDetailFeature>
 
 
     var body: some View {
@@ -42,10 +42,13 @@ struct PilgrimageListContentView: View {
                         Spacer()
 
                         Button {
-                            viewStore.send(.updateFavoriteList(pilgrimage))
-                            viewStore.send(.toggleFavorite(pilgrimage))
+                            viewStore.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
+                            viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
+//                            viewStore.send(.updateFavoriteList(pilgrimage))
+//                            viewStore.send(.toggleFavorite(pilgrimage))
                             withAnimation {
-                                self.isFavorite = viewStore.state.isFavorite
+                                self.isFavorite = viewStore.state.favoriteState.isFavorite
+                                //self.isFavorite = viewStore.state.isFavorite
                             }
                         } label: {
                             if isFavorite {
@@ -53,7 +56,7 @@ struct PilgrimageListContentView: View {
                                     .foregroundStyle(.red)
                             } else {
                                 Image(systemName: "heart")
-                                    .foregroundStyle(R.color.tab_primar_off()!.color)
+                                    .foregroundStyle(R.color.tab_primary_off()!.color)
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -65,9 +68,12 @@ struct PilgrimageListContentView: View {
                 }
             }
             .onAppear {
-                viewStore.send(.toggleFavorite(pilgrimage))
-                viewStore.send(.fetchFavorites)
-                self.isFavorite = viewStore.state.isFavorite
+                viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
+                viewStore.send(.favoriteAction(.fetchFavorites))
+                self.isFavorite = viewStore.state.favoriteState.isFavorite
+                //viewStore.send(.toggleFavorite(pilgrimage))
+                //viewStore.send(.fetchFavorites)
+                //self.isFavorite = viewStore.state.isFavorite
             }
         }
         .padding()
@@ -82,10 +88,17 @@ struct PilgrimageListContentView_Previews: PreviewProvider {
     static var previews: some View {
         PilgrimageListContentView(
             pilgrimage: dummyPilgrimageList[0],
-            store: StoreOf<FavoriteFeature>(initialState: FavoriteFeature.State()) {
-                FavoriteFeature()
-            })
-            .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width / 3)
-            .previewLayout(.sizeThatFits)
+            store: StoreOf<PilgrimageDetailFeature>(
+                initialState:
+                    PilgrimageDetailFeature.State(
+                        favoriteState: FavoriteFeature.State(),
+                        checkInState: CheckInFeature.State()
+                    )
+            ) {
+                PilgrimageDetailFeature()
+            }
+        )
+        .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width / 3)
+        .previewLayout(.sizeThatFits)
     }
 }
