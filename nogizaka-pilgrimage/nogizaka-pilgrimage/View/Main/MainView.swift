@@ -5,11 +5,20 @@
 //  Created by 工藤 海斗 on 2023/01/04.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 struct MainView: View {
     @Environment(\.theme) private var theme
     @StateObject private var locationManager = LocationManager()
+    @State private var store = Store(
+        initialState: PilgrimageDetailFeature.State(
+            favoriteState: FavoriteFeature.State(),
+            checkInState: CheckInFeature.State()
+        )
+    ) {
+        PilgrimageDetailFeature()
+    }
 
     var body: some View {
         TabView {
@@ -32,7 +41,7 @@ struct MainView: View {
             .environmentObject(locationManager)
 
             NavigationStack {
-                CheckInView()
+                CheckInView(store: store)
             }
             .tabItem {
                 Image(R.image.icn_check_in.name)
