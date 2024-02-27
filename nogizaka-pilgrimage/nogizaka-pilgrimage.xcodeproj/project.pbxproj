@@ -30,6 +30,11 @@
 		E78D446A2AF8EBBD008D5550 /* PilgrimageListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78D44692AF8EBBD008D5550 /* PilgrimageListContentView.swift */; };
 		E79045B22B0E088100F0936B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79045B12B0E088100F0936B /* LocationManager.swift */; };
 		E7B5EFB22B18B85400E91C52 /* SearchCandidateFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5EFB12B18B85400E91C52 /* SearchCandidateFeature.swift */; };
+		E7B9CD522B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */; };
+		E7B9CD532B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */; };
+		E7B9CD542B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */; };
+		E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */; };
+		E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */; };
 		E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C11D3F295AF19A0051A1B9 /* R.generated.swift */; };
 		E7C431FA2AEF9F53003E6946 /* PilgrimageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C431F92AEF9F53003E6946 /* PilgrimageCardView.swift */; };
 		E7CAE0E42B1E19B00024EB40 /* FavoritePilgrimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAE0E32B1E19B00024EB40 /* FavoritePilgrimageView.swift */; };
@@ -90,6 +95,7 @@
 		E78D44692AF8EBBD008D5550 /* PilgrimageListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageListContentView.swift; sourceTree = "<group>"; };
 		E79045B12B0E088100F0936B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E7B5EFB12B18B85400E91C52 /* SearchCandidateFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCandidateFeature.swift; sourceTree = "<group>"; };
+		E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7C11D3B295AEE400051A1B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		E7C11D3F295AF19A0051A1B9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		E7C431F92AEF9F53003E6946 /* PilgrimageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageCardView.swift; sourceTree = "<group>"; };
@@ -110,7 +116,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7CB5D5B2B021BCB001A1CDB /* ComposableArchitecture in Frameworks */,
+				E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */,
 				E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */,
+				E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +264,7 @@
 		E74934442959F20E0045AE39 /* nogizaka-pilgrimage */ = {
 			isa = PBXGroup;
 			children = (
+				E7B9CD502B8E2586003FAB19 /* Enviroment */,
 				E7C11D3D295AF19A0051A1B9 /* GeneratedByTools */,
 				E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */,
 				E7FDAA0D2AE177140056AA5B /* Extension */,
@@ -292,6 +301,14 @@
 				E74934622959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift */,
 			);
 			path = "nogizaka-pilgrimageUITests";
+			sourceTree = "<group>";
+		};
+		E7B9CD502B8E2586003FAB19 /* Enviroment */ = {
+			isa = PBXGroup;
+			children = (
+				E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */,
+			);
+			path = Enviroment;
 			sourceTree = "<group>";
 		};
 		E7C11D38295AEDF30051A1B9 /* BuildTools */ = {
@@ -396,6 +413,8 @@
 			packageProductDependencies = (
 				E7FD73D32959FCD400347BA4 /* Rswift */,
 				E7CB5D5A2B021BCB001A1CDB /* ComposableArchitecture */,
+				E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */,
+				E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */,
 			);
 			productName = "nogizaka-pilgrimage";
 			productReference = E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */;
@@ -472,6 +491,7 @@
 			packageReferences = (
 				E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
 				E7CB5D592B021BCB001A1CDB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = E74934432959F20E0045AE39 /* Products */;
 			projectDirPath = "";
@@ -491,6 +511,7 @@
 			files = (
 				E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */,
 				E73E092E2965D18700A1204E /* Localizable.strings in Resources */,
+				E7B9CD522B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */,
 				E749344D2959F2120045AE39 /* Preview Assets.xcassets in Resources */,
 				E749344A2959F2120045AE39 /* Assets.xcassets in Resources */,
 			);
@@ -500,6 +521,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7B9CD532B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +529,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7B9CD542B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,6 +931,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.21.0;
+			};
+		};
 		E7CB5D592B021BCB001A1CDB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
@@ -927,6 +958,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		E7CB5D5A2B021BCB001A1CDB /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E7CB5D592B021BCB001A1CDB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
