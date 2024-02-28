@@ -19,11 +19,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct nogizaka_pilgrimageApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @Environment(\.theme) private var theme
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .environment(\.theme, .system)
+            LaunchScreen()
         }
     }
 }
