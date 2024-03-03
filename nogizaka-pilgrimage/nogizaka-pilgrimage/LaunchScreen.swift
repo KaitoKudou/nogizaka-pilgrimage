@@ -28,7 +28,7 @@ struct LaunchScreen: View {
                 }
             } else {
                 if !viewStore.state.hasError {
-                    MainView()
+                    MainView(pilgrimages: viewStore.state.pilgrimages)
                         .environment(\.theme, .system)
                 }
             }

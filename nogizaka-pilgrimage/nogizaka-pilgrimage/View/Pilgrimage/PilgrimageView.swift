@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct PilgrimageView: View {
+    let pilgrimages: [PilgrimageInformation]
+    
     var body: some View {
         ZStack {
-            PilgrimageMapView()
+            PilgrimageMapView(pilgrimages: pilgrimages)
         }
         .navigationTitle(R.string.localizable.tabbar_pilgrimage())
         .navigationBarTitleDisplayMode(.inline)
@@ -27,7 +29,7 @@ extension PilgrimageView {
         ToolbarItem(placement: .topBarTrailing) {
             NavigationLink(
                 destination: 
-                    PilgrimageListView()
+                    PilgrimageListView(pilgrimages: pilgrimages)
             ) {
                 Image(systemName: "list.bullet")
                     .foregroundStyle(.white)
@@ -37,6 +39,6 @@ extension PilgrimageView {
 }
 
 #Preview {
-    PilgrimageView()
+    PilgrimageView(pilgrimages: dummyPilgrimageList)
         .environmentObject(LocationManager())
 }

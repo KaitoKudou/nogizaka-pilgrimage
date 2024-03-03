@@ -18,7 +18,7 @@ struct SearchCandidateFeature: Reducer {
         case searchPilgrimages(String)
         case startLoading
         case stopLoading
-        case resetPilgrimages
+        case resetPilgrimages(pilgrimages: [PilgrimageInformation])
         case searchAllPilgrimages // 一覧から検索
         case searchPilgrimagesResponse([PilgrimageInformation])
     }
@@ -26,9 +26,9 @@ struct SearchCandidateFeature: Reducer {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case .resetPilgrimages:
+            case let.resetPilgrimages(pilgrimages):
                 // 初回立ち上げ時 and 空文字での検索時に実行
-                state.allSearchCandidatePilgrimages = dummyPilgrimageList
+                state.allSearchCandidatePilgrimages = pilgrimages
                 return .none
 
             case let .searchPilgrimages(text):
@@ -48,7 +48,7 @@ struct SearchCandidateFeature: Reducer {
                 return .none
 
             case .searchAllPilgrimages:
-                let filteredPilgrimages = searchPilgrimages(with: state.searchText, searchTarget: dummyPilgrimageList)
+                let filteredPilgrimages = searchPilgrimages(with: state.searchText, searchTarget: state.allSearchCandidatePilgrimages)
                 return .run { send in
                     await send(.searchPilgrimagesResponse(filteredPilgrimages))
                     await send(.stopLoading)

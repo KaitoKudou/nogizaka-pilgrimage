@@ -23,6 +23,7 @@ struct PilgrimageMapView: View {
     }
     @State private var isShowAlert = false
     @EnvironmentObject private var locationManager: LocationManager
+    let pilgrimages: [PilgrimageInformation]
 
     var body: some View {
         GeometryReader { geometry in
@@ -59,7 +60,7 @@ struct PilgrimageMapView: View {
                 .onChange(of: selectedIndex) { _ in
                     withAnimation {
                         region.center = offsetAppliedCenter(
-                            to: dummyPilgrimageList[selectedIndex].coordinate,
+                            to: pilgrimages[selectedIndex].coordinate,
                             geometry: geometry
                         )
                     }
@@ -71,13 +72,13 @@ struct PilgrimageMapView: View {
         Map(
             coordinateRegion: $region,
             showsUserLocation: true,
-            annotationItems: dummyPilgrimageList,
+            annotationItems: pilgrimages,
             annotationContent: { item in
                 let coordinate = CLLocationCoordinate2D(
                     latitude: item.coordinate.latitude,
                     longitude: item.coordinate.longitude
                 )
-                let index = dummyPilgrimageList.firstIndex(where: { $0.code == item.code }) ?? 0
+                let index = pilgrimages.firstIndex(where: { $0.code == item.code }) ?? 0
 
                 return MapAnnotation(coordinate: coordinate) {
                     Image(uiImage: R.image.map_pin()!)
@@ -91,7 +92,7 @@ struct PilgrimageMapView: View {
 
     private func pilgrimageCardsView(geometry: GeometryProxy) -> some View {
         TabView(selection: $selectedIndex) {
-            ForEach(Array(dummyPilgrimageList.enumerated()), id: \.element.id) { index, pilgrimage in
+            ForEach(Array(pilgrimages.enumerated()), id: \.element.id) { index, pilgrimage in
                 PilgrimageCardView(pilgrimage: pilgrimage, store: store)
                     .tag(index)
                     .frame(
@@ -119,6 +120,6 @@ struct PilgrimageMapView: View {
 }
 
 #Preview {
-    PilgrimageMapView()
+    PilgrimageMapView(pilgrimages: dummyPilgrimageList)
         .environmentObject(LocationManager())
 }
