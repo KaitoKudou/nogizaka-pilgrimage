@@ -5,28 +5,33 @@
 //  Created by 工藤 海斗 on 2024/02/28.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 struct LaunchScreen: View {
-    @State private var isLoading = true
-    @Environment(\.theme) private var theme
+    @State var store = Store(
+        initialState: InitialFeature.State()
+    ) {
+        InitialFeature()
+    }
 
     var body: some View {
-        if isLoading {
-            ZStack {
-                ProgressView()
-                    .controlSize(.large)
-            }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    withAnimation {
-                        isLoading = false
-                    }
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            if viewStore.state.isLoading || viewStore.state.hasError {
+                ZStack {
+                    ProgressView()
+                        .controlSize(.large)
+                }
+                .alert(store: store.scope(state: \.$alert, action: InitialFeature.Action.alertDismissed))
+                .onAppear {
+                    store.send(.fetchAllPilgrimage)
+                }
+            } else {
+                if !viewStore.state.hasError {
+                    MainView()
+                        .environment(\.theme, .system)
                 }
             }
-        } else {
-            MainView()
-                .environment(\.theme, .system)
         }
     }
 }

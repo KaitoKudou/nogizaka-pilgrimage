@@ -8,7 +8,7 @@
 import CoreLocation
 import Foundation
 
-struct PilgrimageInformation: Hashable {
+struct PilgrimageInformation: Hashable, Decodable {
     let code: String
     let name: String
     let description: String
@@ -37,6 +37,18 @@ struct PilgrimageInformation: Hashable {
         self.imageURL = imageURL
         self.copyright = copyright
         self.searchCandidateList = searchCandidateList
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case code
+        case name
+        case description
+        case latitude
+        case longitude
+        case address
+        case imageURL
+        case copyright
+        case searchCandidateList = "search_candidate_list"
     }
 }
 
