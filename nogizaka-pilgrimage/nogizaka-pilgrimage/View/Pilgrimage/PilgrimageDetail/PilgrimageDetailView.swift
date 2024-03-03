@@ -23,14 +23,16 @@ struct PilgrimageDetailView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     AsyncImage(url: pilgrimage.imageURL) { image in
-                        // TODO: 聖地の画像を表示
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
                     } placeholder: {
                         // 画像取得中のプレースホルダー表示
                         Image(R.image.no_image.name)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     }
-                    .padding(.bottom, theme.margins.spacing_m)
+                    .padding(.vertical, theme.margins.spacing_m)
 
                     HStack {
                         Text(pilgrimage.name)

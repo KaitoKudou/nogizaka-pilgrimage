@@ -19,11 +19,12 @@ struct MainView: View {
     ) {
         PilgrimageDetailFeature()
     }
+    let pilgrimages: [PilgrimageInformation]
 
     var body: some View {
         TabView {
             NavigationStack {
-                PilgrimageView()
+                PilgrimageView(pilgrimages: pilgrimages)
             }
             .environmentObject(locationManager)
             .tabItem {
@@ -63,8 +64,6 @@ struct MainView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
+#Preview {
+    MainView(pilgrimages: dummyPilgrimageList)
 }

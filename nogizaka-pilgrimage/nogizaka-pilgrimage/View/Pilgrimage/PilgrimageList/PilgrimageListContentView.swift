@@ -19,8 +19,10 @@ struct PilgrimageListContentView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             HStack(alignment: .top, spacing: theme.margins.spacing_m) {
                 VStack {
-                    AsyncImage(url: nil) { image in
-                        // TODO: 聖地の画像を表示
+                    AsyncImage(url: pilgrimage.imageURL) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
                     } placeholder: {
                         // 画像取得中のプレースホルダー表示
                         Image(R.image.no_image.name)
@@ -44,11 +46,8 @@ struct PilgrimageListContentView: View {
                         Button {
                             viewStore.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
                             viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
-//                            viewStore.send(.updateFavoriteList(pilgrimage))
-//                            viewStore.send(.toggleFavorite(pilgrimage))
                             withAnimation {
                                 self.isFavorite = viewStore.state.favoriteState.isFavorite
-                                //self.isFavorite = viewStore.state.isFavorite
                             }
                         } label: {
                             if isFavorite {
@@ -71,9 +70,6 @@ struct PilgrimageListContentView: View {
                 viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
                 viewStore.send(.favoriteAction(.fetchFavorites))
                 self.isFavorite = viewStore.state.favoriteState.isFavorite
-                //viewStore.send(.toggleFavorite(pilgrimage))
-                //viewStore.send(.fetchFavorites)
-                //self.isFavorite = viewStore.state.isFavorite
             }
         }
         .padding()

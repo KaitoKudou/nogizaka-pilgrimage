@@ -14,6 +14,7 @@ struct PilgrimageListView: View {
     @State var store = Store(initialState: SearchCandidateFeature.State()) {
         SearchCandidateFeature()
     }
+    let pilgrimages: [PilgrimageInformation]
 
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -30,7 +31,7 @@ struct PilgrimageListView: View {
                     )
                 }
                 .onAppear {
-                    viewStore.send(.resetPilgrimages)
+                    viewStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
                 }
                 .onChange(of: viewStore.isLoading) { newIsLoading in
                     if newIsLoading {
@@ -62,9 +63,10 @@ struct PilgrimageListView: View {
             .onSubmit {
                 // キーボードの検索ボタンが押されたときにアクションを送信
                 if !searchWord.isEmpty {
+                    viewStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
                     viewStore.send(.searchPilgrimages(searchWord))
                 } else {
-                    viewStore.send(.resetPilgrimages)
+                    viewStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
                 }
             }
         }
@@ -75,5 +77,5 @@ struct PilgrimageListView: View {
 }
 
 #Preview {
-    PilgrimageListView()
+    PilgrimageListView(pilgrimages: dummyPilgrimageList)
 }

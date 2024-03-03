@@ -46,7 +46,7 @@ struct PilgrimageInformation: Hashable, Decodable {
         case latitude
         case longitude
         case address
-        case imageURL
+        case imageURL = "image_url"
         case copyright
         case searchCandidateList = "search_candidate_list"
     }
