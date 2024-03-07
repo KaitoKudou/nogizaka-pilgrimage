@@ -31,4 +31,6 @@
 "alert_location" = "位置情報がオフになっているため、現在位置を表示できません。";
 "alert_not_nearby" = "近くに聖地がありません。もう少し近づいてみましょう。";
 "alert_fetch_pilgrimages" = "聖地の取得に失敗しました。\n再度お試しください。";
+"alert_fetch_favorite_pilgrimages" = "お気に入りの取得に失敗しました。\n再度お試しください。";
+"alert_update_favorite_pilgrimages" = "お気に入りの登録に失敗しました。\n時間をあけてお試しください。";
 "alert_unknown" = "不明なエラーです";
