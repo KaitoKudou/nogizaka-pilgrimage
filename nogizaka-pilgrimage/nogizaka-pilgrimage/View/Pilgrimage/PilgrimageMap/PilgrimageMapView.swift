@@ -13,17 +13,10 @@ struct PilgrimageMapView: View {
     @Environment(\.theme) private var theme
     @State private var region = PilgrimageMapConstant.initialRegion
     @State private var selectedIndex: Int = 0
-    @State var store = Store(
-        initialState: PilgrimageDetailFeature.State(
-            favoriteState: FavoriteFeature.State(),
-            checkInState: CheckInFeature.State()
-        )
-    ) {
-        PilgrimageDetailFeature()
-    }
     @State private var isShowAlert = false
     @EnvironmentObject private var locationManager: LocationManager
     let pilgrimages: [PilgrimageInformation]
+    let store: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
         GeometryReader { geometry in
@@ -120,6 +113,17 @@ struct PilgrimageMapView: View {
 }
 
 #Preview {
-    PilgrimageMapView(pilgrimages: dummyPilgrimageList)
-        .environmentObject(LocationManager())
+    PilgrimageMapView(
+        pilgrimages: dummyPilgrimageList,
+        store: StoreOf<PilgrimageDetailFeature>(
+            initialState:
+                PilgrimageDetailFeature.State(
+                    favoriteState: FavoriteFeature.State(),
+                    checkInState: CheckInFeature.State()
+                )
+        ) {
+            PilgrimageDetailFeature()
+        }
+    )
+    .environmentObject(LocationManager())
 }

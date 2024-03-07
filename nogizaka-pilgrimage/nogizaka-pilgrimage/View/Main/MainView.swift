@@ -24,7 +24,9 @@ struct MainView: View {
     var body: some View {
         TabView {
             NavigationStack {
-                PilgrimageView(pilgrimages: pilgrimages)
+                PilgrimageView(
+                    pilgrimages: pilgrimages, store: store
+                )
             }
             .environmentObject(locationManager)
             .tabItem {
@@ -33,7 +35,7 @@ struct MainView: View {
             }
 
             NavigationStack {
-                FavoritePilgrimageView()
+                FavoritePilgrimageView(store: store)
             }
             .tabItem {
                 Image(systemName: "heart.fill")

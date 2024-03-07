@@ -9,14 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 
 struct FavoritePilgrimageView: View {
-    @State var store = Store(
-        initialState: PilgrimageDetailFeature.State(
-            favoriteState: FavoriteFeature.State(),
-            checkInState: CheckInFeature.State()
-        )
-    ) {
-        PilgrimageDetailFeature()
-    }
+    let store: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -43,5 +36,15 @@ struct FavoritePilgrimageView: View {
 }
 
 #Preview {
-    FavoritePilgrimageView()
+    FavoritePilgrimageView(
+        store: StoreOf<PilgrimageDetailFeature>(
+            initialState:
+                PilgrimageDetailFeature.State(
+                    favoriteState: FavoriteFeature.State(),
+                    checkInState: CheckInFeature.State()
+                )
+        ) {
+            PilgrimageDetailFeature()
+        }
+    )
 }

@@ -10,7 +10,6 @@ import SwiftUI
 
 struct PilgrimageListContentView: View {
     @Environment(\.theme) private var theme
-    @State private var isFavorite = false
     let pilgrimage: PilgrimageInformation
     let store: StoreOf<PilgrimageDetailFeature>
 
@@ -45,15 +44,14 @@ struct PilgrimageListContentView: View {
 
                         Button {
                             viewStore.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
-                            viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
-                            withAnimation {
-                                self.isFavorite = viewStore.state.favoriteState.isFavorite
-                            }
                         } label: {
-                            if isFavorite {
+                            if viewStore.state.favoriteState.isLoading {
+                                // 通信中の場合、インジケータを表示
+                                ProgressView()
+                            } else if viewStore.state.favoriteState.favoritePilgrimages.contains(pilgrimage) {
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.red)
-                            } else {
+                            } else if !viewStore.state.favoriteState.favoritePilgrimages.contains(pilgrimage) {
                                 Image(systemName: "heart")
                                     .foregroundStyle(R.color.tab_primary_off()!.color)
                             }
@@ -67,9 +65,7 @@ struct PilgrimageListContentView: View {
                 }
             }
             .onAppear {
-                viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
                 viewStore.send(.favoriteAction(.fetchFavorites))
-                self.isFavorite = viewStore.state.favoriteState.isFavorite
             }
         }
         .padding()

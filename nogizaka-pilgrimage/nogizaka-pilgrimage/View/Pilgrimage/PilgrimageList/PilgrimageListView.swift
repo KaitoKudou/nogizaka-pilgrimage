@@ -11,13 +11,14 @@ import SwiftUI
 struct PilgrimageListView: View {
     @Environment(\.theme) private var theme
     @State private var searchWord = ""
-    @State var store = Store(initialState: SearchCandidateFeature.State()) {
+    @State var searchCandidateStore = Store(initialState: SearchCandidateFeature.State()) {
         SearchCandidateFeature()
     }
     let pilgrimages: [PilgrimageInformation]
+    let pilgrimageDetailStore: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithViewStore(searchCandidateStore, observe: { $0 }) { viewStore in
             GeometryReader { geometry in
                 VStack {
                     searchTextField(viewStore: viewStore)
@@ -27,7 +28,8 @@ struct PilgrimageListView: View {
                         .background(R.color.tab_primary()!.color)
 
                     PilgrimageListNavigationView(
-                        pilgrimageList: viewStore.allSearchCandidatePilgrimages
+                        pilgrimageList: viewStore.allSearchCandidatePilgrimages, 
+                        store: pilgrimageDetailStore
                     )
                 }
                 .onAppear {
@@ -77,5 +79,16 @@ struct PilgrimageListView: View {
 }
 
 #Preview {
-    PilgrimageListView(pilgrimages: dummyPilgrimageList)
+    PilgrimageListView(
+        pilgrimages: dummyPilgrimageList,
+        pilgrimageDetailStore: StoreOf<PilgrimageDetailFeature>(
+            initialState:
+                PilgrimageDetailFeature.State(
+                    favoriteState: FavoriteFeature.State(),
+                    checkInState: CheckInFeature.State()
+                )
+        ) {
+            PilgrimageDetailFeature()
+        }
+    )
 }
