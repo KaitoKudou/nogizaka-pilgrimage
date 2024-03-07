@@ -10,41 +10,36 @@ import SwiftUI
 
 struct PilgrimageListNavigationView: View {
     let pilgrimageList: [PilgrimageInformation]
-    @State var store = Store(
-        initialState: PilgrimageDetailFeature.State(
-            favoriteState: FavoriteFeature.State(),
-            checkInState: CheckInFeature.State()
-        )
-    ) {
-        PilgrimageDetailFeature()
-    }
+    let store: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
-        GeometryReader { geometry in
-            NavigationView {
-                List {
-                    ForEach(pilgrimageList, id: \.code) { pilgrimage in
-                        ZStack {
-                            NavigationLink(
-                                destination:
-                                    PilgrimageDetailView(
-                                        pilgrimage: pilgrimage,
-                                        store: store
-                                    )
-                            ) {
-                                EmptyView()
-                            }
-                            .opacity(0)
+        WithViewStore(store, observe: { $0 }) { viewStore in
+            GeometryReader { geometry in
+                NavigationView {
+                    List {
+                        ForEach(Array(pilgrimageList.enumerated()), id: \.element.id) { index, pilgrimage in
+                            ZStack {
+                                NavigationLink(
+                                    destination:
+                                        PilgrimageDetailView(
+                                            pilgrimage: pilgrimage,
+                                            store: store
+                                        )
+                                ) {
+                                    EmptyView()
+                                }
+                                .opacity(0)
 
-                            PilgrimageListContentView(pilgrimage: pilgrimage, store: store)
-                                .frame(maxHeight: geometry.size.width / 3)
+                                PilgrimageListContentView(pilgrimage: pilgrimage, store: store)
+                                    .frame(maxHeight: geometry.size.width / 3)
+                            }
                         }
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
+                    .listStyle(.plain)
                 }
-                .listStyle(.plain)
+                .navigationViewStyle(StackNavigationViewStyle())
             }
-            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }

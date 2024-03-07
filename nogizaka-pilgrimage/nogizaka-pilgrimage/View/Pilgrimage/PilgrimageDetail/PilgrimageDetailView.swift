@@ -42,9 +42,8 @@ struct PilgrimageDetailView: View {
 
                         Button {
                             viewStore.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
-                            viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
                         } label: {
-                            if viewStore.state.favoriteState.isFavorite {
+                            if viewStore.state.favoriteState.favoritePilgrimages.contains(pilgrimage) {
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.red)
                             } else {
@@ -114,7 +113,6 @@ struct PilgrimageDetailView: View {
                 }
             }
             .onAppear {
-                viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
                 viewStore.send(.checkInAction(.verifyCheckedIn(pilgrimage: pilgrimage)))
                 hasCheckedIn = viewStore.state.checkInState.hasCheckedIn
             }

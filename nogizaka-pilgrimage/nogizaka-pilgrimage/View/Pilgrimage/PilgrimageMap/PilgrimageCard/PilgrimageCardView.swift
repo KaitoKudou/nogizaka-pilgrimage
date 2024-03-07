@@ -11,6 +11,7 @@ import SwiftUI
 struct PilgrimageCardView: View {
     @Environment(\.theme) private var theme
     @State private var isFavorite = false
+    @State private var isShowUpdateFavoriteAlert = false
     let pilgrimage: PilgrimageInformation
     let store: StoreOf<PilgrimageDetailFeature>
 
@@ -45,22 +46,23 @@ struct PilgrimageCardView: View {
 
                         Button {
                             viewStore.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
-                            viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
-                            withAnimation {
-                                self.isFavorite = viewStore.state.favoriteState.isFavorite
-                            }
                         } label: {
-                            if isFavorite {
+                            if viewStore.state.favoriteState.isLoading {
+                                // 通信中の場合、インジケータを表示
+                                ProgressView()
+                            } else if viewStore.state.favoriteState.favoritePilgrimages.contains(pilgrimage) {
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.red)
-                            } else {
+                            } else if !viewStore.state.favoriteState.favoritePilgrimages.contains(pilgrimage) {
                                 Image(systemName: "heart")
                                     .foregroundStyle(R.color.tab_primary_off()!.color)
                             }
                         }
+                        .disabled(viewStore.state.favoriteState.isLoading ? true : false)
                     }
                     .padding(.bottom, theme.margins.spacing_m)
-                    
+                    .alert(store: store.scope(state: \.$alert, action: PilgrimageDetailFeature.Action.alertDismissed))
+
                     Text(pilgrimage.address)
                         .font(theme.fonts.caption)
                     
@@ -93,8 +95,7 @@ struct PilgrimageCardView: View {
                 }
             }
             .onAppear {
-                viewStore.send(.favoriteAction(.toggleFavorite(pilgrimage)))
-                self.isFavorite = viewStore.state.favoriteState.isFavorite
+                viewStore.send(.favoriteAction(.fetchFavorites))
             }
         }
         .padding(.all)

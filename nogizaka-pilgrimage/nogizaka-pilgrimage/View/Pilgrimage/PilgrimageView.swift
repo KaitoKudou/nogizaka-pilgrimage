@@ -5,14 +5,16 @@
 //  Created by 工藤 海斗 on 2023/01/04.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 struct PilgrimageView: View {
     let pilgrimages: [PilgrimageInformation]
-    
+    let store: StoreOf<PilgrimageDetailFeature>
+
     var body: some View {
         ZStack {
-            PilgrimageMapView(pilgrimages: pilgrimages)
+            PilgrimageMapView(pilgrimages: pilgrimages, store: store)
         }
         .navigationTitle(R.string.localizable.tabbar_pilgrimage())
         .navigationBarTitleDisplayMode(.inline)
@@ -29,7 +31,7 @@ extension PilgrimageView {
         ToolbarItem(placement: .topBarTrailing) {
             NavigationLink(
                 destination: 
-                    PilgrimageListView(pilgrimages: pilgrimages)
+                    PilgrimageListView(pilgrimages: pilgrimages, pilgrimageDetailStore: store)
             ) {
                 Image(systemName: "list.bullet")
                     .foregroundStyle(.white)
@@ -39,6 +41,17 @@ extension PilgrimageView {
 }
 
 #Preview {
-    PilgrimageView(pilgrimages: dummyPilgrimageList)
-        .environmentObject(LocationManager())
+    PilgrimageView(
+        pilgrimages: dummyPilgrimageList,
+        store: StoreOf<PilgrimageDetailFeature>(
+            initialState:
+                PilgrimageDetailFeature.State(
+                    favoriteState: FavoriteFeature.State(),
+                    checkInState: CheckInFeature.State()
+                )
+        ) {
+            PilgrimageDetailFeature()
+        }
+    )
+    .environmentObject(LocationManager())
 }

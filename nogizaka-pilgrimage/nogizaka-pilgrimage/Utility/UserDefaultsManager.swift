@@ -30,6 +30,10 @@ class UserDefaultsManager {
         userDefaults.set(codes, forKey: userDefaultsKey.rawValue)
     }
 
+    func fetchCodeList(userDefaultsKey: Keys) -> [String] {
+        return userDefaults.stringArray(forKey: userDefaultsKey.rawValue) ?? []
+    }
+
     func fetchList(userDefaultsKey: Keys) -> [PilgrimageInformation] {
         let codes = userDefaults.stringArray(forKey: userDefaultsKey.rawValue) ?? []
         return dummyPilgrimageList.filter { codes.contains($0.code) }
