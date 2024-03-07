@@ -66,7 +66,10 @@ struct InitialFeature: Reducer {
                             let pilgrimage = try document.data(as: PilgrimageInformation.self)
                             pilgrimages.append(pilgrimage)
                         }
-                        await send(.pilgrimageResponse(.success(pilgrimages)))
+                        let sortedArray = pilgrimages.sorted { (first, second) -> Bool in
+                            return first.code < second.code
+                        }
+                        await send(.pilgrimageResponse(.success(sortedArray)))
                     } catch {
                         await send(.pilgrimageResponse(.failure(.fetchPilgrimagesError)))
                     }
