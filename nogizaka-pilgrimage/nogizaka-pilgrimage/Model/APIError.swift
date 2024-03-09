@@ -11,6 +11,8 @@ enum APIError: Error {
     case fetchPilgrimagesError
     case fetchFavoritePilgrimagesError
     case updateFavoritePilgrimagesError
+    case fetchCheckedInError
+    case updateCheckedInError
     case unknownError
 }
 
@@ -23,6 +25,10 @@ extension APIError: LocalizedError {
             return R.string.localizable.alert_fetch_favorite_pilgrimages()
         case .updateFavoritePilgrimagesError:
             return R.string.localizable.alert_update_favorite_pilgrimages()
+        case .fetchCheckedInError:
+            return R.string.localizable.alert_fetch_checked_in_pilgrimages()
+        case .updateCheckedInError:
+            return R.string.localizable.alert_update_checked_in_pilgrimages()
         case .unknownError:
             return R.string.localizable.alert_unknown()
         }
