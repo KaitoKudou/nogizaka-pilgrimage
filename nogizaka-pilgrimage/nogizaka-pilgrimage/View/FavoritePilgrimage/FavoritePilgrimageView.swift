@@ -15,7 +15,7 @@ struct FavoritePilgrimageView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             Group {
                 if viewStore.state.favoriteState.favoritePilgrimages.isEmpty {
-                    Text("お気に入り聖地はありません")
+                    Text(R.string.localizable.favorites_empty())
                 } else {
                     PilgrimageListNavigationView(
                         pilgrimageList: viewStore.state.favoriteState.favoritePilgrimages,

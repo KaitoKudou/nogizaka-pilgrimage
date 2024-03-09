@@ -12,7 +12,7 @@ import CoreLocation
 struct PilgrimageDetailView: View {
     @Environment(\.theme) private var theme
     @State private var isShowAuthorizationAlert = false
-    @State private var hasCheckedIn = false
+    @State private var isShowUpdatedCheckedInAlert = false
     @EnvironmentObject private var locationManager: LocationManager
     let pilgrimage: PilgrimageInformation
     let store: StoreOf<PilgrimageDetailFeature>
@@ -78,20 +78,20 @@ struct PilgrimageDetailView: View {
                             viewStore.send(.showNotNearbyAlert)
                         }
                     } label: {
-                        Text(hasCheckedIn ?
+                        Text(viewStore.state.checkInState.hasCheckedIn ?
                              R.string.localizable.has_check_in() :
                                 R.string.localizable.tabbar_check_in()
                         )
                         .frame(height: theme.margins.spacing_xl)
                     }
-                    .disabled(hasCheckedIn)
+                    .disabled(viewStore.state.checkInState.hasCheckedIn)
                     .alert(store: store.scope(state: \.$alert, action: PilgrimageDetailFeature.Action.alertDismissed))
                     .alert(R.string.localizable.alert_location(), isPresented: $isShowAuthorizationAlert) {
                     } message: {
                         EmptyView()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(hasCheckedIn ?
+                    .background(viewStore.state.checkInState.hasCheckedIn ?
                                 R.color.tab_primary_off()!.color :
                                     R.color.text_secondary()!.color
                     )
@@ -114,7 +114,13 @@ struct PilgrimageDetailView: View {
             }
             .onAppear {
                 viewStore.send(.checkInAction(.verifyCheckedIn(pilgrimage: pilgrimage)))
-                hasCheckedIn = viewStore.state.checkInState.hasCheckedIn
+            }
+            .onChange(of: viewStore.state.checkInState.hasError) { hasError in
+                isShowUpdatedCheckedInAlert = hasError
+            }
+            .alert(viewStore.state.checkInState.errorMessage, isPresented: $isShowUpdatedCheckedInAlert) {
+            } message: {
+                EmptyView()
             }
             .padding(.leading, theme.margins.spacing_m)
             .padding(.trailing, theme.margins.spacing_m)
