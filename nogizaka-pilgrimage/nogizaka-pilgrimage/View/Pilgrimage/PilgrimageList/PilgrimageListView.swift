@@ -33,7 +33,12 @@ struct PilgrimageListView: View {
                     )
                 }
                 .onAppear {
-                    viewStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
+                    searchWord = viewStore.state.searchText
+                    if viewStore.state.allSearchCandidatePilgrimages.isEmpty {
+                        viewStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
+                    } else {
+                        viewStore.send(.resetPilgrimages(pilgrimages: viewStore.state.allSearchCandidatePilgrimages))
+                    }
                 }
                 .onChange(of: viewStore.isLoading) { newIsLoading in
                     if newIsLoading {
@@ -69,6 +74,7 @@ struct PilgrimageListView: View {
                     viewStore.send(.searchPilgrimages(searchWord))
                 } else {
                     viewStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
+                    viewStore.send(.resetSearchText)
                 }
             }
         }
