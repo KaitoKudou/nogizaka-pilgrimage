@@ -43,7 +43,10 @@ struct PilgrimageDetailView: View {
                         Button {
                             viewStore.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
                         } label: {
-                            if viewStore.state.favoriteState.favoritePilgrimages.contains(pilgrimage) {
+                            if viewStore.state.favoriteState.isLoading {
+                                // 通信中の場合、インジケータを表示
+                                ProgressView()
+                            } else if viewStore.state.favoriteState.favoritePilgrimages.contains(pilgrimage) {
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.red)
                             } else {
