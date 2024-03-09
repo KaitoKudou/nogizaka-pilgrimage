@@ -29,6 +29,13 @@ final class LocationManager: NSObject, ObservableObject {
             // 位置情報を利用するか未設定の場合に利用許可を求めるアラートを表示
             locationManager.requestWhenInUseAuthorization()
         } else {
+            switch locationManager.authorizationStatus {
+            case .restricted, .denied:
+                isLocationPermissionDenied = true
+            case .authorizedWhenInUse:
+                isLocationPermissionDenied = false
+            default: break
+            }
             // ユーザーの現在地の配信を１回だけ要求する
             locationManager.startUpdatingLocation()
         }
