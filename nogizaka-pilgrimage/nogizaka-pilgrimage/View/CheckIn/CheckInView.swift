@@ -10,22 +10,60 @@ import SwiftUI
 
 struct CheckInView: View {
     @Environment(\.theme) private var theme
+    @State private var isShowFetchCheckedInAlert = false
     let store: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             GeometryReader { geometry in
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
-                        ForEach(viewStore.state.checkInState.checkedInPilgrimages, id: \.self) { pilgrimage in
-                            CheckInContentView(pilgrimageName: pilgrimage.name)
+                switch (viewStore.state.checkInState.isLoading, viewStore.state.checkInState.checkedInPilgrimages.isEmpty) {
+                case (true, _):
+                    VStack(alignment: .center) {
+                        Spacer()
+
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                                .controlSize(.large)
+                                .frame(alignment: .center)
+                            Spacer()
                         }
+
+                        Spacer()
                     }
-                    .padding(.top, theme.margins.spacing_xs)
+                case (false, true):
+                    VStack(alignment: .center) {
+                        Spacer()
+
+                        HStack {
+                            Spacer()
+                            Text(R.string.localizable.checked_in_empty())
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }
+
+                        Spacer()
+                    }
+                case (false, false):
+                    ScrollView {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
+                            ForEach(viewStore.state.checkInState.checkedInPilgrimages, id: \.self) { pilgrimage in
+                                CheckInContentView(pilgrimageName: pilgrimage.name)
+                            }
+                        }
+                        .padding(.top, theme.margins.spacing_xs)
+                    }
                 }
             }
             .onAppear {
                 viewStore.send(.checkInAction(.fetchCheckedInList))
+            }
+            .onChange(of: viewStore.state.checkInState.hasError) { hasError in
+                isShowFetchCheckedInAlert = hasError
+            }
+            .alert(viewStore.state.checkInState.errorMessage, isPresented: $isShowFetchCheckedInAlert) {
+            } message: {
+                EmptyView()
             }
             .navigationTitle(R.string.localizable.tabbar_check_in())
             .navigationBarTitleDisplayMode(.inline)
