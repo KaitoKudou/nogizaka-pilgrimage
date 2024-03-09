@@ -19,6 +19,7 @@ struct SearchCandidateFeature: Reducer {
         case startLoading
         case stopLoading
         case resetPilgrimages(pilgrimages: [PilgrimageInformation])
+        case resetSearchText
         case searchAllPilgrimages // 一覧から検索
         case searchPilgrimagesResponse([PilgrimageInformation])
     }
@@ -38,6 +39,10 @@ struct SearchCandidateFeature: Reducer {
                     await send(.startLoading)
                     await send(.searchAllPilgrimages)
                 }
+
+            case .resetSearchText:
+                state.searchText = ""
+                return .none
 
             case .startLoading:
                 state.isLoading = true
