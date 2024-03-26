@@ -12,6 +12,7 @@ struct FavoriteFeature: Reducer {
     struct State: Equatable {
         var favoritePilgrimages: [PilgrimageInformation] = []
         var isLoading = false
+        var hasNetworkError = false
         @PresentationState var alert: AlertState<Action>?
     }
 
@@ -20,10 +21,13 @@ struct FavoriteFeature: Reducer {
         case updateFavoriteList(PilgrimageInformation)
         case updateFavoriteCodes(PilgrimageInformation)
         case alertDismissed(PresentationAction<Action>)
-        case pilgrimageResponse(TaskResult<[PilgrimageInformation]>)
+        case pilgrimageResponse(Result<[PilgrimageInformation], APIError>)
         case startLoading
         case stopLoading
+        case setNetworkError(Bool)
     }
+
+    @Dependency(\.networkMonitor) var networkMonitor
 
     var body: some Reducer<State, Action> {
         Reduce { state, action in
@@ -33,6 +37,8 @@ struct FavoriteFeature: Reducer {
                     await send(.startLoading)
 
                     do {
+                        try await networkMonitor.monitorNetwork()
+
                         let uuid = await UIDevice.current.identifierForVendor!.uuidString
                         let querySnapshot = try await Firestore.firestore()
                             .collection("favorite-list")
@@ -46,8 +52,10 @@ struct FavoriteFeature: Reducer {
                             favoritePilgrimages.append(pilgrimage)
                         }
                         await send(.pilgrimageResponse(.success(favoritePilgrimages)))
+                    } catch let error as NSError where error.domain == FirestoreErrorDomain {
+                        await send(.pilgrimageResponse(.failure(.fetchPilgrimagesError)))
                     } catch {
-                        await send(.pilgrimageResponse(.failure(error)))
+                        await send(.setNetworkError(true))
                     }
 
                     await send(.stopLoading)
@@ -61,6 +69,8 @@ struct FavoriteFeature: Reducer {
                 return .run { send in
                     await send(.startLoading)
                     do {
+                        try await networkMonitor.monitorNetwork()
+                        
                         if (try await querySnapshot.getDocuments().documents.first(where: { $0.documentID == pilgrimage.name })) != nil {
                             // 既にデータがある場合はお気に入りから削除
                             try await documentReference.delete()
@@ -82,8 +92,10 @@ struct FavoriteFeature: Reducer {
                             await send(.updateFavoriteCodes(pilgrimage))
                         }
                         await send(.fetchFavorites)
-                    } catch  {
-                        await send(.pilgrimageResponse(.failure(error)))
+                    } catch let error as NSError where error.domain == FirestoreErrorDomain {
+                        await send(.pilgrimageResponse(.failure(.fetchPilgrimagesError)))
+                    } catch {
+                        await send(.setNetworkError(true))
                     }
                     await send(.stopLoading)
                 }
@@ -94,15 +106,22 @@ struct FavoriteFeature: Reducer {
                 state.alert = nil
                 return .none
             case let .pilgrimageResponse(.success(pilgrimages)):
+                state.hasNetworkError = false
                 state.favoritePilgrimages = pilgrimages
                 return .none
-            case .pilgrimageResponse(.failure(_)):
+            case let .pilgrimageResponse(.failure(error)):
+                state.alert = .init(
+                    title: .init(error.localizedDescription)
+                )
                 return .none
             case .startLoading:
                 state.isLoading = true
                 return .none
             case .stopLoading:
                 state.isLoading = false
+                return .none
+            case let .setNetworkError(hasError):
+                state.hasNetworkError = hasError
                 return .none
             }
         }
