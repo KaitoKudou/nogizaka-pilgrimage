@@ -11,6 +11,7 @@ import SwiftUI
 struct CheckInView: View {
     @Environment(\.theme) private var theme
     @State private var isShowFetchCheckedInAlert = false
+    @State private var hasNetworkAlert = false
     let store: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
@@ -60,6 +61,13 @@ struct CheckInView: View {
             }
             .onChange(of: viewStore.state.checkInState.hasError) { hasError in
                 isShowFetchCheckedInAlert = hasError
+            }
+            .onChange(of: viewStore.state.favoriteState.hasNetworkError) { hasNetworkAlert in
+                self.hasNetworkAlert = hasNetworkAlert
+            }
+            .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
+            } message: {
+                EmptyView()
             }
             .alert(viewStore.state.checkInState.errorMessage, isPresented: $isShowFetchCheckedInAlert) {
             } message: {
