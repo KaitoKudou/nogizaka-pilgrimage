@@ -51,6 +51,8 @@ struct InitialFeature: Reducer {
         case alertDismissed(PresentationAction<Action>)
     }
 
+    @Dependency(\.networkMonitor) var networkMonitor
+
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
@@ -59,6 +61,8 @@ struct InitialFeature: Reducer {
                     await send(.startLoading)
 
                     do {
+                        try await networkMonitor.monitorNetwork()
+
                         let querySnapshot = try await Firestore.firestore().collection("pilgrimage-list").getDocuments()
                         var pilgrimages: [PilgrimageInformation] = []
 
@@ -70,8 +74,10 @@ struct InitialFeature: Reducer {
                             return first.code < second.code
                         }
                         await send(.pilgrimageResponse(.success(sortedArray)))
-                    } catch {
+                    } catch let error as NSError where error.domain == FirestoreErrorDomain {
                         await send(.pilgrimageResponse(.failure(.fetchPilgrimagesError)))
+                    } catch {
+                        await send(.pilgrimageResponse(.failure(.networkError)))
                     }
 
                     await send(.stopLoading)

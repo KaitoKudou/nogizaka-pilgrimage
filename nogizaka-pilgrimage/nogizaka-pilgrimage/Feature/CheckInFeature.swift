@@ -57,6 +57,8 @@ struct CheckInFeature: Reducer {
         case updateCheckedInStatus(Bool)
     }
 
+    @Dependency(\.networkMonitor) var networkMonitor
+
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
@@ -92,8 +94,10 @@ struct CheckInFeature: Reducer {
                             await send(.pilgrimageResponse(.success(nil)))
                             await send(.updateCheckedInStatus(true))
                         }
-                    } catch  {
+                    } catch let error as NSError where error.domain == FirestoreErrorDomain {
                         await send(.pilgrimageResponse(.failure(.updateCheckedInError)))
+                    } catch {
+                        await send(.pilgrimageResponse(.failure(.networkError)))
                     }
                     await send(.stopLoading)
                 }
@@ -115,8 +119,10 @@ struct CheckInFeature: Reducer {
                             checkedInPilgrimages.append(pilgrimage)
                         }
                         await send(.pilgrimageResponse(.success(checkedInPilgrimages)))
-                    } catch {
+                    } catch let error as NSError where error.domain == FirestoreErrorDomain {
                         await send(.pilgrimageResponse(.failure(.fetchCheckedInError)))
+                    } catch {
+                        await send(.pilgrimageResponse(.failure(.networkError)))
                     }
 
                     await send(.stopLoading)

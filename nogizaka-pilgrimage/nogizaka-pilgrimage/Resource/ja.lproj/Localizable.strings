@@ -41,4 +41,5 @@
 "alert_update_favorite_pilgrimages" = "お気に入りの登録に失敗しました。\n時間をあけてお試しください。";
 "alert_fetch_checked_in_pilgrimages" = "チェックインの取得に失敗しました。\n時間をあけてお試しください。";
 "alert_update_checked_in_pilgrimages" = "チェックインの登録に失敗しました。\n時間をあけてお試しください。";
+"alert_network" = "通信ができませんでした。\n接続状況をご確認ください。";
 "alert_unknown" = "不明なエラーです";

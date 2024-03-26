@@ -13,6 +13,7 @@ struct PilgrimageDetailView: View {
     @Environment(\.theme) private var theme
     @State private var isShowAuthorizationAlert = false
     @State private var isShowUpdatedCheckedInAlert = false
+    @State private var hasNetworkAlert = false
     @EnvironmentObject private var locationManager: LocationManager
     let pilgrimage: PilgrimageInformation
     let store: StoreOf<PilgrimageDetailFeature>
@@ -120,6 +121,13 @@ struct PilgrimageDetailView: View {
             }
             .onChange(of: viewStore.state.checkInState.hasError) { hasError in
                 isShowUpdatedCheckedInAlert = hasError
+            }
+            .onChange(of: viewStore.state.favoriteState.hasNetworkError) { hasNetworkAlert in
+                self.hasNetworkAlert = hasNetworkAlert
+            }
+            .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
+            } message: {
+                EmptyView()
             }
             .alert(viewStore.state.checkInState.errorMessage, isPresented: $isShowUpdatedCheckedInAlert) {
             } message: {

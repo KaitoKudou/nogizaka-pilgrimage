@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PilgrimageListContentView: View {
     @Environment(\.theme) private var theme
+    @State private var hasNetworkAlert = false
     let pilgrimage: PilgrimageInformation
     let store: StoreOf<PilgrimageDetailFeature>
 
@@ -66,6 +67,13 @@ struct PilgrimageListContentView: View {
             }
             .onAppear {
                 viewStore.send(.favoriteAction(.fetchFavorites))
+            }
+            .onChange(of: viewStore.state.favoriteState.hasNetworkError) { hasNetworkAlert in
+                self.hasNetworkAlert = hasNetworkAlert
+            }
+            .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
+            } message: {
+                EmptyView()
             }
         }
         .padding()
