@@ -8,6 +8,7 @@
 import Foundation
 
 enum APIError: Error {
+    case networkError
     case fetchPilgrimagesError
     case fetchFavoritePilgrimagesError
     case updateFavoritePilgrimagesError
@@ -19,6 +20,8 @@ enum APIError: Error {
 extension APIError: LocalizedError {
     var localizedDescription: String {
         switch self {
+        case .networkError:
+            return R.string.localizable.alert_network()
         case .fetchPilgrimagesError:
             return R.string.localizable.alert_fetch_pilgrimages()
         case .fetchFavoritePilgrimagesError:
