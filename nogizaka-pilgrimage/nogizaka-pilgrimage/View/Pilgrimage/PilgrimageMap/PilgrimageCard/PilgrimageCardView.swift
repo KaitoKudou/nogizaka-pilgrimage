@@ -72,17 +72,15 @@ struct PilgrimageCardView: View {
                     HStack(spacing: theme.margins.spacing_xs) {
                         Group {
                             Button {
-                                viewStore.send(.routeButtonTapped)
+                                viewStore.send(
+                                    .routeButtonTapped(
+                                        latitude: pilgrimage.latitude,
+                                        longitude: pilgrimage.longitude
+                                    )
+                                )
                             } label: {
                                 Text(R.string.localizable.common_btn_route_search_text())
-                                
                             }
-                            .confirmationDialog(
-                                store: store.scope(
-                                    state: \.$confirmationDialog,
-                                    action: PilgrimageDetailFeature.Action.confirmationDialog
-                                )
-                            )
 
                             NavigationLink(
                                 destination:
@@ -106,6 +104,12 @@ struct PilgrimageCardView: View {
             .onChange(of: viewStore.state.favoriteState.hasNetworkError) { hasNetworkAlert in
                 self.hasNetworkAlert = hasNetworkAlert
             }
+            .confirmationDialog(
+                store: store.scope(
+                    state: \.$confirmationDialog,
+                    action: PilgrimageDetailFeature.Action.confirmationDialog
+                )
+            )
             .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
             } message: {
                 EmptyView()
