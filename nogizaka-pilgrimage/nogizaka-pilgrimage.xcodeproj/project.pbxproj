@@ -27,6 +27,7 @@
 		E74BA3D62B31E237008C75FE /* CheckInContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74BA3D52B31E237008C75FE /* CheckInContentView.swift */; };
 		E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */; };
 		E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */; };
+		E7738FA32BB45AA700C00F2F /* RouteActionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */; };
 		E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78276082BAC796000AD16CC /* NetworkMonitor.swift */; };
 		E78D446A2AF8EBBD008D5550 /* PilgrimageListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78D44692AF8EBBD008D5550 /* PilgrimageListContentView.swift */; };
 		E79045B22B0E088100F0936B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79045B12B0E088100F0936B /* LocationManager.swift */; };
@@ -98,6 +99,7 @@
 		E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnvironmentKey.swift; sourceTree = "<group>"; };
 		E767E10F295AF38C002DB619 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+BarAppearance.swift"; sourceTree = "<group>"; };
+		E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteActionClient.swift; sourceTree = "<group>"; };
 		E78276082BAC796000AD16CC /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E78D44692AF8EBBD008D5550 /* PilgrimageListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageListContentView.swift; sourceTree = "<group>"; };
 		E79045B12B0E088100F0936B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				E7178E812B072EDE008C85A3 /* UserDefaultsManager.swift */,
 				E79045B12B0E088100F0936B /* LocationManager.swift */,
 				E78276082BAC796000AD16CC /* NetworkMonitor.swift */,
+				E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				E7178E852B0738C8008C85A3 /* FavoriteFeature.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E7FDAA152AE22EC90056AA5B /* NavigationBarBackButtonTextHidden.swift in Sources */,
+				E7738FA32BB45AA700C00F2F /* RouteActionClient.swift in Sources */,
 				E7A127182B8F7A53004D877A /* InitialFeature.swift in Sources */,
 				E79F3E972B7A3E2A00ABCCD8 /* PilgrimageDetailFeature.swift in Sources */,
 				E71D093B2AF39076009C132E /* PilgrimageDetailView.swift in Sources */,
