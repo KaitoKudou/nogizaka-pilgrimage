@@ -12,6 +12,7 @@ struct PilgrimageDetailFeature: Reducer {
         var favoriteState: FavoriteFeature.State
         var checkInState: CheckInFeature.State
         @PresentationState var alert: AlertState<Action>?
+        @PresentationState var confirmationDialog: ConfirmationDialogState<Action.ConfirmationDialog>?
     }
 
     enum Action: Equatable {
@@ -19,6 +20,14 @@ struct PilgrimageDetailFeature: Reducer {
         case checkInAction(CheckInFeature.Action)
         case showNotNearbyAlert
         case alertDismissed(PresentationAction<Action>)
+        case routeButtonTapped
+        case confirmationDialog(PresentationAction<ConfirmationDialog>)
+
+        @CasePathable
+        enum ConfirmationDialog {
+            case appleMapButtonTapped
+            case googleMapsButtonTapped
+        }
     }
 
     var body: some Reducer<State, Action> {
@@ -37,6 +46,31 @@ struct PilgrimageDetailFeature: Reducer {
                 return .none
             case .alertDismissed:
                 state.alert = nil
+                return .none
+            case .routeButtonTapped:
+                state.confirmationDialog = ConfirmationDialogState {
+                    TextState("")
+                } actions: {
+                    ButtonState(role: .cancel) {
+                        TextState(R.string.localizable.confirmation_dialog_cancel())
+                    }
+                    ButtonState(action: .appleMapButtonTapped) {
+                        TextState(R.string.localizable.confirmation_dialog_apple_map())
+                    }
+                    ButtonState(action: .googleMapsButtonTapped) {
+                        TextState(R.string.localizable.confirmation_dialog_google_maps())
+                    }
+                }
+                return .none
+            case .confirmationDialog(.presented(.appleMapButtonTapped)):
+                // TODO: Apple Mapを開く
+                print("Apple Mapを開く")
+                return .none
+            case .confirmationDialog(.presented(.googleMapsButtonTapped)):
+                // TODO: Google Mapsを開く
+                print("Google Mapsを開く")
+                return .none
+            case .confirmationDialog:
                 return .none
             }
         }

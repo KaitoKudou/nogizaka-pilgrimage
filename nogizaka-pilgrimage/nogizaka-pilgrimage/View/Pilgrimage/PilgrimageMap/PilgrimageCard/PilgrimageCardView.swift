@@ -72,13 +72,18 @@ struct PilgrimageCardView: View {
                     HStack(spacing: theme.margins.spacing_xs) {
                         Group {
                             Button {
-                                // TODO: Google Map or Apple Mapを開く
-                                print("TODO: 経路")
+                                viewStore.send(.routeButtonTapped)
                             } label: {
                                 Text(R.string.localizable.common_btn_route_search_text())
                                 
                             }
-                            
+                            .confirmationDialog(
+                                store: store.scope(
+                                    state: \.$confirmationDialog,
+                                    action: PilgrimageDetailFeature.Action.confirmationDialog
+                                )
+                            )
+
                             NavigationLink(
                                 destination:
                                     PilgrimageDetailView(
