@@ -9,6 +9,13 @@ import ComposableArchitecture
 
 struct PilgrimageDetailFeature: Reducer {
     struct State: Equatable {
+        static func == (lhs: State, rhs: State) -> Bool {
+            return lhs.favoriteState == rhs.favoriteState &&
+            lhs.checkInState == rhs.checkInState &&
+            lhs.alert == rhs.alert &&
+            lhs.confirmationDialog == rhs.confirmationDialog
+        }
+
         var favoriteState: FavoriteFeature.State
         var checkInState: CheckInFeature.State
         @PresentationState var alert: AlertState<Action>?
@@ -16,19 +23,39 @@ struct PilgrimageDetailFeature: Reducer {
     }
 
     enum Action: Equatable {
+        static func == (lhs: PilgrimageDetailFeature.Action, rhs: PilgrimageDetailFeature.Action) -> Bool {
+            switch (lhs, rhs) {
+            case (.favoriteAction, .favoriteAction):
+                return true
+            case (.checkInAction , .checkInAction):
+                return true
+            case (.showNotNearbyAlert, .showNotNearbyAlert):
+                return true
+            case (.alertDismissed, .alertDismissed):
+                return true
+            case (.routeButtonTapped, .routeButtonTapped):
+                return true
+            case (.confirmationDialog, .confirmationDialog):
+                return true
+            default: return false
+            }
+        }
+        
         case favoriteAction(FavoriteFeature.Action)
         case checkInAction(CheckInFeature.Action)
         case showNotNearbyAlert
         case alertDismissed(PresentationAction<Action>)
-        case routeButtonTapped
+        case routeButtonTapped(latitude: String, longitude: String)
         case confirmationDialog(PresentationAction<ConfirmationDialog>)
 
         @CasePathable
-        enum ConfirmationDialog {
-            case appleMapButtonTapped
-            case googleMapsButtonTapped
+        enum ConfirmationDialog: Equatable {
+            case appleMapButtonTapped(latitude: String, longitude: String)
+            case googleMapsButtonTapped(latitude: String, longitude: String)
         }
     }
+
+    @Dependency(\.routeActionClient) var routeActionClient
 
     var body: some Reducer<State, Action> {
         Reduce { state, action in
@@ -47,30 +74,31 @@ struct PilgrimageDetailFeature: Reducer {
             case .alertDismissed:
                 state.alert = nil
                 return .none
-            case .routeButtonTapped:
+            case .routeButtonTapped(let latitude, let longitude):
                 state.confirmationDialog = ConfirmationDialogState {
                     TextState("")
                 } actions: {
                     ButtonState(role: .cancel) {
                         TextState(R.string.localizable.confirmation_dialog_cancel())
                     }
-                    ButtonState(action: .appleMapButtonTapped) {
+                    ButtonState(action: .appleMapButtonTapped(latitude: latitude, longitude: longitude)) {
                         TextState(R.string.localizable.confirmation_dialog_apple_map())
                     }
-                    ButtonState(action: .googleMapsButtonTapped) {
+                    ButtonState(action: .googleMapsButtonTapped(latitude: latitude, longitude: longitude)) {
                         TextState(R.string.localizable.confirmation_dialog_google_maps())
                     }
                 }
                 return .none
-            case .confirmationDialog(.presented(.appleMapButtonTapped)):
-                // TODO: Apple Mapを開く
-                print("Apple Mapを開く")
-                return .none
-            case .confirmationDialog(.presented(.googleMapsButtonTapped)):
-                // TODO: Google Mapsを開く
-                print("Google Mapsを開く")
-                return .none
-            case .confirmationDialog:
+            case .confirmationDialog(.presented(.appleMapButtonTapped(let latitude, let longitude))):
+                return .run { _ in
+                    await routeActionClient.viewOnMap(latitude, longitude)
+                }
+            case .confirmationDialog(.presented(.googleMapsButtonTapped(let latitude, let longitude))):
+                return .run { _ in
+                    await routeActionClient.viewOnGoogleMaps(latitude, longitude)
+                }
+            case .confirmationDialog(.dismiss):
+                state.confirmationDialog = nil
                 return .none
             }
         }
