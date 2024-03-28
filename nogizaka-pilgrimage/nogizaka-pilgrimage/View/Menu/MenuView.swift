@@ -5,22 +5,45 @@
 //  Created by 工藤 海斗 on 2023/11/07.
 //
 
+import ComposableArchitecture
 import SwiftUI
+
+enum MenuItem: Hashable {
+    case contact
+    case termsOfUse
+    case privacyPolicy
+    case appVersion(String)
+
+    var title: String {
+        switch self {
+        case .contact: return R.string.localizable.menu_contact()
+        case .termsOfUse: return R.string.localizable.menu_terms()
+        case .privacyPolicy: return R.string.localizable.menu_privacy_policy()
+        case .appVersion(let version): return R.string.localizable.menu_app_version(version)
+        }
+    }
+}
 
 struct MenuView: View {
     @Environment(\.theme) private var theme
-    var menuList: [String] = []
+    @State private var store = Store(
+        initialState: MenuFeature.State()
+    ) {
+        MenuFeature()
+    }
+    var menuList: [MenuItem] = []
 
     init() {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-        menuList = ["お問い合わせ", "利用規約",
-                        "プライバシーポリシー", "アプリバージョン：" + appVersion]
+        menuList = [.contact, .termsOfUse, .privacyPolicy, .appVersion(appVersion)]
     }
 
     var body: some View {
         List {
             ForEach(menuList, id: \.self) { menuItem in
-                Text(menuItem)
+                Button(menuItem.title) {
+                    store.send(.view(menuItem))
+                }
             }
         }
         .listStyle(.plain)
