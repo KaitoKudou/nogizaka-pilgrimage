@@ -47,6 +47,7 @@
 		E7CAE0E42B1E19B00024EB40 /* FavoritePilgrimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAE0E32B1E19B00024EB40 /* FavoritePilgrimageView.swift */; };
 		E7CAE0E72B1E1D580024EB40 /* PilgrimageListNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAE0E62B1E1D580024EB40 /* PilgrimageListNavigationView.swift */; };
 		E7CB5D5B2B021BCB001A1CDB /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E7CB5D5A2B021BCB001A1CDB /* ComposableArchitecture */; };
+		E7EA0F552BB5BA2100EC8A93 /* MenuFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EA0F542BB5BA2100EC8A93 /* MenuFeature.swift */; };
 		E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = E7FD73D32959FCD400347BA4 /* Rswift */; };
 		E7FDAA002ADFDDFB0056AA5B /* PilgrimageInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDA9FF2ADFDDFB0056AA5B /* PilgrimageInformation.swift */; };
 		E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */; };
@@ -115,6 +116,7 @@
 		E7C431F92AEF9F53003E6946 /* PilgrimageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageCardView.swift; sourceTree = "<group>"; };
 		E7CAE0E32B1E19B00024EB40 /* FavoritePilgrimageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePilgrimageView.swift; sourceTree = "<group>"; };
 		E7CAE0E62B1E1D580024EB40 /* PilgrimageListNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageListNavigationView.swift; sourceTree = "<group>"; };
+		E7EA0F542BB5BA2100EC8A93 /* MenuFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuFeature.swift; sourceTree = "<group>"; };
 		E7FDA9FF2ADFDDFB0056AA5B /* PilgrimageInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageInformation.swift; sourceTree = "<group>"; };
 		E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapConstant.swift; sourceTree = "<group>"; };
 		E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationButton.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				E79F3E942B7A1C8E00ABCCD8 /* CheckInFeature.swift */,
 				E79F3E962B7A3E2A00ABCCD8 /* PilgrimageDetailFeature.swift */,
 				E7A127172B8F7A53004D877A /* InitialFeature.swift */,
+				E7EA0F542BB5BA2100EC8A93 /* MenuFeature.swift */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7EA0F552BB5BA2100EC8A93 /* MenuFeature.swift in Sources */,
 				E7B5EFB22B18B85400E91C52 /* SearchCandidateFeature.swift in Sources */,
 				E7FDAA092AE173AD0056AA5B /* PilgrimageListView.swift in Sources */,
 				E7B9CD5E2B8E391A003FAB19 /* LaunchScreen.swift in Sources */,
