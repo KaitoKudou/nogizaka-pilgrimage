@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import Foundation
 
 struct MenuFeature: Reducer {
     struct State: Equatable {}
@@ -14,22 +15,24 @@ struct MenuFeature: Reducer {
         case view(MenuItem)
     }
 
-    
+    @Dependency(\.safari) var safari
 
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .view(.contact):
-                print("お問い合わせ")
-                return .none
+                // TODO: お問い合わせリンクに差し替え
+                let url = URL(string: "https://www.apple.com")!
+                return .run { _ in await safari(url) }
             case .view(.termsOfUse):
-                print("利用規約")
-                return .none
+                // TODO: 利用規約リンクに差し替え
+                let url = URL(string: "https://www.google.com")!
+                return .run { _ in await safari(url) }
             case .view(.privacyPolicy):
-                print("プライバシーポリシー")
-                return .none
+                // TODO: プライバシーポリシーリンクに差し替え
+                let url = URL(string: "https://github.com/KaitoKudou")!
+                return .run { _ in await safari(url) }
             case .view(.appVersion):
-                print("アプリバージョン")
                 return .none
             }
         }
