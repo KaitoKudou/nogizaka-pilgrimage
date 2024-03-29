@@ -48,3 +48,9 @@
 "confirmation_dialog_cancel" = "キャンセル";
 "confirmation_dialog_apple_map" = "地図で見る";
 "confirmation_dialog_google_maps" = "Google Mapsで見る";
+
+// MARK: - Menu画面に表示するテキスト
+"menu_contact" = "お問い合わせ";
+"menu_terms" = "利用規約";
+"menu_privacy_policy" = "プライバシーポリシー";
+"menu_app_version" = "アプリバージョン：%@";
