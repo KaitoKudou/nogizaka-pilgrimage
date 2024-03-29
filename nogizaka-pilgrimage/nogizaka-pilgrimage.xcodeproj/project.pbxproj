@@ -83,6 +83,7 @@
 		E7178E842B0738C8008C85A3 /* FavoriteFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteFeature.swift; sourceTree = "<group>"; };
 		E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageDetailView.swift; sourceTree = "<group>"; };
 		E7235A71297D75D500E1339A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		E72505702BB710F6002BFB34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E73E09112965C21E00A1204E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E73E09172965C43000A1204E /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
 		E73E091A2965C77E00A1204E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -291,6 +292,7 @@
 		E74934442959F20E0045AE39 /* nogizaka-pilgrimage */ = {
 			isa = PBXGroup;
 			children = (
+				E72505702BB710F6002BFB34 /* Info.plist */,
 				E7B9CD502B8E2586003FAB19 /* Enviroment */,
 				E7C11D3D295AF19A0051A1B9 /* GeneratedByTools */,
 				E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */,
@@ -802,6 +804,7 @@
 				DEVELOPMENT_TEAM = DX3FKMWYLL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "nogizaka-pilgrimage/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を使用することで、聖地と現在までの位置関係を把握することができます。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -835,6 +838,7 @@
 				DEVELOPMENT_TEAM = DX3FKMWYLL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "nogizaka-pilgrimage/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を使用することで、聖地と現在までの位置関係を把握することができます。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
