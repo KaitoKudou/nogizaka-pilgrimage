@@ -11,6 +11,7 @@ import SwiftUI
 enum AdUnitID {
     case menu
     case pilgrimageDetail
+    case checkIn
 
     var id: String {
         switch self {
@@ -18,6 +19,8 @@ enum AdUnitID {
             return "ca-app-pub-4288570549847775/4522473368"
         case .pilgrimageDetail:
             return "ca-app-pub-4288570549847775/3400963383"
+        case .checkIn:
+            return "ca-app-pub-4288570549847775/7654320580"
         }
     }
 }

@@ -13,6 +13,7 @@ struct CheckInView: View {
     @State private var isShowFetchCheckedInAlert = false
     @State private var hasNetworkAlert = false
     let store: StoreOf<PilgrimageDetailFeature>
+    private let adSize = BannerView.getAdSize(width: UIScreen.main.bounds.width)
 
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -44,15 +45,29 @@ struct CheckInView: View {
                         }
 
                         Spacer()
+
+                        BannerView(adUnitID: .checkIn)
+                            .frame(
+                                width: adSize.size.width,
+                                height: adSize.size.height
+                            )
                     }
                 case (false, false):
-                    ScrollView {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
-                            ForEach(viewStore.state.checkInState.checkedInPilgrimages, id: \.self) { pilgrimage in
-                                CheckInContentView(pilgrimageName: pilgrimage.name)
+                    VStack {
+                        ScrollView {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
+                                ForEach(viewStore.state.checkInState.checkedInPilgrimages, id: \.self) { pilgrimage in
+                                    CheckInContentView(pilgrimageName: pilgrimage.name)
+                                }
                             }
+                            .padding(.top, theme.margins.spacing_xs)
                         }
-                        .padding(.top, theme.margins.spacing_xs)
+
+                        BannerView(adUnitID: .checkIn)
+                            .frame(
+                                width: adSize.size.width,
+                                height: adSize.size.height
+                            )
                     }
                 }
             }
