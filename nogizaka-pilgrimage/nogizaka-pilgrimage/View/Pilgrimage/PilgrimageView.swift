@@ -5,6 +5,7 @@
 //  Created by 工藤 海斗 on 2023/01/04.
 //
 
+import AppTrackingTransparency
 import ComposableArchitecture
 import SwiftUI
 
@@ -20,6 +21,16 @@ struct PilgrimageView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             pilgrimageListToolBarItem
+        }
+        .onAppear {
+            requestTrackingAuthorization()
+        }
+    }
+
+    private func requestTrackingAuthorization() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            ATTrackingManager.requestTrackingAuthorization { _ in
+            }
         }
     }
 }
