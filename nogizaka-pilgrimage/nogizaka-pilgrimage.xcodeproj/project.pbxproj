@@ -13,6 +13,9 @@
 		E71D093B2AF39076009C132E /* PilgrimageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */; };
 		E7235A72297D75D500E1339A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7235A71297D75D500E1339A /* Theme.swift */; };
 		E725056F2BB70F8D002BFB34 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = E725056E2BB70F8D002BFB34 /* GoogleMobileAds */; };
+		E72505732BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72505722BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift */; };
+		E72505752BB71786002BFB34 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72505742BB71786002BFB34 /* BannerViewController.swift */; };
+		E72505772BB717FA002BFB34 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72505762BB717FA002BFB34 /* BannerView.swift */; };
 		E73E09122965C21E00A1204E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09112965C21E00A1204E /* MainView.swift */; };
 		E73E09182965C43000A1204E /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09172965C43000A1204E /* CheckInView.swift */; };
 		E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E73E091A2965C77E00A1204E /* Colors.xcassets */; };
@@ -84,6 +87,9 @@
 		E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageDetailView.swift; sourceTree = "<group>"; };
 		E7235A71297D75D500E1339A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		E72505702BB710F6002BFB34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E72505722BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewControllerWidthDelegate.swift; sourceTree = "<group>"; };
+		E72505742BB71786002BFB34 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		E72505762BB717FA002BFB34 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		E73E09112965C21E00A1204E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E73E09172965C43000A1204E /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
 		E73E091A2965C77E00A1204E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -208,9 +214,20 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		E72505712BB716D0002BFB34 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				E72505722BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift */,
+				E72505742BB71786002BFB34 /* BannerViewController.swift */,
+				E72505762BB717FA002BFB34 /* BannerView.swift */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
 		E73E090F2965C1FC00A1204E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E72505712BB716D0002BFB34 /* Banner */,
 				E7CAE0E52B1E1D3C0024EB40 /* Common */,
 				E73E09102965C20600A1204E /* Main */,
 				E73E09132965C2E200A1204E /* Pilgrimage */,
@@ -607,6 +624,7 @@
 				E7178E822B072EDE008C85A3 /* UserDefaultsManager.swift in Sources */,
 				E74719F22AF93A31004C2D4D /* MenuView.swift in Sources */,
 				E79F3E952B7A1C8E00ABCCD8 /* CheckInFeature.swift in Sources */,
+				E72505772BB717FA002BFB34 /* BannerView.swift in Sources */,
 				E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */,
 				E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */,
 				E7C431FA2AEF9F53003E6946 /* PilgrimageCardView.swift in Sources */,
@@ -618,6 +636,7 @@
 				E7738FA32BB45AA700C00F2F /* RouteActionClient.swift in Sources */,
 				E7A127182B8F7A53004D877A /* InitialFeature.swift in Sources */,
 				E79F3E972B7A3E2A00ABCCD8 /* PilgrimageDetailFeature.swift in Sources */,
+				E72505752BB71786002BFB34 /* BannerViewController.swift in Sources */,
 				E71D093B2AF39076009C132E /* PilgrimageDetailView.swift in Sources */,
 				E7CAE0E42B1E19B00024EB40 /* FavoritePilgrimageView.swift in Sources */,
 				E7EA0F572BB5C49500EC8A93 /* SafariEffect.swift in Sources */,
@@ -625,6 +644,7 @@
 				E7FDAA172AE230310056AA5B /* UINavigationControllerExtension.swift in Sources */,
 				E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */,
 				E73E091E2965CACA00A1204E /* PilgrimageView.swift in Sources */,
+				E72505732BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift in Sources */,
 				E7235A72297D75D500E1339A /* Theme.swift in Sources */,
 				E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */,
 				E78D446A2AF8EBBD008D5550 /* PilgrimageListContentView.swift in Sources */,
@@ -807,6 +827,7 @@
 				INFOPLIST_FILE = "nogizaka-pilgrimage/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を使用することで、聖地と現在までの位置関係を把握することができます。";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」すると最適化された広告が表示されます。許可したことによる個人情報へのアクセスはありません。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -841,6 +862,7 @@
 				INFOPLIST_FILE = "nogizaka-pilgrimage/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を使用することで、聖地と現在までの位置関係を把握することができます。";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」すると最適化された広告が表示されます。許可したことによる個人情報へのアクセスはありません。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
