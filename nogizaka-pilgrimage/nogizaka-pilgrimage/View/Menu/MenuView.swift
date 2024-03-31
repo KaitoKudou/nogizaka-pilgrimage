@@ -31,7 +31,8 @@ struct MenuView: View {
     ) {
         MenuFeature()
     }
-    var menuList: [MenuItem] = []
+    private var menuList: [MenuItem] = []
+    private let adSize = BannerView.getAdSize(width: UIScreen.main.bounds.width)
 
     init() {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
@@ -39,12 +40,20 @@ struct MenuView: View {
     }
 
     var body: some View {
-        List {
-            ForEach(menuList, id: \.self) { menuItem in
-                Button(menuItem.title) {
-                    store.send(.view(menuItem))
+        VStack {
+            List {
+                ForEach(menuList, id: \.self) { menuItem in
+                    Button(menuItem.title) {
+                        store.send(.view(menuItem))
+                    }
                 }
             }
+
+            BannerView(adUnitID: .menu)
+                .frame(
+                    width: adSize.size.width,
+                    height: adSize.size.height
+                )
         }
         .listStyle(.plain)
         .navigationTitle(R.string.localizable.tabbar_menu())
