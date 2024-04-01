@@ -65,9 +65,6 @@ struct PilgrimageListContentView: View {
                         .font(theme.fonts.caption)
                 }
             }
-            .onAppear {
-                viewStore.send(.favoriteAction(.fetchFavorites))
-            }
             .onChange(of: viewStore.state.favoriteState.hasNetworkError) { hasNetworkAlert in
                 self.hasNetworkAlert = hasNetworkAlert
             }
