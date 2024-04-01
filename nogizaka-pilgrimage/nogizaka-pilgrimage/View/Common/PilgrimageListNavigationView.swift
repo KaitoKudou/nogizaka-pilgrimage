@@ -30,8 +30,14 @@ struct PilgrimageListNavigationView: View {
                                 }
                                 .opacity(0)
 
-                                PilgrimageListContentView(pilgrimage: pilgrimage, store: store)
-                                    .frame(maxHeight: geometry.size.width / 3)
+                                PilgrimageListContentView(
+                                    pilgrimage: pilgrimage,
+                                    store: store.scope(
+                                        state: { $0.favoriteState },
+                                        action: PilgrimageDetailFeature.Action.favoriteAction
+                                    )
+                                )
+                                .frame(maxHeight: geometry.size.width / 3)
                             }
                         }
                         .listRowSeparator(.hidden)
