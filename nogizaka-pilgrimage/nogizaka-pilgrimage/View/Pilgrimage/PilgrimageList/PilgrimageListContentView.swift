@@ -12,8 +12,7 @@ struct PilgrimageListContentView: View {
     @Environment(\.theme) private var theme
     @State private var hasNetworkAlert = false
     let pilgrimage: PilgrimageInformation
-    let store: StoreOf<PilgrimageDetailFeature>
-
+    let store: StoreOf<FavoriteFeature>
 
     var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
@@ -44,15 +43,19 @@ struct PilgrimageListContentView: View {
                         Spacer()
 
                         Button {
-                            viewStore.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
+                            viewStore.send(.updateFavoriteList(pilgrimage))
                         } label: {
-                            if viewStore.state.favoriteState.isLoading {
+                            if viewStore.state.isLoading {
                                 // 通信中の場合、インジケータを表示
                                 ProgressView()
-                            } else if viewStore.state.favoriteState.favoritePilgrimages.contains(pilgrimage) {
+                            } else if
+                                viewStore.state.favoritePilgrimages
+                                    .contains(pilgrimage) {
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.red)
-                            } else if !viewStore.state.favoriteState.favoritePilgrimages.contains(pilgrimage) {
+                            } else if
+                                !viewStore.state.favoritePilgrimages
+                                    .contains(pilgrimage) {
                                 Image(systemName: "heart")
                                     .foregroundStyle(R.color.tab_primary_off()!.color)
                             }
@@ -65,7 +68,8 @@ struct PilgrimageListContentView: View {
                         .font(theme.fonts.caption)
                 }
             }
-            .onChange(of: viewStore.state.favoriteState.hasNetworkError) { hasNetworkAlert in
+            .onChange(of: viewStore.state.hasNetworkError) {
+                hasNetworkAlert in
                 self.hasNetworkAlert = hasNetworkAlert
             }
             .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
@@ -85,14 +89,10 @@ struct PilgrimageListContentView_Previews: PreviewProvider {
     static var previews: some View {
         PilgrimageListContentView(
             pilgrimage: dummyPilgrimageList[0],
-            store: StoreOf<PilgrimageDetailFeature>(
-                initialState:
-                    PilgrimageDetailFeature.State(
-                        favoriteState: FavoriteFeature.State(),
-                        checkInState: CheckInFeature.State()
-                    )
+            store: StoreOf<FavoriteFeature>(
+                initialState: FavoriteFeature.State()
             ) {
-                PilgrimageDetailFeature()
+                FavoriteFeature()
             }
         )
         .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width / 3)
