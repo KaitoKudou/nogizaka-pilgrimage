@@ -21,16 +21,13 @@ struct MenuFeature: Reducer {
         Reduce { state, action in
             switch action {
             case .view(.contact):
-                // TODO: お問い合わせリンクに差し替え
-                let url = URL(string: "https://www.apple.com")!
+                let url = URL(string: "https://forms.gle/dVsUCgo6GkoLUqxA7")!
                 return .run { _ in await safari(url) }
             case .view(.termsOfUse):
-                // TODO: 利用規約リンクに差し替え
-                let url = URL(string: "https://www.google.com")!
+                let url = URL(string: "https://sites.google.com/view/nogi-jyunrei/terms")!
                 return .run { _ in await safari(url) }
             case .view(.privacyPolicy):
-                // TODO: プライバシーポリシーリンクに差し替え
-                let url = URL(string: "https://github.com/KaitoKudou")!
+                let url = URL(string: "https://sites.google.com/view/nogi-jyunrei/privacy-policy")!
                 return .run { _ in await safari(url) }
             case .view(.appVersion):
                 return .none
