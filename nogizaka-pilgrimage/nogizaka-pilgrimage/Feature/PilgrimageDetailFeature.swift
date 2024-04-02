@@ -7,7 +7,9 @@
 
 import ComposableArchitecture
 
+@Reducer
 struct PilgrimageDetailFeature: Reducer {
+    @ObservableState
     struct State: Equatable {
         static func == (lhs: State, rhs: State) -> Bool {
             return lhs.favoriteState == rhs.favoriteState &&
@@ -18,8 +20,8 @@ struct PilgrimageDetailFeature: Reducer {
 
         var favoriteState: FavoriteFeature.State
         var checkInState: CheckInFeature.State
-        @PresentationState var alert: AlertState<Action>?
-        @PresentationState var confirmationDialog: ConfirmationDialogState<Action.ConfirmationDialog>?
+        @Presents var alert: AlertState<Action>?
+        @Presents var confirmationDialog: ConfirmationDialogState<Action.ConfirmationDialog>?
     }
 
     enum Action: Equatable {

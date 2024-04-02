@@ -9,7 +9,9 @@ import FirebaseFirestore
 import ComposableArchitecture
 import CoreLocation
 
+@Reducer
 struct CheckInFeature: Reducer {
+    @ObservableState
     struct State: Equatable {
         var distance: Double = 0.0 // 現在地から聖地までの距離
         var hasCheckedIn: Bool = false // チェックインしているかどうか
