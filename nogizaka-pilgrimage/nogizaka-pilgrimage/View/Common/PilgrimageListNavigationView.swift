@@ -13,39 +13,37 @@ struct PilgrimageListNavigationView: View {
     let store: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            GeometryReader { geometry in
-                NavigationView {
-                    List {
-                        ForEach(Array(pilgrimageList.enumerated()), id: \.element.id) { index, pilgrimage in
-                            ZStack {
-                                NavigationLink(
-                                    destination:
-                                        PilgrimageDetailView(
-                                            pilgrimage: pilgrimage,
-                                            store: store
-                                        )
-                                ) {
-                                    EmptyView()
-                                }
-                                .opacity(0)
-
-                                PilgrimageListContentView(
-                                    pilgrimage: pilgrimage,
-                                    store: store.scope(
-                                        state: { $0.favoriteState },
-                                        action: PilgrimageDetailFeature.Action.favoriteAction
+        GeometryReader { geometry in
+            NavigationView {
+                List {
+                    ForEach(Array(pilgrimageList.enumerated()), id: \.element.id) { index, pilgrimage in
+                        ZStack {
+                            NavigationLink(
+                                destination:
+                                    PilgrimageDetailView(
+                                        pilgrimage: pilgrimage,
+                                        store: store
                                     )
-                                )
-                                .frame(maxHeight: geometry.size.width / 3)
+                            ) {
+                                EmptyView()
                             }
+                            .opacity(0)
+
+                            PilgrimageListContentView(
+                                pilgrimage: pilgrimage,
+                                store: store.scope(
+                                    state: \.favoriteState,
+                                    action: \.favoriteAction
+                                )
+                            )
+                            .frame(maxHeight: geometry.size.width / 3)
                         }
-                        .listRowSeparator(.hidden)
                     }
-                    .listStyle(.plain)
+                    .listRowSeparator(.hidden)
                 }
-                .navigationViewStyle(StackNavigationViewStyle())
+                .listStyle(.plain)
             }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }

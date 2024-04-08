@@ -16,81 +16,79 @@ struct CheckInView: View {
     private let adSize = BannerView.getAdSize(width: UIScreen.main.bounds.width)
 
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            GeometryReader { geometry in
-                switch (viewStore.state.checkInState.isLoading, viewStore.state.checkInState.checkedInPilgrimages.isEmpty) {
-                case (true, _):
-                    VStack(alignment: .center) {
+        GeometryReader { geometry in
+            switch (store.checkInState.isLoading, store.checkInState.checkedInPilgrimages.isEmpty) {
+            case (true, _):
+                VStack(alignment: .center) {
+                    Spacer()
+
+                    HStack {
                         Spacer()
-
-                        HStack {
-                            Spacer()
-                            ProgressView()
-                                .controlSize(.large)
-                                .frame(alignment: .center)
-                            Spacer()
-                        }
-
+                        ProgressView()
+                            .controlSize(.large)
+                            .frame(alignment: .center)
                         Spacer()
                     }
-                case (false, true):
-                    VStack(alignment: .center) {
+
+                    Spacer()
+                }
+            case (false, true):
+                VStack(alignment: .center) {
+                    Spacer()
+
+                    HStack {
                         Spacer()
-
-                        HStack {
-                            Spacer()
-                            Text(R.string.localizable.checked_in_empty())
-                                .multilineTextAlignment(.center)
-                            Spacer()
-                        }
-
+                        Text(R.string.localizable.checked_in_empty())
+                            .multilineTextAlignment(.center)
                         Spacer()
-
-                        BannerView(adUnitID: .checkIn)
-                            .frame(
-                                width: adSize.size.width,
-                                height: adSize.size.height
-                            )
                     }
-                case (false, false):
-                    VStack {
-                        ScrollView {
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
-                                ForEach(viewStore.state.checkInState.checkedInPilgrimages, id: \.self) { pilgrimage in
-                                    CheckInContentView(pilgrimageName: pilgrimage.name)
-                                }
+
+                    Spacer()
+
+                    BannerView(adUnitID: .checkIn)
+                        .frame(
+                            width: adSize.size.width,
+                            height: adSize.size.height
+                        )
+                }
+            case (false, false):
+                VStack {
+                    ScrollView {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
+                            ForEach(store.checkInState.checkedInPilgrimages, id: \.self) { pilgrimage in
+                                CheckInContentView(pilgrimageName: pilgrimage.name)
                             }
-                            .padding(.top, theme.margins.spacing_xs)
                         }
-
-                        BannerView(adUnitID: .checkIn)
-                            .frame(
-                                width: adSize.size.width,
-                                height: adSize.size.height
-                            )
+                        .padding(.top, theme.margins.spacing_xs)
                     }
+
+                    BannerView(adUnitID: .checkIn)
+                        .frame(
+                            width: adSize.size.width,
+                            height: adSize.size.height
+                        )
                 }
             }
-            .onAppear {
-                viewStore.send(.checkInAction(.fetchCheckedInList))
-            }
-            .onChange(of: viewStore.state.checkInState.hasError) { hasError in
-                isShowFetchCheckedInAlert = hasError
-            }
-            .onChange(of: viewStore.state.favoriteState.hasNetworkError) { hasNetworkAlert in
-                self.hasNetworkAlert = hasNetworkAlert
-            }
-            .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
-            } message: {
-                EmptyView()
-            }
-            .alert(viewStore.state.checkInState.errorMessage, isPresented: $isShowFetchCheckedInAlert) {
-            } message: {
-                EmptyView()
-            }
-            .navigationTitle(R.string.localizable.tabbar_check_in())
-            .navigationBarTitleDisplayMode(.inline)
         }
+        .onAppear {
+            store.send(.checkInAction(.fetchCheckedInList))
+        }
+        .onChange(of: store.checkInState.hasError) { _, hasError in
+            isShowFetchCheckedInAlert = hasError
+        }
+        .onChange(of: store.favoriteState.hasNetworkError) { _, hasNetworkAlert in
+            self.hasNetworkAlert = hasNetworkAlert
+        }
+        .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
+        } message: {
+            EmptyView()
+        }
+        .alert(store.checkInState.errorMessage, isPresented: $isShowFetchCheckedInAlert) {
+        } message: {
+            EmptyView()
+        }
+        .navigationTitle(R.string.localizable.tabbar_check_in())
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

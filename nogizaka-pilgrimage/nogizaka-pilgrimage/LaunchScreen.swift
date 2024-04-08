@@ -16,21 +16,19 @@ struct LaunchScreen: View {
     }
 
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            if viewStore.state.isLoading || viewStore.state.hasError {
-                ZStack {
-                    ProgressView()
-                        .controlSize(.large)
-                }
-                .alert(store: store.scope(state: \.$alert, action: InitialFeature.Action.alertDismissed))
-                .onAppear {
-                    store.send(.fetchAllPilgrimage)
-                }
-            } else {
-                if !viewStore.state.hasError {
-                    MainView(pilgrimages: viewStore.state.pilgrimages)
-                        .environment(\.theme, .system)
-                }
+        if store.isLoading || store.hasError {
+            ZStack {
+                ProgressView()
+                    .controlSize(.large)
+            }
+            .alert(store: store.scope(state: \.$alert, action: \.alertDismissed))
+            .onAppear {
+                store.send(.fetchAllPilgrimage)
+            }
+        } else {
+            if !store.hasError {
+                MainView(pilgrimages: store.pilgrimages)
+                    .environment(\.theme, .system)
             }
         }
     }
