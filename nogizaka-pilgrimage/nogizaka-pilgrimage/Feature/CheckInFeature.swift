@@ -10,7 +10,7 @@ import ComposableArchitecture
 import CoreLocation
 
 @Reducer
-struct CheckInFeature: Reducer {
+struct CheckInFeature {
     @ObservableState
     struct State: Equatable {
         var distance: Double = 0.0 // 現在地から聖地までの距離

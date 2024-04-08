@@ -8,7 +8,7 @@
 import ComposableArchitecture
 
 @Reducer
-struct PilgrimageDetailFeature: Reducer {
+struct PilgrimageDetailFeature {
     @ObservableState
     struct State: Equatable {
         static func == (lhs: State, rhs: State) -> Bool {
