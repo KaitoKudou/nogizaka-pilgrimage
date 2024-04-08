@@ -50,7 +50,7 @@ struct PilgrimageMapView: View {
                 .onAppear {
                     locationManager.requestLocation()
                 }
-                .onChange(of: selectedIndex) { _ in
+                .onChange(of: selectedIndex) { _, _ in
                     withAnimation {
                         region.center = offsetAppliedCenter(
                             to: pilgrimages[selectedIndex].coordinate,
