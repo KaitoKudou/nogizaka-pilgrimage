@@ -21,34 +21,7 @@ struct CheckInFeature: Reducer {
         var errorMessage: String = ""
     }
 
-    enum Action: Equatable {
-        static func == (lhs: CheckInFeature.Action, rhs: CheckInFeature.Action) -> Bool {
-            switch (lhs, rhs) {
-            case let (.calculateDistance(lhsUser, lhsPilgrimage), .calculateDistance(rhsUser, rhsPilgrimage)):
-                // CLLocationCoordinate2Dを比較する
-                return lhsUser.latitude == rhsUser.latitude &&
-                lhsUser.longitude == rhsUser.longitude &&
-                lhsPilgrimage.latitude == rhsPilgrimage.latitude &&
-                lhsPilgrimage.longitude == rhsPilgrimage.longitude
-            case (.addCheckedInList, .addCheckedInList):
-                return true
-            case (.fetchCheckedInList, .fetchCheckedInList):
-                return true
-            case (.verifyCheckedIn(pilgrimage: _), .verifyCheckedIn(pilgrimage: _)):
-                return true
-            case (.startLoading, .startLoading):
-                return true
-            case (.stopLoading, .stopLoading):
-                return true
-            case (.pilgrimageResponse, .pilgrimageResponse):
-                return true
-            case (.updateCheckedInStatus, .updateCheckedInStatus):
-                return true
-            default:
-                return false
-            }
-        }
-
+    enum Action {
         case calculateDistance(userCoordinate: CLLocationCoordinate2D, pilgrimageCoordinate: CLLocationCoordinate2D)
         case addCheckedInList(pilgrimage: PilgrimageInformation)
         case fetchCheckedInList

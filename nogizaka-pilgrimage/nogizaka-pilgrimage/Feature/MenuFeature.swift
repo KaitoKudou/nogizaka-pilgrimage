@@ -13,7 +13,7 @@ struct MenuFeature {
     @ObservableState
     struct State: Equatable {}
 
-    enum Action: Equatable {
+    enum Action {
         case view(MenuItem)
     }
 
