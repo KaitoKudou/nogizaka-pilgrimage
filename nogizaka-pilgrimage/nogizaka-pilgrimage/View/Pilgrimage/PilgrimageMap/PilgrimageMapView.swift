@@ -16,7 +16,6 @@ struct PilgrimageMapView: View {
     @State private var isShowAlert = false
     @EnvironmentObject private var locationManager: LocationManager
     let pilgrimages: [PilgrimageInformation]
-    let store: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
         GeometryReader { geometry in
@@ -86,11 +85,11 @@ struct PilgrimageMapView: View {
     private func pilgrimageCardsView(geometry: GeometryProxy) -> some View {
         TabView(selection: $selectedIndex) {
             ForEach(Array(pilgrimages.enumerated()), id: \.element.id) { index, pilgrimage in
-                PilgrimageCardView(pilgrimage: pilgrimage, store: store)
-                    .tag(index)
-                    .frame(
-                        width: max(0, geometry.size.width - theme.margins.spacing_l * 2)
-                    )
+                PilgrimageCardView(pilgrimage: pilgrimage)
+                .tag(index)
+                .frame(
+                    width: max(0, geometry.size.width - theme.margins.spacing_l * 2)
+                )
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
@@ -114,16 +113,7 @@ struct PilgrimageMapView: View {
 
 #Preview {
     PilgrimageMapView(
-        pilgrimages: dummyPilgrimageList,
-        store: StoreOf<PilgrimageDetailFeature>(
-            initialState:
-                PilgrimageDetailFeature.State(
-                    favoriteState: FavoriteFeature.State(),
-                    checkInState: CheckInFeature.State()
-                )
-        ) {
-            PilgrimageDetailFeature()
-        }
+        pilgrimages: dummyPilgrimageList
     )
     .environmentObject(LocationManager())
 }
