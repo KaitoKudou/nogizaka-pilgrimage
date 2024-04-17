@@ -10,12 +10,11 @@ import SwiftUI
 
 struct PilgrimageListView: View {
     @Environment(\.theme) private var theme
-    @State private var searchWord = ""
-    @State var searchCandidateStore = Store(initialState: SearchCandidateFeature.State()) {
-        SearchCandidateFeature()
+    @State private var searchText = ""
+    @State var store = Store(initialState: PilgrimageListFeature.State()) {
+        PilgrimageListFeature()
     }
     let pilgrimages: [PilgrimageInformation]
-    let pilgrimageDetailStore: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
         GeometryReader { geometry in
@@ -26,17 +25,16 @@ struct PilgrimageListView: View {
                     .padding(.horizontal, theme.margins.spacing_m)
                     .background(R.color.tab_primary()!.color)
 
-                PilgrimageListNavigationView(
-                    pilgrimageList: searchCandidateStore.allSearchCandidatePilgrimages,
-                    store: pilgrimageDetailStore
-                )
+                PilgrimageListNavigationView(store: store)
             }
             .onAppear {
-                searchWord = searchCandidateStore.searchText
-                if searchCandidateStore.allSearchCandidatePilgrimages.isEmpty {
-                    searchCandidateStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
+                searchText = store.searchText
+                store.send(.onAppear(pilgrimages))
+
+                if store.searchText.isEmpty {
+                    store.send(.searchPilgrimages(""))
                 } else {
-                    searchCandidateStore.send(.resetPilgrimages(pilgrimages: searchCandidateStore.allSearchCandidatePilgrimages))
+                    store.send(.searchPilgrimages(searchText))
                 }
             }
         }
@@ -53,7 +51,7 @@ struct PilgrimageListView: View {
 
             TextField(
                 R.string.localizable.pilgrimage_list_placeholder(),
-                text: $searchWord
+                text: $searchText
             )
             .padding(.vertical, theme.margins.spacing_xs)
             .padding(.leading, theme.margins.spacing_xxs)
@@ -61,12 +59,10 @@ struct PilgrimageListView: View {
             .submitLabel(.search)
             .onSubmit {
                 // キーボードの検索ボタンが押されたときにアクションを送信
-                if !searchWord.isEmpty {
-                    searchCandidateStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
-                    searchCandidateStore.send(.searchPilgrimages(searchWord))
+                if !searchText.isEmpty {
+                    store.send(.searchPilgrimages(searchText))
                 } else {
-                    searchCandidateStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
-                    searchCandidateStore.send(.resetSearchText)
+                    store.send(.searchPilgrimages(""))
                 }
             }
         }
@@ -78,15 +74,6 @@ struct PilgrimageListView: View {
 
 #Preview {
     PilgrimageListView(
-        pilgrimages: dummyPilgrimageList,
-        pilgrimageDetailStore: StoreOf<PilgrimageDetailFeature>(
-            initialState:
-                PilgrimageDetailFeature.State(
-                    favoriteState: FavoriteFeature.State(),
-                    checkInState: CheckInFeature.State()
-                )
-        ) {
-            PilgrimageDetailFeature()
-        }
+        pilgrimages: dummyPilgrimageList
     )
 }
