@@ -10,11 +10,12 @@ import SwiftUI
 
 struct PilgrimageCardView: View {
     @Environment(\.theme) private var theme
-    @State private var isFavorite = false
-    @State private var isShowUpdateFavoriteAlert = false
-    @State private var hasNetworkAlert = false
+    @State var store = Store(
+        initialState: PilgrimageCardFeature.State()
+    ) {
+        PilgrimageCardFeature()
+    }
     let pilgrimage: PilgrimageInformation
-    let store: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
         HStack(spacing: theme.margins.spacing_m) {
@@ -45,23 +46,22 @@ struct PilgrimageCardView: View {
                     Spacer()
 
                     Button {
-                        store.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
+                        store.send(.favoriteButtonTapped(pilgrimage))
                     } label: {
-                        if store.favoriteState.isLoading {
+                        if store.isLoading {
                             // 通信中の場合、インジケータを表示
                             ProgressView()
-                        } else if store.favoriteState.favoritePilgrimages.contains(pilgrimage) {
+                        } else if store.favorited {
                             Image(systemName: "heart.fill")
                                 .foregroundStyle(.red)
-                        } else if !store.favoriteState.favoritePilgrimages.contains(pilgrimage) {
+                        } else if !store.favorited {
                             Image(systemName: "heart")
                                 .foregroundStyle(R.color.tab_primary_off()!.color)
                         }
                     }
-                    .disabled(store.favoriteState.isLoading ? true : false)
+                    .disabled(store.isLoading ? true : false)
                 }
                 .padding(.bottom, theme.margins.spacing_m)
-                .alert(store: store.scope(state: \.$alert, action: \.alertDismissed))
 
                 Text(pilgrimage.address)
                     .font(theme.fonts.caption)
@@ -83,9 +83,7 @@ struct PilgrimageCardView: View {
 
                         NavigationLink(
                             destination:
-                                PilgrimageDetailView(
-                                    pilgrimage: pilgrimage, store: store
-                                )
+                                PilgrimageDetailView(pilgrimage: pilgrimage)
                         ) {
                             Text(R.string.localizable.common_btn_detail_text())
                         }
@@ -97,21 +95,20 @@ struct PilgrimageCardView: View {
                 }
             }
             .onAppear {
-                store.send(.favoriteAction(.fetchFavorites))
+                store.send(.onAppear(pilgrimage))
             }
-            .onChange(of: store.favoriteState.hasNetworkError) { _, _ in
-                self.hasNetworkAlert = hasNetworkAlert
-            }
-            .confirmationDialog(
-                store: store.scope(
-                    state: \.$confirmationDialog,
-                    action: \.confirmationDialog
+            .alert(
+                $store.scope(
+                    state: \.destination?.alert,
+                    action: \.destination.alert
                 )
             )
-            .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
-            } message: {
-                EmptyView()
-            }
+            .confirmationDialog(
+                $store.scope(
+                    state: \.destination?.confirmationDialog,
+                    action: \.destination.confirmationDialog
+                )
+            )
         }
         .padding(.all)
         .background(.white)
@@ -121,16 +118,7 @@ struct PilgrimageCardView: View {
 struct PilgrimageCardView_Previews: PreviewProvider {
     static var previews: some View {
         PilgrimageCardView(
-            pilgrimage: dummyPilgrimageList[0],
-            store: StoreOf<PilgrimageDetailFeature>(
-                initialState:
-                    PilgrimageDetailFeature.State(
-                        favoriteState: FavoriteFeature.State(),
-                        checkInState: CheckInFeature.State()
-                    )
-            ) {
-                PilgrimageDetailFeature()
-            }
+            pilgrimage: dummyPilgrimageList[0]
         )
         .frame(width: UIScreen.main.bounds.width - 64, height: UIScreen.main.bounds.width / 2 - 32)
         .previewLayout(.sizeThatFits)
