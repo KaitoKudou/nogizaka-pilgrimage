@@ -12,12 +12,13 @@ import CoreLocation
 struct PilgrimageDetailView: View {
     @Environment(\.theme) private var theme
     @State private var isShowAuthorizationAlert = false
-    @State private var isShowUpdatedCheckedInAlert = false
-    @State private var hasNetworkAlert = false
     @EnvironmentObject private var locationManager: LocationManager
+    @State private var store = Store(
+        initialState: PilgrimageDetailFeature.State()
+    ) {
+        PilgrimageDetailFeature()
+    }
     let pilgrimage: PilgrimageInformation
-    let store: StoreOf<PilgrimageDetailFeature>
-    private let distanceThreshold: Double = 100.0
     private let adSize = BannerView.getAdSize(width: UIScreen.main.bounds.width)
 
     var body: some View {
@@ -43,12 +44,12 @@ struct PilgrimageDetailView: View {
                         Spacer()
 
                         Button {
-                            store.send(.favoriteAction(.updateFavoriteList(pilgrimage)))
+                            store.send(.favoriteButtonTapped(pilgrimage))
                         } label: {
-                            if store.favoriteState.isLoading {
+                            if store.isLoading {
                                 // 通信中の場合、インジケータを表示
                                 ProgressView()
-                            } else if store.favoriteState.favoritePilgrimages.contains(pilgrimage) {
+                            } else if store.favorited {
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.red)
                             } else {
@@ -68,32 +69,23 @@ struct PilgrimageDetailView: View {
                         }
 
                         store.send(
-                            .checkInAction(
-                                .calculateDistance(
-                                    userCoordinate: locationManager.userLocation!,
-                                    pilgrimageCoordinate: pilgrimage.coordinate
-                                )
+                            .checkInButtonTapped(
+                                pilgrimage: pilgrimage,
+                                userCoordinate: locationManager.userLocation!
                             )
                         )
-
-                        if store.checkInState.distance <= distanceThreshold {
-                            store.send(.checkInAction(.addCheckedInList(pilgrimage: pilgrimage)))
-                        } else {
-                            // 100m以内に聖地がない場合
-                            store.send(.showNotNearbyAlert)
-                        }
                     } label: {
-                        Text(store.checkInState.hasCheckedIn ?
+                        Text(store.hasCheckedIn ?
                              R.string.localizable.has_check_in() :
                                 R.string.localizable.tabbar_check_in()
                         )
                         .frame(height: theme.margins.spacing_xl)
                     }
-                    .disabled(store.checkInState.hasCheckedIn)
+                    .disabled(store.hasCheckedIn)
                     .alert(
-                        store: store.scope(
-                            state: \.$alert,
-                            action: \.alertDismissed
+                        $store.scope(
+                            state: \.destination?.alert,
+                            action: \.destination.alert
                         )
                     )
                     .alert(R.string.localizable.alert_location(), isPresented: $isShowAuthorizationAlert) {
@@ -101,7 +93,7 @@ struct PilgrimageDetailView: View {
                         EmptyView()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(store.checkInState.hasCheckedIn ?
+                    .background(store.hasCheckedIn ?
                                 R.color.tab_primary_off()!.color :
                                     R.color.text_secondary()!.color
                     )
@@ -130,21 +122,7 @@ struct PilgrimageDetailView: View {
                 )
         }
         .onAppear {
-            store.send(.checkInAction(.verifyCheckedIn(pilgrimage: pilgrimage)))
-        }
-        .onChange(of: store.checkInState.hasError) { _, hasError in
-            isShowUpdatedCheckedInAlert = hasError
-        }
-        .onChange(of: store.favoriteState.hasNetworkError) { _, hasNetworkAlert in
-            self.hasNetworkAlert = hasNetworkAlert
-        }
-        .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
-        } message: {
-            EmptyView()
-        }
-        .alert(store.checkInState.errorMessage, isPresented: $isShowUpdatedCheckedInAlert) {
-        } message: {
-            EmptyView()
+            store.send(.onAppear(pilgrimage))
         }
         .padding(.leading, theme.margins.spacing_m)
         .padding(.trailing, theme.margins.spacing_m)
@@ -152,26 +130,10 @@ struct PilgrimageDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonTextHidden()
     }
-
-    func calculateDistance(userCoordinate: CLLocationCoordinate2D, pilgrimageCoordinate: CLLocationCoordinate2D) -> CLLocationDistance {
-        let userLocation = CLLocation(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
-        let pilgrimageLocation = CLLocation(latitude: pilgrimageCoordinate.latitude, longitude: pilgrimageCoordinate.longitude)
-
-        return userLocation.distance(from: pilgrimageLocation)
-    }
 }
 
 #Preview {
     PilgrimageDetailView(
-        pilgrimage: dummyPilgrimageList[0],
-        store: StoreOf<PilgrimageDetailFeature>(
-            initialState:
-                PilgrimageDetailFeature.State(
-                    favoriteState: FavoriteFeature.State(),
-                    checkInState: CheckInFeature.State()
-                )
-        ) {
-            PilgrimageDetailFeature()
-        }
+        pilgrimage: dummyPilgrimageList[0]
     )
 }
