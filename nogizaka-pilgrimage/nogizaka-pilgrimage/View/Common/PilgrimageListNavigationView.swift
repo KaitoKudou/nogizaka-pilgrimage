@@ -9,57 +9,55 @@ import ComposableArchitecture
 import SwiftUI
 
 struct PilgrimageListNavigationView: View {
-    let pilgrimageList: [PilgrimageInformation]
-    let store: StoreOf<PilgrimageDetailFeature>
+    @Bindable var store: StoreOf<PilgrimageListFeature>
+
+    init(store: StoreOf<PilgrimageListFeature>) {
+        self.store = store
+    }
 
     var body: some View {
         GeometryReader { geometry in
-            NavigationView {
+            NavigationStack {
                 List {
-                    ForEach(Array(pilgrimageList.enumerated()), id: \.element.id) { index, pilgrimage in
+                    ForEachStore(
+                        store.scope(
+                        state: \.pilgrimageSearchResults,
+                        action: \.pilgrimageRows
+                        )
+                    ) { itemStore in
                         ZStack {
                             NavigationLink(
-                                destination:
-                                    PilgrimageDetailView(
-                                        pilgrimage: pilgrimage,
-                                        store: store
-                                    )
+                                destination: PilgrimageDetailView(pilgrimage: itemStore.pilgrimage)
                             ) {
                                 EmptyView()
                             }
                             .opacity(0)
 
                             PilgrimageListContentView(
-                                pilgrimage: pilgrimage,
-                                store: store.scope(
-                                    state: \.favoriteState,
-                                    action: \.favoriteAction
-                                )
+                                pilgrimage: itemStore.pilgrimage,
+                                store: itemStore
                             )
                             .frame(maxHeight: geometry.size.width / 3)
                         }
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
             }
-            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
 
 
+
+
 #Preview {
     PilgrimageListNavigationView(
-        pilgrimageList: dummyPilgrimageList,
-        store: StoreOf<PilgrimageDetailFeature>(
+        store: .init(
             initialState:
-                PilgrimageDetailFeature.State(
-                    favoriteState: FavoriteFeature.State(),
-                    checkInState: CheckInFeature.State()
-                )
+                PilgrimageListFeature.State()
         ) {
-            PilgrimageDetailFeature()
+            PilgrimageListFeature()
         }
     )
 }
