@@ -13,23 +13,16 @@ import CoreLocation
 struct CheckInFeature {
     @ObservableState
     struct State: Equatable {
-        var distance: Double = 0.0 // 現在地から聖地までの距離
-        var hasCheckedIn: Bool = false // チェックインしているかどうか
         var checkedInPilgrimages: [PilgrimageInformation] = []
         var isLoading: Bool = false
-        var hasError: Bool = false // 失敗アラートの表示を制御
-        var errorMessage: String = ""
+        @Presents var destination: Destination.State?
     }
 
     enum Action {
-        case calculateDistance(userCoordinate: CLLocationCoordinate2D, pilgrimageCoordinate: CLLocationCoordinate2D)
-        case addCheckedInList(pilgrimage: PilgrimageInformation)
-        case fetchCheckedInList
-        case verifyCheckedIn(pilgrimage: PilgrimageInformation)
-        case startLoading
-        case stopLoading
+        case onAppear
+        case setLoading(Bool)
         case pilgrimageResponse(Result<[PilgrimageInformation]?, APIError>)
-        case updateCheckedInStatus(Bool)
+        case destination(PresentationAction<Destination.Action>)
     }
 
     @Dependency(\.networkMonitor) var networkMonitor
@@ -37,48 +30,9 @@ struct CheckInFeature {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case .calculateDistance(let userCoordinate, let pilgrimageCoordinate):
-                let userLocation = CLLocation(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
-                let pilgrimageLocation = CLLocation(latitude: pilgrimageCoordinate.latitude, longitude: pilgrimageCoordinate.longitude)
-
-                state.distance = userLocation.distance(from: pilgrimageLocation)
-                return .none
-            case .addCheckedInList(let pilgrimage):
-                let uuid = UIDevice.current.identifierForVendor!.uuidString
-                let querySnapshot = Firestore.firestore().collection("checked-in-list").document(uuid).collection("list")
-                let documentReference = querySnapshot.document(pilgrimage.name)
-
+            case .onAppear:
                 return .run { send in
-                    await send(.stopLoading)
-                    do {
-                        if (try await querySnapshot.getDocuments().documents.first(where: { $0.documentID == pilgrimage.name })) != nil {
-                            await send(.updateCheckedInStatus(false))
-                        } else {
-                            let data: [String: Any?] = [
-                                "code": pilgrimage.code,
-                                "name": pilgrimage.name,
-                                "description": pilgrimage.description,
-                                "latitude": pilgrimage.latitude,
-                                "longitude": pilgrimage.longitude,
-                                "address": pilgrimage.address,
-                                "image_url": pilgrimage.imageURL?.absoluteString,
-                                "copyright": pilgrimage.copyright,
-                                "search_candidate_list": pilgrimage.searchCandidateList
-                            ]
-                            try await documentReference.setData(data as [String : Any])
-                            await send(.pilgrimageResponse(.success(nil)))
-                            await send(.updateCheckedInStatus(true))
-                        }
-                    } catch let error as NSError where error.domain == FirestoreErrorDomain {
-                        await send(.pilgrimageResponse(.failure(.updateCheckedInError)))
-                    } catch {
-                        await send(.pilgrimageResponse(.failure(.networkError)))
-                    }
-                    await send(.stopLoading)
-                }
-            case .fetchCheckedInList:
-                return .run { send in
-                    await send(.startLoading)
+                    await send(.setLoading(true))
 
                     do {
                         let uuid = await UIDevice.current.identifierForVendor!.uuidString
@@ -96,47 +50,51 @@ struct CheckInFeature {
                         await send(.pilgrimageResponse(.success(checkedInPilgrimages)))
                     } catch let error as NSError where error.domain == FirestoreErrorDomain {
                         await send(.pilgrimageResponse(.failure(.fetchCheckedInError)))
-                    } catch {
+                    } catch let error as APIError where error == APIError.networkError {
                         await send(.pilgrimageResponse(.failure(.networkError)))
                     }
 
-                    await send(.stopLoading)
+                    await send(.setLoading(false))
                 }
-            case .verifyCheckedIn(let pilgrimage):
-                let uuid = UIDevice.current.identifierForVendor!.uuidString
-                let querySnapshot = Firestore.firestore().collection("checked-in-list").document(uuid).collection("list")
-
-                return .run { send in
-                    await send(.startLoading)
-                    do {
-                        if (try await querySnapshot.getDocuments().documents.first(where: { $0.documentID == pilgrimage.name })) != nil {
-                            await send(.updateCheckedInStatus(true))
-                        } else {
-                            await send(.updateCheckedInStatus(false))
-                        }
-                    }
-                    await send(.stopLoading)
-                }
-            case .startLoading:
-                state.isLoading = true
+            case let .pilgrimageResponse(.success(pilgrimages)):
+                guard let pilgrimages = pilgrimages else { return .none }
+                state.checkedInPilgrimages = pilgrimages
                 return .none
-            case .stopLoading:
-                state.isLoading = false
-                return .none
-            case .pilgrimageResponse(.success(let pilgrimages)):
-                state.hasError = false
-                if let pilgrimages = pilgrimages {
-                    state.checkedInPilgrimages = pilgrimages
+            case let .pilgrimageResponse(.failure(error)):
+                switch error {
+                case .networkError:
+                    state.destination = .alert(.networkError)
+                case .fetchCheckedInError:
+                    state.destination = .alert(.fetchCheckedInError)
+                default: return .none
                 }
                 return .none
-            case .pilgrimageResponse(.failure(let error)):
-                state.errorMessage = error.localizedDescription
-                state.hasError = true
+            case let .setLoading(isLoading):
+                state.isLoading = isLoading
                 return .none
-            case .updateCheckedInStatus(let hasCheckedIn):
-                state.hasCheckedIn = hasCheckedIn
+            case .destination:
                 return .none
             }
         }
+        .ifLet(\.$destination, action: \.destination)
+    }
+}
+
+extension AlertState where Action == CheckInFeature.Destination.Alert {
+    static let fetchCheckedInError = Self {
+        TextState(APIError.fetchCheckedInError.localizedDescription)
+    }
+
+    static let networkError = Self {
+        TextState(APIError.networkError.localizedDescription)
+    }
+}
+
+extension CheckInFeature {
+    @Reducer(state: .equatable)
+    public enum Destination {
+        case alert(AlertState<Alert>)
+
+        public enum Alert: Equatable {}
     }
 }
