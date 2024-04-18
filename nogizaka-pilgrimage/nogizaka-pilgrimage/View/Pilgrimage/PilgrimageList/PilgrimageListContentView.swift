@@ -10,9 +10,13 @@ import SwiftUI
 
 struct PilgrimageListContentView: View {
     @Environment(\.theme) private var theme
-    @State private var hasNetworkAlert = false
     let pilgrimage: PilgrimageInformation
-    let store: StoreOf<FavoriteFeature>
+    @Bindable var store: StoreOf<PilgrimageRowFeature>
+
+    init(pilgrimage: PilgrimageInformation, store: StoreOf<PilgrimageRowFeature>) {
+        self.pilgrimage = pilgrimage
+        self.store = store
+    }
 
     var body: some View {
         HStack(alignment: .top, spacing: theme.margins.spacing_m) {
@@ -42,19 +46,15 @@ struct PilgrimageListContentView: View {
                     Spacer()
 
                     Button {
-                        store.send(.updateFavoriteList(pilgrimage))
+                        store.send(.updateFavorite(pilgrimage))
                     } label: {
                         if store.isLoading {
                             // 通信中の場合、インジケータを表示
                             ProgressView()
-                        } else if
-                            store.favoritePilgrimages
-                                .contains(pilgrimage) {
+                        } else if store.favorited {
                             Image(systemName: "heart.fill")
                                 .foregroundStyle(.red)
-                        } else if
-                            !store.favoritePilgrimages
-                                .contains(pilgrimage) {
+                        } else {
                             Image(systemName: "heart")
                                 .foregroundStyle(R.color.tab_primary_off()!.color)
                         }
@@ -66,14 +66,15 @@ struct PilgrimageListContentView: View {
                 Text(pilgrimage.address)
                     .font(theme.fonts.caption)
             }
-            .onChange(of: store.hasNetworkError) {
-                _, hasNetworkAlert in
-                self.hasNetworkAlert = hasNetworkAlert
+            .onAppear {
+                store.send(.onAppear(pilgrimage))
             }
-            .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
-            } message: {
-                EmptyView()
-            }
+            .alert(
+                $store.scope(
+                    state: \.destination?.alert,
+                    action: \.destination.alert
+                )
+            )
         }
         .padding()
         .background(Color.white)
@@ -87,10 +88,12 @@ struct PilgrimageListContentView_Previews: PreviewProvider {
     static var previews: some View {
         PilgrimageListContentView(
             pilgrimage: dummyPilgrimageList[0],
-            store: StoreOf<FavoriteFeature>(
-                initialState: FavoriteFeature.State()
+            store: .init(
+                initialState: PilgrimageRowFeature.State(
+                    pilgrimage: dummyPilgrimageList[0]
+                )
             ) {
-                FavoriteFeature()
+                PilgrimageRowFeature()
             }
         )
         .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width / 3)

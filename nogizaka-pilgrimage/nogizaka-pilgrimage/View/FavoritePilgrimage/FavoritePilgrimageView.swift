@@ -9,24 +9,54 @@ import ComposableArchitecture
 import SwiftUI
 
 struct FavoritePilgrimageView: View {
-    let store: StoreOf<PilgrimageDetailFeature>
+    let store: StoreOf<FavoriteFeature>
+
+    init(store: StoreOf<FavoriteFeature>) {
+        self.store = store
+    }
 
     var body: some View {
         Group {
-            if store.favoriteState.favoritePilgrimages.isEmpty {
-                Text(R.string.localizable.favorites_empty())
-            } else {
-                PilgrimageListNavigationView(
-                    pilgrimageList: store.favoriteState.favoritePilgrimages,
-                    store: store
-                )
+            VStack {
+                if store.favoritePilgrimageRows.isEmpty {
+                    Text(R.string.localizable.favorites_empty())
+                } else if store.isLoading {
+                    ProgressView()
+                        .controlSize(.large)
+                        .frame(alignment: .center)
+                } else {
+                    GeometryReader { geometry in
+                        NavigationStack {
+                            List {
+                                ForEachStore(store.scope(
+                                    state: \.favoritePilgrimageRows,
+                                    action: \.favoritePilgrimageRows
+                                )) { itemStore in
+                                    ZStack {
+                                        NavigationLink(
+                                            destination: PilgrimageDetailView(pilgrimage: itemStore.pilgrimage)
+                                        ) {
+                                            EmptyView()
+                                        }
+                                        .opacity(0)
+
+                                        PilgrimageListContentView(
+                                            pilgrimage: itemStore.pilgrimage, 
+                                            store: itemStore
+                                        )
+                                        .frame(maxHeight: geometry.size.width / 3)
+                                    }
+                                    .listRowSeparator(.hidden)
+                                }
+                            }
+                            .listStyle(.plain)
+                        }
+                    }
+                }
             }
         }
         .onAppear {
-            store.send(.favoriteAction(.fetchFavorites))
-        }
-        .onChange(of: store.favoriteState.favoritePilgrimages) { _, _ in
-            store.send(.favoriteAction(.fetchFavorites))
+            store.send(.onAppear)
         }
         .navigationTitle(R.string.localizable.tabbar_favorite())
         .navigationBarTitleDisplayMode(.inline)
@@ -35,14 +65,10 @@ struct FavoritePilgrimageView: View {
 
 #Preview {
     FavoritePilgrimageView(
-        store: StoreOf<PilgrimageDetailFeature>(
-            initialState:
-                PilgrimageDetailFeature.State(
-                    favoriteState: FavoriteFeature.State(),
-                    checkInState: CheckInFeature.State()
-                )
+        store: .init(
+            initialState: FavoriteFeature.State()
         ) {
-            PilgrimageDetailFeature()
+            FavoriteFeature()
         }
     )
 }

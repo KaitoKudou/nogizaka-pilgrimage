@@ -10,14 +10,16 @@ import SwiftUI
 
 struct CheckInView: View {
     @Environment(\.theme) private var theme
-    @State private var isShowFetchCheckedInAlert = false
-    @State private var hasNetworkAlert = false
-    let store: StoreOf<PilgrimageDetailFeature>
+    @Bindable var store: StoreOf<CheckInFeature>
     private let adSize = BannerView.getAdSize(width: UIScreen.main.bounds.width)
+
+    init(store: StoreOf<CheckInFeature>) {
+        self.store = store
+    }
 
     var body: some View {
         GeometryReader { geometry in
-            switch (store.checkInState.isLoading, store.checkInState.checkedInPilgrimages.isEmpty) {
+            switch (store.isLoading, store.checkedInPilgrimages.isEmpty) {
             case (true, _):
                 VStack(alignment: .center) {
                     Spacer()
@@ -55,7 +57,7 @@ struct CheckInView: View {
                 VStack {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
-                            ForEach(store.checkInState.checkedInPilgrimages, id: \.self) { pilgrimage in
+                            ForEach(store.checkedInPilgrimages, id: \.self) { pilgrimage in
                                 CheckInContentView(pilgrimageName: pilgrimage.name)
                             }
                         }
@@ -71,22 +73,14 @@ struct CheckInView: View {
             }
         }
         .onAppear {
-            store.send(.checkInAction(.fetchCheckedInList))
+            store.send(.onAppear)
         }
-        .onChange(of: store.checkInState.hasError) { _, hasError in
-            isShowFetchCheckedInAlert = hasError
-        }
-        .onChange(of: store.favoriteState.hasNetworkError) { _, hasNetworkAlert in
-            self.hasNetworkAlert = hasNetworkAlert
-        }
-        .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {
-        } message: {
-            EmptyView()
-        }
-        .alert(store.checkInState.errorMessage, isPresented: $isShowFetchCheckedInAlert) {
-        } message: {
-            EmptyView()
-        }
+        .alert(
+            $store.scope(
+                state: \.destination?.alert,
+                action: \.destination.alert
+            )
+        )
         .navigationTitle(R.string.localizable.tabbar_check_in())
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -95,14 +89,10 @@ struct CheckInView: View {
 struct CheckInView_Previews: PreviewProvider {
     static var previews: some View {
         CheckInView(
-            store: StoreOf<PilgrimageDetailFeature>(
-                initialState:
-                    PilgrimageDetailFeature.State(
-                        favoriteState: FavoriteFeature.State(),
-                        checkInState: CheckInFeature.State()
-                    )
+            store: .init(
+                initialState: CheckInFeature.State()
             ) {
-                PilgrimageDetailFeature()
+                CheckInFeature()
             }
         )
     }

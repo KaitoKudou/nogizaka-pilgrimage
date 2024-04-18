@@ -53,8 +53,22 @@ struct PilgrimageInformation: Hashable, Decodable {
 }
 
 extension PilgrimageInformation: Identifiable {
-    var id: String {
-        return code
+    var id: Int {
+        return Int(code)!
+    }
+}
+
+extension PilgrimageInformation {
+    init (from item: PilgrimageInformation) {
+        self.code = item.code
+        self.name = item.name
+        self.description = item.description
+        self.latitude = item.latitude
+        self.longitude = item.longitude
+        self.address = item.address
+        self.imageURL = item.imageURL
+        self.copyright = item.copyright
+        self.searchCandidateList = item.searchCandidateList
     }
 }
 
