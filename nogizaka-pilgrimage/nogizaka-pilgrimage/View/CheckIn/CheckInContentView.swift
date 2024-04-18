@@ -13,7 +13,8 @@ struct CheckInContentView: View {
 
     var body: some View {
         VStack {
-            Image(R.image.checkedIn_image.name)
+            Image(R.image.checked_in_image.name)
+                .resizable()
                 .aspectRatio(contentMode: .fit)
 
             Text(pilgrimageName)
