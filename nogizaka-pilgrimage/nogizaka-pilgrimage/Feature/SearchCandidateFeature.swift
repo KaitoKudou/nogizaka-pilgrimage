@@ -7,14 +7,16 @@
 
 import ComposableArchitecture
 
-struct SearchCandidateFeature: Reducer {
+@Reducer
+struct SearchCandidateFeature {
+    @ObservableState
     struct State: Equatable {
         var allSearchCandidatePilgrimages: [PilgrimageInformation] = [] // 検索結果の配列(一覧)
         var searchText: String = ""
         var isLoading: Bool = false
     }
 
-    enum Action: Equatable {
+    enum Action {
         case searchPilgrimages(String)
         case startLoading
         case stopLoading

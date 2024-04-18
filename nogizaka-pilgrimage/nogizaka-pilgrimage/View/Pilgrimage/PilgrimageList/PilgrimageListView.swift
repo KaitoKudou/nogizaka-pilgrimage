@@ -18,31 +18,25 @@ struct PilgrimageListView: View {
     let pilgrimageDetailStore: StoreOf<PilgrimageDetailFeature>
 
     var body: some View {
-        WithViewStore(searchCandidateStore, observe: { $0 }) { viewStore in
-            GeometryReader { geometry in
-                VStack {
-                    searchTextField(viewStore: viewStore)
-                        .padding(.top, theme.margins.spacing_xxs)
-                        .padding(.bottom, theme.margins.spacing_m)
-                        .padding(.horizontal, theme.margins.spacing_m)
-                        .background(R.color.tab_primary()!.color)
+        GeometryReader { geometry in
+            VStack {
+                searchTextField()
+                    .padding(.top, theme.margins.spacing_xxs)
+                    .padding(.bottom, theme.margins.spacing_m)
+                    .padding(.horizontal, theme.margins.spacing_m)
+                    .background(R.color.tab_primary()!.color)
 
-                    PilgrimageListNavigationView(
-                        pilgrimageList: viewStore.allSearchCandidatePilgrimages, 
-                        store: pilgrimageDetailStore
-                    )
-                }
-                .onAppear {
-                    searchWord = viewStore.state.searchText
-                    if viewStore.state.allSearchCandidatePilgrimages.isEmpty {
-                        viewStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
-                    } else {
-                        viewStore.send(.resetPilgrimages(pilgrimages: viewStore.state.allSearchCandidatePilgrimages))
-                    }
-                }
-                .onChange(of: viewStore.isLoading) { newIsLoading in
-                    if newIsLoading {
-                    }
+                PilgrimageListNavigationView(
+                    pilgrimageList: searchCandidateStore.allSearchCandidatePilgrimages,
+                    store: pilgrimageDetailStore
+                )
+            }
+            .onAppear {
+                searchWord = searchCandidateStore.searchText
+                if searchCandidateStore.allSearchCandidatePilgrimages.isEmpty {
+                    searchCandidateStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
+                } else {
+                    searchCandidateStore.send(.resetPilgrimages(pilgrimages: searchCandidateStore.allSearchCandidatePilgrimages))
                 }
             }
         }
@@ -51,9 +45,7 @@ struct PilgrimageListView: View {
         .navigationBarBackButtonTextHidden()
     }
 
-    private func searchTextField(
-        viewStore: ViewStore<SearchCandidateFeature.State, SearchCandidateFeature.Action>
-    ) -> some View {
+    private func searchTextField() -> some View {
         HStack(spacing: .zero) {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.gray)
@@ -70,11 +62,11 @@ struct PilgrimageListView: View {
             .onSubmit {
                 // キーボードの検索ボタンが押されたときにアクションを送信
                 if !searchWord.isEmpty {
-                    viewStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
-                    viewStore.send(.searchPilgrimages(searchWord))
+                    searchCandidateStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
+                    searchCandidateStore.send(.searchPilgrimages(searchWord))
                 } else {
-                    viewStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
-                    viewStore.send(.resetSearchText)
+                    searchCandidateStore.send(.resetPilgrimages(pilgrimages: pilgrimages))
+                    searchCandidateStore.send(.resetSearchText)
                 }
             }
         }

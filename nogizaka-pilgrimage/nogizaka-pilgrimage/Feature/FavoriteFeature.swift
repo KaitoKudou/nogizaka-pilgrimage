@@ -8,12 +8,14 @@
 import ComposableArchitecture
 import FirebaseFirestore
 
-struct FavoriteFeature: Reducer {
+@Reducer
+struct FavoriteFeature {
+    @ObservableState
     struct State: Equatable {
         var favoritePilgrimages: [PilgrimageInformation] = []
         var isLoading = false
         var hasNetworkError = false
-        @PresentationState var alert: AlertState<Action>?
+        @Presents var alert: AlertState<Action>?
     }
 
     enum Action: Equatable {

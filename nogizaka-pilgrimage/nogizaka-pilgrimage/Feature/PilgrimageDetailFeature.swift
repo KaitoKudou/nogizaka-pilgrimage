@@ -7,7 +7,9 @@
 
 import ComposableArchitecture
 
-struct PilgrimageDetailFeature: Reducer {
+@Reducer
+struct PilgrimageDetailFeature {
+    @ObservableState
     struct State: Equatable {
         static func == (lhs: State, rhs: State) -> Bool {
             return lhs.favoriteState == rhs.favoriteState &&
@@ -18,8 +20,8 @@ struct PilgrimageDetailFeature: Reducer {
 
         var favoriteState: FavoriteFeature.State
         var checkInState: CheckInFeature.State
-        @PresentationState var alert: AlertState<Action>?
-        @PresentationState var confirmationDialog: ConfirmationDialogState<Action.ConfirmationDialog>?
+        @Presents var alert: AlertState<Action>?
+        @Presents var confirmationDialog: ConfirmationDialogState<Action.ConfirmationDialog>?
     }
 
     enum Action: Equatable {
@@ -56,16 +58,21 @@ struct PilgrimageDetailFeature: Reducer {
     }
 
     @Dependency(\.routeActionClient) var routeActionClient
+    @Dependency(\.networkMonitor) var networkMonitor
 
     var body: some Reducer<State, Action> {
+        Scope(state: \.favoriteState, action: \.favoriteAction) {
+            FavoriteFeature()
+        }
+        Scope(state: \.checkInState, action: \.checkInAction) {
+            CheckInFeature()
+        }
         Reduce { state, action in
             switch action {
-            case .favoriteAction(let action):
-                return FavoriteFeature().reduce(into: &state.favoriteState, action: action)
-                    .map { Action.favoriteAction($0) }
-            case .checkInAction(let action):
-                return CheckInFeature().reduce(into: &state.checkInState, action: action)
-                    .map { Action.checkInAction($0) }
+            case .favoriteAction:
+                return .none
+            case .checkInAction:
+                return .none
             case .showNotNearbyAlert:
                 state.alert = .init(
                     title: .init(R.string.localizable.alert_not_nearby())

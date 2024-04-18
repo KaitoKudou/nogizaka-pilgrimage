@@ -15,61 +15,59 @@ struct PilgrimageListContentView: View {
     let store: StoreOf<FavoriteFeature>
 
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            HStack(alignment: .top, spacing: theme.margins.spacing_m) {
-                VStack {
-                    AsyncImage(url: pilgrimage.imageURL) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        // 画像取得中のプレースホルダー表示
-                        Image(R.image.no_image.name)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    }
-
-                    if let copyright = pilgrimage.copyright {
-                        Text(copyright)
-                            .font(theme.fonts.captionSmall)
-                    }
+        HStack(alignment: .top, spacing: theme.margins.spacing_m) {
+            VStack {
+                AsyncImage(url: pilgrimage.imageURL) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } placeholder: {
+                    // 画像取得中のプレースホルダー表示
+                    Image(R.image.no_image.name)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                 }
 
-                VStack(alignment: .leading) {
-                    HStack(alignment: .top) {
-                        Text(pilgrimage.name)
-                            .font(theme.fonts.bodyMedium)
-
-                        Spacer()
-
-                        Button {
-                            viewStore.send(.updateFavoriteList(pilgrimage))
-                        } label: {
-                            if viewStore.state.isLoading {
-                                // 通信中の場合、インジケータを表示
-                                ProgressView()
-                            } else if
-                                viewStore.state.favoritePilgrimages
-                                    .contains(pilgrimage) {
-                                Image(systemName: "heart.fill")
-                                    .foregroundStyle(.red)
-                            } else if
-                                !viewStore.state.favoritePilgrimages
-                                    .contains(pilgrimage) {
-                                Image(systemName: "heart")
-                                    .foregroundStyle(R.color.tab_primary_off()!.color)
-                            }
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                    .padding(.bottom, theme.margins.spacing_m)
-
-                    Text(pilgrimage.address)
-                        .font(theme.fonts.caption)
+                if let copyright = pilgrimage.copyright {
+                    Text(copyright)
+                        .font(theme.fonts.captionSmall)
                 }
             }
-            .onChange(of: viewStore.state.hasNetworkError) {
-                hasNetworkAlert in
+
+            VStack(alignment: .leading) {
+                HStack(alignment: .top) {
+                    Text(pilgrimage.name)
+                        .font(theme.fonts.bodyMedium)
+
+                    Spacer()
+
+                    Button {
+                        store.send(.updateFavoriteList(pilgrimage))
+                    } label: {
+                        if store.isLoading {
+                            // 通信中の場合、インジケータを表示
+                            ProgressView()
+                        } else if
+                            store.favoritePilgrimages
+                                .contains(pilgrimage) {
+                            Image(systemName: "heart.fill")
+                                .foregroundStyle(.red)
+                        } else if
+                            !store.favoritePilgrimages
+                                .contains(pilgrimage) {
+                            Image(systemName: "heart")
+                                .foregroundStyle(R.color.tab_primary_off()!.color)
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .padding(.bottom, theme.margins.spacing_m)
+
+                Text(pilgrimage.address)
+                    .font(theme.fonts.caption)
+            }
+            .onChange(of: store.hasNetworkError) {
+                _, hasNetworkAlert in
                 self.hasNetworkAlert = hasNetworkAlert
             }
             .alert(R.string.localizable.alert_network(), isPresented: $hasNetworkAlert) {

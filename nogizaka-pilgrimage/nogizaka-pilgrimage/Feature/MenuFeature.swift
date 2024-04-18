@@ -8,10 +8,12 @@
 import ComposableArchitecture
 import Foundation
 
-struct MenuFeature: Reducer {
+@Reducer
+struct MenuFeature {
+    @ObservableState
     struct State: Equatable {}
 
-    enum Action: Equatable {
+    enum Action {
         case view(MenuItem)
     }
 
