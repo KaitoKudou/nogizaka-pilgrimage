@@ -77,8 +77,12 @@ struct BannerView: UIViewControllerRepresentable {
         // MARK: - BannerViewControllerWidthDelegate methods
         func bannerViewController(_: BannerViewController, didUpdate width: CGFloat) {
             // Pass the viewWidth from Coordinator to BannerView.
+            // iPadでのAdMob広告表示エラーに対応
+            // See also https://qiita.com/SNQ-2001/items/1f19c3b6ce584ef25d6f
+            let request = GADRequest()
+            request.scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
             parent.viewWidth = width
-            parent.bannerView.load(GADRequest())
+            parent.bannerView.load(request)
         }
 
         // MARK: - GADBannerViewDelegate methods
