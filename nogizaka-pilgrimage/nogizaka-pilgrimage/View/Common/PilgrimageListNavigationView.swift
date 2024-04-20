@@ -25,21 +25,26 @@ struct PilgrimageListNavigationView: View {
                         action: \.pilgrimageRows
                         )
                     ) { itemStore in
-                        ZStack {
-                            NavigationLink(
-                                destination: PilgrimageDetailView(pilgrimage: itemStore.pilgrimage)
-                            ) {
-                                EmptyView()
-                            }
-                            .opacity(0)
+                        if itemStore.id % 5 == 0 {
+                            NativeAdvanceView()
+                                .frame(height: geometry.size.width / 3)
+                        } else {
+                            ZStack {
+                                NavigationLink(
+                                    destination: PilgrimageDetailView(pilgrimage: itemStore.pilgrimage)
+                                ) {
+                                    EmptyView()
+                                }
+                                .opacity(0)
 
-                            PilgrimageListContentView(
-                                pilgrimage: itemStore.pilgrimage,
-                                store: itemStore
-                            )
-                            .frame(maxHeight: geometry.size.width / 3)
+                                PilgrimageListContentView(
+                                    pilgrimage: itemStore.pilgrimage,
+                                    store: itemStore
+                                )
+                                .frame(maxHeight: geometry.size.width / 3)
+                            }
+                            .listRowSeparator(.hidden)
                         }
-                        .listRowSeparator(.hidden)
                     }
                 }
                 .listStyle(.plain)
