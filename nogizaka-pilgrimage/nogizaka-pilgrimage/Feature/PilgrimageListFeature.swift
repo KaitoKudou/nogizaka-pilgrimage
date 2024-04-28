@@ -13,32 +13,23 @@ import SwiftUI
 struct PilgrimageListFeature {
     @ObservableState
     struct State: Equatable {
+        var scrollToIndex = 0
+        var isLoading = false
         var searchText = ""
         var pilgrimageRows = IdentifiedArrayOf<PilgrimageRowFeature.State>()
-        var pilgrimageSearchResults: IdentifiedArrayOf<PilgrimageRowFeature.State> { // 検索結果
-            if searchText.isEmpty {
-                return pilgrimageRows
-            } else {
-                return pilgrimageRows.filter {
-                    let normalizedSearchText = searchText.normalizedString
-                    let normalizedSearchCandidates = $0.pilgrimage.searchCandidateList.map { $0.normalizedString }
-
-                    // 部分一致を確認する
-                    let matchingCandidates = normalizedSearchCandidates.filter {
-                        $0.range(of: normalizedSearchText, options: .caseInsensitive) != nil
-                    }
-
-                    return !matchingCandidates.isEmpty
-                }
-            }
-        }
+        var pilgrimageSearchResults = IdentifiedArrayOf<PilgrimageRowFeature.State>()
         @Presents var destination: Destination.State?
         var path = StackState<PilgrimageDetailFeature.State>()
     }
 
     enum Action {
         case onAppear([PilgrimageInformation])
+        case updateScrollToIndex(scrollToIndex: Int)
         case searchPilgrimages(String)
+        case updateSearchText(String)
+        case search(String)
+        case setLoading(Bool)
+        case resetSearchResults
         case pilgrimageRows(IdentifiedActionOf<PilgrimageRowFeature>)
         case path(StackAction<PilgrimageDetailFeature.State, PilgrimageDetailFeature.Action>)
     }
@@ -51,8 +42,47 @@ struct PilgrimageListFeature {
             case let .onAppear(pilgrimageRows):
                 state.pilgrimageRows = .init(response: pilgrimageRows)
                 return .none
+            case let .updateScrollToIndex(scrollToIndex):
+                state.scrollToIndex = scrollToIndex
+                return .none
+            case .resetSearchResults:
+                state.pilgrimageSearchResults = []
+                return .none
             case let .searchPilgrimages(searchText):
+                return .run { send in
+                    await send(.setLoading(true))
+                    await send(.updateSearchText(searchText))
+                    await send(.resetSearchResults)
+                    await send(.search(searchText))
+                    await send(.setLoading(false))
+                }
+            case let .updateSearchText(searchText):
+                if state.searchText != searchText {
+                    state.scrollToIndex = 0
+                }
+
                 state.searchText = searchText
+                return .none
+            case let .search(searchText):
+                if searchText.isEmpty {
+                    state.pilgrimageSearchResults = state.pilgrimageRows
+                } else {
+                    state.pilgrimageSearchResults = state.pilgrimageRows.filter {
+                        let normalizedSearchText = searchText.normalizedString
+                        let normalizedSearchCandidates = $0.pilgrimage.searchCandidateList.map { $0.normalizedString }
+
+                        // 部分一致を確認する
+                        let matchingCandidates = normalizedSearchCandidates.filter {
+                            $0.range(of: normalizedSearchText, options: .caseInsensitive) != nil
+                        }
+
+                        return !matchingCandidates.isEmpty
+                    }
+                }
+
+                return .none
+            case let .setLoading(isLoading):
+                state.isLoading = isLoading
                 return .none
             case let .pilgrimageRows(.element(id, .delegate(.favoriteButtonTapped(pilgrimage)))):
                 let uuid = UIDevice.current.identifierForVendor!.uuidString
@@ -103,7 +133,7 @@ struct PilgrimageListFeature {
                 return .none
             }
         }
-        .forEach(\.pilgrimageRows, action: \.pilgrimageRows) {
+        .forEach(\.pilgrimageSearchResults, action: \.pilgrimageRows) {
             PilgrimageRowFeature()
         }
     }
