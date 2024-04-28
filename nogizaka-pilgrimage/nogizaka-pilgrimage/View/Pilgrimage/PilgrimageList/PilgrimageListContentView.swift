@@ -35,6 +35,8 @@ struct PilgrimageListContentView: View {
                 if let copyright = pilgrimage.copyright {
                     Text(copyright)
                         .font(theme.fonts.captionSmall)
+                        .foregroundStyle(.black)
+                        .multilineTextAlignment(.leading)
                 }
             }
 
@@ -42,6 +44,8 @@ struct PilgrimageListContentView: View {
                 HStack(alignment: .top) {
                     Text(pilgrimage.name)
                         .font(theme.fonts.bodyMedium)
+                        .foregroundStyle(.black)
+                        .multilineTextAlignment(.leading)
 
                     Spacer()
 
@@ -65,6 +69,8 @@ struct PilgrimageListContentView: View {
 
                 Text(pilgrimage.address)
                     .font(theme.fonts.caption)
+                    .foregroundStyle(.black)
+                    .multilineTextAlignment(.leading)
             }
             .onAppear {
                 store.send(.onAppear(pilgrimage))
