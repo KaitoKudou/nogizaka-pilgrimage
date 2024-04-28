@@ -64,7 +64,12 @@ final class NativeAdvanceViewController: UIViewController {
             options: [multipleAdOptions]
         )
         adLoader.delegate = self
-        adLoader.load(GADRequest())
+
+        let request = GADRequest()
+        // iPadでのAdMob広告表示エラーに対応
+        // See also https://qiita.com/SNQ-2001/items/1f19c3b6ce584ef25d6f
+        request.scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+        adLoader.load(request)
     }
 }
 
