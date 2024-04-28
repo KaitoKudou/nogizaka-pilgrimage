@@ -25,17 +25,19 @@ struct PilgrimageListView: View {
                     .padding(.horizontal, theme.margins.spacing_m)
                     .background(R.color.tab_primary()!.color)
 
-                PilgrimageListNavigationView(store: store)
+                if store.isLoading {
+                    Spacer()
+                    ProgressView()
+                        .controlSize(.large)
+                    Spacer()
+                } else {
+                    PilgrimageListNavigationView(store: store)
+                }
             }
             .onAppear {
                 searchText = store.searchText
                 store.send(.onAppear(pilgrimages))
-
-                if store.searchText.isEmpty {
-                    store.send(.searchPilgrimages(""))
-                } else {
-                    store.send(.searchPilgrimages(searchText))
-                }
+                store.send(.searchPilgrimages(searchText))
             }
         }
         .navigationTitle(R.string.localizable.navbar_pilgrimage_list())
@@ -59,11 +61,7 @@ struct PilgrimageListView: View {
             .submitLabel(.search)
             .onSubmit {
                 // キーボードの検索ボタンが押されたときにアクションを送信
-                if !searchText.isEmpty {
-                    store.send(.searchPilgrimages(searchText))
-                } else {
-                    store.send(.searchPilgrimages(""))
-                }
+                store.send(.searchPilgrimages(searchText))
             }
         }
         .background(.white)
