@@ -18,43 +18,53 @@ struct PilgrimageListNavigationView: View {
     var body: some View {
         GeometryReader { geometry in
             NavigationStack {
-                List {
-                    ForEachStore(
-                        store.scope(
-                        state: \.pilgrimageSearchResults,
-                        action: \.pilgrimageRows
-                        )
-                    ) { itemStore in
-                        if itemStore.id % 5 == 0 {
-                            NativeAdvanceView()
-                                .frame(height: geometry.size.width / 3)
-                        } else {
-                            ZStack {
+                ScrollView {
+                    ScrollViewReader { proxy in
+                        LazyVStack(alignment: .leading) {
+                            ForEachStore(
+                                store.scope(
+                                    state: \.pilgrimageSearchResults,
+                                    action: \.pilgrimageRows
+                                )
+                            ) { itemStore in
+
+                                if itemStore.id % 5 == 0 {
+                                    NativeAdvanceView()
+                                        .frame(height: geometry.size.width / 3)
+                                        .padding(.vertical, 8)
+                                        .padding(.horizontal, 16)
+                                }
+
                                 NavigationLink(
                                     destination: PilgrimageDetailView(pilgrimage: itemStore.pilgrimage)
+                                        .onAppear {
+                                            store.send(
+                                                .updateScrollToIndex(scrollToIndex: itemStore.pilgrimage.id)
+                                            )
+                                        }
                                 ) {
-                                    EmptyView()
+                                    PilgrimageListContentView(
+                                        pilgrimage: itemStore.pilgrimage,
+                                        store: itemStore
+                                    )
+                                    .frame(maxHeight: geometry.size.width / 3)
+                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, 16)
+                                    .id(itemStore.pilgrimage.id)
                                 }
-                                .opacity(0)
-
-                                PilgrimageListContentView(
-                                    pilgrimage: itemStore.pilgrimage,
-                                    store: itemStore
-                                )
-                                .frame(maxHeight: geometry.size.width / 3)
                             }
-                            .listRowSeparator(.hidden)
+                        }
+                        .onAppear {
+                            proxy.scrollTo(
+                                store.scrollToIndex, anchor: .center
+                            )
                         }
                     }
                 }
-                .listStyle(.plain)
             }
         }
     }
 }
-
-
-
 
 #Preview {
     PilgrimageListNavigationView(
