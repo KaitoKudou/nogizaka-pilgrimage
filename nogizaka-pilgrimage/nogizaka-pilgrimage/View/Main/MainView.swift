@@ -43,7 +43,7 @@ struct MainView: View {
                 )
             }
             .tabItem {
-                Image(R.image.icn_check_in.name)
+                Image(R.image.stamp.name)
                 Text(R.string.localizable.tabbar_check_in())
             }
 
