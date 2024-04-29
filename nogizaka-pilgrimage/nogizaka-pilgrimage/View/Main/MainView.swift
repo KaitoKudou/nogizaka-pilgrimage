@@ -25,13 +25,7 @@ struct MainView: View {
             }
 
             NavigationStack {
-                FavoritePilgrimageView(
-                    store: .init(
-                        initialState: FavoriteFeature.State()
-                    ) {
-                        FavoriteFeature()
-                    }
-                )
+                FavoritePilgrimageView()
             }
             .tabItem {
                 Image(systemName: "heart.fill")
