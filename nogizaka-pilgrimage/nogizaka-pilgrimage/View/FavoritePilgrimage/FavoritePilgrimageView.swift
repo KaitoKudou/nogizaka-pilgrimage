@@ -9,10 +9,8 @@ import ComposableArchitecture
 import SwiftUI
 
 struct FavoritePilgrimageView: View {
-    let store: StoreOf<FavoriteFeature>
-
-    init(store: StoreOf<FavoriteFeature>) {
-        self.store = store
+    @State var store = Store(initialState: FavoriteFeature.State()) {
+        FavoriteFeature()
     }
 
     var body: some View {
@@ -26,37 +24,7 @@ struct FavoritePilgrimageView: View {
                         .frame(alignment: .center)
                 } else {
                     GeometryReader { geometry in
-                        NavigationStack {
-                            List {
-                                ForEachStore(store.scope(
-                                    state: \.favoritePilgrimageRows,
-                                    action: \.favoritePilgrimageRows
-                                )) { itemStore in
-                                    
-                                    if itemStore.id % 5 == 0 {
-                                        NativeAdvanceView()
-                                            .frame(height: geometry.size.width / 3)
-                                    }
-
-                                    ZStack {
-                                        NavigationLink(
-                                            destination: PilgrimageDetailView(pilgrimage: itemStore.pilgrimage)
-                                        ) {
-                                            EmptyView()
-                                        }
-                                        .opacity(0)
-
-                                        PilgrimageListContentView(
-                                            pilgrimage: itemStore.pilgrimage,
-                                            store: itemStore
-                                        )
-                                        .frame(maxHeight: geometry.size.width / 3)
-                                    }
-                                    .listRowSeparator(.hidden)
-                                }
-                            }
-                        }
-                        .listStyle(.plain)
+                        favoritePilgrimageScrollView(geometry: geometry)
                     }
                 }
             }
@@ -67,14 +35,56 @@ struct FavoritePilgrimageView: View {
         .navigationTitle(R.string.localizable.tabbar_favorite())
         .navigationBarTitleDisplayMode(.inline)
     }
+
+    private func favoritePilgrimageScrollView(geometry: GeometryProxy) -> some View {
+        NavigationStack {
+            ScrollView {
+                ScrollViewReader { proxy in
+                    LazyVStack(alignment: .leading) {
+                        ForEachStore(
+                            store.scope(
+                                state: \.favoritePilgrimageRows,
+                                action: \.favoritePilgrimageRows
+                            )
+                        ) { itemStore in
+
+                            if itemStore.id % 5 == 0 {
+                                NativeAdvanceView()
+                                    .frame(height: geometry.size.width / 3)
+                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, 16)
+                            }
+
+                            NavigationLink(
+                                destination: PilgrimageDetailView(pilgrimage: itemStore.pilgrimage)
+                                    .onAppear {
+                                        store.send(
+                                            .updateScrollToIndex(scrollToIndex: itemStore.pilgrimage.id)
+                                        )
+                                    }
+                            ) {
+                                PilgrimageListContentView(
+                                    pilgrimage: itemStore.pilgrimage,
+                                    store: itemStore
+                                )
+                                .frame(maxHeight: geometry.size.width / 3)
+                                .padding(.vertical, 8)
+                                .padding(.horizontal, 16)
+                                .id(itemStore.pilgrimage.id)
+                            }
+                        }
+                    }
+                    .onAppear {
+                        proxy.scrollTo(
+                            store.scrollToIndex, anchor: .center
+                        )
+                    }
+                }
+            }
+        }
+    }
 }
 
 #Preview {
-    FavoritePilgrimageView(
-        store: .init(
-            initialState: FavoriteFeature.State()
-        ) {
-            FavoriteFeature()
-        }
-    )
+    FavoritePilgrimageView()
 }
