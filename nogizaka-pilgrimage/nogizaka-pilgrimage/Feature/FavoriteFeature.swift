@@ -12,6 +12,7 @@ import FirebaseFirestore
 struct FavoriteFeature {
     @ObservableState
     struct State: Equatable {
+        var scrollToIndex = 0
         var favoritePilgrimageRows = IdentifiedArrayOf<PilgrimageRowFeature.State>()
         var isLoading = false
         var favorited = false
@@ -20,6 +21,7 @@ struct FavoriteFeature {
 
     enum Action {
         case onAppear
+        case updateScrollToIndex(scrollToIndex: Int)
         case fetchFavorites
         case pilgrimageResponse(Result<[PilgrimageInformation], APIError>)
         case setLoading(Bool)
@@ -35,6 +37,9 @@ struct FavoriteFeature {
             switch action {
             case .onAppear:
                 return .send(.fetchFavorites)
+            case let .updateScrollToIndex(scrollToIndex):
+                state.scrollToIndex = scrollToIndex
+                return .none
             case .fetchFavorites:
                 return .run { send in
                     await send(.setLoading(true))
