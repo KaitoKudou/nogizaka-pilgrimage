@@ -25,6 +25,7 @@
 
 // MARK: - 聖地詳細画面のテキスト
 "navbar_pilgrimage_detail" = "聖地詳細";
+"check_in_button" = "スタンプを押す";
 "has_check_in" = "聖地巡礼済み";
 
 // MARK: - お気に入り画面のテキスト

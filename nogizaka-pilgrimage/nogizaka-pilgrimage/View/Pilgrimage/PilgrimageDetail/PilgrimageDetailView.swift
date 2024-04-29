@@ -77,7 +77,7 @@ struct PilgrimageDetailView: View {
                     } label: {
                         Text(store.hasCheckedIn ?
                              R.string.localizable.has_check_in() :
-                                R.string.localizable.tabbar_check_in()
+                                R.string.localizable.check_in_button()
                         )
                         .frame(height: theme.margins.spacing_xl)
                     }
