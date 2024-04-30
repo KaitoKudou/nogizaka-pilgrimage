@@ -857,6 +857,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nogizaka-pilgrimage/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "のぎラリー";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を使用することで、聖地と現在までの位置関係を把握することができます。";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」すると最適化された広告が表示されます。許可したことによる個人情報へのアクセスはありません。";
@@ -892,6 +893,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nogizaka-pilgrimage/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "のぎラリー";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を使用することで、聖地と現在までの位置関係を把握することができます。";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」すると最適化された広告が表示されます。許可したことによる個人情報へのアクセスはありません。";
