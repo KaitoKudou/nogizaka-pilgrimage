@@ -74,6 +74,10 @@ struct MenuView: View {
                         height: adSize.size.height
                     )
             }
+            .onAppear {
+                store.send(.onAppear)
+                setupMenuItems()
+            }
             .navigationTitle(R.string.localizable.tabbar_menu())
             .navigationBarTitleDisplayMode(.inline)
             .foregroundStyle(.primary)
@@ -93,10 +97,6 @@ struct MenuView: View {
                     }
                 )
             }
-        }
-        .onAppear {
-            store.send(.onAppear)
-            setupMenuItems()
         }
     }
 
