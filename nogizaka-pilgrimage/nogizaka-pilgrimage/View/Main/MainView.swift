@@ -47,9 +47,13 @@ struct MainView: View {
                 Text(R.string.localizable.tabbar_check_in())
             }
 
-            NavigationStack {
-                MenuView()
-            }
+            MenuView(
+                store: .init(
+                    initialState: MenuFeature.State()
+                ) {
+                    MenuFeature()
+                }
+            )
             .tabItem {
                 Image(systemName: "line.3.horizontal")
                 Text(R.string.localizable.tabbar_menu())

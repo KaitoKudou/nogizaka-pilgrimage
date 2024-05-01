@@ -22,6 +22,17 @@ extension Theme {
         navigationBarAppearance.shadowImage = UIImage()
         navigationBarAppearance.shadowColor = nil
 
+        // 戻るボタンのテキストを非表示で統一
+        let backItemAppearance = UIBarButtonItemAppearance()
+        backItemAppearance.normal.titleTextAttributes = [.foregroundColor : UIColor.clear]
+        navigationBarAppearance.backButtonAppearance = backItemAppearance
+
+        // 戻るボタンのアイコンを統一
+        let imageConfig = UIImage.SymbolConfiguration(weight: .regular)
+        let image = UIImage(systemName: "chevron.backward", withConfiguration: imageConfig)?
+            .withTintColor(.white ,renderingMode: .alwaysOriginal)
+        navigationBarAppearance.setBackIndicatorImage(image, transitionMaskImage: image)
+
         // 用意した `UINavigationBarAppearance` を設定
         UINavigationBar.appearance().tintColor = R.color.tab_primary()!
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance

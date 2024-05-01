@@ -42,7 +42,6 @@ struct PilgrimageListView: View {
         }
         .navigationTitle(R.string.localizable.navbar_pilgrimage_list())
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonTextHidden()
     }
 
     private func searchTextField() -> some View {
