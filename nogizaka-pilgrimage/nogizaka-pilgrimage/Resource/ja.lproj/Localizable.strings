@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  nogizaka-pilgrimage
+
+  Created by 工藤 海斗 on 2023/01/05.
+  
+*/
+
+// MARK: - TabViewのテキスト
+"tabbar_pilgrimage" = "マップ";
+"tabbar_check_in" = "スタンプ";
+"tabbar_menu" = "メニュー";
+"tabbar_favorite" = "お気に入り";
+
+// MARK: - 聖地一覧画面のテキスト
+"navbar_pilgrimage_list" = "聖地リスト";
+"list_type_all" = "聖地一覧";
+
+// MARK: - TextField
+"pilgrimage_list_placeholder" = "検索ワードを入力してください。";
+
+// MARK: - common button
+"common_btn_route_search_text" = "経路";
+"common_btn_detail_text" = "詳細";
+
+// MARK: - 聖地詳細画面のテキスト
+"navbar_pilgrimage_detail" = "聖地詳細";
+"check_in_button" = "スタンプを押す";
+"has_check_in" = "聖地巡礼済み";
+
+// MARK: - お気に入り画面のテキスト
+"favorites_empty" = "お気に入り聖地はありません。";
+
+// MARK: - チェックイン画面のテキスト
+"checked_in_empty" = "訪れた聖地はありません。\n聖地巡礼してスタンプを押してみましょう。";
+
+// MARK: - Alert
+"alert_location" = "位置情報がオフになっているため、現在位置を表示できません。";
+"alert_not_nearby" = "近くに聖地がありません。もう少し近づいてみましょう。";
+"alert_fetch_pilgrimages" = "聖地の取得に失敗しました。\n再度お試しください。";
+"alert_fetch_favorite_pilgrimages" = "お気に入りの取得に失敗しました。\n再度お試しください。";
+"alert_update_favorite_pilgrimages" = "お気に入りの登録に失敗しました。\n時間をあけてお試しください。";
+"alert_fetch_checked_in_pilgrimages" = "訪れた聖地の取得に失敗しました。\n時間をあけてお試しください。";
+"alert_update_checked_in_pilgrimages" = "スタンプの登録に失敗しました。\n時間をあけてお試しください。";
+"alert_network" = "通信ができませんでした。\n接続状況をご確認ください。";
+"alert_unknown" = "不明なエラーです";
+
+// MARK: - ConfirmationDialog
+"confirmation_dialog_cancel" = "キャンセル";
+"confirmation_dialog_apple_map" = "地図で見る";
+"confirmation_dialog_google_maps" = "Google Mapsで見る";
+
+// MARK: - Menu画面に表示するテキスト
+"menu_about_developer" = "開発者について";
+"menu_contact" = "お問い合わせ";
+"menu_terms" = "利用規約";
+"menu_open_source_license" = "オープンソースライセンス";
+"menu_icon_license" = "アイコンライセンス";
+"menu_privacy_policy" = "プライバシーポリシー";
+"menu_app_version" = "アプリバージョン：%@";
+"menu_section_support" = "サポート";
+"menu_section_app" = "アプリについて";
+"icons_by" = "Icons by";
+"icons8" = "Icons8";

@@ -1,21 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/swift,xcode,macos,cocoapods,carthage,swiftpackagemanager,swiftpm
-# Edit at https://www.toptal.com/developers/gitignore?templates=swift,xcode,macos,cocoapods,carthage,swiftpackagemanager,swiftpm
-
-### Carthage ###
-# Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
-Carthage/Build
-
-### CocoaPods ###
-## CocoaPods GitIgnore Template
-
-# CocoaPods - Only use to conserve bandwidth / Save time on Pushing
-#           - Also handy if you have a large number of dependant pods
-#           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
-Pods/
+# Created by https://www.toptal.com/developers/gitignore/api/macos,swift
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,swift
 
 ### macOS ###
 # General
@@ -52,6 +36,7 @@ Temporary Items
 
 ### Swift ###
 # Xcode
+#
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## User settings
@@ -133,26 +118,7 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-### SwiftPackageManager ###
-Packages
-xcuserdata
-*.xcodeproj
-
-
-### SwiftPM ###
-
-
-### Xcode ###
-
-## Xcode 8 and earlier
-
-### Xcode Patch ###
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcodeproj/project.xcworkspace/
-!*.xcworkspace/contents.xcworkspacedata
-/*.gcno
-**/xcshareddata/WorkspaceSettings.xcsettings
-
-# End of https://www.toptal.com/developers/gitignore/api/swift,xcode,macos,cocoapods,carthage,swiftpackagemanager,swiftpm
+# R.swift
+#
+# R.generated.swift file will be automatically genrated by R.swift
+*.generated.swift
