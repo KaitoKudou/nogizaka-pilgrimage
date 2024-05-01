@@ -49,9 +49,7 @@
 		E7A1271A2B8F854D004D877A /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A127192B8F854D004D877A /* APIError.swift */; };
 		E7A7E7C82BD01BF200E19E8B /* PilgrimageDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7E7C72BD01BF200E19E8B /* PilgrimageDetailFeature.swift */; };
 		E7A7E7CA2BD01CA400E19E8B /* PilgrimageCardFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7E7C92BD01CA400E19E8B /* PilgrimageCardFeature.swift */; };
-		E7B9CD522B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */; };
-		E7B9CD532B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */; };
-		E7B9CD542B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */; };
+		E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */; };
 		E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */; };
 		E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */; };
 		E7B9CD5E2B8E391A003FAB19 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B9CD5D2B8E391A003FAB19 /* LaunchScreen.swift */; };
@@ -134,7 +132,7 @@
 		E7A127192B8F854D004D877A /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		E7A7E7C72BD01BF200E19E8B /* PilgrimageDetailFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageDetailFeature.swift; sourceTree = "<group>"; };
 		E7A7E7C92BD01CA400E19E8B /* PilgrimageCardFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageCardFeature.swift; sourceTree = "<group>"; };
-		E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7B9CD5D2B8E391A003FAB19 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		E7C11D3B295AEE400051A1B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		E7C11D3F295AF19A0051A1B9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
@@ -384,7 +382,7 @@
 		E7B9CD502B8E2586003FAB19 /* Enviroment */ = {
 			isa = PBXGroup;
 			children = (
-				E7B9CD512B8E25A5003FAB19 /* GoogleService-Info.plist */,
+				E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */,
 			);
 			path = Enviroment;
 			sourceTree = "<group>";
@@ -594,11 +592,11 @@
 			files = (
 				E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */,
 				E73E092E2965D18700A1204E /* Localizable.strings in Resources */,
-				E7B9CD522B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */,
 				E76BF1632BD166E800A1CB97 /* .rswiftignore in Resources */,
 				E749344D2959F2120045AE39 /* Preview Assets.xcassets in Resources */,
 				E76BF1602BD163E800A1CB97 /* NativeAdView.xib in Resources */,
 				E749344A2959F2120045AE39 /* Assets.xcassets in Resources */,
+				E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,7 +604,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B9CD532B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,7 +611,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B9CD542B8E25A5003FAB19 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -871,15 +867,15 @@
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」すると最適化された広告が表示されます。許可したことによる個人情報へのアクセスはありません。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimage";
+				PRODUCT_BUNDLE_IDENTIFIER = "kaitokudo2468110921.nogizaka-pilgrimage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -907,15 +903,15 @@
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」すると最適化された広告が表示されます。許可したことによる個人情報へのアクセスはありません。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimage";
+				PRODUCT_BUNDLE_IDENTIFIER = "kaitokudo2468110921.nogizaka-pilgrimage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

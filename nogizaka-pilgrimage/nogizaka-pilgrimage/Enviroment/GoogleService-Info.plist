@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.icloud.kaitokudo2468110921.nogizaka-pilgrimage</string>
+	<string>kaitokudo2468110921.nogizaka-pilgrimage</string>
 	<key>PROJECT_ID</key>
 	<string>nogizaka-pilgrimage</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1063190777504:ios:f4a5b8e384f1ae33dc83c5</string>
+	<string>1:1063190777504:ios:d372fefdff7bb7d3dc83c5</string>
 </dict>
 </plist>
