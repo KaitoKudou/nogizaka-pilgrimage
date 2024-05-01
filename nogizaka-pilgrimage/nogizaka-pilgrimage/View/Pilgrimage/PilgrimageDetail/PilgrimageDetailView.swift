@@ -128,7 +128,6 @@ struct PilgrimageDetailView: View {
         .padding(.trailing, theme.margins.spacing_m)
         .navigationTitle(R.string.localizable.navbar_pilgrimage_detail())
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonTextHidden()
     }
 }
 

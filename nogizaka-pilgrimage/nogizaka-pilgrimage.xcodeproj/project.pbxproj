@@ -68,7 +68,6 @@
 		E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */; };
 		E7FDAA092AE173AD0056AA5B /* PilgrimageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA082AE173AD0056AA5B /* PilgrimageListView.swift */; };
 		E7FDAA112AE177CB0056AA5B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA102AE177CB0056AA5B /* UIColorExtension.swift */; };
-		E7FDAA152AE22EC90056AA5B /* NavigationBarBackButtonTextHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA142AE22EC90056AA5B /* NavigationBarBackButtonTextHidden.swift */; };
 		E7FDAA172AE230310056AA5B /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA162AE230310056AA5B /* UINavigationControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -149,7 +148,6 @@
 		E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationButton.swift; sourceTree = "<group>"; };
 		E7FDAA082AE173AD0056AA5B /* PilgrimageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageListView.swift; sourceTree = "<group>"; };
 		E7FDAA102AE177CB0056AA5B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		E7FDAA142AE22EC90056AA5B /* NavigationBarBackButtonTextHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarBackButtonTextHidden.swift; sourceTree = "<group>"; };
 		E7FDAA162AE230310056AA5B /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -225,7 +223,6 @@
 				E7235A71297D75D500E1339A /* Theme.swift */,
 				E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */,
 				E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */,
-				E7FDAA142AE22EC90056AA5B /* NavigationBarBackButtonTextHidden.swift */,
 				E79045B12B0E088100F0936B /* LocationManager.swift */,
 				E78276082BAC796000AD16CC /* NetworkMonitor.swift */,
 				E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */,
@@ -671,7 +668,6 @@
 				E79045B22B0E088100F0936B /* LocationManager.swift in Sources */,
 				E7178E852B0738C8008C85A3 /* FavoriteFeature.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
-				E7FDAA152AE22EC90056AA5B /* NavigationBarBackButtonTextHidden.swift in Sources */,
 				E71A82792BE200B700C16FEE /* BuildClient.swift in Sources */,
 				E7738FA32BB45AA700C00F2F /* RouteActionClient.swift in Sources */,
 				E7A127182B8F7A53004D877A /* InitialFeature.swift in Sources */,
