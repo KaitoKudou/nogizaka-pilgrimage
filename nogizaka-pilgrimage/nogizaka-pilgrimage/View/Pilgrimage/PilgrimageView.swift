@@ -21,7 +21,7 @@ struct PilgrimageView: View {
         .toolbar {
             pilgrimageListToolBarItem
         }
-        .onAppear {
+        .onDisappear {
             requestTrackingAuthorization()
         }
     }
