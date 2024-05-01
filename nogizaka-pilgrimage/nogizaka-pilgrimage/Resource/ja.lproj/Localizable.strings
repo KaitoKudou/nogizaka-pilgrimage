@@ -51,7 +51,14 @@
 "confirmation_dialog_google_maps" = "Google Mapsで見る";
 
 // MARK: - Menu画面に表示するテキスト
+"menu_about_developer" = "開発者について";
 "menu_contact" = "お問い合わせ";
 "menu_terms" = "利用規約";
+"menu_open_source_license" = "オープンソースライセンス";
+"menu_icon_license" = "アイコンライセンス";
 "menu_privacy_policy" = "プライバシーポリシー";
 "menu_app_version" = "アプリバージョン：%@";
+"menu_section_support" = "サポート";
+"menu_section_app" = "アプリについて";
+"icons_by" = "Icons by";
+"icons8" = "Icons8";
