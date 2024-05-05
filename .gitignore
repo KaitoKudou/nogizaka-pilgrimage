@@ -122,3 +122,7 @@ iOSInjectionProject/
 #
 # R.generated.swift file will be automatically genrated by R.swift
 *.generated.swift
+
+# Firebase
+.firebase
+.firebaserc
