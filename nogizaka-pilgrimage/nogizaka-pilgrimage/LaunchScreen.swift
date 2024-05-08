@@ -16,14 +16,19 @@ struct LaunchScreen: View {
     }
 
     var body: some View {
-        if store.isLoading || store.hasError {
+        if store.isLoading || store.hasError || store.shouldUpdate {
             ZStack {
                 ProgressView()
                     .controlSize(.large)
             }
-            .alert(store: store.scope(state: \.$alert, action: \.alertDismissed))
+            .alert(
+                $store.scope(
+                    state: \.destination?.alert,
+                    action: \.destination.alert
+                )
+            )
             .onAppear {
-                store.send(.fetchAllPilgrimage)
+                store.send(.onAppear)
             }
         } else {
             if !store.hasError {
