@@ -12,52 +12,49 @@ import FirebaseFirestore
 struct InitialFeature {
     @ObservableState
     struct State: Equatable {
+        var shouldUpdate = false
         var isLoading = true
+        var appUpdateInfo: AppUpdateInformation?
         var pilgrimages: [PilgrimageInformation] = []
         var hasError = false
-        @Presents var alert: AlertState<Action>?
+        @Presents var destination: Destination.State?
     }
 
-    enum Action: Equatable {
-        static func == (lhs: Action, rhs: Action) -> Bool {
-            switch (lhs, rhs) {
-            case (.fetchAllPilgrimage, .fetchAllPilgrimage):
-                return true
-            case let (.pilgrimageResponse(lhsResult), .pilgrimageResponse(rhsResult)):
-                switch (lhsResult, rhsResult) {
-                case (.success(let lhsValue), .success(let rhsValue)):
-                    return lhsValue == rhsValue
-                case (.failure(let lhsError), .failure(let rhsError)):
-                    return lhsError.localizedDescription == rhsError.localizedDescription
-                default:
-                    return false
-                }
-            case (.startLoading, .startLoading):
-                return true
-            case (.stopLoading, .stopLoading):
-                return true
-            case (.fetchPilgrimagesFailureAlert(_), .fetchPilgrimagesFailureAlert(_)):
-                return true
-            case (.alertDismissed, .alertDismissed):
-                return true
-            default:
-                return false
-            }
-        }
-
+    enum Action {
+        case onAppear
         case fetchAllPilgrimage
+        case appUpdateInfoResponse(Result<AppUpdateInformation, APIError>)
         case pilgrimageResponse(Result<[PilgrimageInformation], APIError>)
         case startLoading
         case stopLoading
-        case fetchPilgrimagesFailureAlert(message: String)
-        case alertDismissed(PresentationAction<Action>)
+        case destination(PresentationAction<Destination.Action>)
     }
 
+    @Dependency(\.applicationClient) var applicationClient
+    @Dependency(\.buildClient) var buildClient
     @Dependency(\.networkMonitor) var networkMonitor
 
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
+            case .onAppear:
+                return .run { send in
+                    do {
+                        try await networkMonitor.monitorNetwork()
+
+                        let appUpdateInfo = try await Firestore.firestore()
+                            .collection("configure")
+                            .document("update")
+                            .getDocument()
+                            .data(as: AppUpdateInformation.self)
+                        await send(.appUpdateInfoResponse(.success(appUpdateInfo)))
+
+                    } catch {
+                        await send(.pilgrimageResponse(.failure(.networkError)))
+                    }
+
+                    await send(.fetchAllPilgrimage)
+                }
             case .fetchAllPilgrimage:
                 return .run { send in
                     await send(.startLoading)
@@ -84,32 +81,110 @@ struct InitialFeature {
 
                     await send(.stopLoading)
                 }
+            case let .appUpdateInfoResponse(.success(appUpdateInfo)):
+                state.hasError = false
+
+                if appUpdateInfo.targetVersion.compare(buildClient.appVersion()) == .orderedDescending {
+                    // アップデート促進アラートを表示
+                    state.shouldUpdate = true
+                    state.appUpdateInfo = appUpdateInfo
+                    state.destination = .alert(.updatePromotionAlert(appUpdateInfo: appUpdateInfo))
+                }
+                return .none
+            case let .appUpdateInfoResponse(.failure(error)):
+                state.hasError = true
+                return .run { send in
+                    await send(.pilgrimageResponse(.failure(error)))
+                }
             case let .pilgrimageResponse(.success(pilgrimages)):
                 state.pilgrimages = pilgrimages
                 state.hasError = false
                 return .none
             case let .pilgrimageResponse(.failure(error)):
                 state.hasError = true
-                return .run { send in
-                    await send(.fetchPilgrimagesFailureAlert(message: error.localizedDescription))
+                switch error {
+                case .fetchPilgrimagesError:
+                    state.destination = .alert(.fetchPilgrimagesFailureAlert())
+                case .networkError:
+                    state.destination = .alert(.networkErrorAlert())
+                default: return .none
                 }
+                return .none
             case .startLoading:
                 state.isLoading = true
                 return .none
             case .stopLoading:
                 state.isLoading = false
                 return .none
-            case let .fetchPilgrimagesFailureAlert(errorMessage):
-                state.alert = .init(
-                    title: .init(errorMessage)
-                )
-                return .none
-            case .alertDismissed:
-                state.alert = nil
+            case .destination(.presented(.alert(.update))):
+                return .run { send in
+                    _ = await self.applicationClient.open(
+                        URL(string: "https://apps.apple.com/jp/app/id6501994754")!, [:]
+                    )
+                    await send(.onAppear)
+                }
+            case .destination(.presented(.alert(.retryFetchPilgrimages))):
                 return .run { send in
                     await send(.fetchAllPilgrimage)
                 }
+            case .destination:
+                state.shouldUpdate = false
+                return .none
             }
+        }
+        .ifLet(\.$destination, action: \.destination)
+    }
+}
+
+extension AlertState where Action == InitialFeature.Destination.Alert {
+    static func fetchPilgrimagesFailureAlert() -> Self {
+        Self {
+            TextState(APIError.fetchPilgrimagesError.localizedDescription)
+        } actions: {
+            ButtonState(action: .retryFetchPilgrimages) {
+                TextState(R.string.localizable.alert_ok())
+            }
+        }
+    }
+
+    static func networkErrorAlert() -> Self {
+        Self {
+            TextState(APIError.networkError.localizedDescription)
+        } actions: {
+            ButtonState(action: .retryFetchPilgrimages) {
+                TextState(R.string.localizable.alert_ok())
+            }
+        }
+    }
+
+    static func updatePromotionAlert(appUpdateInfo: AppUpdateInformation) -> Self {
+        Self {
+            TextState(appUpdateInfo.title)
+        } actions: {
+            if !appUpdateInfo.isForce {
+                ButtonState(action: .later) {
+                    TextState(R.string.localizable.alert_optional_update())
+                }
+            }
+
+            ButtonState(action: .update) {
+                TextState(R.string.localizable.alert_force_update())
+            }
+        } message: {
+            TextState(appUpdateInfo.message)
+        }
+    }
+}
+
+extension InitialFeature {
+    @Reducer(state: .equatable)
+    public enum Destination {
+        case alert(AlertState<Alert>)
+
+        public enum Alert: Equatable {
+            case later
+            case update
+            case retryFetchPilgrimages
         }
     }
 }

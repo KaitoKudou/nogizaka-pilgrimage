@@ -44,6 +44,10 @@
 "alert_update_checked_in_pilgrimages" = "スタンプの登録に失敗しました。\n時間をあけてお試しください。";
 "alert_network" = "通信ができませんでした。\n接続状況をご確認ください。";
 "alert_unknown" = "不明なエラーです";
+"alert_optional_update" = "あとで";
+"alert_force_update" = "アップデート";
+"alert_ok" = "OK";
+
 
 // MARK: - ConfirmationDialog
 "confirmation_dialog_cancel" = "キャンセル";
