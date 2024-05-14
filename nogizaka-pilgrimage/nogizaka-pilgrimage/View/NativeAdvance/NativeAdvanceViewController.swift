@@ -55,7 +55,7 @@ final class NativeAdvanceViewController: UIViewController {
 
     func refreshAd() {
         let multipleAdOptions = GADMultipleAdsAdLoaderOptions()
-        multipleAdOptions.numberOfAds = 5;
+        multipleAdOptions.numberOfAds = 1;
 
         adLoader = GADAdLoader(
             adUnitID: adUnitID, 
