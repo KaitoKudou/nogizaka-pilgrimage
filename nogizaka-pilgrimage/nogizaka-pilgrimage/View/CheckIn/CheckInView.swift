@@ -19,57 +19,20 @@ struct CheckInView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            switch (store.isLoading, store.checkedInPilgrimages.isEmpty) {
-            case (true, _):
-                VStack(alignment: .center) {
-                    Spacer()
-
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                            .controlSize(.large)
-                            .frame(alignment: .center)
-                        Spacer()
-                    }
-
-                    Spacer()
+            VStack {
+                if store.checkedInPilgrimages.isEmpty {
+                    emptyCheckInView()
+                } else {
+                    filledCheckInView(geometry: geometry)
                 }
-            case (false, true):
-                VStack(alignment: .center) {
-                    Spacer()
 
-                    HStack {
-                        Spacer()
-                        Text(R.string.localizable.checked_in_empty())
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    }
+                Spacer()
 
-                    Spacer()
-
-                    BannerView(adUnitID: .checkIn)
-                        .frame(
-                            width: adSize.size.width,
-                            height: adSize.size.height
-                        )
-                }
-            case (false, false):
-                VStack {
-                    ScrollView {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
-                            ForEach(store.checkedInPilgrimages, id: \.self) { pilgrimage in
-                                CheckInContentView(pilgrimageName: pilgrimage.name)
-                            }
-                        }
-                        .padding(.top, theme.margins.spacing_xs)
-                    }
-
-                    BannerView(adUnitID: .checkIn)
-                        .frame(
-                            width: adSize.size.width,
-                            height: adSize.size.height
-                        )
-                }
+                BannerView(adUnitID: .checkIn)
+                    .frame(
+                        width: adSize.size.width,
+                        height: adSize.size.height
+                    )
             }
         }
         .onAppear {
@@ -83,6 +46,36 @@ struct CheckInView: View {
         )
         .navigationTitle(R.string.localizable.tabbar_check_in())
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    @ViewBuilder
+    private func filledCheckInView(geometry: GeometryProxy) -> some View {
+        VStack {
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
+                    ForEach(store.checkedInPilgrimages, id: \.self) { pilgrimage in
+                        CheckInContentView(pilgrimageName: pilgrimage.name)
+                    }
+                }
+                .padding(.top, theme.margins.spacing_xs)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func emptyCheckInView() -> some View {
+        VStack(alignment: .center) {
+            Spacer()
+
+            HStack {
+                Spacer()
+                Text(R.string.localizable.checked_in_empty())
+                    .multilineTextAlignment(.center)
+                Spacer()
+            }
+
+            Spacer()
+        }
     }
 }
 
