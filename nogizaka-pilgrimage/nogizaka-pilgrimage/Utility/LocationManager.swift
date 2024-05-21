@@ -22,7 +22,7 @@ final class LocationManager: NSObject, ObservableObject {
     func requestLocation() {
         // initで設定を書くと，アプリ起動時に許可ダイアログが出てしまうためここ設定を行う
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 1000
+        locationManager.distanceFilter = 5
         locationManager.delegate = self
 
         if locationManager.authorizationStatus == .notDetermined {
