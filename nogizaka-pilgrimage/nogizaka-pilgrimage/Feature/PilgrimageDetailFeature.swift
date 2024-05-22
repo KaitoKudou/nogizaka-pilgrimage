@@ -200,9 +200,9 @@ struct PilgrimageDetailFeature {
         }
     }
 
-    /// 現在地と聖地までの距離が100m以内かどうか判定
+    /// 現在地と聖地までの距離が200m以内かどうか判定
     func isNearbyPilgrimage(userCoordinate: CLLocationCoordinate2D, pilgrimageCoordinate: CLLocationCoordinate2D) -> Bool {
-        let distanceThreshold = 100.0
+        let distanceThreshold = 200.0
         let userLocation = CLLocation(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
         let pilgrimageLocation = CLLocation(latitude: pilgrimageCoordinate.latitude, longitude: pilgrimageCoordinate.longitude)
 
