@@ -1,8 +1,8 @@
 //
-//  BannerView.swift
+//  BannerViewContainer.swift
 //  nogizaka-pilgrimage
 //
-//  Created by 工藤 海斗 on 2024/03/30.
+//  Created by 工藤 海斗 on 2025/03/27.
 //
 
 import GoogleMobileAds
@@ -25,9 +25,9 @@ enum AdUnitID {
     }
 }
 
-struct BannerView: UIViewControllerRepresentable {
+struct BannerViewContainer: UIViewControllerRepresentable {
     @State private var viewWidth: CGFloat = .zero
-    private let bannerView = GADBannerView()
+    private let bannerView = BannerView()
     let adUnitID: AdUnitID
 
     init(adUnitID: AdUnitID) {
@@ -55,22 +55,22 @@ struct BannerView: UIViewControllerRepresentable {
         guard viewWidth != .zero else { return }
 
         // Request a banner ad with the updated viewWidth.
-        bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
-        bannerView.load(GADRequest())
+        bannerView.adSize = currentOrientationAnchoredAdaptiveBanner(width: viewWidth)
+        bannerView.load(Request())
     }
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 
-    static func getAdSize(width: CGFloat) -> GADAdSize {
-        return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(width)
+    static func getAdSize(width: CGFloat) -> AdSize {
+        return currentOrientationAnchoredAdaptiveBanner(width: width)
     }
 
-    class Coordinator: NSObject, BannerViewControllerWidthDelegate, GADBannerViewDelegate {
-        let parent: BannerView
+    class Coordinator: NSObject, BannerViewControllerWidthDelegate, BannerViewDelegate {
+        let parent: BannerViewContainer
 
-        init(_ parent: BannerView) {
+        init(_ parent: BannerViewContainer) {
             self.parent = parent
         }
 
@@ -79,14 +79,14 @@ struct BannerView: UIViewControllerRepresentable {
             // Pass the viewWidth from Coordinator to BannerView.
             // iPadでのAdMob広告表示エラーに対応
             // See also https://qiita.com/SNQ-2001/items/1f19c3b6ce584ef25d6f
-            let request = GADRequest()
+            let request = Request()
             request.scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
             parent.viewWidth = width
             parent.bannerView.load(request)
         }
 
         // MARK: - GADBannerViewDelegate methods
-        func bannerView(_: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: any Error) {
             // エラー時にも広告ビューのサイズを設定し直す
             DispatchQueue.main.async {
                 self.parent.bannerView.frame = CGRect(origin: .zero, size: CGSize(width: self.parent.viewWidth, height: 60))
