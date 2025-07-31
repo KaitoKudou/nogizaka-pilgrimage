@@ -47,6 +47,7 @@ struct MenuView: View {
     @Environment(\.theme) private var theme
     @Bindable var store: StoreOf<MenuFeature>
     @State private var menuItems: [MenuSection: [MenuItem]] = [:]
+    private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
 
     init(store: StoreOf<MenuFeature>) {
         self.store = store
@@ -65,7 +66,7 @@ struct MenuView: View {
         VStack(spacing: .zero) {
             menuListView
             BannerViewContainer(adUnitID: .menu)
-                .frame(height: 50)
+                .frame(width: adSize.size.width, height: adSize.size.height)
         }
         .onAppear {
             store.send(.onAppear)

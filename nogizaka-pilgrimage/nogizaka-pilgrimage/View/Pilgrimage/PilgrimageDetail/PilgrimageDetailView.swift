@@ -18,6 +18,7 @@ struct PilgrimageDetailView: View {
     ) {
         PilgrimageDetailFeature()
     }
+    private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
     let pilgrimage: PilgrimageInformation
 
     var body: some View {
@@ -115,7 +116,7 @@ struct PilgrimageDetailView: View {
             }
 
             BannerViewContainer(adUnitID: .pilgrimageDetail)
-                .frame(height: 50)
+                .frame(width: adSize.size.width, height: adSize.size.height)
         }
         .onAppear {
             store.send(.onAppear(pilgrimage))

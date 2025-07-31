@@ -11,6 +11,7 @@ import SwiftUI
 struct CheckInView: View {
     @Environment(\.theme) private var theme
     @Bindable var store: StoreOf<CheckInFeature>
+    private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
 
     init(store: StoreOf<CheckInFeature>) {
         self.store = store
@@ -28,7 +29,7 @@ struct CheckInView: View {
                 Spacer()
 
                 BannerViewContainer(adUnitID: .checkIn)
-                    .frame(height: 50)
+                    .frame(width: adSize.size.width, height: adSize.size.height)
             }
         }
         .onAppear {
