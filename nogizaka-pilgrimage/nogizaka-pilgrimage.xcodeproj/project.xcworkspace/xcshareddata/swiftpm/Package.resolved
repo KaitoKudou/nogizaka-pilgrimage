@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/cybozu/LicenseList.git",
       "state" : {
-        "revision" : "0828b88c1a6130d56ede2cc6c41ec50068a7ebd6",
-        "version" : "0.7.0"
+        "revision" : "a0a1784aa60dcdafbc30cb2ffbac90544b46100a",
+        "version" : "2.1.0"
       }
     },
     {
@@ -213,8 +213,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
       "state" : {
-        "revision" : "ab4c3ec7546c7566fe49918fc9461df44e015537",
-        "version" : "12.2.0"
+        "revision" : "49efd19f8f4bbe130de7e2ee9e061d202a9a2a8b",
+        "version" : "12.8.0"
       }
     },
     {
