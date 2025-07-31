@@ -47,7 +47,6 @@ struct MenuView: View {
     @Environment(\.theme) private var theme
     @Bindable var store: StoreOf<MenuFeature>
     @State private var menuItems: [MenuSection: [MenuItem]] = [:]
-    private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
 
     init(store: StoreOf<MenuFeature>) {
         self.store = store
@@ -55,48 +54,66 @@ struct MenuView: View {
 
     var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
-            VStack(spacing: .zero) {
-                List {
-                    ForEach(MenuSection.allCases, id: \.self) { section in
-                        Section(section.title) {
-                            ForEach(menuItems[section] ?? [], id: \.self) { menuItem in
-                                Button(menuItem.title) {
-                                    store.send(.view(menuItem))
-                                }
-                            }
-                        }
-                    }
-                }
-
-                BannerViewContainer(adUnitID: .menu)
-                    .frame(
-                        width: adSize.size.width,
-                        height: adSize.size.height
-                    )
-            }
-            .onAppear {
-                store.send(.onAppear)
-                setupMenuItems()
-            }
-            .navigationTitle(R.string.localizable.tabbar_menu())
-            .navigationBarTitleDisplayMode(.inline)
-            .foregroundStyle(.primary)
+            mainContentView
         } destination: { store in
-            switch store.state {
-            case .openSourceLicense:
-                LicenseListView()
-                    .listStyle(.plain)
-                    .navigationTitle(R.string.localizable.menu_open_source_license())
-                    .navigationBarTitleDisplayMode(.inline)
-            case .iconLicense:
-                IconLicenseView(
-                    store: .init(
-                        initialState: IconLicenseFeature.State()
-                    ) {
-                        IconLicenseFeature()
-                    }
-                )
+            destinationView(for: store)
+        }
+    }
+    
+    // メイン画面のコンテンツを分離
+    private var mainContentView: some View {
+        VStack(spacing: .zero) {
+            menuListView
+            BannerViewContainer(adUnitID: .menu)
+                .frame(height: 50)
+        }
+        .onAppear {
+            store.send(.onAppear)
+            setupMenuItems()
+        }
+        .navigationTitle(R.string.localizable.tabbar_menu())
+        .navigationBarTitleDisplayMode(.inline)
+        .foregroundStyle(.primary)
+    }
+    
+    private var menuListView: some View {
+        List {
+            ForEach(MenuSection.allCases, id: \.self) { section in
+                menuSection(for: section)
             }
+        }
+    }
+    
+    private func menuSection(for section: MenuSection) -> some View {
+        Section(section.title) {
+            ForEach(menuItems[section] ?? [], id: \.self) { menuItem in
+                menuButton(for: menuItem)
+            }
+        }
+    }
+    
+    private func menuButton(for menuItem: MenuItem) -> some View {
+        Button(menuItem.title) {
+            store.send(.view(menuItem))
+        }
+    }
+    
+    @ViewBuilder
+    private func destinationView(for store: StoreOf<MenuFeature.Path>) -> some View {
+        switch store.state {
+        case .openSourceLicense:
+            LicenseListView()
+                .listStyle(.plain)
+                .navigationTitle(R.string.localizable.menu_open_source_license())
+                .navigationBarTitleDisplayMode(.inline)
+        case .iconLicense:
+            IconLicenseView(
+                store: .init(
+                    initialState: IconLicenseFeature.State()
+                ) {
+                    IconLicenseFeature()
+                }
+            )
         }
     }
 
