@@ -9,8 +9,8 @@ import GoogleMobileAds
 
 final class NativeAdvanceViewController: UIViewController {
     private var heightConstraint: NSLayoutConstraint?
-    private var nativeAdView: GADNativeAdView!
-    private var adLoader: GADAdLoader!
+    private var nativeAdView: NativeAdView!
+    private var adLoader: AdLoader!
     private let adUnitID = "ca-app-pub-4288570549847775/6418050522"
 
     override func viewDidLoad() {
@@ -18,7 +18,7 @@ final class NativeAdvanceViewController: UIViewController {
 
         guard
             let nibObjects = Bundle.main.loadNibNamed("NativeAdView", owner: nil, options: nil),
-            let adView = nibObjects.first as? GADNativeAdView
+            let adView = nibObjects.first as? NativeAdView
         else {
             return assert(false, "Could not load nib file for adView")
         }
@@ -26,7 +26,7 @@ final class NativeAdvanceViewController: UIViewController {
         refreshAd()
     }
 
-    func setAdView(_ view: GADNativeAdView) {
+    func setAdView(_ view: NativeAdView) {
         nativeAdView = view
         nativeAdView.backgroundColor = .white
 
@@ -54,10 +54,10 @@ final class NativeAdvanceViewController: UIViewController {
     }
 
     func refreshAd() {
-        let multipleAdOptions = GADMultipleAdsAdLoaderOptions()
+        let multipleAdOptions = MultipleAdsAdLoaderOptions()
         multipleAdOptions.numberOfAds = 1;
 
-        adLoader = GADAdLoader(
+        adLoader = AdLoader(
             adUnitID: adUnitID, 
             rootViewController: self,
             adTypes: [.native],
@@ -65,7 +65,7 @@ final class NativeAdvanceViewController: UIViewController {
         )
         adLoader.delegate = self
 
-        let request = GADRequest()
+        let request = Request()
         // iPadでのAdMob広告表示エラーに対応
         // See also https://qiita.com/SNQ-2001/items/1f19c3b6ce584ef25d6f
         request.scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
@@ -73,8 +73,8 @@ final class NativeAdvanceViewController: UIViewController {
     }
 }
 
-extension NativeAdvanceViewController: GADNativeAdDelegate, GADNativeAdLoaderDelegate {
-    func adLoader(_ adLoader: GADAdLoader, didReceive nativeAd: GADNativeAd) {
+extension NativeAdvanceViewController: NativeAdDelegate, NativeAdLoaderDelegate {
+    func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
         nativeAd.delegate = self
 
         (nativeAdView.headlineView as? UILabel)?.text = nativeAd.headline
@@ -92,7 +92,7 @@ extension NativeAdvanceViewController: GADNativeAdDelegate, GADNativeAdLoaderDel
         nativeAdView.nativeAd = nativeAd
     }
 
-    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: Error) {
+    func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
         print("\(adLoader) failed with error: \(error.localizedDescription)")
     }
 }

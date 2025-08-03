@@ -15,16 +15,16 @@
 		E71A827D2BE20F6900C16FEE /* IconLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A827C2BE20F6900C16FEE /* IconLicenseView.swift */; };
 		E71D093B2AF39076009C132E /* PilgrimageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */; };
 		E7235A72297D75D500E1339A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7235A71297D75D500E1339A /* Theme.swift */; };
-		E725056F2BB70F8D002BFB34 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = E725056E2BB70F8D002BFB34 /* GoogleMobileAds */; };
 		E72505732BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72505722BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift */; };
 		E72505752BB71786002BFB34 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72505742BB71786002BFB34 /* BannerViewController.swift */; };
-		E72505772BB717FA002BFB34 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72505762BB717FA002BFB34 /* BannerView.swift */; };
 		E73E09122965C21E00A1204E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09112965C21E00A1204E /* MainView.swift */; };
 		E73E09182965C43000A1204E /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09172965C43000A1204E /* CheckInView.swift */; };
 		E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E73E091A2965C77E00A1204E /* Colors.xcassets */; };
 		E73E091E2965CACA00A1204E /* PilgrimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E091D2965CACA00A1204E /* PilgrimageView.swift */; };
 		E73E092E2965D18700A1204E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E73E09302965D18700A1204E /* Localizable.strings */; };
 		E74719F22AF93A31004C2D4D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74719F12AF93A31004C2D4D /* MenuView.swift */; };
+		E747728F2D958B0100F659EF /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = E747728E2D958B0100F659EF /* GoogleMobileAds */; };
+		E74772912D95966B00F659EF /* BannerViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74772902D95966B00F659EF /* BannerViewContainer.swift */; };
 		E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */; };
 		E749344A2959F2120045AE39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E74934492959F2120045AE39 /* Assets.xcassets */; };
 		E749344D2959F2120045AE39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E749344C2959F2120045AE39 /* Preview Assets.xcassets */; };
@@ -99,13 +99,13 @@
 		E72505702BB710F6002BFB34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E72505722BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewControllerWidthDelegate.swift; sourceTree = "<group>"; };
 		E72505742BB71786002BFB34 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
-		E72505762BB717FA002BFB34 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		E73E09112965C21E00A1204E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E73E09172965C43000A1204E /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
 		E73E091A2965C77E00A1204E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		E73E091D2965CACA00A1204E /* PilgrimageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageView.swift; sourceTree = "<group>"; };
 		E73E092F2965D18700A1204E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E74719F12AF93A31004C2D4D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		E74772902D95966B00F659EF /* BannerViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewContainer.swift; sourceTree = "<group>"; };
 		E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nogizaka-pilgrimage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageApp.swift; sourceTree = "<group>"; };
 		E74934492959F2120045AE39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -158,10 +158,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E747728F2D958B0100F659EF /* GoogleMobileAds in Frameworks */,
 				E7CB5D5B2B021BCB001A1CDB /* ComposableArchitecture in Frameworks */,
 				E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */,
 				E710931D2BE13DAA005482F7 /* LicenseList in Frameworks */,
-				E725056F2BB70F8D002BFB34 /* GoogleMobileAds in Frameworks */,
 				E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */,
 				E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */,
 			);
@@ -240,7 +240,7 @@
 			children = (
 				E72505722BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift */,
 				E72505742BB71786002BFB34 /* BannerViewController.swift */,
-				E72505762BB717FA002BFB34 /* BannerView.swift */,
+				E74772902D95966B00F659EF /* BannerViewContainer.swift */,
 			);
 			path = Banner;
 			sourceTree = "<group>";
@@ -498,8 +498,8 @@
 				E7CB5D5A2B021BCB001A1CDB /* ComposableArchitecture */,
 				E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */,
 				E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */,
-				E725056E2BB70F8D002BFB34 /* GoogleMobileAds */,
 				E710931C2BE13DAA005482F7 /* LicenseList */,
+				E747728E2D958B0100F659EF /* GoogleMobileAds */,
 			);
 			productName = "nogizaka-pilgrimage";
 			productReference = E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */;
@@ -577,8 +577,8 @@
 				E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
 				E7CB5D592B021BCB001A1CDB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				E725056D2BB70F8D002BFB34 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				E710931B2BE13DAA005482F7 /* XCRemoteSwiftPackageReference "LicenseList" */,
+				E747728D2D958B0100F659EF /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = E74934432959F20E0045AE39 /* Products */;
 			projectDirPath = "";
@@ -662,7 +662,6 @@
 				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
 				E74719F22AF93A31004C2D4D /* MenuView.swift in Sources */,
 				E79F3E952B7A1C8E00ABCCD8 /* CheckInFeature.swift in Sources */,
-				E72505772BB717FA002BFB34 /* BannerView.swift in Sources */,
 				E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */,
 				E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */,
 				E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */,
@@ -686,6 +685,7 @@
 				E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */,
 				E73E091E2965CACA00A1204E /* PilgrimageView.swift in Sources */,
 				E72505732BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift in Sources */,
+				E74772912D95966B00F659EF /* BannerViewContainer.swift in Sources */,
 				E7235A72297D75D500E1339A /* Theme.swift in Sources */,
 				E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */,
 				E78D446A2AF8EBBD008D5550 /* PilgrimageListContentView.swift in Sources */,
@@ -1053,16 +1053,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/cybozu/LicenseList.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.7.0;
+				kind = exactVersion;
+				version = 2.1.0;
 			};
 		};
-		E725056D2BB70F8D002BFB34 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+		E747728D2D958B0100F659EF /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 11.2.0;
+				minimumVersion = 12.8.0;
 			};
 		};
 		E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -1097,9 +1097,9 @@
 			package = E710931B2BE13DAA005482F7 /* XCRemoteSwiftPackageReference "LicenseList" */;
 			productName = LicenseList;
 		};
-		E725056E2BB70F8D002BFB34 /* GoogleMobileAds */ = {
+		E747728E2D958B0100F659EF /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E725056D2BB70F8D002BFB34 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			package = E747728D2D958B0100F659EF /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
 		};
 		E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */ = {

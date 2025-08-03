@@ -18,8 +18,8 @@ struct PilgrimageDetailView: View {
     ) {
         PilgrimageDetailFeature()
     }
+    private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
     let pilgrimage: PilgrimageInformation
-    private let adSize = BannerView.getAdSize(width: UIScreen.main.bounds.width)
 
     var body: some View {
         VStack {
@@ -115,11 +115,8 @@ struct PilgrimageDetailView: View {
                 }
             }
 
-            BannerView(adUnitID: .pilgrimageDetail)
-                .frame(
-                    width: adSize.size.width,
-                    height: adSize.size.height
-                )
+            BannerViewContainer(adUnitID: .pilgrimageDetail)
+                .frame(width: adSize.size.width, height: adSize.size.height)
         }
         .onAppear {
             store.send(.onAppear(pilgrimage))
