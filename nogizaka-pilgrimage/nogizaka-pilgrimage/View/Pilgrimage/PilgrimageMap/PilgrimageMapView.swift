@@ -49,8 +49,8 @@ struct PilgrimageMapView: View {
                 .onAppear {
                     locationManager.requestLocation()
                 }
-                .onChange(of: selectedIndex) { _, _ in
-                    withAnimation {
+                .onChange(of: selectedIndex) { _, newIndex in
+                    withAnimation(.easeInOut(duration: 0.3)) {
                         region.center = offsetAppliedCenter(
                             to: pilgrimages[selectedIndex].coordinate,
                             geometry: geometry
@@ -61,25 +61,18 @@ struct PilgrimageMapView: View {
     }
 
     private var mapView: some View {
-        Map(
-            coordinateRegion: $region,
-            showsUserLocation: true,
-            annotationItems: pilgrimages,
-            annotationContent: { item in
-                let coordinate = CLLocationCoordinate2D(
-                    latitude: item.coordinate.latitude,
-                    longitude: item.coordinate.longitude
-                )
-                let index = pilgrimages.firstIndex(where: { $0.code == item.code }) ?? 0
-
-                return MapAnnotation(coordinate: coordinate) {
-                    Image(uiImage: R.image.map_pin()!)
-                        .onTapGesture {
-                            selectedIndex = index
-                        }
+        GeometryReader { geometry in
+            ClusterMapView(
+                region: $region,
+                pilgrimages: pilgrimages,
+                showsUserLocation: true,
+                onAnnotationSelected: { index in
+                    withAnimation {
+                        selectedIndex = index
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 
     private func pilgrimageCardsView(geometry: GeometryProxy) -> some View {
