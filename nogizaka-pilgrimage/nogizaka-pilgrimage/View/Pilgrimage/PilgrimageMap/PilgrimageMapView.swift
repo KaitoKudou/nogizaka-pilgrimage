@@ -11,8 +11,8 @@ import SwiftUI
 
 struct PilgrimageMapView: View {
     @Environment(\.theme) private var theme
-    @State private var region = PilgrimageMapConstant.initialRegion
     @State private var selectedIndex: Int = 0
+    @State private var centerCommand: ClusterMapView.CenterCommand?
     @State private var isShowAlert = false
     @EnvironmentObject private var locationManager: LocationManager
     let pilgrimages: [PilgrimageInformation]
@@ -33,7 +33,11 @@ struct PilgrimageMapView: View {
                             return
                         }
                         withAnimation {
-                            self.region.center = offsetAppliedCenter(to: location, geometry: geometry)
+                            centerCommand = .init(
+                                target: location,
+                                yOffset: cardsHeight(geometry: geometry) / 2,
+                                animated: true
+                            )
                         }
                     }
                     .alert(R.string.localizable.alert_location(), isPresented: $isShowAlert) {
@@ -49,11 +53,12 @@ struct PilgrimageMapView: View {
                 .onAppear {
                     locationManager.requestLocation()
                 }
-                .onChange(of: selectedIndex) { _, _ in
-                    withAnimation {
-                        region.center = offsetAppliedCenter(
-                            to: pilgrimages[selectedIndex].coordinate,
-                            geometry: geometry
+                .onChange(of: selectedIndex) { _, newIndex in
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        centerCommand = .init(
+                            target: pilgrimages[newIndex].coordinate,
+                            yOffset: cardsHeight(geometry: geometry) / 2,
+                            animated: true
                         )
                     }
                 }
@@ -61,25 +66,20 @@ struct PilgrimageMapView: View {
     }
 
     private var mapView: some View {
-        Map(
-            coordinateRegion: $region,
-            showsUserLocation: true,
-            annotationItems: pilgrimages,
-            annotationContent: { item in
-                let coordinate = CLLocationCoordinate2D(
-                    latitude: item.coordinate.latitude,
-                    longitude: item.coordinate.longitude
-                )
-                let index = pilgrimages.firstIndex(where: { $0.code == item.code }) ?? 0
-
-                return MapAnnotation(coordinate: coordinate) {
-                    Image(uiImage: R.image.map_pin()!)
-                        .onTapGesture {
-                            selectedIndex = index
-                        }
+        GeometryReader { geometry in
+            ClusterMapView(
+                selectedIndex: $selectedIndex,
+                centerCommand: $centerCommand,
+                initialRegion: PilgrimageMapConstant.initialRegion,
+                pilgrimages: pilgrimages,
+                showsUserLocation: true,
+                onAnnotationSelected: { index in
+                    withAnimation {
+                        selectedIndex = index
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 
     private func pilgrimageCardsView(geometry: GeometryProxy) -> some View {
@@ -98,16 +98,6 @@ struct PilgrimageMapView: View {
 
     private func cardsHeight(geometry: GeometryProxy) -> CGFloat {
         return max(0, geometry.size.width / 2 - theme.margins.spacing_m)
-    }
-
-    private func offsetAppliedCenter(to center: CLLocationCoordinate2D, geometry: GeometryProxy) -> CLLocationCoordinate2D {
-        let ratio = (cardsHeight(geometry: geometry) / 2) / geometry.size.height
-        let latitudeOffset = ratio * region.span.latitudeDelta
-        let coordinate = CLLocationCoordinate2D(
-            latitude: center.latitude - latitudeOffset,
-            longitude: center.longitude
-        )
-        return coordinate
     }
 }
 
