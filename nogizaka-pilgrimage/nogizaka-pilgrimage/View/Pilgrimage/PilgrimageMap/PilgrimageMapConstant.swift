@@ -11,9 +11,9 @@ import MapKit
 // MARK: 聖地マップで使用する定数
 enum PilgrimageMapConstant {
     /// 中心点から東西軸に沿った境界までの距離として指定される、領域の東西方向の長さ (メートル単位)
-    static let initialLatitudinalMeters: CLLocationDistance = 1000
+    static let initialLatitudinalMeters: CLLocationDistance = 700
     /// 中心点から南北軸に沿った境界までの距離として指定される、領域の南北方向の長さ (メートル単位)
-    static let initialLongitudinalMeters: CLLocationDistance = 1000
+    static let initialLongitudinalMeters: CLLocationDistance = 700
 
     /// マップのリージョンの初期値
     /// 乃木坂駅を指定。
