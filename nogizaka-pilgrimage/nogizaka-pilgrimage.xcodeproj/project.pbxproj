@@ -36,6 +36,7 @@
 		E74BC8352BE91929009EB17F /* UIApplicationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74BC8342BE91929009EB17F /* UIApplicationClient.swift */; };
 		E74D395D2BC6DADA00140C5D /* PilgrimageListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74D395C2BC6DADA00140C5D /* PilgrimageListFeature.swift */; };
 		E74D395F2BC6DC0000140C5D /* PilgrimageRowFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74D395E2BC6DC0000140C5D /* PilgrimageRowFeature.swift */; };
+		E757BB042E8AD58500035318 /* ReadableContentGuideModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */; };
 		E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */; };
 		E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF15D2BD1630C00A1CB97 /* NativeAdvanceViewController.swift */; };
 		E76BF1602BD163E800A1CB97 /* NativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76BF15F2BD163E800A1CB97 /* NativeAdView.xib */; };
@@ -123,6 +124,7 @@
 		E74BC8342BE91929009EB17F /* UIApplicationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationClient.swift; sourceTree = "<group>"; };
 		E74D395C2BC6DADA00140C5D /* PilgrimageListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageListFeature.swift; sourceTree = "<group>"; };
 		E74D395E2BC6DC0000140C5D /* PilgrimageRowFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageRowFeature.swift; sourceTree = "<group>"; };
+		E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableContentGuideModifier.swift; sourceTree = "<group>"; };
 		E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnvironmentKey.swift; sourceTree = "<group>"; };
 		E767E10F295AF38C002DB619 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		E76BF15D2BD1630C00A1CB97 /* NativeAdvanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdvanceViewController.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				E7CAE0E62B1E1D580024EB40 /* PilgrimageListNavigationView.swift */,
+				E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				E7EA0F552BB5BA2100EC8A93 /* MenuFeature.swift in Sources */,
 				E74BC8352BE91929009EB17F /* UIApplicationClient.swift in Sources */,
 				E7FDAA092AE173AD0056AA5B /* PilgrimageListView.swift in Sources */,
+				E757BB042E8AD58500035318 /* ReadableContentGuideModifier.swift in Sources */,
 				E7B9CD5E2B8E391A003FAB19 /* LaunchScreen.swift in Sources */,
 				E73E09182965C43000A1204E /* CheckInView.swift in Sources */,
 				E7FDAA112AE177CB0056AA5B /* UIColorExtension.swift in Sources */,
@@ -875,7 +879,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.4.0.0;
+				CURRENT_PROJECT_VERSION = 1.5.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"nogizaka-pilgrimage/Preview Content\"";
 				DEVELOPMENT_TEAM = DX3FKMWYLL;
 				ENABLE_PREVIEWS = YES;
@@ -895,7 +899,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kaitokudo2468110921.nogizaka-pilgrimage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -912,7 +916,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.4.0.0;
+				CURRENT_PROJECT_VERSION = 1.5.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"nogizaka-pilgrimage/Preview Content\"";
 				DEVELOPMENT_TEAM = DX3FKMWYLL;
 				ENABLE_PREVIEWS = YES;
@@ -932,7 +936,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "kaitokudo2468110921.nogizaka-pilgrimage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
