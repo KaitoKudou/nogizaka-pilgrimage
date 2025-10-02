@@ -80,6 +80,7 @@ struct PilgrimageDetailView: View {
                                 R.string.localizable.check_in_button()
                         )
                         .frame(height: theme.margins.spacing_xl)
+                        .frame(maxWidth: .infinity)
                     }
                     .disabled(store.hasCheckedIn)
                     .alert(
@@ -114,6 +115,7 @@ struct PilgrimageDetailView: View {
                         .padding(.bottom, theme.margins.spacing_xxl)
                 }
             }
+            .readableContentGuide()
 
             BannerViewContainer(adUnitID: .pilgrimageDetail)
                 .frame(width: adSize.size.width, height: adSize.size.height)
