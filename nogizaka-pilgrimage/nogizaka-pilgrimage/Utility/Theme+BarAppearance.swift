@@ -70,13 +70,21 @@ extension Theme {
             .foregroundColor: normalColor,
             .font: uiFonts.caption,
         ]
-
+        itemAppearance.normal.titlePositionAdjustment = UIOffset(
+            horizontal: Theme.system.margins.zero,
+            vertical: Theme.system.margins.spacing_xxs
+        )
+        
         // 選択状態
         itemAppearance.selected.iconColor = selectedColor
         itemAppearance.selected.titleTextAttributes = [
             .foregroundColor: selectedColor,
             .font: uiFonts.caption,
         ]
+        itemAppearance.selected.titlePositionAdjustment = UIOffset(
+            horizontal: Theme.system.margins.zero,
+            vertical: Theme.system.margins.spacing_xxs
+        )
 
         return itemAppearance
     }
