@@ -11,8 +11,6 @@
 		E710931D2BE13DAA005482F7 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = E710931C2BE13DAA005482F7 /* LicenseList */; };
 		E7178E852B0738C8008C85A3 /* FavoriteFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7178E842B0738C8008C85A3 /* FavoriteFeature.swift */; };
 		E71A82792BE200B700C16FEE /* BuildClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A82782BE200B700C16FEE /* BuildClient.swift */; };
-		E71A827B2BE20E4700C16FEE /* IconLicenseFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A827A2BE20E4700C16FEE /* IconLicenseFeature.swift */; };
-		E71A827D2BE20F6900C16FEE /* IconLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A827C2BE20F6900C16FEE /* IconLicenseView.swift */; };
 		E71D093B2AF39076009C132E /* PilgrimageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */; };
 		E7235A72297D75D500E1339A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7235A71297D75D500E1339A /* Theme.swift */; };
 		E72505732BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72505722BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift */; };
@@ -55,6 +53,7 @@
 		E7A7E7C82BD01BF200E19E8B /* PilgrimageDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7E7C72BD01BF200E19E8B /* PilgrimageDetailFeature.swift */; };
 		E7A7E7CA2BD01CA400E19E8B /* PilgrimageCardFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7E7C92BD01CA400E19E8B /* PilgrimageCardFeature.swift */; };
 		E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */; };
+		E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931412F46053A00B94C75 /* IconLicenseView.swift */; };
 		E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */; };
 		E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */; };
 		E7B9CD5E2B8E391A003FAB19 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B9CD5D2B8E391A003FAB19 /* LaunchScreen.swift */; };
@@ -96,8 +95,6 @@
 		E70B48132AD6EC2800C951A9 /* PilgrimageMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapView.swift; sourceTree = "<group>"; };
 		E7178E842B0738C8008C85A3 /* FavoriteFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteFeature.swift; sourceTree = "<group>"; };
 		E71A82782BE200B700C16FEE /* BuildClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildClient.swift; sourceTree = "<group>"; };
-		E71A827A2BE20E4700C16FEE /* IconLicenseFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseFeature.swift; sourceTree = "<group>"; };
-		E71A827C2BE20F6900C16FEE /* IconLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseView.swift; sourceTree = "<group>"; };
 		E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageDetailView.swift; sourceTree = "<group>"; };
 		E7235A71297D75D500E1339A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		E72505702BB710F6002BFB34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -144,6 +141,7 @@
 		E7A7E7C72BD01BF200E19E8B /* PilgrimageDetailFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageDetailFeature.swift; sourceTree = "<group>"; };
 		E7A7E7C92BD01CA400E19E8B /* PilgrimageCardFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageCardFeature.swift; sourceTree = "<group>"; };
 		E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E7B931412F46053A00B94C75 /* IconLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseView.swift; sourceTree = "<group>"; };
 		E7B9CD5D2B8E391A003FAB19 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		E7C11D3B295AEE400051A1B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		E7C11D3F295AF19A0051A1B9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
@@ -216,7 +214,7 @@
 				E79F3E942B7A1C8E00ABCCD8 /* CheckInFeature.swift */,
 				E7A127172B8F7A53004D877A /* InitialFeature.swift */,
 				E7EA0F542BB5BA2100EC8A93 /* MenuFeature.swift */,
-				E71A827A2BE20E4700C16FEE /* IconLicenseFeature.swift */,
+				E7B931422F46053A00B94C75 /* IconLicense */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -312,7 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				E74719F12AF93A31004C2D4D /* MenuView.swift */,
-				E71A827C2BE20F6900C16FEE /* IconLicenseView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -392,6 +389,14 @@
 				E76BF1642BD16FE700A1CB97 /* NativeAdvanceView.swift */,
 			);
 			path = NativeAdvance;
+			sourceTree = "<group>";
+		};
+		E7B931422F46053A00B94C75 /* IconLicense */ = {
+			isa = PBXGroup;
+			children = (
+				E7B931412F46053A00B94C75 /* IconLicenseView.swift */,
+			);
+			path = IconLicense;
 			sourceTree = "<group>";
 		};
 		E7B9CD502B8E2586003FAB19 /* Enviroment */ = {
@@ -670,9 +675,9 @@
 				E7B9CD5E2B8E391A003FAB19 /* LaunchScreen.swift in Sources */,
 				E73E09182965C43000A1204E /* CheckInView.swift in Sources */,
 				E7FDAA112AE177CB0056AA5B /* UIColorExtension.swift in Sources */,
+				E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */,
 				E70B48142AD6EC2800C951A9 /* PilgrimageMapView.swift in Sources */,
 				E74D395D2BC6DADA00140C5D /* PilgrimageListFeature.swift in Sources */,
-				E71A827D2BE20F6900C16FEE /* IconLicenseView.swift in Sources */,
 				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
 				E74719F22AF93A31004C2D4D /* MenuView.swift in Sources */,
 				E79F3E952B7A1C8E00ABCCD8 /* CheckInFeature.swift in Sources */,
@@ -707,7 +712,6 @@
 				E78D446A2AF8EBBD008D5550 /* PilgrimageListContentView.swift in Sources */,
 				E7CAE0E72B1E1D580024EB40 /* PilgrimageListNavigationView.swift in Sources */,
 				E74BA3D62B31E237008C75FE /* CheckInContentView.swift in Sources */,
-				E71A827B2BE20E4700C16FEE /* IconLicenseFeature.swift in Sources */,
 				E74D395F2BC6DC0000140C5D /* PilgrimageRowFeature.swift in Sources */,
 				E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */,
 				E7FDAA002ADFDDFB0056AA5B /* PilgrimageInformation.swift in Sources */,
