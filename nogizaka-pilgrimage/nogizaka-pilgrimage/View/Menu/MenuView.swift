@@ -108,13 +108,7 @@ struct MenuView: View {
                 .navigationTitle(R.string.localizable.menu_open_source_license())
                 .navigationBarTitleDisplayMode(.inline)
         case .iconLicense:
-            IconLicenseView(
-                store: .init(
-                    initialState: IconLicenseFeature.State()
-                ) {
-                    IconLicenseFeature()
-                }
-            )
+            IconLicenseView()
         }
     }
 
