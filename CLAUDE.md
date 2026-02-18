@@ -60,6 +60,69 @@ struct SomeClient: DependencyKey {
 
 SwiftUI ネイティブの `NavigationStack` + `@State` を使用する。
 
+## レイヤー構成
+
+### ディレクトリ構造
+
+```
+Feature/          # Presentation層（View + ViewModel）
+├── Initial/
+│   ├── InitialView.swift
+│   └── InitialViewModel.swift
+├── PilgrimageList/
+├── PilgrimageDetail/
+├── CheckIn/
+├── Favorite/
+└── Menu/
+
+Domain/           # Domain層（ビジネスエンティティ・ルール）
+├── Model/
+│   ├── PilgrimageInformation.swift
+│   ├── AppUpdateInformation.swift
+│   └── APIError.swift
+├── UseCase/
+│   └── CheckInUseCase.swift      # struct定義 + liveValue
+└── Repository/                   # @DependencyClient struct（インターフェース）
+    ├── PilgrimageRepository.swift
+    ├── CheckInRepository.swift
+    └── FavoriteRepository.swift
+
+Data/             # Data層（Repository実装・DataStore）
+├── Repository/                   # extension + liveValue（Firestore実装）
+│   ├── PilgrimageRepository+Live.swift
+│   ├── CheckInRepository+Live.swift
+│   └── FavoriteRepository+Live.swift
+└── DataStore/
+    ├── Remote/
+    │   ├── PilgrimageRemoteDataStore.swift
+    │   ├── CheckInRemoteDataStore.swift
+    │   └── FavoriteRemoteDataStore.swift
+    └── Cache/                    # Firebaseキャッシュ対応時に追加
+
+Utility/          # 既存のまま（LocationManager, Theme等）
+```
+
+### 依存方向
+
+```
+Feature → Domain → Data
+```
+
+上位レイヤーが下位レイヤーに依存し、逆方向の依存は発生しない。
+
+### UseCaseの指針
+
+- **UseCase.execute のみ**を公開する
+- 複数ステップのビジネスロジックがある場合のみ UseCase を作る
+- 現状は `CheckInUseCase`（位置検証 + Firestore書き込み）のみ
+- 単純な読み書きは ViewModel から Repository を直接呼ぶ
+
+### Repositoryの指針
+
+- `Domain/Repository/` — `@DependencyClient` struct 定義（インターフェース）
+- `Data/Repository/` — `extension + liveValue`（Firestore実装）
+- 読み取りも書き込みも Repository が担う（UseCase 経由不要）
+
 ## 技術スタック
 
 | 項目 | 内容 |
