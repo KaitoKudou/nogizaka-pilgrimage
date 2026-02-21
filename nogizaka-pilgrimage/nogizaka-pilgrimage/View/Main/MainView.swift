@@ -5,7 +5,6 @@
 //  Created by 工藤 海斗 on 2023/01/04.
 //
 
-import ComposableArchitecture
 import SwiftUI
 
 struct MainView: View {
@@ -47,13 +46,7 @@ struct MainView: View {
                 Text(R.string.localizable.tabbar_check_in())
             }
 
-            MenuView(
-                store: .init(
-                    initialState: MenuFeature.State()
-                ) {
-                    MenuFeature()
-                }
-            )
+            MenuView()
             .tabItem {
                 Image(systemName: "line.3.horizontal")
                 Text(R.string.localizable.tabbar_menu())
