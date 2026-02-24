@@ -5,18 +5,14 @@
 //  Created by 工藤 海斗 on 2023/11/06.
 //
 
-import ComposableArchitecture
 import SwiftUI
 
 struct PilgrimageListContentView: View {
     @Environment(\.theme) private var theme
     let pilgrimage: PilgrimageInformation
-    @Bindable var store: StoreOf<PilgrimageRowFeature>
-
-    init(pilgrimage: PilgrimageInformation, store: StoreOf<PilgrimageRowFeature>) {
-        self.pilgrimage = pilgrimage
-        self.store = store
-    }
+    let isLoading: Bool
+    let favorited: Bool
+    let onFavoriteToggle: () -> Void
 
     var body: some View {
         HStack(alignment: .top, spacing: theme.margins.spacing_m) {
@@ -50,12 +46,12 @@ struct PilgrimageListContentView: View {
                     Spacer()
 
                     Button {
-                        store.send(.updateFavorite(pilgrimage))
+                        onFavoriteToggle()
                     } label: {
-                        if store.isLoading {
+                        if isLoading {
                             // 通信中の場合、インジケータを表示
                             ProgressView()
-                        } else if store.favorited {
+                        } else if favorited {
                             Image(systemName: "heart.fill")
                                 .foregroundStyle(.red)
                         } else {
@@ -72,15 +68,6 @@ struct PilgrimageListContentView: View {
                     .foregroundStyle(.black)
                     .multilineTextAlignment(.leading)
             }
-            .onAppear {
-                store.send(.onAppear(pilgrimage))
-            }
-            .alert(
-                $store.scope(
-                    state: \.destination?.alert,
-                    action: \.destination.alert
-                )
-            )
         }
         .padding()
         .background(Color.white)
@@ -90,19 +77,12 @@ struct PilgrimageListContentView: View {
     }
 }
 
-struct PilgrimageListContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        PilgrimageListContentView(
-            pilgrimage: dummyPilgrimageList[0],
-            store: .init(
-                initialState: PilgrimageRowFeature.State(
-                    pilgrimage: dummyPilgrimageList[0]
-                )
-            ) {
-                PilgrimageRowFeature()
-            }
-        )
-        .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width / 3)
-        .previewLayout(.sizeThatFits)
-    }
+#Preview(traits: .sizeThatFitsLayout) {
+    PilgrimageListContentView(
+        pilgrimage: dummyPilgrimageList[0],
+        isLoading: false,
+        favorited: true,
+        onFavoriteToggle: {}
+    )
+    .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width / 3)
 }

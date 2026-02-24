@@ -24,7 +24,7 @@ struct MainView: View {
             }
 
             NavigationStack {
-                FavoritePilgrimageView()
+                FavoriteView()
             }
             .tabItem {
                 Image(systemName: "heart.fill")
