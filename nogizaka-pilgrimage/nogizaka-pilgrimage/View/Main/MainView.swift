@@ -33,13 +33,7 @@ struct MainView: View {
             .environmentObject(locationManager)
 
             NavigationStack {
-                CheckInView(
-                    store: .init(
-                        initialState: CheckInFeature.State()
-                    ) {
-                        CheckInFeature()
-                    }
-                )
+                CheckInView()
             }
             .tabItem {
                 Image(R.image.stamp.name)

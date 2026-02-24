@@ -2,25 +2,20 @@
 //  CheckInView.swift
 //  nogizaka-pilgrimage
 //
-//  Created by 工藤 海斗 on 2023/01/04.
+//  Created k_kudo on 2026/02/24.
 //
 
-import ComposableArchitecture
 import SwiftUI
 
 struct CheckInView: View {
     @Environment(\.theme) private var theme
-    @Bindable var store: StoreOf<CheckInFeature>
+    @State private var viewModel = CheckInViewModel()
     private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
-
-    init(store: StoreOf<CheckInFeature>) {
-        self.store = store
-    }
 
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                if store.checkedInPilgrimages.isEmpty {
+                if viewModel.checkedInPilgrimages.isEmpty {
                     emptyCheckInView()
                 } else {
                     filledCheckInView(geometry: geometry)
@@ -33,14 +28,16 @@ struct CheckInView: View {
             }
         }
         .onAppear {
-            store.send(.onAppear)
+            Task {
+                await viewModel.fetchCheckedInPilgrimages()
+            }
         }
         .alert(
-            $store.scope(
-                state: \.destination?.alert,
-                action: \.destination.alert
-            )
-        )
+            viewModel.alertMessage ?? "",
+            isPresented: $viewModel.showAlert
+        ) {
+            Button("OK") {}
+        }
         .navigationTitle(R.string.localizable.tabbar_check_in())
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -49,8 +46,11 @@ struct CheckInView: View {
     private func filledCheckInView(geometry: GeometryProxy) -> some View {
         VStack {
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))], spacing: theme.margins.spacing_s) {
-                    ForEach(store.checkedInPilgrimages, id: \.self) { pilgrimage in
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))],
+                    spacing: theme.margins.spacing_s
+                ) {
+                    ForEach(viewModel.checkedInPilgrimages, id: \.self) { pilgrimage in
                         CheckInContentView(pilgrimageName: pilgrimage.name)
                     }
                 }
@@ -76,14 +76,6 @@ struct CheckInView: View {
     }
 }
 
-struct CheckInView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckInView(
-            store: .init(
-                initialState: CheckInFeature.State()
-            ) {
-                CheckInFeature()
-            }
-        )
-    }
+#Preview {
+    CheckInView()
 }
