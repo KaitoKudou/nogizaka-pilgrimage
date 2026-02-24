@@ -27,6 +27,7 @@ struct PilgrimageListNavigationView: View {
                                     action: \.pilgrimageRows
                                 )
                             ) { itemStore in
+                                @Bindable var itemStore = itemStore
 
                                 if itemStore.id % 5 == 0 {
                                     NativeAdvanceView()
@@ -45,13 +46,26 @@ struct PilgrimageListNavigationView: View {
                                 ) {
                                     PilgrimageListContentView(
                                         pilgrimage: itemStore.pilgrimage,
-                                        store: itemStore
+                                        isLoading: itemStore.isLoading,
+                                        favorited: itemStore.favorited,
+                                        onFavoriteToggle: {
+                                            itemStore.send(.updateFavorite(itemStore.pilgrimage))
+                                        }
                                     )
                                     .frame(maxHeight: geometry.size.width / 3)
                                     .padding(.vertical, 8)
                                     .padding(.horizontal, 16)
                                     .id(itemStore.pilgrimage.id)
                                 }
+                                .onAppear {
+                                    itemStore.send(.onAppear(itemStore.pilgrimage))
+                                }
+                                .alert(
+                                    $itemStore.scope(
+                                        state: \.destination?.alert,
+                                        action: \.destination.alert
+                                    )
+                                )
                             }
                         }
                         .onAppear {

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E70B48142AD6EC2800C951A9 /* PilgrimageMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70B48132AD6EC2800C951A9 /* PilgrimageMapView.swift */; };
 		E710931D2BE13DAA005482F7 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = E710931C2BE13DAA005482F7 /* LicenseList */; };
-		E7178E852B0738C8008C85A3 /* FavoriteFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7178E842B0738C8008C85A3 /* FavoriteFeature.swift */; };
 		E71A82792BE200B700C16FEE /* BuildClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A82782BE200B700C16FEE /* BuildClient.swift */; };
 		E71D093B2AF39076009C132E /* PilgrimageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */; };
 		E7235A72297D75D500E1339A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7235A71297D75D500E1339A /* Theme.swift */; };
@@ -45,6 +44,8 @@
 		E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78276082BAC796000AD16CC /* NetworkMonitor.swift */; };
 		E78D446A2AF8EBBD008D5550 /* PilgrimageListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78D44692AF8EBBD008D5550 /* PilgrimageListContentView.swift */; };
 		E79045B22B0E088100F0936B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79045B12B0E088100F0936B /* LocationManager.swift */; };
+		E795AAB52F4DEA390062C9CE /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E795AAB42F4DEA390062C9CE /* FavoriteViewModel.swift */; };
+		E795AAB72F4DEA460062C9CE /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E795AAB62F4DEA460062C9CE /* FavoriteView.swift */; };
 		E79D8C922E43859C006170C3 /* ClusterMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D8C912E43859C006170C3 /* ClusterMapView.swift */; };
 		E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */; };
 		E7A127182B8F7A53004D877A /* InitialFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A127172B8F7A53004D877A /* InitialFeature.swift */; };
@@ -61,7 +62,6 @@
 		E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C11D3F295AF19A0051A1B9 /* R.generated.swift */; };
 		E7C431FA2AEF9F53003E6946 /* PilgrimageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C431F92AEF9F53003E6946 /* PilgrimageCardView.swift */; };
 		E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E7C72A652E5F517300FC2378 /* CustomDump */; };
-		E7CAE0E42B1E19B00024EB40 /* FavoritePilgrimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAE0E32B1E19B00024EB40 /* FavoritePilgrimageView.swift */; };
 		E7CAE0E72B1E1D580024EB40 /* PilgrimageListNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAE0E62B1E1D580024EB40 /* PilgrimageListNavigationView.swift */; };
 		E7CB5D5B2B021BCB001A1CDB /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E7CB5D5A2B021BCB001A1CDB /* ComposableArchitecture */; };
 		E7EA0F572BB5C49500EC8A93 /* SafariEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EA0F562BB5C49500EC8A93 /* SafariEffect.swift */; };
@@ -93,7 +93,6 @@
 
 /* Begin PBXFileReference section */
 		E70B48132AD6EC2800C951A9 /* PilgrimageMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapView.swift; sourceTree = "<group>"; };
-		E7178E842B0738C8008C85A3 /* FavoriteFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteFeature.swift; sourceTree = "<group>"; };
 		E71A82782BE200B700C16FEE /* BuildClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildClient.swift; sourceTree = "<group>"; };
 		E71D093A2AF39076009C132E /* PilgrimageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageDetailView.swift; sourceTree = "<group>"; };
 		E7235A71297D75D500E1339A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -133,6 +132,8 @@
 		E78276082BAC796000AD16CC /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E78D44692AF8EBBD008D5550 /* PilgrimageListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageListContentView.swift; sourceTree = "<group>"; };
 		E79045B12B0E088100F0936B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E795AAB42F4DEA390062C9CE /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		E795AAB62F4DEA460062C9CE /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		E79D8C912E43859C006170C3 /* ClusterMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterMapView.swift; sourceTree = "<group>"; };
 		E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageAnnotation.swift; sourceTree = "<group>"; };
 		E7A127172B8F7A53004D877A /* InitialFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialFeature.swift; sourceTree = "<group>"; };
@@ -147,7 +148,6 @@
 		E7C11D3B295AEE400051A1B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		E7C11D3F295AF19A0051A1B9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		E7C431F92AEF9F53003E6946 /* PilgrimageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageCardView.swift; sourceTree = "<group>"; };
-		E7CAE0E32B1E19B00024EB40 /* FavoritePilgrimageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePilgrimageView.swift; sourceTree = "<group>"; };
 		E7CAE0E62B1E1D580024EB40 /* PilgrimageListNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageListNavigationView.swift; sourceTree = "<group>"; };
 		E7EA0F562BB5C49500EC8A93 /* SafariEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariEffect.swift; sourceTree = "<group>"; };
 		E7FDA9FF2ADFDDFB0056AA5B /* PilgrimageInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageInformation.swift; sourceTree = "<group>"; };
@@ -206,9 +206,9 @@
 		E7178E832B073863008C85A3 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				E795AAB32F4DEA2C0062C9CE /* Favorite */,
 				E755E4242F4DD84800EF8E2F /* CheckIn */,
 				E7B931442F473A9700B94C75 /* Menu */,
-				E7178E842B0738C8008C85A3 /* FavoriteFeature.swift */,
 				E74D395C2BC6DADA00140C5D /* PilgrimageListFeature.swift */,
 				E74D395E2BC6DC0000140C5D /* PilgrimageRowFeature.swift */,
 				E7A7E7C72BD01BF200E19E8B /* PilgrimageDetailFeature.swift */,
@@ -261,7 +261,6 @@
 				E7CAE0E52B1E1D3C0024EB40 /* Common */,
 				E73E09102965C20600A1204E /* Main */,
 				E73E09132965C2E200A1204E /* Pilgrimage */,
-				E7CAE0E22B1E198C0024EB40 /* FavoritePilgrimage */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -382,6 +381,15 @@
 			path = NativeAdvance;
 			sourceTree = "<group>";
 		};
+		E795AAB32F4DEA2C0062C9CE /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				E795AAB42F4DEA390062C9CE /* FavoriteViewModel.swift */,
+				E795AAB62F4DEA460062C9CE /* FavoriteView.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
 		E7B931422F46053A00B94C75 /* IconLicense */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,14 +446,6 @@
 				E7C431F92AEF9F53003E6946 /* PilgrimageCardView.swift */,
 			);
 			path = PilgrimageCard;
-			sourceTree = "<group>";
-		};
-		E7CAE0E22B1E198C0024EB40 /* FavoritePilgrimage */ = {
-			isa = PBXGroup;
-			children = (
-				E7CAE0E32B1E19B00024EB40 /* FavoritePilgrimageView.swift */,
-			);
-			path = FavoritePilgrimage;
 			sourceTree = "<group>";
 		};
 		E7CAE0E52B1E1D3C0024EB40 /* Common */ = {
@@ -686,7 +686,6 @@
 				E7A1271A2B8F854D004D877A /* APIError.swift in Sources */,
 				E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */,
 				E79045B22B0E088100F0936B /* LocationManager.swift in Sources */,
-				E7178E852B0738C8008C85A3 /* FavoriteFeature.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E755E4282F4DD86900EF8E2F /* CheckInView.swift in Sources */,
 				E71A82792BE200B700C16FEE /* BuildClient.swift in Sources */,
@@ -696,12 +695,13 @@
 				E7A127182B8F7A53004D877A /* InitialFeature.swift in Sources */,
 				E72505752BB71786002BFB34 /* BannerViewController.swift in Sources */,
 				E71D093B2AF39076009C132E /* PilgrimageDetailView.swift in Sources */,
-				E7CAE0E42B1E19B00024EB40 /* FavoritePilgrimageView.swift in Sources */,
+				E795AAB72F4DEA460062C9CE /* FavoriteView.swift in Sources */,
 				E7EA0F572BB5C49500EC8A93 /* SafariEffect.swift in Sources */,
 				E755E42A2F4DD95C00EF8E2F /* CheckInContentView.swift in Sources */,
 				E7A7E7C82BD01BF200E19E8B /* PilgrimageDetailFeature.swift in Sources */,
 				E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */,
 				E7A7E7CA2BD01CA400E19E8B /* PilgrimageCardFeature.swift in Sources */,
+				E795AAB52F4DEA390062C9CE /* FavoriteViewModel.swift in Sources */,
 				E7B931482F4749AB00B94C75 /* MenuView.swift in Sources */,
 				E7FDAA172AE230310056AA5B /* UINavigationControllerExtension.swift in Sources */,
 				E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */,
