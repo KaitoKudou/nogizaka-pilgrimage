@@ -38,5 +38,4 @@ struct CurrentLocationButton: View {
 
 #Preview {
     CurrentLocationButton(didTap: {})
-        .previewLayout(.sizeThatFits)
 }

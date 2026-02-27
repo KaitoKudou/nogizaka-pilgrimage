@@ -5,16 +5,11 @@
 //  Created by 工藤 海斗 on 2023/10/30.
 //
 
-import ComposableArchitecture
 import SwiftUI
 
 struct PilgrimageCardView: View {
     @Environment(\.theme) private var theme
-    @State var store = Store(
-        initialState: PilgrimageCardFeature.State()
-    ) {
-        PilgrimageCardFeature()
-    }
+    @State private var viewModel = PilgrimageCardViewModel()
     let pilgrimage: PilgrimageInformation
 
     var body: some View {
@@ -46,20 +41,20 @@ struct PilgrimageCardView: View {
                     Spacer()
 
                     Button {
-                        store.send(.favoriteButtonTapped(pilgrimage))
+                        Task { await viewModel.toggleFavorite(pilgrimage) }
                     } label: {
-                        if store.isLoading {
+                        if viewModel.isLoading {
                             // 通信中の場合、インジケータを表示
                             ProgressView()
-                        } else if store.favorited {
+                        } else if viewModel.favorited {
                             Image(systemName: "heart.fill")
                                 .foregroundStyle(.red)
-                        } else if !store.favorited {
+                        } else {
                             Image(systemName: "heart")
                                 .foregroundStyle(R.color.tab_primary_off()!.color)
                         }
                     }
-                    .disabled(store.isLoading ? true : false)
+                    .disabled(viewModel.isLoading)
                 }
                 .padding(.bottom, theme.margins.spacing_m)
 
@@ -71,11 +66,9 @@ struct PilgrimageCardView: View {
                 HStack(spacing: theme.margins.spacing_xs) {
                     Group {
                         Button {
-                            store.send(
-                                .routeButtonTapped(
-                                    latitude: pilgrimage.latitude,
-                                    longitude: pilgrimage.longitude
-                                )
+                            viewModel.showRouteDialog(
+                                latitude: pilgrimage.latitude,
+                                longitude: pilgrimage.longitude
                             )
                         } label: {
                             Text(R.string.localizable.common_btn_route_search_text())
@@ -95,20 +88,24 @@ struct PilgrimageCardView: View {
                 }
             }
             .onAppear {
-                store.send(.onAppear(pilgrimage))
+                Task { await viewModel.onAppear(pilgrimage: pilgrimage) }
             }
             .alert(
-                $store.scope(
-                    state: \.destination?.alert,
-                    action: \.destination.alert
-                )
-            )
+                viewModel.activeAlert?.title ?? "",
+                isPresented: $viewModel.isAlertPresented
+            ) {}
             .confirmationDialog(
-                $store.scope(
-                    state: \.destination?.confirmationDialog,
-                    action: \.destination.confirmationDialog
-                )
-            )
+                "",
+                isPresented: $viewModel.isConfirmationDialogPresented
+            ) {
+                Button(R.string.localizable.confirmation_dialog_apple_map()) {
+                    Task { await viewModel.openAppleMaps() }
+                }
+                Button(R.string.localizable.confirmation_dialog_google_maps()) {
+                    Task { await viewModel.openGoogleMaps() }
+                }
+                Button(R.string.localizable.confirmation_dialog_cancel(), role: .cancel) {}
+            }
         }
         .padding(.all)
         .background(.white)
