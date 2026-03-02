@@ -5,6 +5,7 @@
 //  Created by k_kudo on 2026/02/26.
 //
 
+import AppLogger
 import Dependencies
 import FirebaseFirestore
 import UIKit
@@ -90,7 +91,7 @@ final class PilgrimageListViewModel {
             let documents = try await querySnapshot.getDocuments().documents
             favoriteStatus[pilgrimage.id] = documents.contains { $0.documentID == pilgrimage.name }
         } catch {
-            // サイレントに失敗
+            #log(.error, "verifyFavorited failed: \(error.localizedDescription)")
         }
     }
 

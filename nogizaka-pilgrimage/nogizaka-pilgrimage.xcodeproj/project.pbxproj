@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -52,6 +52,7 @@
 		E795AAD62F5055EC0062C9CE /* PilgrimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E795AAD52F5055EC0062C9CE /* PilgrimageView.swift */; };
 		E795AADA2F51A2AB0062C9CE /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = E795AAD92F51A2AB0062C9CE /* Dependencies */; };
 		E795AADC2F51A2AB0062C9CE /* DependenciesMacros in Frameworks */ = {isa = PBXBuildFile; productRef = E795AADB2F51A2AB0062C9CE /* DependenciesMacros */; };
+		E795AAF12F54A0000062C9CE /* AppLogger in Frameworks */ = {isa = PBXBuildFile; productRef = E795AAF22F54A0000062C9CE /* AppLogger */; };
 		E79D8C922E43859C006170C3 /* ClusterMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D8C912E43859C006170C3 /* ClusterMapView.swift */; };
 		E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */; };
 		E7A1271A2B8F854D004D877A /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A127192B8F854D004D877A /* APIError.swift */; };
@@ -136,6 +137,11 @@
 		E795AACF2F5055BE0062C9CE /* PilgrimageListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageListContentView.swift; sourceTree = "<group>"; };
 		E795AAD32F5055D80062C9CE /* PilgrimageMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapView.swift; sourceTree = "<group>"; };
 		E795AAD52F5055EC0062C9CE /* PilgrimageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageView.swift; sourceTree = "<group>"; };
+		E795AADE2F5491010062C9CE /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		E795AAE72F5492EA0062C9CE /* LogMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMacro.swift; sourceTree = "<group>"; };
+		E795AAE92F5492F40062C9CE /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
+		E795AAEB2F5493000062C9CE /* LogMacroPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMacroPlugin.swift; sourceTree = "<group>"; };
+		E795AAEE2F5493210062C9CE /* LogMacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMacroTests.swift; sourceTree = "<group>"; };
 		E79D8C912E43859C006170C3 /* ClusterMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterMapView.swift; sourceTree = "<group>"; };
 		E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageAnnotation.swift; sourceTree = "<group>"; };
 		E7A127192B8F854D004D877A /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -158,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E795AAF12F54A0000062C9CE /* AppLogger in Frameworks */,
 				E747728F2D958B0100F659EF /* GoogleMobileAds in Frameworks */,
 				E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */,
 				E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */,
@@ -257,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				E76BF1622BD166E800A1CB97 /* .rswiftignore */,
+				E795AADD2F5490D80062C9CE /* AppLoggerMacro */,
 				E7C11D38295AEDF30051A1B9 /* BuildTools */,
 				E74934442959F20E0045AE39 /* nogizaka-pilgrimage */,
 				E74934552959F2120045AE39 /* nogizaka-pilgrimageTests */,
@@ -409,6 +417,58 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		E795AADD2F5490D80062C9CE /* AppLoggerMacro */ = {
+			isa = PBXGroup;
+			children = (
+				E795AAE22F5492A60062C9CE /* Sources */,
+				E795AAE12F5492930062C9CE /* Tests */,
+				E795AADE2F5491010062C9CE /* Package.swift */,
+			);
+			path = AppLoggerMacro;
+			sourceTree = "<group>";
+		};
+		E795AAE12F5492930062C9CE /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E795AAED2F5493090062C9CE /* AppLoggerTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		E795AAE22F5492A60062C9CE /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E795AAE62F5492D50062C9CE /* AppLogger */,
+				E795AAE52F5492CB0062C9CE /* AppLoggerMacros */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		E795AAE52F5492CB0062C9CE /* AppLoggerMacros */ = {
+			isa = PBXGroup;
+			children = (
+				E795AAEB2F5493000062C9CE /* LogMacroPlugin.swift */,
+			);
+			path = AppLoggerMacros;
+			sourceTree = "<group>";
+		};
+		E795AAE62F5492D50062C9CE /* AppLogger */ = {
+			isa = PBXGroup;
+			children = (
+				E795AAE72F5492EA0062C9CE /* LogMacro.swift */,
+				E795AAE92F5492F40062C9CE /* LogLevel.swift */,
+			);
+			path = AppLogger;
+			sourceTree = "<group>";
+		};
+		E795AAED2F5493090062C9CE /* AppLoggerTests */ = {
+			isa = PBXGroup;
+			children = (
+				E795AAEE2F5493210062C9CE /* LogMacroTests.swift */,
+			);
+			path = AppLoggerTests;
+			sourceTree = "<group>";
+		};
 		E7B931422F46053A00B94C75 /* IconLicense */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,6 +563,7 @@
 			);
 			name = "nogizaka-pilgrimage";
 			packageProductDependencies = (
+				E795AAF22F54A0000062C9CE /* AppLogger */,
 				E7FD73D32959FCD400347BA4 /* Rswift */,
 				E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */,
 				E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */,
@@ -591,6 +652,7 @@
 				E747728D2D958B0100F659EF /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				E7C72A642E5F517300FC2378 /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
 				E795AAD82F51A2AB0062C9CE /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				E795AAE02F5492490062C9CE /* XCLocalSwiftPackageReference "AppLoggerMacro" */,
 			);
 			productRefGroup = E74934432959F20E0045AE39 /* Products */;
 			projectDirPath = "";
@@ -810,6 +872,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EXPLICITLY_BUILT_MODULES = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -863,6 +926,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EXPLICITLY_BUILT_MODULES = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1059,6 +1123,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		E795AAE02F5492490062C9CE /* XCLocalSwiftPackageReference "AppLoggerMacro" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = AppLoggerMacro;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		E710931B2BE13DAA005482F7 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1130,6 +1201,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E795AAD82F51A2AB0062C9CE /* XCRemoteSwiftPackageReference "swift-dependencies" */;
 			productName = DependenciesMacros;
+		};
+		E795AAF22F54A0000062C9CE /* AppLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppLogger;
 		};
 		E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

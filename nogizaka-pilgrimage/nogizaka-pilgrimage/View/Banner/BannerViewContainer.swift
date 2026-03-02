@@ -5,6 +5,7 @@
 //  Created by 工藤 海斗 on 2025/03/27.
 //
 
+import AppLogger
 import GoogleMobileAds
 import SwiftUI
 
@@ -77,7 +78,7 @@ struct BannerViewContainer: UIViewControllerRepresentable {
 
         // MARK: - GADBannerViewDelegate methods
         func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
-            print("Banner failed to receive ad with error: \(error.localizedDescription)")
+            #log(.error, "Banner failed to receive ad: \(error.localizedDescription)")
         }
     }
 }

@@ -5,6 +5,7 @@
 //  Created by k_kudo on 2026/02/26.
 //
 
+import AppLogger
 import CoreLocation
 import Dependencies
 import FirebaseFirestore
@@ -131,7 +132,7 @@ final class PilgrimageDetailViewModel {
             let documents = try await querySnapshot.getDocuments().documents
             favorited = documents.contains { $0.documentID == pilgrimage.name }
         } catch {
-            // サイレントに失敗
+            #log(.error, "verifyFavorited failed: \(error.localizedDescription)")
         }
     }
 
@@ -146,7 +147,7 @@ final class PilgrimageDetailViewModel {
             let documents = try await querySnapshot.getDocuments().documents
             hasCheckedIn = documents.contains { $0.documentID == pilgrimage.name }
         } catch {
-            // サイレントに失敗
+            #log(.error, "verifyCheckedIn failed: \(error.localizedDescription)")
         }
     }
 
