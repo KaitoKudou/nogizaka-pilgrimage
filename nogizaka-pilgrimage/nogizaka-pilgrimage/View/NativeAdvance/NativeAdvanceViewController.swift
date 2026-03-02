@@ -5,6 +5,7 @@
 //  Created by 工藤 海斗 on 2024/04/18.
 //
 
+import AppLogger
 import GoogleMobileAds
 
 final class NativeAdvanceViewController: UIViewController {
@@ -93,6 +94,6 @@ extension NativeAdvanceViewController: NativeAdDelegate, NativeAdLoaderDelegate 
     }
 
     func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
-        print("\(adLoader) failed with error: \(error.localizedDescription)")
+        #log(.error, "AdLoader failed: \(error.localizedDescription)")
     }
 }

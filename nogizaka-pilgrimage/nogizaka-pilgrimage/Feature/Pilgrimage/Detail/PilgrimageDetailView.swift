@@ -5,7 +5,6 @@
 //  Created by 工藤 海斗 on 2023/11/02.
 //
 
-import ComposableArchitecture
 import SwiftUI
 import CoreLocation
 
@@ -13,11 +12,7 @@ struct PilgrimageDetailView: View {
     @Environment(\.theme) private var theme
     @State private var isShowAuthorizationAlert = false
     @EnvironmentObject private var locationManager: LocationManager
-    @State private var store = Store(
-        initialState: PilgrimageDetailFeature.State()
-    ) {
-        PilgrimageDetailFeature()
-    }
+    @State private var viewModel = PilgrimageDetailViewModel()
     private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
     let pilgrimage: PilgrimageInformation
 
@@ -44,12 +39,12 @@ struct PilgrimageDetailView: View {
                         Spacer()
 
                         Button {
-                            store.send(.favoriteButtonTapped(pilgrimage))
+                            Task { await viewModel.toggleFavorite(pilgrimage) }
                         } label: {
-                            if store.isLoading {
+                            if viewModel.isLoading {
                                 // 通信中の場合、インジケータを表示
                                 ProgressView()
-                            } else if store.favorited {
+                            } else if viewModel.favorited {
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.red)
                             } else {
@@ -68,33 +63,31 @@ struct PilgrimageDetailView: View {
                             return
                         }
 
-                        store.send(
-                            .checkInButtonTapped(
+                        Task {
+                            await viewModel.checkIn(
                                 pilgrimage: pilgrimage,
                                 userCoordinate: locationManager.userLocation!
                             )
-                        )
+                        }
                     } label: {
-                        Text(store.hasCheckedIn ?
+                        Text(viewModel.hasCheckedIn ?
                              R.string.localizable.has_check_in() :
                                 R.string.localizable.check_in_button()
                         )
                         .frame(height: theme.margins.spacing_xl)
                         .frame(maxWidth: .infinity)
                     }
-                    .disabled(store.hasCheckedIn)
+                    .disabled(viewModel.hasCheckedIn)
                     .alert(
-                        $store.scope(
-                            state: \.destination?.alert,
-                            action: \.destination.alert
-                        )
-                    )
+                        viewModel.activeAlert?.title ?? "",
+                        isPresented: $viewModel.isAlertPresented
+                    ) {}
                     .alert(R.string.localizable.alert_location(), isPresented: $isShowAuthorizationAlert) {
                     } message: {
                         EmptyView()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(store.hasCheckedIn ?
+                    .background(viewModel.hasCheckedIn ?
                                 R.color.tab_primary_off()!.color :
                                     R.color.text_secondary()!.color
                     )
@@ -121,7 +114,7 @@ struct PilgrimageDetailView: View {
                 .frame(width: adSize.size.width, height: adSize.size.height)
         }
         .onAppear {
-            store.send(.onAppear(pilgrimage))
+            Task { await viewModel.onAppear(pilgrimage: pilgrimage) }
         }
         .padding(.leading, theme.margins.spacing_m)
         .padding(.trailing, theme.margins.spacing_m)

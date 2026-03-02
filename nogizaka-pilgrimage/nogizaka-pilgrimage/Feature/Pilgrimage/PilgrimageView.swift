@@ -6,7 +6,6 @@
 //
 
 import AppTrackingTransparency
-import ComposableArchitecture
 import SwiftUI
 
 struct PilgrimageView: View {

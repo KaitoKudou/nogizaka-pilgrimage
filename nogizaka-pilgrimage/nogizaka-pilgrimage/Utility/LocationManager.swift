@@ -5,6 +5,7 @@
 //  Created by 工藤 海斗 on 2023/11/22.
 //
 
+import AppLogger
 import CoreLocation
 
 final class LocationManager: NSObject, ObservableObject {
@@ -77,6 +78,6 @@ extension LocationManager: CLLocationManagerDelegate {
 
     /// 位置情報取得失敗時に呼ばれる
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("didFailWithError error=\(error.localizedDescription)")
+        #log(.error, "didFailWithError: \(error.localizedDescription)")
     }
 }

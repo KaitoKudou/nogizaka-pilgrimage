@@ -8,7 +8,7 @@
 import UIKit
 
 // NavigationBarの戻るボタンをModifier化した場合のスワイプで前画面に戻れなくなる事象を回避
-extension UINavigationController: UIGestureRecognizerDelegate {
+extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
     override open func viewDidLoad() {
         super.viewDidLoad()
         interactivePopGestureRecognizer?.delegate = self
