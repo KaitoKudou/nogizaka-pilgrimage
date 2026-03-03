@@ -16,6 +16,11 @@
 		E72EA33D2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA33C2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift */; };
 		E72EA33F2F55E7D2007BFC81 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA33E2F55E7D2007BFC81 /* FavoriteRepository.swift */; };
 		E72EA3412F55E7DF007BFC81 /* FavoriteRepository+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3402F55E7DF007BFC81 /* FavoriteRepository+Live.swift */; };
+		E72EA3442F5703B1007BFC81 /* CheckInRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3432F5703B1007BFC81 /* CheckInRemoteDataStore.swift */; };
+		E72EA3462F5703C7007BFC81 /* CheckInRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3452F5703C7007BFC81 /* CheckInRepository.swift */; };
+		E72EA3482F57042C007BFC81 /* CheckInRepository+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3472F57042C007BFC81 /* CheckInRepository+Live.swift */; };
+		E72EA34A2F570441007BFC81 /* CheckInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3492F570441007BFC81 /* CheckInUseCase.swift */; };
+		E72EA34C2F570852007BFC81 /* CheckInLocalDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA34B2F570852007BFC81 /* CheckInLocalDataStore.swift */; };
 		E73E09122965C21E00A1204E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09112965C21E00A1204E /* MainView.swift */; };
 		E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E73E091A2965C77E00A1204E /* Colors.xcassets */; };
 		E73E092E2965D18700A1204E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E73E09302965D18700A1204E /* Localizable.strings */; };
@@ -104,6 +109,11 @@
 		E72EA33C2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRemoteDataStore.swift; sourceTree = "<group>"; };
 		E72EA33E2F55E7D2007BFC81 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
 		E72EA3402F55E7DF007BFC81 /* FavoriteRepository+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteRepository+Live.swift"; sourceTree = "<group>"; };
+		E72EA3432F5703B1007BFC81 /* CheckInRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInRemoteDataStore.swift; sourceTree = "<group>"; };
+		E72EA3452F5703C7007BFC81 /* CheckInRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInRepository.swift; sourceTree = "<group>"; };
+		E72EA3472F57042C007BFC81 /* CheckInRepository+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckInRepository+Live.swift"; sourceTree = "<group>"; };
+		E72EA3492F570441007BFC81 /* CheckInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInUseCase.swift; sourceTree = "<group>"; };
+		E72EA34B2F570852007BFC81 /* CheckInLocalDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInLocalDataStore.swift; sourceTree = "<group>"; };
 		E73E09112965C21E00A1204E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E73E091A2965C77E00A1204E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		E73E092F2965D18700A1204E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -244,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				E72EA3402F55E7DF007BFC81 /* FavoriteRepository+Live.swift */,
+				E72EA3472F57042C007BFC81 /* CheckInRepository+Live.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -261,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				E72EA33E2F55E7D2007BFC81 /* FavoriteRepository.swift */,
+				E72EA3452F5703C7007BFC81 /* CheckInRepository.swift */,
 			);
 			path = RepositoryProtocol;
 			sourceTree = "<group>";
@@ -269,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				E72EA3352F55D530007BFC81 /* RepositoryProtocol */,
+				E72EA3422F57037A007BFC81 /* UseCase */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -286,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				E72EA33A2F55E7A3007BFC81 /* FavoriteLocalDataStore.swift */,
+				E72EA34B2F570852007BFC81 /* CheckInLocalDataStore.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -294,8 +308,17 @@
 			isa = PBXGroup;
 			children = (
 				E72EA33C2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift */,
+				E72EA3432F5703B1007BFC81 /* CheckInRemoteDataStore.swift */,
 			);
 			path = Remote;
+			sourceTree = "<group>";
+		};
+		E72EA3422F57037A007BFC81 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				E72EA3492F570441007BFC81 /* CheckInUseCase.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		E73E090F2965C1FC00A1204E /* View */ = {
@@ -799,6 +822,7 @@
 				E72EA33D2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift in Sources */,
 				E7FDAA112AE177CB0056AA5B /* UIColorExtension.swift in Sources */,
 				E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */,
+				E72EA3482F57042C007BFC81 /* CheckInRepository+Live.swift in Sources */,
 				E795AAC82F50558E0062C9CE /* PilgrimageCardViewModel.swift in Sources */,
 				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
 				E755E4262F4DD85800EF8E2F /* CheckInViewModel.swift in Sources */,
@@ -823,13 +847,16 @@
 				E795AAB72F4DEA460062C9CE /* FavoriteView.swift in Sources */,
 				E7EA0F572BB5C49500EC8A93 /* SafariEffect.swift in Sources */,
 				E755E42A2F4DD95C00EF8E2F /* CheckInContentView.swift in Sources */,
+				E72EA34A2F570441007BFC81 /* CheckInUseCase.swift in Sources */,
 				E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */,
 				E795AAB52F4DEA390062C9CE /* FavoriteViewModel.swift in Sources */,
+				E72EA3462F5703C7007BFC81 /* CheckInRepository.swift in Sources */,
 				E7B931482F4749AB00B94C75 /* MenuView.swift in Sources */,
 				E7FDAA172AE230310056AA5B /* UINavigationControllerExtension.swift in Sources */,
 				E72EA33F2F55E7D2007BFC81 /* FavoriteRepository.swift in Sources */,
 				E795AAD02F5055BE0062C9CE /* PilgrimageListContentView.swift in Sources */,
 				E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */,
+				E72EA34C2F570852007BFC81 /* CheckInLocalDataStore.swift in Sources */,
 				E795AABC2F4F37830062C9CE /* LaunchViewModel.swift in Sources */,
 				E795AAD62F5055EC0062C9CE /* PilgrimageView.swift in Sources */,
 				E795AACA2F50559C0062C9CE /* PilgrimageCardView.swift in Sources */,
@@ -841,6 +868,7 @@
 				E72EA3412F55E7DF007BFC81 /* FavoriteRepository+Live.swift in Sources */,
 				E7FDAA002ADFDDFB0056AA5B /* PilgrimageInformation.swift in Sources */,
 				E76BF1652BD16FE700A1CB97 /* NativeAdvanceView.swift in Sources */,
+				E72EA3442F5703B1007BFC81 /* CheckInRemoteDataStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
