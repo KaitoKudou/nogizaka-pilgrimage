@@ -6,12 +6,14 @@
 //
 
 import Dependencies
-import FirebaseFirestore
+import Foundation
 
 @Observable
 final class FavoriteViewModel {
     @ObservationIgnored
     @Dependency(\.networkMonitor) var networkMonitor
+    @ObservationIgnored
+    @Dependency(FavoriteRepository.self) var favoriteRepository
 
     var favoritePilgrimages: [PilgrimageInformation] = []
     var isLoading = false
@@ -31,23 +33,12 @@ final class FavoriteViewModel {
 
         do {
             try await networkMonitor.monitorNetwork()
-
-            let uuid = await UIDevice.current.identifierForVendor!.uuidString
-            let querySnapshot = try await Firestore.firestore()
-                .collection("favorite-list")
-                .document(uuid)
-                .collection("list")
-                .getDocuments()
-
-            favoritePilgrimages = try querySnapshot.documents.map {
-                try $0.data(as: PilgrimageInformation.self)
-            }
+            favoritePilgrimages = try await favoriteRepository.fetchFavorites()
+        } catch let error as APIError {
+            alertMessage = error.localizedDescription
+            showAlert = true
         } catch {
-            if (error as NSError).domain == FirestoreErrorDomain {
-                alertMessage = APIError.fetchFavoritePilgrimagesError.localizedDescription
-            } else {
-                alertMessage = APIError.unknownError.localizedDescription
-            }
+            alertMessage = APIError.unknownError.localizedDescription
             showAlert = true
         }
     }
@@ -56,40 +47,22 @@ final class FavoriteViewModel {
         loadingItems.insert(pilgrimage.id)
         defer { loadingItems.remove(pilgrimage.id) }
 
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
-        let collection = Firestore.firestore()
-            .collection("favorite-list")
-            .document(uuid)
-            .collection("list")
-        let documentRef = collection.document(pilgrimage.name)
-
         do {
             try await networkMonitor.monitorNetwork()
 
-            if (try await collection.getDocuments().documents
-                .first(where: { $0.documentID == pilgrimage.name })) != nil {
-                try await documentRef.delete()
+            let exists = try await favoriteRepository.isFavorited(pilgrimage.name)
+            if exists {
+                try await favoriteRepository.removeFavorite(pilgrimage)
+                favoritePilgrimages.removeAll { $0.id == pilgrimage.id }
             } else {
-                let data: [String: Any?] = [
-                    "code": pilgrimage.code,
-                    "name": pilgrimage.name,
-                    "description": pilgrimage.description,
-                    "latitude": pilgrimage.latitude,
-                    "longitude": pilgrimage.longitude,
-                    "address": pilgrimage.address,
-                    "image_url": pilgrimage.imageURL?.absoluteString,
-                    "copyright": pilgrimage.copyright,
-                    "search_candidate_list": pilgrimage.searchCandidateList
-                ]
-                try await documentRef.setData(data as [String: Any])
+                try await favoriteRepository.addFavorite(pilgrimage)
+                favoritePilgrimages.append(pilgrimage)
             }
-            await fetchFavorites()
+        } catch let error as APIError {
+            alertMessage = error.localizedDescription
+            showAlert = true
         } catch {
-            if (error as NSError).domain == FirestoreErrorDomain {
-                alertMessage = APIError.updateFavoritePilgrimagesError.localizedDescription
-            } else {
-                alertMessage = APIError.unknownError.localizedDescription
-            }
+            alertMessage = APIError.unknownError.localizedDescription
             showAlert = true
         }
     }
