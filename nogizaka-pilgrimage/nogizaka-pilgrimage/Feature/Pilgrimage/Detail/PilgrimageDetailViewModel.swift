@@ -9,12 +9,14 @@ import AppLogger
 import CoreLocation
 import Dependencies
 import FirebaseFirestore
-import UIKit
+import Foundation
 
 @Observable
 final class PilgrimageDetailViewModel {
     @ObservationIgnored
     @Dependency(\.networkMonitor) var networkMonitor
+    @ObservationIgnored
+    @Dependency(FavoriteRepository.self) var favoriteRepository
 
     var isLoading = false
     var favorited = false
@@ -51,32 +53,18 @@ final class PilgrimageDetailViewModel {
         isLoading = true
         defer { isLoading = false }
 
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
-        let querySnapshot = Firestore.firestore().collection("favorite-list").document(uuid).collection("list")
-        let documentReference = querySnapshot.document(pilgrimage.name)
-
         do {
             try await networkMonitor.monitorNetwork()
 
-            if (try await querySnapshot.getDocuments().documents.first(where: { $0.documentID == pilgrimage.name })) != nil {
-                try await documentReference.delete()
+            let exists = try await favoriteRepository.isFavorited(pilgrimage.name)
+            if exists {
+                try await favoriteRepository.removeFavorite(pilgrimage)
                 favorited = false
             } else {
-                let data: [String: Any?] = [
-                    "code": pilgrimage.code,
-                    "name": pilgrimage.name,
-                    "description": pilgrimage.description,
-                    "latitude": pilgrimage.latitude,
-                    "longitude": pilgrimage.longitude,
-                    "address": pilgrimage.address,
-                    "image_url": pilgrimage.imageURL?.absoluteString,
-                    "copyright": pilgrimage.copyright,
-                    "search_candidate_list": pilgrimage.searchCandidateList
-                ]
-                try await documentReference.setData(data as [String: Any])
+                try await favoriteRepository.addFavorite(pilgrimage)
                 favorited = true
             }
-        } catch let error as NSError where error.domain == FirestoreErrorDomain {
+        } catch is APIError {
             activeAlert = .updateFavoritePilgrimagesError
         } catch {
             activeAlert = .networkError
@@ -122,15 +110,8 @@ final class PilgrimageDetailViewModel {
     }
 
     private func verifyFavorited(_ pilgrimage: PilgrimageInformation) async {
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
-        let querySnapshot = Firestore.firestore()
-            .collection("favorite-list")
-            .document(uuid)
-            .collection("list")
-
         do {
-            let documents = try await querySnapshot.getDocuments().documents
-            favorited = documents.contains { $0.documentID == pilgrimage.name }
+            favorited = try await favoriteRepository.isFavorited(pilgrimage.name)
         } catch {
             #log(.error, "verifyFavorited failed: \(error.localizedDescription)")
         }
