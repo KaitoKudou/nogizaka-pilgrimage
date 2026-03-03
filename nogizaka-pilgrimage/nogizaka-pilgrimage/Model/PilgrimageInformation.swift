@@ -8,7 +8,7 @@
 import CoreLocation
 import Foundation
 
-struct PilgrimageInformation: Hashable, Decodable {
+struct PilgrimageInformation: Hashable, Codable {
     let code: String
     let name: String
     let description: String

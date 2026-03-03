@@ -35,6 +35,9 @@ struct PilgrimageListView: View {
                 searchText = viewModel.searchText
                 viewModel.onAppear(pilgrimages: pilgrimages)
             }
+            .task {
+                await viewModel.loadFavoriteStatuses()
+            }
             .alert(
                 viewModel.activeAlert?.title ?? "",
                 isPresented: $viewModel.isAlertPresented
@@ -98,9 +101,6 @@ struct PilgrimageListView: View {
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 16)
                                 .id(pilgrimage.id)
-                            }
-                            .onAppear {
-                                Task { await viewModel.verifyFavorited(pilgrimage: pilgrimage) }
                             }
                         }
                     }

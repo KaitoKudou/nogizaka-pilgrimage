@@ -12,6 +12,21 @@
 		E7235A72297D75D500E1339A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7235A71297D75D500E1339A /* Theme.swift */; };
 		E72505732BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72505722BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift */; };
 		E72505752BB71786002BFB34 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72505742BB71786002BFB34 /* BannerViewController.swift */; };
+		E72EA33B2F55E7A3007BFC81 /* FavoriteLocalDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA33A2F55E7A3007BFC81 /* FavoriteLocalDataStore.swift */; };
+		E72EA33D2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA33C2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift */; };
+		E72EA33F2F55E7D2007BFC81 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA33E2F55E7D2007BFC81 /* FavoriteRepository.swift */; };
+		E72EA3412F55E7DF007BFC81 /* FavoriteRepository+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3402F55E7DF007BFC81 /* FavoriteRepository+Live.swift */; };
+		E72EA3442F5703B1007BFC81 /* CheckInRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3432F5703B1007BFC81 /* CheckInRemoteDataStore.swift */; };
+		E72EA3462F5703C7007BFC81 /* CheckInRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3452F5703C7007BFC81 /* CheckInRepository.swift */; };
+		E72EA3482F57042C007BFC81 /* CheckInRepository+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3472F57042C007BFC81 /* CheckInRepository+Live.swift */; };
+		E72EA34A2F570441007BFC81 /* CheckInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3492F570441007BFC81 /* CheckInUseCase.swift */; };
+		E72EA34C2F570852007BFC81 /* CheckInLocalDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA34B2F570852007BFC81 /* CheckInLocalDataStore.swift */; };
+		E72EA34E2F57166E007BFC81 /* PilgrimageRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA34D2F57166E007BFC81 /* PilgrimageRemoteDataStore.swift */; };
+		E72EA3502F571683007BFC81 /* PilgrimageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA34F2F571683007BFC81 /* PilgrimageRepository.swift */; };
+		E72EA3522F571698007BFC81 /* PilgrimageRepository+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3512F571698007BFC81 /* PilgrimageRepository+Live.swift */; };
+		E72EA3542F5716B2007BFC81 /* AppConfigRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3532F5716B2007BFC81 /* AppConfigRemoteDataStore.swift */; };
+		E72EA3562F5716C2007BFC81 /* AppConfigRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3552F5716C2007BFC81 /* AppConfigRepository.swift */; };
+		E72EA3582F5716D0007BFC81 /* AppConfigRepository+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3572F5716D0007BFC81 /* AppConfigRepository+Live.swift */; };
 		E73E09122965C21E00A1204E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09112965C21E00A1204E /* MainView.swift */; };
 		E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E73E091A2965C77E00A1204E /* Colors.xcassets */; };
 		E73E092E2965D18700A1204E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E73E09302965D18700A1204E /* Localizable.strings */; };
@@ -96,6 +111,21 @@
 		E72505702BB710F6002BFB34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E72505722BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewControllerWidthDelegate.swift; sourceTree = "<group>"; };
 		E72505742BB71786002BFB34 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		E72EA33A2F55E7A3007BFC81 /* FavoriteLocalDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocalDataStore.swift; sourceTree = "<group>"; };
+		E72EA33C2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRemoteDataStore.swift; sourceTree = "<group>"; };
+		E72EA33E2F55E7D2007BFC81 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
+		E72EA3402F55E7DF007BFC81 /* FavoriteRepository+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteRepository+Live.swift"; sourceTree = "<group>"; };
+		E72EA3432F5703B1007BFC81 /* CheckInRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInRemoteDataStore.swift; sourceTree = "<group>"; };
+		E72EA3452F5703C7007BFC81 /* CheckInRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInRepository.swift; sourceTree = "<group>"; };
+		E72EA3472F57042C007BFC81 /* CheckInRepository+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckInRepository+Live.swift"; sourceTree = "<group>"; };
+		E72EA3492F570441007BFC81 /* CheckInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInUseCase.swift; sourceTree = "<group>"; };
+		E72EA34B2F570852007BFC81 /* CheckInLocalDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInLocalDataStore.swift; sourceTree = "<group>"; };
+		E72EA34D2F57166E007BFC81 /* PilgrimageRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageRemoteDataStore.swift; sourceTree = "<group>"; };
+		E72EA34F2F571683007BFC81 /* PilgrimageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageRepository.swift; sourceTree = "<group>"; };
+		E72EA3512F571698007BFC81 /* PilgrimageRepository+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PilgrimageRepository+Live.swift"; sourceTree = "<group>"; };
+		E72EA3532F5716B2007BFC81 /* AppConfigRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigRemoteDataStore.swift; sourceTree = "<group>"; };
+		E72EA3552F5716C2007BFC81 /* AppConfigRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigRepository.swift; sourceTree = "<group>"; };
+		E72EA3572F5716D0007BFC81 /* AppConfigRepository+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfigRepository+Live.swift"; sourceTree = "<group>"; };
 		E73E09112965C21E00A1204E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E73E091A2965C77E00A1204E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		E73E092F2965D18700A1204E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -232,6 +262,83 @@
 			path = Banner;
 			sourceTree = "<group>";
 		};
+		E72EA3332F55D514007BFC81 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				E72EA3402F55E7DF007BFC81 /* FavoriteRepository+Live.swift */,
+				E72EA3472F57042C007BFC81 /* CheckInRepository+Live.swift */,
+				E72EA3512F571698007BFC81 /* PilgrimageRepository+Live.swift */,
+				E72EA3572F5716D0007BFC81 /* AppConfigRepository+Live.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		E72EA3342F55D514007BFC81 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E72EA3372F55E75A007BFC81 /* DataStore */,
+				E72EA3332F55D514007BFC81 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E72EA3352F55D530007BFC81 /* RepositoryProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				E72EA33E2F55E7D2007BFC81 /* FavoriteRepository.swift */,
+				E72EA3452F5703C7007BFC81 /* CheckInRepository.swift */,
+				E72EA34F2F571683007BFC81 /* PilgrimageRepository.swift */,
+				E72EA3552F5716C2007BFC81 /* AppConfigRepository.swift */,
+			);
+			path = RepositoryProtocol;
+			sourceTree = "<group>";
+		};
+		E72EA3362F55D530007BFC81 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E72EA3352F55D530007BFC81 /* RepositoryProtocol */,
+				E72EA3422F57037A007BFC81 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		E72EA3372F55E75A007BFC81 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				E72EA3382F55E76C007BFC81 /* Local */,
+				E72EA3392F55E77E007BFC81 /* Remote */,
+			);
+			path = DataStore;
+			sourceTree = "<group>";
+		};
+		E72EA3382F55E76C007BFC81 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				E72EA33A2F55E7A3007BFC81 /* FavoriteLocalDataStore.swift */,
+				E72EA34B2F570852007BFC81 /* CheckInLocalDataStore.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		E72EA3392F55E77E007BFC81 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				E72EA33C2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift */,
+				E72EA3432F5703B1007BFC81 /* CheckInRemoteDataStore.swift */,
+				E72EA34D2F57166E007BFC81 /* PilgrimageRemoteDataStore.swift */,
+				E72EA3532F5716B2007BFC81 /* AppConfigRemoteDataStore.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		E72EA3422F57037A007BFC81 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				E72EA3492F570441007BFC81 /* CheckInUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		E73E090F2965C1FC00A1204E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +400,8 @@
 				E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */,
 				E7FDAA0D2AE177140056AA5B /* Extension */,
 				E7235A70297D75B000E1339A /* Utility */,
+				E72EA3342F55D514007BFC81 /* Data */,
+				E72EA3362F55D530007BFC81 /* Domain */,
 				E7178E832B073863008C85A3 /* Feature */,
 				E73E091C2965CA0A00A1204E /* Resource */,
 				E7FDA9FE2ADFDDA10056AA5B /* Model */,
@@ -725,23 +834,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7B931462F473AA900B94C75 /* MenuViewModel.swift in Sources */,
+				E72EA33B2F55E7A3007BFC81 /* FavoriteLocalDataStore.swift in Sources */,
 				E757BB042E8AD58500035318 /* ReadableContentGuideModifier.swift in Sources */,
 				E795AACE2F5055B40062C9CE /* PilgrimageListView.swift in Sources */,
+				E72EA33D2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift in Sources */,
 				E7FDAA112AE177CB0056AA5B /* UIColorExtension.swift in Sources */,
+				E72EA34E2F57166E007BFC81 /* PilgrimageRemoteDataStore.swift in Sources */,
 				E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */,
+				E72EA3482F57042C007BFC81 /* CheckInRepository+Live.swift in Sources */,
 				E795AAC82F50558E0062C9CE /* PilgrimageCardViewModel.swift in Sources */,
 				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
 				E755E4262F4DD85800EF8E2F /* CheckInViewModel.swift in Sources */,
+				E72EA3522F571698007BFC81 /* PilgrimageRepository+Live.swift in Sources */,
 				E795AABE2F4F37B50062C9CE /* LaunchView.swift in Sources */,
+				E72EA3562F5716C2007BFC81 /* AppConfigRepository.swift in Sources */,
 				E795AAC42F50556B0062C9CE /* PilgrimageDetailViewModel.swift in Sources */,
 				E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */,
 				E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */,
+				E72EA3542F5716B2007BFC81 /* AppConfigRemoteDataStore.swift in Sources */,
 				E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */,
 				E7A1271A2B8F854D004D877A /* APIError.swift in Sources */,
 				E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */,
 				E79045B22B0E088100F0936B /* LocationManager.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E755E4282F4DD86900EF8E2F /* CheckInView.swift in Sources */,
+				E72EA3502F571683007BFC81 /* PilgrimageRepository.swift in Sources */,
 				E795AACC2F5055AA0062C9CE /* PilgrimageListViewModel.swift in Sources */,
 				E71A82792BE200B700C16FEE /* BuildClient.swift in Sources */,
 				E79D8C922E43859C006170C3 /* ClusterMapView.swift in Sources */,
@@ -753,12 +870,17 @@
 				E795AAB72F4DEA460062C9CE /* FavoriteView.swift in Sources */,
 				E7EA0F572BB5C49500EC8A93 /* SafariEffect.swift in Sources */,
 				E755E42A2F4DD95C00EF8E2F /* CheckInContentView.swift in Sources */,
+				E72EA34A2F570441007BFC81 /* CheckInUseCase.swift in Sources */,
 				E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */,
 				E795AAB52F4DEA390062C9CE /* FavoriteViewModel.swift in Sources */,
+				E72EA3462F5703C7007BFC81 /* CheckInRepository.swift in Sources */,
 				E7B931482F4749AB00B94C75 /* MenuView.swift in Sources */,
 				E7FDAA172AE230310056AA5B /* UINavigationControllerExtension.swift in Sources */,
+				E72EA3582F5716D0007BFC81 /* AppConfigRepository+Live.swift in Sources */,
+				E72EA33F2F55E7D2007BFC81 /* FavoriteRepository.swift in Sources */,
 				E795AAD02F5055BE0062C9CE /* PilgrimageListContentView.swift in Sources */,
 				E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */,
+				E72EA34C2F570852007BFC81 /* CheckInLocalDataStore.swift in Sources */,
 				E795AABC2F4F37830062C9CE /* LaunchViewModel.swift in Sources */,
 				E795AAD62F5055EC0062C9CE /* PilgrimageView.swift in Sources */,
 				E795AACA2F50559C0062C9CE /* PilgrimageCardView.swift in Sources */,
@@ -767,8 +889,10 @@
 				E7235A72297D75D500E1339A /* Theme.swift in Sources */,
 				E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */,
 				E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */,
+				E72EA3412F55E7DF007BFC81 /* FavoriteRepository+Live.swift in Sources */,
 				E7FDAA002ADFDDFB0056AA5B /* PilgrimageInformation.swift in Sources */,
 				E76BF1652BD16FE700A1CB97 /* NativeAdvanceView.swift in Sources */,
+				E72EA3442F5703B1007BFC81 /* CheckInRemoteDataStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

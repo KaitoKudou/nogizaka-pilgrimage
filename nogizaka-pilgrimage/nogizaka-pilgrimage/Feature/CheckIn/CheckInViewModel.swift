@@ -5,12 +5,14 @@
 //  Created by k_kudo on 2026/02/24.
 //
 
-import FirebaseFirestore
+import Dependencies
 import Foundation
-import UIKit
 
 @Observable
 final class CheckInViewModel {
+    @ObservationIgnored
+    @Dependency(CheckInRepository.self) var checkInRepository
+
     var checkedInPilgrimages: [PilgrimageInformation] = []
     var isLoading = false
     var alertMessage: String?
@@ -21,22 +23,12 @@ final class CheckInViewModel {
         defer { isLoading = false }
 
         do {
-            let uuid = await UIDevice.current.identifierForVendor!.uuidString
-            let querySnapshot = try await Firestore.firestore()
-                .collection("checked-in-list")
-                .document(uuid)
-                .collection("list")
-                .getDocuments()
-
-            checkedInPilgrimages = try querySnapshot.documents.map {
-                try $0.data(as: PilgrimageInformation.self)
-            }
+            checkedInPilgrimages = try await checkInRepository.fetchCheckedInPilgrimages()
+        } catch is APIError {
+            alertMessage = APIError.fetchCheckedInError.localizedDescription
+            showAlert = true
         } catch {
-            if (error as NSError).domain == FirestoreErrorDomain {
-                alertMessage = APIError.fetchCheckedInError.localizedDescription
-            } else {
-                alertMessage = APIError.unknownError.localizedDescription
-            }
+            alertMessage = APIError.unknownError.localizedDescription
             showAlert = true
         }
     }

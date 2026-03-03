@@ -47,12 +47,16 @@ final class SomeViewModel {
 
 ```swift
 @DependencyClient
-struct SomeClient: DependencyKey {
-    static var liveValue = Self(
-        fetchItems: { /* Firebase 実装 */ }
-    )
-
+struct SomeClient {
     var fetchItems: () async throws -> [Item]
+}
+
+extension SomeClient: DependencyKey {
+    static let liveValue: Self = {
+        return .init(
+            fetchItems: { /* Firebase 実装 */ }
+        )
+    }()
 }
 ```
 
@@ -82,22 +86,27 @@ Domain/           # Domain層（ビジネスエンティティ・ルール）
 │   └── APIError.swift
 ├── UseCase/
 │   └── CheckInUseCase.swift      # struct定義 + liveValue
-└── Repository/                   # @DependencyClient struct（インターフェース）
+└── RepositoryProtocol/            # @DependencyClient struct（インターフェース）
     ├── PilgrimageRepository.swift
     ├── CheckInRepository.swift
-    └── FavoriteRepository.swift
+    ├── FavoriteRepository.swift
+    └── AppConfigRepository.swift
 
 Data/             # Data層（Repository実装・DataStore）
 ├── Repository/                   # extension + liveValue（Firestore実装）
 │   ├── PilgrimageRepository+Live.swift
 │   ├── CheckInRepository+Live.swift
-│   └── FavoriteRepository+Live.swift
+│   ├── FavoriteRepository+Live.swift
+│   └── AppConfigRepository+Live.swift
 └── DataStore/
     ├── Remote/
     │   ├── PilgrimageRemoteDataStore.swift
     │   ├── CheckInRemoteDataStore.swift
-    │   └── FavoriteRemoteDataStore.swift
-    └── Cache/                    # Firebaseキャッシュ対応時に追加
+    │   ├── FavoriteRemoteDataStore.swift
+    │   └── AppConfigRemoteDataStore.swift
+    └── Local/                    # ローカルキャッシュ（インメモリ → SwiftData予定）
+        ├── FavoriteLocalDataStore.swift
+        └── CheckInLocalDataStore.swift
 
 Utility/          # 既存のまま（LocationManager, Theme等）
 ```
@@ -119,7 +128,7 @@ Feature → Domain → Data
 
 ### Repositoryの指針
 
-- `Domain/Repository/` — `@DependencyClient` struct 定義（インターフェース）
+- `Domain/RepositoryProtocol/` — `@DependencyClient` struct 定義（インターフェース）
 - `Data/Repository/` — `extension + liveValue`（Firestore実装）
 - 読み取りも書き込みも Repository が担う（UseCase 経由不要）
 
@@ -140,4 +149,5 @@ Swift Package Manager を使用。TCA 廃止後は `Package.swift` に直接 `sw
 
 ## Firebase キャッシュ方針
 
-（TCA 剥がし完了後に決定・追記する）
+- Phase 1（実装済み）: インメモリキャッシュ（`FavoriteLocalDataStore` / `CheckInLocalDataStore` — actor ベース）
+- Phase 2（予定）: SwiftData 導入、聖地データのローカルキャッシュ + TTL、お気に入りを完全ローカル化（ID のみ保持）

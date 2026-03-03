@@ -8,13 +8,18 @@
 import AppLogger
 import CoreLocation
 import Dependencies
-import FirebaseFirestore
-import UIKit
+import Foundation
 
 @Observable
 final class PilgrimageDetailViewModel {
     @ObservationIgnored
     @Dependency(\.networkMonitor) var networkMonitor
+    @ObservationIgnored
+    @Dependency(FavoriteRepository.self) var favoriteRepository
+    @ObservationIgnored
+    @Dependency(CheckInRepository.self) var checkInRepository
+    @ObservationIgnored
+    @Dependency(CheckInUseCase.self) var checkInUseCase
 
     var isLoading = false
     var favorited = false
@@ -51,32 +56,18 @@ final class PilgrimageDetailViewModel {
         isLoading = true
         defer { isLoading = false }
 
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
-        let querySnapshot = Firestore.firestore().collection("favorite-list").document(uuid).collection("list")
-        let documentReference = querySnapshot.document(pilgrimage.name)
-
         do {
             try await networkMonitor.monitorNetwork()
 
-            if (try await querySnapshot.getDocuments().documents.first(where: { $0.documentID == pilgrimage.name })) != nil {
-                try await documentReference.delete()
+            let exists = try await favoriteRepository.isFavorited(pilgrimage.name)
+            if exists {
+                try await favoriteRepository.removeFavorite(pilgrimage)
                 favorited = false
             } else {
-                let data: [String: Any?] = [
-                    "code": pilgrimage.code,
-                    "name": pilgrimage.name,
-                    "description": pilgrimage.description,
-                    "latitude": pilgrimage.latitude,
-                    "longitude": pilgrimage.longitude,
-                    "address": pilgrimage.address,
-                    "image_url": pilgrimage.imageURL?.absoluteString,
-                    "copyright": pilgrimage.copyright,
-                    "search_candidate_list": pilgrimage.searchCandidateList
-                ]
-                try await documentReference.setData(data as [String: Any])
+                try await favoriteRepository.addFavorite(pilgrimage)
                 favorited = true
             }
-        } catch let error as NSError where error.domain == FirestoreErrorDomain {
+        } catch is APIError {
             activeAlert = .updateFavoritePilgrimagesError
         } catch {
             activeAlert = .networkError
@@ -84,37 +75,17 @@ final class PilgrimageDetailViewModel {
     }
 
     func checkIn(pilgrimage: PilgrimageInformation, userCoordinate: CLLocationCoordinate2D) async {
-        guard isNearbyPilgrimage(userCoordinate: userCoordinate, pilgrimageCoordinate: pilgrimage.coordinate) else {
-            activeAlert = .notNearbyError
-            return
-        }
-
         isLoading = true
         defer { isLoading = false }
 
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
-        let querySnapshot = Firestore.firestore().collection("checked-in-list").document(uuid).collection("list")
-        let documentReference = querySnapshot.document(pilgrimage.name)
-
         do {
-            if (try await querySnapshot.getDocuments().documents.first(where: { $0.documentID == pilgrimage.name })) != nil {
-                hasCheckedIn = false
-            } else {
-                let data: [String: Any?] = [
-                    "code": pilgrimage.code,
-                    "name": pilgrimage.name,
-                    "description": pilgrimage.description,
-                    "latitude": pilgrimage.latitude,
-                    "longitude": pilgrimage.longitude,
-                    "address": pilgrimage.address,
-                    "image_url": pilgrimage.imageURL?.absoluteString,
-                    "copyright": pilgrimage.copyright,
-                    "search_candidate_list": pilgrimage.searchCandidateList
-                ]
-                try await documentReference.setData(data as [String: Any])
+            let isNewCheckIn = try await checkInUseCase.execute(pilgrimage, userCoordinate)
+            if isNewCheckIn {
                 hasCheckedIn = true
             }
-        } catch let error as NSError where error.domain == FirestoreErrorDomain {
+        } catch is CheckInError {
+            activeAlert = .notNearbyError
+        } catch is APIError {
             activeAlert = .updateCheckedInError
         } catch {
             activeAlert = .networkError
@@ -122,39 +93,18 @@ final class PilgrimageDetailViewModel {
     }
 
     private func verifyFavorited(_ pilgrimage: PilgrimageInformation) async {
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
-        let querySnapshot = Firestore.firestore()
-            .collection("favorite-list")
-            .document(uuid)
-            .collection("list")
-
         do {
-            let documents = try await querySnapshot.getDocuments().documents
-            favorited = documents.contains { $0.documentID == pilgrimage.name }
+            favorited = try await favoriteRepository.isFavorited(pilgrimage.name)
         } catch {
             #log(.error, "verifyFavorited failed: \(error.localizedDescription)")
         }
     }
 
     private func verifyCheckedIn(_ pilgrimage: PilgrimageInformation) async {
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
-        let querySnapshot = Firestore.firestore()
-            .collection("checked-in-list")
-            .document(uuid)
-            .collection("list")
-
         do {
-            let documents = try await querySnapshot.getDocuments().documents
-            hasCheckedIn = documents.contains { $0.documentID == pilgrimage.name }
+            hasCheckedIn = try await checkInRepository.isCheckedIn(pilgrimage.name)
         } catch {
             #log(.error, "verifyCheckedIn failed: \(error.localizedDescription)")
         }
-    }
-
-    private func isNearbyPilgrimage(userCoordinate: CLLocationCoordinate2D, pilgrimageCoordinate: CLLocationCoordinate2D) -> Bool {
-        let distanceThreshold = 200.0
-        let userLocation = CLLocation(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
-        let pilgrimageLocation = CLLocation(latitude: pilgrimageCoordinate.latitude, longitude: pilgrimageCoordinate.longitude)
-        return userLocation.distance(from: pilgrimageLocation) < distanceThreshold
     }
 }

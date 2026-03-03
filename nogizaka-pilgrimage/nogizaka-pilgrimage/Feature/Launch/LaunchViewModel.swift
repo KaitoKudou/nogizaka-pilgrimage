@@ -6,7 +6,7 @@
 //
 
 import Dependencies
-import FirebaseFirestore
+import Foundation
 
 @Observable
 final class LaunchViewModel {
@@ -14,6 +14,10 @@ final class LaunchViewModel {
     @Dependency(\.buildClient) var buildClient
     @ObservationIgnored
     @Dependency(\.networkMonitor) var networkMonitor
+    @ObservationIgnored
+    @Dependency(PilgrimageRepository.self) var pilgrimageRepository
+    @ObservationIgnored
+    @Dependency(AppConfigRepository.self) var appConfigRepository
 
     var pilgrimages: [PilgrimageInformation] = []
     var isLoading = true
@@ -53,20 +57,12 @@ final class LaunchViewModel {
 
         do {
             try await networkMonitor.monitorNetwork()
-
-            let querySnapshot = try await Firestore.firestore()
-                .collection("pilgrimage-list")
-                .getDocuments()
-
-            pilgrimages = try querySnapshot.documents
-                .map { try $0.data(as: PilgrimageInformation.self) }
+            pilgrimages = try await pilgrimageRepository.fetchAllPilgrimages()
                 .sorted { $0.code < $1.code }
+        } catch is APIError {
+            activeAlert = .fetchError
         } catch {
-            if (error as NSError).domain == FirestoreErrorDomain {
-                activeAlert = .fetchError
-            } else {
-                activeAlert = .networkError
-            }
+            activeAlert = .networkError
         }
     }
 
@@ -77,12 +73,7 @@ final class LaunchViewModel {
     private func checkForUpdate() async {
         do {
             try await networkMonitor.monitorNetwork()
-
-            let appUpdateInfo = try await Firestore.firestore()
-                .collection("configure")
-                .document("update")
-                .getDocument()
-                .data(as: AppUpdateInformation.self)
+            let appUpdateInfo = try await appConfigRepository.fetchUpdateInfo()
 
             if appUpdateInfo.targetVersion.compare(buildClient.appVersion()) == .orderedDescending {
                 pendingUpdate = appUpdateInfo

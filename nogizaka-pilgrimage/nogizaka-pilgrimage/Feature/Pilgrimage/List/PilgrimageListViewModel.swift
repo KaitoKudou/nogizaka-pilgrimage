@@ -7,13 +7,14 @@
 
 import AppLogger
 import Dependencies
-import FirebaseFirestore
-import UIKit
+import Foundation
 
 @Observable
 final class PilgrimageListViewModel {
     @ObservationIgnored
     @Dependency(\.networkMonitor) var networkMonitor
+    @ObservationIgnored
+    @Dependency(FavoriteRepository.self) var favoriteRepository
 
     var pilgrimages: [PilgrimageInformation] = []
     var searchResults: [PilgrimageInformation] = []
@@ -21,7 +22,7 @@ final class PilgrimageListViewModel {
     var isLoading = false
     var scrollToIndex = 0
 
-    private var favoriteStatus: [Int: Bool] = [:]
+    private var favoritedIds: Set<Int> = []
     private var loadingItems: Set<Int> = []
 
     enum AlertType {
@@ -42,7 +43,7 @@ final class PilgrimageListViewModel {
     }
 
     func isFavorited(_ pilgrimage: PilgrimageInformation) -> Bool {
-        favoriteStatus[pilgrimage.id] ?? false
+        favoritedIds.contains(pilgrimage.id)
     }
 
     func isItemLoading(_ pilgrimage: PilgrimageInformation) -> Bool {
@@ -52,6 +53,15 @@ final class PilgrimageListViewModel {
     func onAppear(pilgrimages: [PilgrimageInformation]) {
         self.pilgrimages = pilgrimages
         searchPilgrimages(searchText)
+    }
+
+    func loadFavoriteStatuses() async {
+        do {
+            let favorites = try await favoriteRepository.fetchFavorites()
+            favoritedIds = Set(favorites.map(\.id))
+        } catch {
+            #log(.error, "loadFavoriteStatuses failed: \(error.localizedDescription)")
+        }
     }
 
     func searchPilgrimages(_ text: String) {
@@ -80,51 +90,21 @@ final class PilgrimageListViewModel {
         scrollToIndex = index
     }
 
-    func verifyFavorited(pilgrimage: PilgrimageInformation) async {
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
-        let querySnapshot = Firestore.firestore()
-            .collection("favorite-list")
-            .document(uuid)
-            .collection("list")
-
-        do {
-            let documents = try await querySnapshot.getDocuments().documents
-            favoriteStatus[pilgrimage.id] = documents.contains { $0.documentID == pilgrimage.name }
-        } catch {
-            #log(.error, "verifyFavorited failed: \(error.localizedDescription)")
-        }
-    }
-
     func toggleFavorite(pilgrimage: PilgrimageInformation) async {
         loadingItems.insert(pilgrimage.id)
         defer { loadingItems.remove(pilgrimage.id) }
 
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
-        let querySnapshot = Firestore.firestore().collection("favorite-list").document(uuid).collection("list")
-        let documentReference = querySnapshot.document(pilgrimage.name)
-
         do {
             try await networkMonitor.monitorNetwork()
 
-            if (try await querySnapshot.getDocuments().documents.first(where: { $0.documentID == pilgrimage.name })) != nil {
-                try await documentReference.delete()
-                favoriteStatus[pilgrimage.id] = false
+            if favoritedIds.contains(pilgrimage.id) {
+                try await favoriteRepository.removeFavorite(pilgrimage)
+                favoritedIds.remove(pilgrimage.id)
             } else {
-                let data: [String: Any?] = [
-                    "code": pilgrimage.code,
-                    "name": pilgrimage.name,
-                    "description": pilgrimage.description,
-                    "latitude": pilgrimage.latitude,
-                    "longitude": pilgrimage.longitude,
-                    "address": pilgrimage.address,
-                    "image_url": pilgrimage.imageURL?.absoluteString,
-                    "copyright": pilgrimage.copyright,
-                    "search_candidate_list": pilgrimage.searchCandidateList
-                ]
-                try await documentReference.setData(data as [String: Any])
-                favoriteStatus[pilgrimage.id] = true
+                try await favoriteRepository.addFavorite(pilgrimage)
+                favoritedIds.insert(pilgrimage.id)
             }
-        } catch let error as NSError where error.domain == FirestoreErrorDomain {
+        } catch is APIError {
             activeAlert = .updateFavoritePilgrimagesError
         } catch {
             activeAlert = .networkError
