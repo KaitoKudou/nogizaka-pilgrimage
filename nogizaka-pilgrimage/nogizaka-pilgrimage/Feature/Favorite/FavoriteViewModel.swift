@@ -11,11 +11,9 @@ import Foundation
 @Observable
 final class FavoriteViewModel {
     @ObservationIgnored
-    @Dependency(\.networkMonitor) var networkMonitor
-    @ObservationIgnored
     @Dependency(FavoriteRepository.self) var favoriteRepository
 
-    var favoritePilgrimages: [PilgrimageInformation] = []
+    var favoritePilgrimages: [PilgrimageEntity] = []
     var isLoading = false
     var alertMessage: String?
     var showAlert = false
@@ -23,7 +21,7 @@ final class FavoriteViewModel {
 
     private var loadingItems: Set<Int> = []
 
-    func isItemLoading(_ pilgrimage: PilgrimageInformation) -> Bool {
+    func isItemLoading(_ pilgrimage: PilgrimageEntity) -> Bool {
         loadingItems.contains(pilgrimage.id)
     }
 
@@ -32,7 +30,6 @@ final class FavoriteViewModel {
         defer { isLoading = false }
 
         do {
-            try await networkMonitor.monitorNetwork()
             favoritePilgrimages = try await favoriteRepository.fetchFavorites()
         } catch let error as APIError {
             alertMessage = error.localizedDescription
@@ -43,14 +40,12 @@ final class FavoriteViewModel {
         }
     }
 
-    func toggleFavorite(_ pilgrimage: PilgrimageInformation) async {
+    func toggleFavorite(_ pilgrimage: PilgrimageEntity) async {
         loadingItems.insert(pilgrimage.id)
         defer { loadingItems.remove(pilgrimage.id) }
 
         do {
-            try await networkMonitor.monitorNetwork()
-
-            let exists = try await favoriteRepository.isFavorited(pilgrimage.name)
+            let exists = try await favoriteRepository.isFavorited(pilgrimage.code)
             if exists {
                 try await favoriteRepository.removeFavorite(pilgrimage)
                 favoritePilgrimages.removeAll { $0.id == pilgrimage.id }

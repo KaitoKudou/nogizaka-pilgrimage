@@ -6,58 +6,46 @@
 //
 
 import Dependencies
-import FirebaseFirestore
 
 extension FavoriteRepository: DependencyKey {
     static let liveValue: Self = {
-        @Dependency(FavoriteRemoteDataStore.self) var remoteDataStore
         @Dependency(FavoriteLocalDataStore.self) var localDataStore
+        @Dependency(PilgrimageLocalDataStore.self) var pilgrimageLocalDataStore
 
         return .init(
             fetchFavorites: {
                 do {
-                    let result = try await remoteDataStore.fetchAll()
-                    await localDataStore.setAll(result)
-                    return result
+                    let codes = try await localDataStore.getAll()
+                    guard let objects = try await pilgrimageLocalDataStore.getAll() else {
+                        return []
+                    }
+                    let codeSet = Set(codes)
+                    return objects.filter { codeSet.contains($0.code) }.map { $0.toDomain() }
                 } catch {
-                    throw mapError(error, to: .fetchFavoritePilgrimagesError)
+                    throw APIError.unknownError
                 }
             },
-            isFavorited: { name in
-                if let cached = await localDataStore.getAll() {
-                    return cached.contains { $0.name == name }
-                }
+            isFavorited: { code in
                 do {
-                    let result = try await remoteDataStore.fetchAll()
-                    await localDataStore.setAll(result)
-                    return result.contains { $0.name == name }
+                    return try await localDataStore.contains(code)
                 } catch {
-                    throw mapError(error, to: .fetchFavoritePilgrimagesError)
+                    throw APIError.unknownError
                 }
             },
             addFavorite: { pilgrimage in
                 do {
-                    try await remoteDataStore.add(pilgrimage)
-                    await localDataStore.add(pilgrimage)
+                    try await localDataStore.add(pilgrimage.code)
                 } catch {
-                    throw mapError(error, to: .updateFavoritePilgrimagesError)
+                    throw APIError.unknownError
                 }
             },
             removeFavorite: { pilgrimage in
                 do {
-                    try await remoteDataStore.remove(pilgrimage.name)
-                    await localDataStore.remove(pilgrimage.id)
+                    try await localDataStore.remove(pilgrimage.code)
                 } catch {
-                    throw mapError(error, to: .updateFavoritePilgrimagesError)
+                    throw APIError.unknownError
                 }
             }
         )
     }()
-
-    private static func mapError(_ error: Error, to apiError: APIError) -> APIError {
-        if (error as NSError).domain == FirestoreErrorDomain {
-            return apiError
-        }
-        return .unknownError
-    }
 }

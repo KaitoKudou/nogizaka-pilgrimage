@@ -13,8 +13,6 @@ import Foundation
 @Observable
 final class PilgrimageDetailViewModel {
     @ObservationIgnored
-    @Dependency(\.networkMonitor) var networkMonitor
-    @ObservationIgnored
     @Dependency(FavoriteRepository.self) var favoriteRepository
     @ObservationIgnored
     @Dependency(CheckInRepository.self) var checkInRepository
@@ -27,15 +25,13 @@ final class PilgrimageDetailViewModel {
 
     enum AlertType {
         case notNearbyError
-        case updateCheckedInError
-        case updateFavoritePilgrimagesError
+        case updateError
         case networkError
 
         var title: String {
             switch self {
             case .notNearbyError: return R.string.localizable.alert_not_nearby()
-            case .updateCheckedInError: return APIError.updateCheckedInError.localizedDescription
-            case .updateFavoritePilgrimagesError: return APIError.updateFavoritePilgrimagesError.localizedDescription
+            case .updateError: return APIError.updateError.localizedDescription
             case .networkError: return APIError.networkError.localizedDescription
             }
         }
@@ -46,20 +42,18 @@ final class PilgrimageDetailViewModel {
         set { if !newValue { activeAlert = nil } }
     }
 
-    func onAppear(pilgrimage: PilgrimageInformation) async {
+    func onAppear(pilgrimage: PilgrimageEntity) async {
         async let fav: () = verifyFavorited(pilgrimage)
         async let check: () = verifyCheckedIn(pilgrimage)
         _ = await (fav, check)
     }
 
-    func toggleFavorite(_ pilgrimage: PilgrimageInformation) async {
+    func toggleFavorite(_ pilgrimage: PilgrimageEntity) async {
         isLoading = true
         defer { isLoading = false }
 
         do {
-            try await networkMonitor.monitorNetwork()
-
-            let exists = try await favoriteRepository.isFavorited(pilgrimage.name)
+            let exists = try await favoriteRepository.isFavorited(pilgrimage.code)
             if exists {
                 try await favoriteRepository.removeFavorite(pilgrimage)
                 favorited = false
@@ -68,13 +62,13 @@ final class PilgrimageDetailViewModel {
                 favorited = true
             }
         } catch is APIError {
-            activeAlert = .updateFavoritePilgrimagesError
+            activeAlert = .updateError
         } catch {
             activeAlert = .networkError
         }
     }
 
-    func checkIn(pilgrimage: PilgrimageInformation, userCoordinate: CLLocationCoordinate2D) async {
+    func checkIn(pilgrimage: PilgrimageEntity, userCoordinate: CLLocationCoordinate2D) async {
         isLoading = true
         defer { isLoading = false }
 
@@ -86,23 +80,23 @@ final class PilgrimageDetailViewModel {
         } catch is CheckInError {
             activeAlert = .notNearbyError
         } catch is APIError {
-            activeAlert = .updateCheckedInError
+            activeAlert = .updateError
         } catch {
             activeAlert = .networkError
         }
     }
 
-    private func verifyFavorited(_ pilgrimage: PilgrimageInformation) async {
+    private func verifyFavorited(_ pilgrimage: PilgrimageEntity) async {
         do {
-            favorited = try await favoriteRepository.isFavorited(pilgrimage.name)
+            favorited = try await favoriteRepository.isFavorited(pilgrimage.code)
         } catch {
             #log(.error, "verifyFavorited failed: \(error.localizedDescription)")
         }
     }
 
-    private func verifyCheckedIn(_ pilgrimage: PilgrimageInformation) async {
+    private func verifyCheckedIn(_ pilgrimage: PilgrimageEntity) async {
         do {
-            hasCheckedIn = try await checkInRepository.isCheckedIn(pilgrimage.name)
+            hasCheckedIn = try await checkInRepository.isCheckedIn(pilgrimage.code)
         } catch {
             #log(.error, "verifyCheckedIn failed: \(error.localizedDescription)")
         }

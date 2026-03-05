@@ -18,20 +18,22 @@ final class LaunchViewModel {
     @Dependency(PilgrimageRepository.self) var pilgrimageRepository
     @ObservationIgnored
     @Dependency(AppConfigRepository.self) var appConfigRepository
+    @ObservationIgnored
+    @Dependency(FavoriteMigrationClient.self) var favoriteMigration
 
-    var pilgrimages: [PilgrimageInformation] = []
+    var pilgrimages: [PilgrimageEntity] = []
     var isLoading = true
-    var pendingUpdate: AppUpdateInformation?
+    var pendingUpdate: AppUpdateInfoDTO?
 
     enum AlertType {
-        case updatePromotion(AppUpdateInformation)
+        case updatePromotion(AppUpdateInfoDTO)
         case fetchError
         case networkError
 
         var title: String {
             switch self {
             case .updatePromotion(let info): return info.title
-            case .fetchError: return APIError.fetchPilgrimagesError.localizedDescription
+            case .fetchError: return APIError.fetchError.localizedDescription
             case .networkError: return APIError.networkError.localizedDescription
             }
         }
@@ -48,6 +50,7 @@ final class LaunchViewModel {
 
     func initialize() async {
         await checkForUpdate()
+        await favoriteMigration.migrateIfNeeded()
         await fetchAllPilgrimages()
     }
 
@@ -56,7 +59,6 @@ final class LaunchViewModel {
         defer { isLoading = false }
 
         do {
-            try await networkMonitor.monitorNetwork()
             pilgrimages = try await pilgrimageRepository.fetchAllPilgrimages()
                 .sorted { $0.code < $1.code }
         } catch is APIError {

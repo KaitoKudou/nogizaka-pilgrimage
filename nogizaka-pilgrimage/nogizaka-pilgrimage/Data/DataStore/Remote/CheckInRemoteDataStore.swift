@@ -12,25 +12,28 @@ import UIKit
 
 @DependencyClient
 struct CheckInRemoteDataStore {
-    var fetchAll: () async throws -> [PilgrimageInformation]
-    var exists: (_ name: String) async throws -> Bool
-    var add: (_ pilgrimage: PilgrimageInformation) async throws -> Void
+    var fetchAll: () async throws -> [PilgrimageDTO]
+    var add: (_ dto: PilgrimageDTO) async throws -> Void
 }
 
 extension CheckInRemoteDataStore: DependencyKey {
     static let liveValue: Self = {
         return .init(
             fetchAll: {
-                let snapshot = try await collectionRef().getDocuments()
-                return try snapshot.documents.map { try $0.data(as: PilgrimageInformation.self) }
+                do {
+                    let snapshot = try await collectionRef().getDocuments()
+                    return try snapshot.documents.map { try $0.data(as: PilgrimageDTO.self) }
+                } catch {
+                    throw APIError.fetchError
+                }
             },
-            exists: { name in
-                let snapshot = try await collectionRef().getDocuments()
-                return snapshot.documents.contains { $0.documentID == name }
-            },
-            add: { pilgrimage in
-                let ref = await collectionRef().document(pilgrimage.name)
-                try ref.setData(from: pilgrimage)
+            add: { dto in
+                do {
+                    let ref = await collectionRef().document(dto.code)
+                    try ref.setData(from: dto)
+                } catch {
+                    throw APIError.updateError
+                }
             }
         )
     }()

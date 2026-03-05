@@ -11,18 +11,22 @@ import FirebaseFirestore
 
 @DependencyClient
 struct AppConfigRemoteDataStore {
-    var fetchUpdateInfo: () async throws -> AppUpdateInformation
+    var fetchUpdateInfo: () async throws -> AppUpdateInfoDTO
 }
 
 extension AppConfigRemoteDataStore: DependencyKey {
     static let liveValue: Self = {
         return .init(
             fetchUpdateInfo: {
-                return try await Firestore.firestore()
-                    .collection("configure")
-                    .document("update")
-                    .getDocument()
-                    .data(as: AppUpdateInformation.self)
+                do {
+                    return try await Firestore.firestore()
+                        .collection("configure")
+                        .document("update")
+                        .getDocument()
+                        .data(as: AppUpdateInfoDTO.self)
+                } catch {
+                    throw APIError.networkError
+                }
             }
         )
     }()

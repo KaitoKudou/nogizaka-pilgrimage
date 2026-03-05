@@ -12,12 +12,10 @@ import Foundation
 @Observable
 final class PilgrimageListViewModel {
     @ObservationIgnored
-    @Dependency(\.networkMonitor) var networkMonitor
-    @ObservationIgnored
     @Dependency(FavoriteRepository.self) var favoriteRepository
 
-    var pilgrimages: [PilgrimageInformation] = []
-    var searchResults: [PilgrimageInformation] = []
+    var pilgrimages: [PilgrimageEntity] = []
+    var searchResults: [PilgrimageEntity] = []
     var searchText = ""
     var isLoading = false
     var scrollToIndex = 0
@@ -26,12 +24,12 @@ final class PilgrimageListViewModel {
     private var loadingItems: Set<Int> = []
 
     enum AlertType {
-        case updateFavoritePilgrimagesError
+        case updateError
         case networkError
 
         var title: String {
             switch self {
-            case .updateFavoritePilgrimagesError: return APIError.updateFavoritePilgrimagesError.localizedDescription
+            case .updateError: return APIError.updateError.localizedDescription
             case .networkError: return APIError.networkError.localizedDescription
             }
         }
@@ -42,15 +40,15 @@ final class PilgrimageListViewModel {
         set { if !newValue { activeAlert = nil } }
     }
 
-    func isFavorited(_ pilgrimage: PilgrimageInformation) -> Bool {
+    func isFavorited(_ pilgrimage: PilgrimageEntity) -> Bool {
         favoritedIds.contains(pilgrimage.id)
     }
 
-    func isItemLoading(_ pilgrimage: PilgrimageInformation) -> Bool {
+    func isItemLoading(_ pilgrimage: PilgrimageEntity) -> Bool {
         loadingItems.contains(pilgrimage.id)
     }
 
-    func onAppear(pilgrimages: [PilgrimageInformation]) {
+    func onAppear(pilgrimages: [PilgrimageEntity]) {
         self.pilgrimages = pilgrimages
         searchPilgrimages(searchText)
     }
@@ -90,13 +88,11 @@ final class PilgrimageListViewModel {
         scrollToIndex = index
     }
 
-    func toggleFavorite(pilgrimage: PilgrimageInformation) async {
+    func toggleFavorite(pilgrimage: PilgrimageEntity) async {
         loadingItems.insert(pilgrimage.id)
         defer { loadingItems.remove(pilgrimage.id) }
 
         do {
-            try await networkMonitor.monitorNetwork()
-
             if favoritedIds.contains(pilgrimage.id) {
                 try await favoriteRepository.removeFavorite(pilgrimage)
                 favoritedIds.remove(pilgrimage.id)
@@ -105,7 +101,7 @@ final class PilgrimageListViewModel {
                 favoritedIds.insert(pilgrimage.id)
             }
         } catch is APIError {
-            activeAlert = .updateFavoritePilgrimagesError
+            activeAlert = .updateError
         } catch {
             activeAlert = .networkError
         }

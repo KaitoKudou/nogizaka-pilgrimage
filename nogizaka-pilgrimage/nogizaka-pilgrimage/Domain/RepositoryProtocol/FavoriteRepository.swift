@@ -10,8 +10,8 @@ import DependenciesMacros
 
 @DependencyClient
 struct FavoriteRepository {
-    var fetchFavorites: () async throws -> [PilgrimageInformation]
-    var isFavorited: (_ name: String) async throws -> Bool
-    var addFavorite: (_ pilgrimage: PilgrimageInformation) async throws -> Void
-    var removeFavorite: (_ pilgrimage: PilgrimageInformation) async throws -> Void
+    var fetchFavorites: () async throws -> [PilgrimageEntity]
+    var isFavorited: (_ code: String) async throws -> Bool
+    var addFavorite: (_ pilgrimage: PilgrimageEntity) async throws -> Void
+    var removeFavorite: (_ pilgrimage: PilgrimageEntity) async throws -> Void
 }

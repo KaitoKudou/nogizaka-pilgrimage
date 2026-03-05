@@ -12,8 +12,6 @@ import Foundation
 @Observable
 final class PilgrimageCardViewModel {
     @ObservationIgnored
-    @Dependency(\.networkMonitor) var networkMonitor
-    @ObservationIgnored
     @Dependency(\.routeActionClient) var routeActionClient
     @ObservationIgnored
     @Dependency(FavoriteRepository.self) var favoriteRepository
@@ -26,12 +24,12 @@ final class PilgrimageCardViewModel {
     private(set) var routeLongitude = ""
 
     enum AlertType {
-        case updateFavoritePilgrimagesError
+        case updateError
         case networkError
 
         var title: String {
             switch self {
-            case .updateFavoritePilgrimagesError: return APIError.updateFavoritePilgrimagesError.localizedDescription
+            case .updateError: return APIError.updateError.localizedDescription
             case .networkError: return APIError.networkError.localizedDescription
             }
         }
@@ -42,22 +40,20 @@ final class PilgrimageCardViewModel {
         set { if !newValue { activeAlert = nil } }
     }
 
-    func onAppear(pilgrimage: PilgrimageInformation) async {
+    func onAppear(pilgrimage: PilgrimageEntity) async {
         do {
-            favorited = try await favoriteRepository.isFavorited(pilgrimage.name)
+            favorited = try await favoriteRepository.isFavorited(pilgrimage.code)
         } catch {
             #log(.error, "verifyFavorited failed: \(error.localizedDescription)")
         }
     }
 
-    func toggleFavorite(_ pilgrimage: PilgrimageInformation) async {
+    func toggleFavorite(_ pilgrimage: PilgrimageEntity) async {
         isLoading = true
         defer { isLoading = false }
 
         do {
-            try await networkMonitor.monitorNetwork()
-
-            let exists = try await favoriteRepository.isFavorited(pilgrimage.name)
+            let exists = try await favoriteRepository.isFavorited(pilgrimage.code)
             if exists {
                 try await favoriteRepository.removeFavorite(pilgrimage)
                 favorited = false
@@ -66,7 +62,7 @@ final class PilgrimageCardViewModel {
                 favorited = true
             }
         } catch is APIError {
-            activeAlert = .updateFavoritePilgrimagesError
+            activeAlert = .updateError
         } catch {
             activeAlert = .networkError
         }

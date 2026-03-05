@@ -6,7 +6,6 @@
 //
 
 import Dependencies
-import FirebaseFirestore
 
 extension AppConfigRepository: DependencyKey {
     static let liveValue: Self = {
@@ -16,10 +15,9 @@ extension AppConfigRepository: DependencyKey {
             fetchUpdateInfo: {
                 do {
                     return try await remoteDataStore.fetchUpdateInfo()
+                } catch let error as APIError {
+                    throw error
                 } catch {
-                    if (error as NSError).domain == FirestoreErrorDomain {
-                        throw APIError.networkError
-                    }
                     throw APIError.unknownError
                 }
             }

@@ -7,29 +7,56 @@
 
 import Dependencies
 import DependenciesMacros
+import Foundation
+import SwiftData
 
 @DependencyClient
 struct CheckInLocalDataStore {
-    var getAll: () async -> [PilgrimageInformation]?
-    var setAll: (_ pilgrimages: [PilgrimageInformation]) async -> Void
-    var add: (_ pilgrimage: PilgrimageInformation) async -> Void
+    var getAll: () async throws -> [String]?
+    var setAll: (_ codes: [String]) async throws -> Void
+    var add: (_ code: String) async throws -> Void
+    var contains: (_ code: String) async throws -> Bool
 }
 
 extension CheckInLocalDataStore: DependencyKey {
+    private static let hasLoadedKey = "hasLoadedCheckInsOnce"
+
     static let liveValue: Self = {
-        let storage = CheckInLocalStorage()
+        @Dependency(SwiftDataClient.self) var swiftDataClient
+
         return .init(
-            getAll: { await storage.getAll() },
-            setAll: { await storage.setAll($0) },
-            add: { await storage.add($0) }
+            getAll: {
+                guard UserDefaults.standard.bool(forKey: hasLoadedKey) else { return nil }
+                let context = ModelContext(try swiftDataClient.container())
+                let descriptor = FetchDescriptor<CheckInObject>(
+                    sortBy: [SortDescriptor(\.checkedInAt)]
+                )
+                let objects = try context.fetch(descriptor)
+                return objects.map(\.pilgrimageCode)
+            },
+            setAll: { codes in
+                let context = ModelContext(try swiftDataClient.container())
+                try context.delete(model: CheckInObject.self)
+                for code in codes {
+                    context.insert(CheckInObject(pilgrimageCode: code))
+                }
+                try context.save()
+                UserDefaults.standard.set(true, forKey: hasLoadedKey)
+            },
+            add: { code in
+                let context = ModelContext(try swiftDataClient.container())
+                context.insert(CheckInObject(pilgrimageCode: code))
+                try context.save()
+            },
+            contains: { code in
+                let context = ModelContext(try swiftDataClient.container())
+                var descriptor = FetchDescriptor<CheckInObject>(
+                    predicate: #Predicate { $0.pilgrimageCode == code }
+                )
+                descriptor.fetchLimit = 1
+                let matched = try context.fetch(descriptor)
+                return !matched.isEmpty
+            }
         )
     }()
-}
-
-private actor CheckInLocalStorage {
-    private var pilgrimages: [PilgrimageInformation]?
-
-    func getAll() -> [PilgrimageInformation]? { pilgrimages }
-    func setAll(_ items: [PilgrimageInformation]) { pilgrimages = items }
-    func add(_ item: PilgrimageInformation) { pilgrimages?.append(item) }
 }
