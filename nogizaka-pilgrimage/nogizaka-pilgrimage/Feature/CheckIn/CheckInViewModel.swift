@@ -13,7 +13,7 @@ final class CheckInViewModel {
     @ObservationIgnored
     @Dependency(CheckInRepository.self) var checkInRepository
 
-    var checkedInPilgrimages: [PilgrimageInformation] = []
+    var checkedInPilgrimages: [PilgrimageEntity] = []
     var isLoading = false
     var alertMessage: String?
     var showAlert = false
@@ -25,7 +25,7 @@ final class CheckInViewModel {
         do {
             checkedInPilgrimages = try await checkInRepository.fetchCheckedInPilgrimages()
         } catch is APIError {
-            alertMessage = APIError.fetchCheckedInError.localizedDescription
+            alertMessage = APIError.fetchError.localizedDescription
             showAlert = true
         } catch {
             alertMessage = APIError.unknownError.localizedDescription

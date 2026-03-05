@@ -10,5 +10,5 @@ import DependenciesMacros
 
 @DependencyClient
 struct PilgrimageRepository {
-    var fetchAllPilgrimages: () async throws -> [PilgrimageInformation]
+    var fetchAllPilgrimages: () async throws -> [PilgrimageEntity]
 }

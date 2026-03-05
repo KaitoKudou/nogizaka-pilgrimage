@@ -18,11 +18,15 @@ extension AppConfigRemoteDataStore: DependencyKey {
     static let liveValue: Self = {
         return .init(
             fetchUpdateInfo: {
-                return try await Firestore.firestore()
-                    .collection("configure")
-                    .document("update")
-                    .getDocument()
-                    .data(as: AppUpdateInformation.self)
+                do {
+                    return try await Firestore.firestore()
+                        .collection("configure")
+                        .document("update")
+                        .getDocument()
+                        .data(as: AppUpdateInformation.self)
+                } catch {
+                    throw APIError.networkError
+                }
             }
         )
     }()

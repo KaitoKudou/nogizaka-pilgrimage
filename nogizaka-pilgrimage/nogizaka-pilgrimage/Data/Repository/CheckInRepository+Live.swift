@@ -6,50 +6,52 @@
 //
 
 import Dependencies
-import FirebaseFirestore
 
 extension CheckInRepository: DependencyKey {
     static let liveValue: Self = {
         @Dependency(CheckInRemoteDataStore.self) var remoteDataStore
         @Dependency(CheckInLocalDataStore.self) var localDataStore
+        @Dependency(PilgrimageLocalDataStore.self) var pilgrimageLocalDataStore
 
         return .init(
             fetchCheckedInPilgrimages: {
                 do {
-                    let result = try await remoteDataStore.fetchAll()
-                    await localDataStore.setAll(result)
-                    return result
+                    if let codes = try await localDataStore.getAll(),
+                       let objects = try await pilgrimageLocalDataStore.getAll() {
+                        let codeSet = Set(codes)
+                        return objects.filter { codeSet.contains($0.code) }.map { $0.toDomain() }
+                    }
+                    let dtos = try await remoteDataStore.fetchAll()
+                    let codes = dtos.map(\.code)
+                    try await localDataStore.setAll(codes)
+                    if let objects = try await pilgrimageLocalDataStore.getAll() {
+                        let codeSet = Set(codes)
+                        return objects.filter { codeSet.contains($0.code) }.map { $0.toDomain() }
+                    }
+                    return []
+                } catch let error as APIError {
+                    throw error
                 } catch {
-                    throw mapError(error, to: .fetchCheckedInError)
+                    throw APIError.unknownError
                 }
             },
-            isCheckedIn: { name in
-                if let cached = await localDataStore.getAll() {
-                    return cached.contains { $0.name == name }
-                }
+            isCheckedIn: { code in
                 do {
-                    let result = try await remoteDataStore.fetchAll()
-                    await localDataStore.setAll(result)
-                    return result.contains { $0.name == name }
+                    return try await localDataStore.contains(code)
                 } catch {
-                    throw mapError(error, to: .fetchCheckedInError)
+                    throw APIError.unknownError
                 }
             },
             addCheckIn: { pilgrimage in
                 do {
-                    try await remoteDataStore.add(pilgrimage)
-                    await localDataStore.add(pilgrimage)
+                    try await remoteDataStore.add(PilgrimageDTO(from: pilgrimage))
+                    try await localDataStore.add(pilgrimage.code)
+                } catch let error as APIError {
+                    throw error
                 } catch {
-                    throw mapError(error, to: .updateCheckedInError)
+                    throw APIError.unknownError
                 }
             }
         )
     }()
-
-    private static func mapError(_ error: Error, to apiError: APIError) -> APIError {
-        if (error as NSError).domain == FirestoreErrorDomain {
-            return apiError
-        }
-        return .unknownError
-    }
 }

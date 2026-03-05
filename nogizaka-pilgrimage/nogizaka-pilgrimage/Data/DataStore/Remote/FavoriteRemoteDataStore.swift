@@ -10,12 +10,10 @@ import DependenciesMacros
 import FirebaseFirestore
 import UIKit
 
+// MARK: - DEPRECATED: マイグレーション用に残す。次リリースで削除予定。
 @DependencyClient
 struct FavoriteRemoteDataStore {
-    var fetchAll: () async throws -> [PilgrimageInformation]
-    var exists: (_ name: String) async throws -> Bool
-    var add: (_ pilgrimage: PilgrimageInformation) async throws -> Void
-    var remove: (_ name: String) async throws -> Void
+    var fetchAll: () async throws -> [PilgrimageDTO]
 }
 
 extension FavoriteRemoteDataStore: DependencyKey {
@@ -23,18 +21,7 @@ extension FavoriteRemoteDataStore: DependencyKey {
         return .init(
             fetchAll: {
                 let snapshot = try await collectionRef().getDocuments()
-                return try snapshot.documents.map { try $0.data(as: PilgrimageInformation.self) }
-            },
-            exists: { name in
-                let snapshot = try await collectionRef().getDocuments()
-                return snapshot.documents.contains { $0.documentID == name }
-            },
-            add: { pilgrimage in
-                let ref = await collectionRef().document(pilgrimage.name)
-                try ref.setData(from: pilgrimage)
-            },
-            remove: { name in
-                try await collectionRef().document(name).delete()
+                return try snapshot.documents.map { try $0.data(as: PilgrimageDTO.self) }
             }
         )
     }()

@@ -11,17 +11,21 @@ import FirebaseFirestore
 
 @DependencyClient
 struct PilgrimageRemoteDataStore {
-    var fetchAll: () async throws -> [PilgrimageInformation]
+    var fetchAll: () async throws -> [PilgrimageDTO]
 }
 
 extension PilgrimageRemoteDataStore: DependencyKey {
     static let liveValue: Self = {
         return .init(
             fetchAll: {
-                let snapshot = try await Firestore.firestore()
-                    .collection("pilgrimage-list")
-                    .getDocuments()
-                return try snapshot.documents.map { try $0.data(as: PilgrimageInformation.self) }
+                do {
+                    let snapshot = try await Firestore.firestore()
+                        .collection("pilgrimage-list")
+                        .getDocuments()
+                    return try snapshot.documents.map { try $0.data(as: PilgrimageDTO.self) }
+                } catch {
+                    throw APIError.fetchError
+                }
             }
         )
     }()
