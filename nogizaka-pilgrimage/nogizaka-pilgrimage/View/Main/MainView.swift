@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     @Environment(\.theme) private var theme
     @StateObject private var locationManager = LocationManager()
-    let pilgrimages: [PilgrimageInformation]
+    let pilgrimages: [PilgrimageEntity]
 
     var body: some View {
         TabView {

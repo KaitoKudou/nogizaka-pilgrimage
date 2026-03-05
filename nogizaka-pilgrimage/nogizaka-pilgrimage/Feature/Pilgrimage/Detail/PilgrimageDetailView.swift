@@ -14,7 +14,7 @@ struct PilgrimageDetailView: View {
     @EnvironmentObject private var locationManager: LocationManager
     @State private var viewModel = PilgrimageDetailViewModel()
     private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
-    let pilgrimage: PilgrimageInformation
+    let pilgrimage: PilgrimageEntity
 
     var body: some View {
         VStack {

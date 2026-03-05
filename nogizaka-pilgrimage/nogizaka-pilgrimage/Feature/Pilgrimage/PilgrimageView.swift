@@ -9,7 +9,7 @@ import AppTrackingTransparency
 import SwiftUI
 
 struct PilgrimageView: View {
-    let pilgrimages: [PilgrimageInformation]
+    let pilgrimages: [PilgrimageEntity]
 
     var body: some View {
         ZStack {

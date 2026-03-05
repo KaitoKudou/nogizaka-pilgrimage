@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PilgrimageListContentView: View {
     @Environment(\.theme) private var theme
-    let pilgrimage: PilgrimageInformation
+    let pilgrimage: PilgrimageEntity
     let isLoading: Bool
     let favorited: Bool
     let onFavoriteToggle: () -> Void

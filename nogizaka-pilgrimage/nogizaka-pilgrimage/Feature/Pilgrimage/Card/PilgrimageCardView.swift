@@ -10,7 +10,7 @@ import SwiftUI
 struct PilgrimageCardView: View {
     @Environment(\.theme) private var theme
     @State private var viewModel = PilgrimageCardViewModel()
-    let pilgrimage: PilgrimageInformation
+    let pilgrimage: PilgrimageEntity
 
     var body: some View {
         HStack(spacing: theme.margins.spacing_m) {

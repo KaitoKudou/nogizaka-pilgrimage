@@ -14,7 +14,7 @@ struct PilgrimageMapView: View {
     @State private var centerCommand: ClusterMapView.CenterCommand?
     @State private var isShowAlert = false
     @EnvironmentObject private var locationManager: LocationManager
-    let pilgrimages: [PilgrimageInformation]
+    let pilgrimages: [PilgrimageEntity]
 
     var body: some View {
         GeometryReader { geometry in

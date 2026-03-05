@@ -12,7 +12,7 @@ struct ClusterMapView: UIViewRepresentable {
     @Binding var selectedIndex: Int
     @Binding var centerCommand: CenterCommand?
     let initialRegion: MKCoordinateRegion
-    let pilgrimages: [PilgrimageInformation]
+    let pilgrimages: [PilgrimageEntity]
     let showsUserLocation: Bool
     let onAnnotationSelected: (Int) -> Void
     

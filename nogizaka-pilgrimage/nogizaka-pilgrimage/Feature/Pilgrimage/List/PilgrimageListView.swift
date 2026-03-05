@@ -11,7 +11,7 @@ struct PilgrimageListView: View {
     @Environment(\.theme) private var theme
     @State private var searchText = ""
     @State private var viewModel = PilgrimageListViewModel()
-    let pilgrimages: [PilgrimageInformation]
+    let pilgrimages: [PilgrimageEntity]
 
     var body: some View {
         GeometryReader { geometry in
