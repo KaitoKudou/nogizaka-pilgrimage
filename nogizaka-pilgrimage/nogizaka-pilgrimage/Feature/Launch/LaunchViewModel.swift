@@ -23,10 +23,10 @@ final class LaunchViewModel {
 
     var pilgrimages: [PilgrimageEntity] = []
     var isLoading = true
-    var pendingUpdate: AppUpdateInformation?
+    var pendingUpdate: AppUpdateInfoDTO?
 
     enum AlertType {
-        case updatePromotion(AppUpdateInformation)
+        case updatePromotion(AppUpdateInfoDTO)
         case fetchError
         case networkError
 

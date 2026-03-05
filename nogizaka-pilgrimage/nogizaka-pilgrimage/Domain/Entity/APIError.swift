@@ -2,7 +2,7 @@
 //  APIError.swift
 //  nogizaka-pilgrimage
 //
-//  Created by 工藤 海斗 on 2024/02/29.
+//  Created by k_kudo on 2026/03/05.
 //
 
 import Foundation

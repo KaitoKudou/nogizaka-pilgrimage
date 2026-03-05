@@ -1,13 +1,13 @@
 //
-//  AppUpdateInformation.swift
+//  AppUpdateInfoDTO.swift
 //  nogizaka-pilgrimage
 //
-//  Created by 工藤 海斗 on 2024/05/06.
+//  Created by k_kudo on 2026/03/05.
 //
 
 import Foundation
 
-struct AppUpdateInformation: Decodable, Hashable {
+struct AppUpdateInfoDTO: Decodable, Hashable {
     let targetVersion: String
     let isForce: Bool
     let title: String
