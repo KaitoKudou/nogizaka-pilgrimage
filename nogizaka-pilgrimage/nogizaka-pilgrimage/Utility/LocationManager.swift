@@ -7,77 +7,84 @@
 
 import AppLogger
 import CoreLocation
+import Observation
 
-final class LocationManager: NSObject, ObservableObject {
+@Observable
+final class LocationManager {
     /// ユーザーの現在地の位置座標
-    @Published private(set) var userLocation: CLLocationCoordinate2D?
+    private(set) var userLocation: CLLocationCoordinate2D?
     /// 位置情報の利用許可状態
-    @Published private(set) var isLocationPermissionDenied: Bool = true
+    private(set) var isLocationPermissionDenied: Bool = true
 
-    private let locationManager = CLLocationManager()
+    private let delegate: Delegate
+    private let clLocationManager = CLLocationManager()
 
-    override init() {
-        super.init()
+    init() {
+        delegate = Delegate()
+        delegate.owner = self
     }
 
     func requestLocation() {
-        // initで設定を書くと，アプリ起動時に許可ダイアログが出てしまうためここ設定を行う
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 5
-        locationManager.delegate = self
+        // initで設定を書くと，アプリ起動時に許可ダイアログが出てしまうためここで設定を行う
+        clLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+        clLocationManager.distanceFilter = 5
+        clLocationManager.delegate = delegate
 
-        if locationManager.authorizationStatus == .notDetermined {
+        if clLocationManager.authorizationStatus == .notDetermined {
             // 位置情報を利用するか未設定の場合に利用許可を求めるアラートを表示
-            locationManager.requestWhenInUseAuthorization()
+            clLocationManager.requestWhenInUseAuthorization()
         } else {
-            switch locationManager.authorizationStatus {
+            switch clLocationManager.authorizationStatus {
             case .restricted, .denied:
                 isLocationPermissionDenied = true
             case .authorizedWhenInUse:
                 isLocationPermissionDenied = false
             default: break
             }
-            // ユーザーの現在地の配信を１回だけ要求する
-            locationManager.startUpdatingLocation()
+            clLocationManager.startUpdatingLocation()
         }
     }
 }
 
-extension LocationManager: CLLocationManagerDelegate {
-    /// 許可状態のステータスが変更された際に呼ばれる
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .notDetermined:
-            // 位置情報を利用するか未設定の場合に利用許可を求めるアラートを表示
-            manager.requestWhenInUseAuthorization()
-        case .restricted, .denied:
-            // .restricted: 位置情報を利用する権限がない
-            // .denied: ユーザが明示的に位置情報の利用を拒否
-            isLocationPermissionDenied = true
-        case .authorizedWhenInUse:
-            // アプリを使用している間のみ位置情報の利用を許可
-            // 位置情報利用が許可がされたらStateに通知
-            locationManager.startUpdatingLocation()
-            isLocationPermissionDenied = false
-        case .authorizedAlways:
-            // 位置情報の利用を常に許可
-            break
-        @unknown default:
-            break
-        }
-    }
+private extension LocationManager {
+    final class Delegate: NSObject, CLLocationManagerDelegate {
+        weak var owner: LocationManager?
 
-    /// 位置情報取得成功時に呼ばれる
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else {
-            locationManager.stopUpdatingLocation()
-            return
+        /// 許可状態のステータスが変更された際に呼ばれる
+        func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+            switch manager.authorizationStatus {
+            case .notDetermined:
+                // 位置情報を利用するか未設定の場合に利用許可を求めるアラートを表示
+                manager.requestWhenInUseAuthorization()
+            case .restricted, .denied:
+                // .restricted: 位置情報を利用する権限がない
+                // .denied: ユーザが明示的に位置情報の利用を拒否
+                owner?.isLocationPermissionDenied = true
+            case .authorizedWhenInUse:
+                // アプリを使用している間のみ位置情報の利用を許可
+                // 位置情報利用が許可がされたらStateに通知
+                manager.startUpdatingLocation()
+                owner?.isLocationPermissionDenied = false
+            case .authorizedAlways:
+                // 位置情報の利用を常に許可
+                break
+            @unknown default:
+                break
+            }
         }
-        userLocation = location.coordinate
-    }
 
-    /// 位置情報取得失敗時に呼ばれる
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        #log(.error, "didFailWithError: \(error.localizedDescription)")
+        /// 位置情報取得成功時に呼ばれる
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            guard let location = locations.last else {
+                manager.stopUpdatingLocation()
+                return
+            }
+            owner?.userLocation = location.coordinate
+        }
+
+        /// 位置情報取得失敗時に呼ばれる
+        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+            #log(.error, "didFailWithError: \(error.localizedDescription)")
+        }
     }
 }

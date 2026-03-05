@@ -43,7 +43,7 @@ final class MenuViewModel {
     }
 
     @ObservationIgnored
-    @Dependency(\.buildClient) private var buildClient
+    @Dependency(BuildClient.self) private var buildClient
 
     var appVersion: String {
         buildClient.appVersion()

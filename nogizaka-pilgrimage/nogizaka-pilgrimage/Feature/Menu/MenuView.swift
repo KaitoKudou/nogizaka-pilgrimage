@@ -5,15 +5,13 @@
 //  Created by k_kudo on 2026/02/19.
 //
 
-import Dependencies
 import LicenseList
 import SwiftUI
 
 struct MenuView: View {
-    @Dependency(\.safari) private var safari
-
     @State private var viewModel = MenuViewModel()
     @State private var navigationPath: [MenuDestination] = []
+    @State private var safariURL: URL?
 
     private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
     private var sections: [(title: String, items: [MenuItem])] {
@@ -59,6 +57,10 @@ struct MenuView: View {
                 }
             }
         }
+        .fullScreenCover(item: $safariURL) { url in
+            SafariView(url: url)
+                .ignoresSafeArea()
+        }
     }
 
     private func menuButton(for menuItem: MenuItem) -> some View {
@@ -68,7 +70,7 @@ struct MenuView: View {
             case .navigate(let destination):
                 navigationPath.append(destination)
             case .openURL(let url):
-                Task { await safari(url) }
+                safariURL = url
             }
         }
     }

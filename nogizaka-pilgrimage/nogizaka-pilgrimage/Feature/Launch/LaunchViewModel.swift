@@ -11,9 +11,9 @@ import Foundation
 @Observable
 final class LaunchViewModel {
     @ObservationIgnored
-    @Dependency(\.buildClient) var buildClient
+    @Dependency(BuildClient.self) var buildClient
     @ObservationIgnored
-    @Dependency(\.networkMonitor) var networkMonitor
+    @Dependency(NetworkMonitor.self) var networkMonitor
     @ObservationIgnored
     @Dependency(PilgrimageRepository.self) var pilgrimageRepository
     @ObservationIgnored

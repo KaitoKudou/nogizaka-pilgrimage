@@ -12,7 +12,7 @@ import Foundation
 @Observable
 final class PilgrimageCardViewModel {
     @ObservationIgnored
-    @Dependency(\.routeActionClient) var routeActionClient
+    @Dependency(RouteActionClient.self) var routeActionClient
     @ObservationIgnored
     @Dependency(FavoriteRepository.self) var favoriteRepository
 

@@ -53,5 +53,5 @@ extension PilgrimageView {
     PilgrimageView(
         pilgrimages: dummyPilgrimageList
     )
-    .environmentObject(LocationManager())
+    .environment(LocationManager())
 }

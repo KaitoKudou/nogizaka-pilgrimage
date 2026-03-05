@@ -6,16 +6,18 @@
 //
 
 import Dependencies
+import DependenciesMacros
 import Foundation
 
-public struct NetworkMonitor{
-    public var monitorNetwork: @Sendable () async throws -> Void
+@DependencyClient
+struct NetworkMonitor {
+    var monitorNetwork: @Sendable () async throws -> Void
 }
 
 extension NetworkMonitor: DependencyKey {
-    public static var liveValue = Self(
+    static var liveValue = Self(
         monitorNetwork: {
-            let (data, response) = try await URLSession.shared.data(from: URL(string: "https://www.google.com")!)
+            let (_, response) = try await URLSession.shared.data(from: URL(string: "https://www.google.com")!)
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw APIError.networkError
             }
@@ -25,17 +27,4 @@ extension NetworkMonitor: DependencyKey {
             }
         }
     )
-}
-
-extension NetworkMonitor: TestDependencyKey {
-    public static let previewValue = Self(
-        monitorNetwork: {}
-    )
-}
-
-extension DependencyValues {
-  public var networkMonitor: NetworkMonitor {
-    get { self[NetworkMonitor.self] }
-    set { self[NetworkMonitor.self] = newValue }
-  }
 }
