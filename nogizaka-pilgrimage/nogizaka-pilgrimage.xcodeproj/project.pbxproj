@@ -37,6 +37,7 @@
 		E72EA36E2F586FEF007BFC81 /* FavoriteMigrationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA36D2F586FEF007BFC81 /* FavoriteMigrationClient.swift */; };
 		E72EA3702F59B1BB007BFC81 /* AppUpdateInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA36F2F59B1BB007BFC81 /* AppUpdateInfoDTO.swift */; };
 		E72EA3722F59B2CC007BFC81 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3712F59B2CC007BFC81 /* APIError.swift */; };
+		E72EA3752F59C948007BFC81 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EA3742F59C948007BFC81 /* SafariView.swift */; };
 		E73E09122965C21E00A1204E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E09112965C21E00A1204E /* MainView.swift */; };
 		E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E73E091A2965C77E00A1204E /* Colors.xcassets */; };
 		E73E092E2965D18700A1204E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E73E09302965D18700A1204E /* Localizable.strings */; };
@@ -87,7 +88,6 @@
 		E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */; };
 		E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C11D3F295AF19A0051A1B9 /* R.generated.swift */; };
 		E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E7C72A652E5F517300FC2378 /* CustomDump */; };
-		E7EA0F572BB5C49500EC8A93 /* SafariEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EA0F562BB5C49500EC8A93 /* SafariEffect.swift */; };
 		E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = E7FD73D32959FCD400347BA4 /* Rswift */; };
 		E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */; };
 		E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */; };
@@ -143,6 +143,7 @@
 		E72EA36D2F586FEF007BFC81 /* FavoriteMigrationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMigrationClient.swift; sourceTree = "<group>"; };
 		E72EA36F2F59B1BB007BFC81 /* AppUpdateInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateInfoDTO.swift; sourceTree = "<group>"; };
 		E72EA3712F59B2CC007BFC81 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		E72EA3742F59C948007BFC81 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		E73E09112965C21E00A1204E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E73E091A2965C77E00A1204E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		E73E092F2965D18700A1204E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -196,7 +197,6 @@
 		E7B931472F4749AB00B94C75 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		E7C11D3B295AEE400051A1B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		E7C11D3F295AF19A0051A1B9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
-		E7EA0F562BB5C49500EC8A93 /* SafariEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariEffect.swift; sourceTree = "<group>"; };
 		E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapConstant.swift; sourceTree = "<group>"; };
 		E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationButton.swift; sourceTree = "<group>"; };
 		E7FDAA102AE177CB0056AA5B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -261,9 +261,9 @@
 				E79045B12B0E088100F0936B /* LocationManager.swift */,
 				E78276082BAC796000AD16CC /* NetworkMonitor.swift */,
 				E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */,
-				E7EA0F562BB5C49500EC8A93 /* SafariEffect.swift */,
 				E71A82782BE200B700C16FEE /* BuildClient.swift */,
 				E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */,
+				E72EA3742F59C948007BFC81 /* SafariView.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -890,6 +890,7 @@
 				E795AAC82F50558E0062C9CE /* PilgrimageCardViewModel.swift in Sources */,
 				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
 				E755E4262F4DD85800EF8E2F /* CheckInViewModel.swift in Sources */,
+				E72EA3752F59C948007BFC81 /* SafariView.swift in Sources */,
 				E72EA3522F571698007BFC81 /* PilgrimageRepository+Live.swift in Sources */,
 				E795AABE2F4F37B50062C9CE /* LaunchView.swift in Sources */,
 				E72EA3562F5716C2007BFC81 /* AppConfigRepository.swift in Sources */,
@@ -919,7 +920,6 @@
 				E795AAD42F5055D80062C9CE /* PilgrimageMapView.swift in Sources */,
 				E72505752BB71786002BFB34 /* BannerViewController.swift in Sources */,
 				E795AAB72F4DEA460062C9CE /* FavoriteView.swift in Sources */,
-				E7EA0F572BB5C49500EC8A93 /* SafariEffect.swift in Sources */,
 				E755E42A2F4DD95C00EF8E2F /* CheckInContentView.swift in Sources */,
 				E72EA34A2F570441007BFC81 /* CheckInUseCase.swift in Sources */,
 				E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */,
