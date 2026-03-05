@@ -13,7 +13,7 @@ struct PilgrimageMapView: View {
     @State private var selectedIndex: Int = 0
     @State private var centerCommand: ClusterMapView.CenterCommand?
     @State private var isShowAlert = false
-    @EnvironmentObject private var locationManager: LocationManager
+    @Environment(LocationManager.self) private var locationManager
     let pilgrimages: [PilgrimageEntity]
 
     var body: some View {
@@ -104,5 +104,5 @@ struct PilgrimageMapView: View {
     PilgrimageMapView(
         pilgrimages: dummyPilgrimageList
     )
-    .environmentObject(LocationManager())
+    .environment(LocationManager())
 }

@@ -11,7 +11,7 @@ import CoreLocation
 struct PilgrimageDetailView: View {
     @Environment(\.theme) private var theme
     @State private var isShowAuthorizationAlert = false
-    @EnvironmentObject private var locationManager: LocationManager
+    @Environment(LocationManager.self) private var locationManager
     @State private var viewModel = PilgrimageDetailViewModel()
     private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
     let pilgrimage: PilgrimageEntity
@@ -127,4 +127,5 @@ struct PilgrimageDetailView: View {
     PilgrimageDetailView(
         pilgrimage: dummyPilgrimageList[0]
     )
+    .environment(LocationManager())
 }
