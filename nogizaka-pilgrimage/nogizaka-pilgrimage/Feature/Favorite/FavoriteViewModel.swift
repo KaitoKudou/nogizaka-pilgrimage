@@ -8,6 +8,7 @@
 import Dependencies
 import Foundation
 
+@MainActor
 @Observable
 final class FavoriteViewModel {
     @ObservationIgnored

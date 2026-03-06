@@ -10,6 +10,7 @@ import CoreLocation
 import Dependencies
 import Foundation
 
+@MainActor
 @Observable
 final class PilgrimageDetailViewModel {
     @ObservationIgnored
