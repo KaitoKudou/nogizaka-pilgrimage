@@ -38,16 +38,16 @@ struct LaunchView: View {
         switch alertType {
         case .updatePromotion(let info):
             if !info.isForce {
-                Button(R.string.localizable.alert_optional_update()) {
+                Button(String(localized: .alertOptionalUpdate)) {
                     viewModel.dismissUpdate()
                 }
             }
-            Button(R.string.localizable.alert_force_update()) {
+            Button(String(localized: .alertForceUpdate)) {
                 openURL(URL(string: "https://apps.apple.com/jp/app/id6501994754")!)
                 Task { await viewModel.initialize() }
             }
         case .fetchError, .networkError:
-            Button(R.string.localizable.alert_ok()) {
+            Button(String(localized: .alertOk)) {
                 Task { await viewModel.fetchAllPilgrimages() }
             }
         }

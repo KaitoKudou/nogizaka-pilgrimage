@@ -17,11 +17,11 @@ struct MenuView: View {
     private var sections: [(title: String, items: [MenuItem])] {
         [
             (
-                R.string.localizable.menu_section_support(),
+                String(localized: .menuSectionSupport),
                 [.aboutDeveloper, .contact]
             ),
             (
-                R.string.localizable.menu_section_app(),
+                String(localized: .menuSectionApp),
                 [.termsOfUse, .openSourceLicense, .iconLicense, .privacyPolicy, .appVersion(viewModel.appVersion)]
             )
         ]
@@ -42,7 +42,7 @@ struct MenuView: View {
                 BannerViewContainer(adUnitID: .menu)
                     .frame(width: adSize.size.width, height: adSize.size.height)
             }
-            .navigationTitle(R.string.localizable.tabbar_menu())
+            .navigationTitle(String(localized: .tabbarMenu))
             .navigationBarTitleDisplayMode(.inline)
             .foregroundStyle(.primary)
             .navigationDestination(for: MenuDestination.self) { destination in
@@ -50,7 +50,7 @@ struct MenuView: View {
                 case .openSourceLicense:
                     LicenseListView()
                         .listStyle(.plain)
-                        .navigationTitle(R.string.localizable.menu_open_source_license())
+                        .navigationTitle(String(localized: .menuOpenSourceLicense))
                         .navigationBarTitleDisplayMode(.inline)
                 case .iconLicense:
                     IconLicenseView()

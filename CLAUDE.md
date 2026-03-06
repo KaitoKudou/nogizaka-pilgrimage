@@ -12,12 +12,6 @@
 - **swift-dependencies (`@Dependency`)** — 依存性注入
 - **`@DependencyClient` (DependenciesMacros)** — struct ベースの Dependency 定義
 
-### 廃止するもの
-
-- **The Composable Architecture (TCA)** — `@Reducer`, `Store`, `Action`, `Effect` は全廃
-  - 理由: TCA のアップデート追従コストがメンテナンスの負担になるため
-  - swift-dependencies と DependenciesMacros は TCA から切り離して継続使用する
-
 ### ViewModel の書き方
 
 ```swift
@@ -64,6 +58,34 @@ extension SomeClient: DependencyKey {
 
 SwiftUI ネイティブの `NavigationStack` + `@State` を使用する。
 
+### リソースアクセス
+
+ローカライズ文字列は `Resource/LocalizedStringResource+Keys.swift` に定義した型安全キーを使う。
+
+```swift
+// SwiftUI の Text — LocalizedStringResource を直接渡す
+Text(.tabbarPilgrimage)
+
+// String が必要な場面（navigationTitle, Button, alert 等）
+.navigationTitle(String(localized: .tabbarCheckIn))
+Button(String(localized: .alertOk)) { }
+
+// フォーマット引数がある場合
+String(format: String(localized: .menuAppVersion), version)
+```
+
+カラー・画像は Asset Catalog シンボルを使う（`ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES`）。
+
+```swift
+// SwiftUI
+Color(.tabPrimary)
+Image(.placeholder)
+
+// UIKit
+UIColor(resource: .tabPrimary)
+UIImage(resource: .mapPin)
+```
+
 ## レイヤー構成
 
 ### ディレクトリ構造
@@ -108,6 +130,13 @@ Data/             # Data層（Repository実装・DataStore）
         ├── FavoriteLocalDataStore.swift
         └── CheckInLocalDataStore.swift
 
+Resource/         # リソース定義
+├── Assets.xcassets/              # 画像リソース
+├── Colors.xcassets/              # カラーリソース
+├── ja.lproj/
+│   └── Localizable.strings       # ローカライズ文字列
+└── LocalizedStringResource+Keys.swift  # 型安全なローカライズキー定義
+
 Utility/          # 既存のまま（LocationManager, Theme等）
 ```
 
@@ -141,13 +170,8 @@ Feature → Domain → Data
 | バックエンド | Firebase (Firestore, Analytics) |
 | 広告 | Google Mobile Ads |
 | DI | swift-dependencies + DependenciesMacros |
-| リソース管理 | R.swift |
+| リソース管理 | Asset Catalog シンボル + `LocalizedStringResource` extension |
 
 ## パッケージ管理
 
 Swift Package Manager を使用。TCA 廃止後は `Package.swift` に直接 `swift-dependencies` と `swift-dependency-macros` を追加する。
-
-## Firebase キャッシュ方針
-
-- Phase 1（実装済み）: インメモリキャッシュ（`FavoriteLocalDataStore` / `CheckInLocalDataStore` — actor ベース）
-- Phase 2（予定）: SwiftData 導入、聖地データのローカルキャッシュ + TTL、お気に入りを完全ローカル化（ID のみ保持）

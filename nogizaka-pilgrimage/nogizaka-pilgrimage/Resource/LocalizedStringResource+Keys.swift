@@ -1,0 +1,64 @@
+//
+//  LocalizedStringResource+Keys.swift
+//  nogizaka-pilgrimage
+//
+//  Created by k_kudo on 2026/03/07.
+//
+
+import Foundation
+
+extension LocalizedStringResource {
+    // MARK: - TabView
+    static let tabbarPilgrimage = LocalizedStringResource("tabbar_pilgrimage")
+    static let tabbarCheckIn = LocalizedStringResource("tabbar_check_in")
+    static let tabbarMenu = LocalizedStringResource("tabbar_menu")
+    static let tabbarFavorite = LocalizedStringResource("tabbar_favorite")
+
+    // MARK: - 聖地一覧
+    static let navbarPilgrimageList = LocalizedStringResource("navbar_pilgrimage_list")
+    static let pilgrimageListPlaceholder = LocalizedStringResource("pilgrimage_list_placeholder")
+
+    // MARK: - ボタン
+    static let commonBtnRouteSearchText = LocalizedStringResource("common_btn_route_search_text")
+    static let commonBtnDetailText = LocalizedStringResource("common_btn_detail_text")
+
+    // MARK: - 聖地詳細
+    static let navbarPilgrimageDetail = LocalizedStringResource("navbar_pilgrimage_detail")
+    static let checkInButton = LocalizedStringResource("check_in_button")
+    static let hasCheckIn = LocalizedStringResource("has_check_in")
+
+    // MARK: - お気に入り
+    static let favoritesEmpty = LocalizedStringResource("favorites_empty")
+
+    // MARK: - チェックイン
+    static let checkedInEmpty = LocalizedStringResource("checked_in_empty")
+
+    // MARK: - Alert
+    static let alertLocation = LocalizedStringResource("alert_location")
+    static let alertNotNearby = LocalizedStringResource("alert_not_nearby")
+    static let alertFetchError = LocalizedStringResource("alert_fetch_error")
+    static let alertUpdateError = LocalizedStringResource("alert_update_error")
+    static let alertNetwork = LocalizedStringResource("alert_network")
+    static let alertUnknown = LocalizedStringResource("alert_unknown")
+    static let alertOptionalUpdate = LocalizedStringResource("alert_optional_update")
+    static let alertForceUpdate = LocalizedStringResource("alert_force_update")
+    static let alertOk = LocalizedStringResource("alert_ok")
+
+    // MARK: - ConfirmationDialog
+    static let confirmationDialogCancel = LocalizedStringResource("confirmation_dialog_cancel")
+    static let confirmationDialogAppleMap = LocalizedStringResource("confirmation_dialog_apple_map")
+    static let confirmationDialogGoogleMaps = LocalizedStringResource("confirmation_dialog_google_maps")
+
+    // MARK: - メニュー
+    static let menuAboutDeveloper = LocalizedStringResource("menu_about_developer")
+    static let menuContact = LocalizedStringResource("menu_contact")
+    static let menuTerms = LocalizedStringResource("menu_terms")
+    static let menuOpenSourceLicense = LocalizedStringResource("menu_open_source_license")
+    static let menuIconLicense = LocalizedStringResource("menu_icon_license")
+    static let menuPrivacyPolicy = LocalizedStringResource("menu_privacy_policy")
+    static let menuAppVersion = LocalizedStringResource("menu_app_version")
+    static let menuSectionSupport = LocalizedStringResource("menu_section_support")
+    static let menuSectionApp = LocalizedStringResource("menu_section_app")
+    static let iconsBy = LocalizedStringResource("icons_by")
+    static let icons8 = LocalizedStringResource("icons8")
+}

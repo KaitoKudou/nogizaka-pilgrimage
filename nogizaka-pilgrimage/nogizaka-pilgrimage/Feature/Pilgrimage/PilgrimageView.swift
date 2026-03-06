@@ -15,7 +15,7 @@ struct PilgrimageView: View {
         ZStack {
             PilgrimageMapView(pilgrimages: pilgrimages)
         }
-        .navigationTitle(R.string.localizable.tabbar_pilgrimage())
+        .navigationTitle(String(localized: .tabbarPilgrimage))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             pilgrimageListToolBarItem

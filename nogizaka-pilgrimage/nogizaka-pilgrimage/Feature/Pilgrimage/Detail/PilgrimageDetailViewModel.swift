@@ -31,7 +31,7 @@ final class PilgrimageDetailViewModel {
 
         var title: String {
             switch self {
-            case .notNearbyError: return R.string.localizable.alert_not_nearby()
+            case .notNearbyError: return String(localized: .alertNotNearby)
             case .updateError: return APIError.updateError.localizedDescription
             case .networkError: return APIError.networkError.localizedDescription
             }

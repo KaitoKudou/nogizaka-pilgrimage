@@ -20,7 +20,7 @@ struct MainView: View {
             .environment(locationManager)
             .tabItem {
                 Image(systemName: "map")
-                Text(R.string.localizable.tabbar_pilgrimage())
+                Text(.tabbarPilgrimage)
             }
 
             NavigationStack {
@@ -28,7 +28,7 @@ struct MainView: View {
             }
             .tabItem {
                 Image(systemName: "heart.fill")
-                Text(R.string.localizable.tabbar_favorite())
+                Text(.tabbarFavorite)
             }
             .environment(locationManager)
 
@@ -36,14 +36,14 @@ struct MainView: View {
                 CheckInView()
             }
             .tabItem {
-                Image(R.image.stamp.name)
-                Text(R.string.localizable.tabbar_check_in())
+                Image(.stamp)
+                Text(.tabbarCheckIn)
             }
 
             MenuView()
             .tabItem {
                 Image(systemName: "line.3.horizontal")
-                Text(R.string.localizable.tabbar_menu())
+                Text(.tabbarMenu)
             }
         }
         .onAppear {

@@ -22,7 +22,7 @@ struct PilgrimageCardView: View {
 
                 } placeholder: {
                     // 画像取得中のプレースホルダー表示
-                    Image(R.image.no_image.name)
+                    Image(.placeholder)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                 }
@@ -51,7 +51,7 @@ struct PilgrimageCardView: View {
                                 .foregroundStyle(.red)
                         } else {
                             Image(systemName: "heart")
-                                .foregroundStyle(R.color.tab_primary_off()!.color)
+                                .foregroundStyle(Color(.tabPrimaryOff))
                         }
                     }
                     .disabled(viewModel.isLoading)
@@ -71,18 +71,18 @@ struct PilgrimageCardView: View {
                                 longitude: pilgrimage.longitude
                             )
                         } label: {
-                            Text(R.string.localizable.common_btn_route_search_text())
+                            Text(.commonBtnRouteSearchText)
                         }
 
                         NavigationLink(
                             destination:
                                 PilgrimageDetailView(pilgrimage: pilgrimage)
                         ) {
-                            Text(R.string.localizable.common_btn_detail_text())
+                            Text(.commonBtnDetailText)
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: 26)
-                    .background(R.color.text_secondary()!.color)
+                    .background(Color(.textSecondary))
                     .foregroundStyle(.white)
                     .font(theme.fonts.caption)
                 }
@@ -98,13 +98,13 @@ struct PilgrimageCardView: View {
                 "",
                 isPresented: $viewModel.isConfirmationDialogPresented
             ) {
-                Button(R.string.localizable.confirmation_dialog_apple_map()) {
+                Button(String(localized: .confirmationDialogAppleMap)) {
                     Task { await viewModel.openAppleMaps() }
                 }
-                Button(R.string.localizable.confirmation_dialog_google_maps()) {
+                Button(String(localized: .confirmationDialogGoogleMaps)) {
                     Task { await viewModel.openGoogleMaps() }
                 }
-                Button(R.string.localizable.confirmation_dialog_cancel(), role: .cancel) {}
+                Button(String(localized: .confirmationDialogCancel), role: .cancel) {}
             }
         }
         .padding(.all)

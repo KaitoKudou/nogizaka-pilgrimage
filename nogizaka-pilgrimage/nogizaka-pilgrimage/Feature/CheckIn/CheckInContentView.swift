@@ -13,13 +13,13 @@ struct CheckInContentView: View {
 
     var body: some View {
         VStack {
-            Image(R.image.checked_in_image.name)
+            Image(.checkedIn)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
 
             Text(pilgrimageName)
                 .font(theme.fonts.bodyMedium)
-                .foregroundColor(R.color.tab_primary()!.color)
+                .foregroundColor(Color(.tabPrimary))
                 .lineLimit(2)
         }
     }

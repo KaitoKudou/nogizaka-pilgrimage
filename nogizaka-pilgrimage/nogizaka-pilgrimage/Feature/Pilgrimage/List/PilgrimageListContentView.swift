@@ -23,7 +23,7 @@ struct PilgrimageListContentView: View {
                         .aspectRatio(contentMode: .fit)
                 } placeholder: {
                     // 画像取得中のプレースホルダー表示
-                    Image(R.image.no_image.name)
+                    Image(.placeholder)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                 }
@@ -56,7 +56,7 @@ struct PilgrimageListContentView: View {
                                 .foregroundStyle(.red)
                         } else {
                             Image(systemName: "heart")
-                                .foregroundStyle(R.color.tab_primary_off()!.color)
+                                .foregroundStyle(Color(.tabPrimaryOff))
                         }
                     }
                     .buttonStyle(PlainButtonStyle())

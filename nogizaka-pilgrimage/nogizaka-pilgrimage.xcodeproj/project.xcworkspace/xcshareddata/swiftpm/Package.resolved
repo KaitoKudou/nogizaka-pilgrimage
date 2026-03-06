@@ -1,5 +1,5 @@
 {
-  "originHash" : "5b91fc98c082952f1e22a408f6483c67cbf3ca8e6ce4ad44d5464d43e5049904",
+  "originHash" : "6cf7eb17c81f766dd39e2c508d0dd7eac74a12240fe539455a0b012f61405211",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -125,15 +125,6 @@
       "state" : {
         "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
         "version" : "2.4.0"
-      }
-    },
-    {
-      "identity" : "r.swift.library",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mac-cain13/R.swift.Library.git",
-      "state" : {
-        "revision" : "8998cfe77f4fce79ee6dfab0c88a7d551659d8fb",
-        "version" : "5.4.0"
       }
     },
     {
