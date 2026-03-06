@@ -56,7 +56,6 @@
 		E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */; };
 		E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF15D2BD1630C00A1CB97 /* NativeAdvanceViewController.swift */; };
 		E76BF1602BD163E800A1CB97 /* NativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76BF15F2BD163E800A1CB97 /* NativeAdView.xib */; };
-		E76BF1632BD166E800A1CB97 /* .rswiftignore in Resources */ = {isa = PBXBuildFile; fileRef = E76BF1622BD166E800A1CB97 /* .rswiftignore */; };
 		E76BF1652BD16FE700A1CB97 /* NativeAdvanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF1642BD16FE700A1CB97 /* NativeAdvanceView.swift */; };
 		E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */; };
 		E7738FA32BB45AA700C00F2F /* RouteActionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */; };
@@ -86,10 +85,8 @@
 		E7B931482F4749AB00B94C75 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931472F4749AB00B94C75 /* MenuView.swift */; };
 		E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */; };
 		E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */; };
-		E7BB04122F5B18FD008EFAAE /* Rswift+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB04112F5B18FD008EFAAE /* Rswift+Sendable.swift */; };
-		E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C11D3F295AF19A0051A1B9 /* R.generated.swift */; };
+		E7BB04142F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB04132F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift */; };
 		E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E7C72A652E5F517300FC2378 /* CustomDump */; };
-		E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = E7FD73D32959FCD400347BA4 /* Rswift */; };
 		E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */; };
 		E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */; };
 		E7FDAA112AE177CB0056AA5B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA102AE177CB0056AA5B /* UIColorExtension.swift */; };
@@ -163,10 +160,8 @@
 		E755E4292F4DD95C00EF8E2F /* CheckInContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInContentView.swift; sourceTree = "<group>"; };
 		E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableContentGuideModifier.swift; sourceTree = "<group>"; };
 		E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnvironmentKey.swift; sourceTree = "<group>"; };
-		E767E10F295AF38C002DB619 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		E76BF15D2BD1630C00A1CB97 /* NativeAdvanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdvanceViewController.swift; sourceTree = "<group>"; };
 		E76BF15F2BD163E800A1CB97 /* NativeAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAdView.xib; sourceTree = "<group>"; };
-		E76BF1622BD166E800A1CB97 /* .rswiftignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .rswiftignore; sourceTree = "<group>"; };
 		E76BF1642BD16FE700A1CB97 /* NativeAdvanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdvanceView.swift; sourceTree = "<group>"; };
 		E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+BarAppearance.swift"; sourceTree = "<group>"; };
 		E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteActionClient.swift; sourceTree = "<group>"; };
@@ -196,9 +191,7 @@
 		E7B931412F46053A00B94C75 /* IconLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseView.swift; sourceTree = "<group>"; };
 		E7B931452F473AA900B94C75 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		E7B931472F4749AB00B94C75 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
-		E7BB04112F5B18FD008EFAAE /* Rswift+Sendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rswift+Sendable.swift"; sourceTree = "<group>"; };
-		E7C11D3B295AEE400051A1B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		E7C11D3F295AF19A0051A1B9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		E7BB04132F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalizedStringResource+Keys.swift"; sourceTree = "<group>"; };
 		E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapConstant.swift; sourceTree = "<group>"; };
 		E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationButton.swift; sourceTree = "<group>"; };
 		E7FDAA102AE177CB0056AA5B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -216,7 +209,6 @@
 				E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */,
 				E795AADA2F51A2AB0062C9CE /* Dependencies in Frameworks */,
 				E710931D2BE13DAA005482F7 /* LicenseList in Frameworks */,
-				E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */,
 				E795AADC2F51A2AB0062C9CE /* DependenciesMacros in Frameworks */,
 				E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */,
 			);
@@ -266,7 +258,6 @@
 				E71A82782BE200B700C16FEE /* BuildClient.swift */,
 				E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */,
 				E72EA3742F59C948007BFC81 /* SafariView.swift */,
-				E7BB04112F5B18FD008EFAAE /* Rswift+Sendable.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -423,6 +414,7 @@
 				E74934492959F2120045AE39 /* Assets.xcassets */,
 				E73E091A2965C77E00A1204E /* Colors.xcassets */,
 				E73E09302965D18700A1204E /* Localizable.strings */,
+				E7BB04132F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -430,9 +422,7 @@
 		E74934392959F20E0045AE39 = {
 			isa = PBXGroup;
 			children = (
-				E76BF1622BD166E800A1CB97 /* .rswiftignore */,
 				E795AADD2F5490D80062C9CE /* AppLoggerMacro */,
-				E7C11D38295AEDF30051A1B9 /* BuildTools */,
 				E74934442959F20E0045AE39 /* nogizaka-pilgrimage */,
 				E74934552959F2120045AE39 /* nogizaka-pilgrimageTests */,
 				E749345F2959F2120045AE39 /* nogizaka-pilgrimageUITests */,
@@ -456,7 +446,6 @@
 			children = (
 				E72505702BB710F6002BFB34 /* Info.plist */,
 				E7B9CD502B8E2586003FAB19 /* Enviroment */,
-				E7C11D3D295AF19A0051A1B9 /* GeneratedByTools */,
 				E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */,
 				E7FDAA0D2AE177140056AA5B /* Extension */,
 				E7235A70297D75B000E1339A /* Utility */,
@@ -661,31 +650,6 @@
 			path = Enviroment;
 			sourceTree = "<group>";
 		};
-		E7C11D38295AEDF30051A1B9 /* BuildTools */ = {
-			isa = PBXGroup;
-			children = (
-				E7C11D3B295AEE400051A1B9 /* Package.swift */,
-				E767E10F295AF38C002DB619 /* Empty.swift */,
-			);
-			path = BuildTools;
-			sourceTree = "<group>";
-		};
-		E7C11D3D295AF19A0051A1B9 /* GeneratedByTools */ = {
-			isa = PBXGroup;
-			children = (
-				E7C11D3E295AF19A0051A1B9 /* Rswift */,
-			);
-			path = GeneratedByTools;
-			sourceTree = "<group>";
-		};
-		E7C11D3E295AF19A0051A1B9 /* Rswift */ = {
-			isa = PBXGroup;
-			children = (
-				E7C11D3F295AF19A0051A1B9 /* R.generated.swift */,
-			);
-			path = Rswift;
-			sourceTree = "<group>";
-		};
 		E7FD73D52959FDD000347BA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -709,7 +673,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E74934662959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimage" */;
 			buildPhases = (
-				E7FD73D62959FEEF00347BA4 /* Run R.swift */,
 				E749343E2959F20E0045AE39 /* Sources */,
 				E749343F2959F20E0045AE39 /* Frameworks */,
 				E74934402959F20E0045AE39 /* Resources */,
@@ -721,7 +684,6 @@
 			name = "nogizaka-pilgrimage";
 			packageProductDependencies = (
 				E795AAF22F54A0000062C9CE /* AppLogger */,
-				E7FD73D32959FCD400347BA4 /* Rswift */,
 				E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */,
 				E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */,
 				E710931C2BE13DAA005482F7 /* LicenseList */,
@@ -803,7 +765,6 @@
 			);
 			mainGroup = E74934392959F20E0045AE39;
 			packageReferences = (
-				E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */,
 				E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E710931B2BE13DAA005482F7 /* XCRemoteSwiftPackageReference "LicenseList" */,
 				E747728D2D958B0100F659EF /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
@@ -829,7 +790,6 @@
 			files = (
 				E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */,
 				E73E092E2965D18700A1204E /* Localizable.strings in Resources */,
-				E76BF1632BD166E800A1CB97 /* .rswiftignore in Resources */,
 				E749344D2959F2120045AE39 /* Preview Assets.xcassets in Resources */,
 				E76BF1602BD163E800A1CB97 /* NativeAdView.xib in Resources */,
 				E749344A2959F2120045AE39 /* Assets.xcassets in Resources */,
@@ -852,29 +812,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		E7FD73D62959FEEF00347BA4 /* Run R.swift */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run R.swift";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				$SRCROOT/$TARGET_NAME/GeneratedByTools/Rswift/R.generated.swift,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd BuildTools\nSDKROOT=$(xcrun --sdk macosx --show-sdk-path)\nswift run -c release rswift generate \"$SRCROOT/$TARGET_NAME/GeneratedByTools/Rswift/R.generated.swift\"\n\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E749343E2959F20E0045AE39 /* Sources */ = {
@@ -909,7 +846,6 @@
 				E72EA3672F585D20007BFC81 /* PilgrimageEntity.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E72EA3622F585CAE007BFC81 /* CheckInObject.swift in Sources */,
-				E7BB04122F5B18FD008EFAAE /* Rswift+Sendable.swift in Sources */,
 				E755E4282F4DD86900EF8E2F /* CheckInView.swift in Sources */,
 				E72EA3502F571683007BFC81 /* PilgrimageRepository.swift in Sources */,
 				E72EA36B2F5866D0007BFC81 /* PilgrimageLocalDataStore.swift in Sources */,
@@ -935,13 +871,13 @@
 				E72EA3582F5716D0007BFC81 /* AppConfigRepository+Live.swift in Sources */,
 				E72EA33F2F55E7D2007BFC81 /* FavoriteRepository.swift in Sources */,
 				E795AAD02F5055BE0062C9CE /* PilgrimageListContentView.swift in Sources */,
-				E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */,
 				E72EA34C2F570852007BFC81 /* CheckInLocalDataStore.swift in Sources */,
 				E795AABC2F4F37830062C9CE /* LaunchViewModel.swift in Sources */,
 				E795AAD62F5055EC0062C9CE /* PilgrimageView.swift in Sources */,
 				E795AACA2F50559C0062C9CE /* PilgrimageCardView.swift in Sources */,
 				E72505732BB716EB002BFB34 /* BannerViewControllerWidthDelegate.swift in Sources */,
 				E74772912D95966B00F659EF /* BannerViewContainer.swift in Sources */,
+				E7BB04142F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift in Sources */,
 				E72EA36E2F586FEF007BFC81 /* FavoriteMigrationClient.swift in Sources */,
 				E7235A72297D75D500E1339A /* Theme.swift in Sources */,
 				E76D0BD42AD557F000D6BB2B /* Theme+BarAppearance.swift in Sources */,
@@ -1116,6 +1052,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.5.0.0;
@@ -1154,6 +1091,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.5.0.0;
@@ -1353,14 +1291,6 @@
 				minimumVersion = 1.3.3;
 			};
 		};
-		E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mac-cain13/R.swift.Library.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1402,11 +1332,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E7C72A642E5F517300FC2378 /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
 			productName = CustomDump;
-		};
-		E7FD73D32959FCD400347BA4 /* Rswift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E7FD73D22959FCD400347BA4 /* XCRemoteSwiftPackageReference "R.swift.Library" */;
-			productName = Rswift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
