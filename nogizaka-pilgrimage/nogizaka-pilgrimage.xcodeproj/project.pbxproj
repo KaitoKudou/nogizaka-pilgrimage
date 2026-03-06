@@ -86,6 +86,7 @@
 		E7B931482F4749AB00B94C75 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931472F4749AB00B94C75 /* MenuView.swift */; };
 		E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */; };
 		E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */; };
+		E7BB04122F5B18FD008EFAAE /* Rswift+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB04112F5B18FD008EFAAE /* Rswift+Sendable.swift */; };
 		E7C11D40295AF19A0051A1B9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C11D3F295AF19A0051A1B9 /* R.generated.swift */; };
 		E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E7C72A652E5F517300FC2378 /* CustomDump */; };
 		E7FD73D42959FCD400347BA4 /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = E7FD73D32959FCD400347BA4 /* Rswift */; };
@@ -195,6 +196,7 @@
 		E7B931412F46053A00B94C75 /* IconLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseView.swift; sourceTree = "<group>"; };
 		E7B931452F473AA900B94C75 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		E7B931472F4749AB00B94C75 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		E7BB04112F5B18FD008EFAAE /* Rswift+Sendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rswift+Sendable.swift"; sourceTree = "<group>"; };
 		E7C11D3B295AEE400051A1B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		E7C11D3F295AF19A0051A1B9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapConstant.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				E71A82782BE200B700C16FEE /* BuildClient.swift */,
 				E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */,
 				E72EA3742F59C948007BFC81 /* SafariView.swift */,
+				E7BB04112F5B18FD008EFAAE /* Rswift+Sendable.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				E72EA3672F585D20007BFC81 /* PilgrimageEntity.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E72EA3622F585CAE007BFC81 /* CheckInObject.swift in Sources */,
+				E7BB04122F5B18FD008EFAAE /* Rswift+Sendable.swift in Sources */,
 				E755E4282F4DD86900EF8E2F /* CheckInView.swift in Sources */,
 				E72EA3502F571683007BFC81 /* PilgrimageRepository.swift in Sources */,
 				E72EA36B2F5866D0007BFC81 /* PilgrimageLocalDataStore.swift in Sources */,
@@ -1140,7 +1144,8 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1177,7 +1182,8 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1196,7 +1202,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/nogizaka-pilgrimage.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/nogizaka-pilgrimage";
 			};
@@ -1216,7 +1222,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/nogizaka-pilgrimage.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/nogizaka-pilgrimage";
 			};
@@ -1234,7 +1240,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "nogizaka-pilgrimage";
 			};
@@ -1252,7 +1258,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "nogizaka-pilgrimage";
 			};
