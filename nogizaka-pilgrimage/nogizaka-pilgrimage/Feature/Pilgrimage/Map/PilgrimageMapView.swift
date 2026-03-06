@@ -39,7 +39,7 @@ struct PilgrimageMapView: View {
                             )
                         }
                     }
-                    .alert(R.string.localizable.alert_location(), isPresented: $isShowAlert) {
+                    .alert(String(localized: .alertLocation), isPresented: $isShowAlert) {
                     } message: {
                         EmptyView()
                     }

@@ -14,7 +14,7 @@ struct FavoriteView: View {
     var body: some View {
         VStack {
             if viewModel.favoritePilgrimages.isEmpty {
-                Text(R.string.localizable.favorites_empty())
+                Text(.favoritesEmpty)
             } else if viewModel.isLoading {
                 ProgressView()
                     .controlSize(.large)
@@ -34,7 +34,7 @@ struct FavoriteView: View {
         ) {
             Button("OK") {}
         }
-        .navigationTitle(R.string.localizable.tabbar_favorite())
+        .navigationTitle(String(localized: .tabbarFavorite))
         .navigationBarTitleDisplayMode(.inline)
     }
 

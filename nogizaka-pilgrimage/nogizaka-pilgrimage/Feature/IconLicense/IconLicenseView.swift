@@ -15,12 +15,12 @@ struct IconLicenseView: View {
         ScrollView {
             VStack {
                 HStack {
-                    Text(R.string.localizable.icons_by())
+                    Text(.iconsBy)
 
                     Button {
                         safariURL = URL(string: "https://icons8.com")!
                     } label: {
-                        Text(R.string.localizable.icons8())
+                        Text(.icons8)
                             .underline()
                     }
                 }
@@ -32,7 +32,7 @@ struct IconLicenseView: View {
             SafariView(url: url)
                 .ignoresSafeArea()
         }
-        .navigationTitle(R.string.localizable.menu_icon_license())
+        .navigationTitle(String(localized: .menuIconLicense))
     }
 }
 

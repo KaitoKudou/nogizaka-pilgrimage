@@ -14,9 +14,9 @@ extension Theme {
     @MainActor func styleNavigationBarGlobalAppearance() {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.backgroundColor = R.color.tab_primary()!
+        navigationBarAppearance.backgroundColor = UIColor(resource: .tabPrimary)
         navigationBarAppearance.titleTextAttributes = [
-            .foregroundColor: R.color.nav_text()!,
+            .foregroundColor: UIColor(resource: .navText),
             .font: uiFonts.navigationTitle
         ]
         navigationBarAppearance.shadowImage = UIImage()
@@ -34,7 +34,7 @@ extension Theme {
         navigationBarAppearance.setBackIndicatorImage(image, transitionMaskImage: image)
 
         // 用意した `UINavigationBarAppearance` を設定
-        UINavigationBar.appearance().tintColor = R.color.tab_primary()!
+        UINavigationBar.appearance().tintColor = UIColor(resource: .tabPrimary)
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
     }
@@ -46,8 +46,8 @@ extension Theme {
     @MainActor func styleTabBarGlobalAppearance() {
         let tabAppearance = UITabBarAppearance()
         tabAppearance.configureWithOpaqueBackground()
-        tabAppearance.backgroundColor = R.color.bg_primary()!
-        tabAppearance.selectionIndicatorTintColor = R.color.tab_primary()!
+        tabAppearance.backgroundColor = UIColor(resource: .bgPrimary)
+        tabAppearance.selectionIndicatorTintColor = UIColor(resource: .tabPrimary)
 
         let tabBarItemAppearance = tabBarItemAppearanceConfiguration()
         tabAppearance.compactInlineLayoutAppearance = tabBarItemAppearance
@@ -61,8 +61,8 @@ extension Theme {
 
     @MainActor private func tabBarItemAppearanceConfiguration() -> UITabBarItemAppearance {
         let itemAppearance = UITabBarItemAppearance()
-        let normalColor = R.color.tab_primary_off()!
-        let selectedColor = R.color.tab_primary()!
+        let normalColor = UIColor(resource: .tabPrimaryOff)
+        let selectedColor = UIColor(resource: .tabPrimary)
 
         // 通常状態
         itemAppearance.normal.iconColor = normalColor

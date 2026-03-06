@@ -38,7 +38,7 @@ struct CheckInView: View {
         ) {
             Button("OK") {}
         }
-        .navigationTitle(R.string.localizable.tabbar_check_in())
+        .navigationTitle(String(localized: .tabbarCheckIn))
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -66,7 +66,7 @@ struct CheckInView: View {
 
             HStack {
                 Spacer()
-                Text(R.string.localizable.checked_in_empty())
+                Text(.checkedInEmpty)
                     .multilineTextAlignment(.center)
                 Spacer()
             }

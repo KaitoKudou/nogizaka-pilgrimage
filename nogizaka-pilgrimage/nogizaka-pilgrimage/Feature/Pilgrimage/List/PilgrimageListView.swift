@@ -20,7 +20,7 @@ struct PilgrimageListView: View {
                     .padding(.top, theme.margins.spacing_xxs)
                     .padding(.bottom, theme.margins.spacing_m)
                     .padding(.horizontal, theme.margins.spacing_m)
-                    .background(R.color.tab_primary()!.color)
+                    .background(Color(.tabPrimary))
 
                 if viewModel.isLoading {
                     Spacer()
@@ -43,7 +43,7 @@ struct PilgrimageListView: View {
                 isPresented: $viewModel.isAlertPresented
             ) {}
         }
-        .navigationTitle(R.string.localizable.navbar_pilgrimage_list())
+        .navigationTitle(String(localized: .navbarPilgrimageList))
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -54,7 +54,7 @@ struct PilgrimageListView: View {
                 .padding(.leading, theme.margins.spacing_xs)
 
             TextField(
-                R.string.localizable.pilgrimage_list_placeholder(),
+                String(localized: .pilgrimageListPlaceholder),
                 text: $searchText
             )
             .padding(.vertical, theme.margins.spacing_xs)
@@ -66,7 +66,7 @@ struct PilgrimageListView: View {
             }
         }
         .background(.white)
-        .border(R.color.tab_primary()!.color, width: 1)
+        .border(Color(.tabPrimary), width: 1)
         .cornerRadius(8.0)
     }
 

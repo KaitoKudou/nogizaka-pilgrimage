@@ -89,9 +89,9 @@ struct ClusterMapView: UIViewRepresentable {
                 guard let pa = ann as? PilgrimageAnnotation,
                       let v = mapView.view(for: pa) else { continue }
                 if pa.index == selectedIndex {
-                    v.image = UIImage(named: R.image.map_pin.name)
+                    v.image = UIImage(resource: .mapPin)
                 } else {
-                    v.image = UIImage(named: R.image.unselected_map_pin.name)
+                    v.image = UIImage(resource: .unselectedMapPin)
                 }
             }
         }
@@ -151,7 +151,7 @@ struct ClusterMapView: UIViewRepresentable {
                 }
                 
                 // カスタムピン画像を設定
-                annotationView?.image = (pilgrimageAnnotation.index == parent.selectedIndex) ? UIImage(named: R.image.map_pin.name) : UIImage(named: R.image.unselected_map_pin.name)
+                annotationView?.image = (pilgrimageAnnotation.index == parent.selectedIndex) ? UIImage(resource: .mapPin) : UIImage(resource: .unselectedMapPin)
                 annotationView?.clusteringIdentifier = "pilgrimageCluster" // これによりクラスタリングが有効になる
                 
                 return annotationView

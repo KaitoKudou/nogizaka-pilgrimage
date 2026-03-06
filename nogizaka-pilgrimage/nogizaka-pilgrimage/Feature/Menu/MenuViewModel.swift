@@ -24,13 +24,13 @@ enum MenuItem: Hashable {
 
     var title: String {
         switch self {
-        case .aboutDeveloper: return R.string.localizable.menu_about_developer()
-        case .contact: return R.string.localizable.menu_contact()
-        case .termsOfUse: return R.string.localizable.menu_terms()
-        case .openSourceLicense: return R.string.localizable.menu_open_source_license()
-        case .iconLicense: return R.string.localizable.menu_icon_license()
-        case .privacyPolicy: return R.string.localizable.menu_privacy_policy()
-        case .appVersion(let version): return R.string.localizable.menu_app_version(version)
+        case .aboutDeveloper: return String(localized: .menuAboutDeveloper)
+        case .contact: return String(localized: .menuContact)
+        case .termsOfUse: return String(localized: .menuTerms)
+        case .openSourceLicense: return String(localized: .menuOpenSourceLicense)
+        case .iconLicense: return String(localized: .menuIconLicense)
+        case .privacyPolicy: return String(localized: .menuPrivacyPolicy)
+        case .appVersion(let version): return String(format: String(localized: .menuAppVersion), version)
         }
     }
 }

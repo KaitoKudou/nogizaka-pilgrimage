@@ -26,7 +26,7 @@ struct PilgrimageDetailView: View {
                             .aspectRatio(contentMode: .fit)
                     } placeholder: {
                         // 画像取得中のプレースホルダー表示
-                        Image(R.image.no_image.name)
+                        Image(.placeholder)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     }
@@ -49,7 +49,7 @@ struct PilgrimageDetailView: View {
                                     .foregroundStyle(.red)
                             } else {
                                 Image(systemName: "heart")
-                                    .foregroundStyle(R.color.tab_primary_off()!.color)
+                                    .foregroundStyle(Color(.tabPrimaryOff))
                             }
                         }
                     }
@@ -71,8 +71,8 @@ struct PilgrimageDetailView: View {
                         }
                     } label: {
                         Text(viewModel.hasCheckedIn ?
-                             R.string.localizable.has_check_in() :
-                                R.string.localizable.check_in_button()
+                             String(localized: .hasCheckIn) :
+                                String(localized: .checkInButton)
                         )
                         .frame(height: theme.margins.spacing_xl)
                         .frame(maxWidth: .infinity)
@@ -82,14 +82,14 @@ struct PilgrimageDetailView: View {
                         viewModel.activeAlert?.title ?? "",
                         isPresented: $viewModel.isAlertPresented
                     ) {}
-                    .alert(R.string.localizable.alert_location(), isPresented: $isShowAuthorizationAlert) {
+                    .alert(String(localized: .alertLocation), isPresented: $isShowAuthorizationAlert) {
                     } message: {
                         EmptyView()
                     }
                     .frame(maxWidth: .infinity)
                     .background(viewModel.hasCheckedIn ?
-                                R.color.tab_primary_off()!.color :
-                                    R.color.text_secondary()!.color
+                                Color(.tabPrimaryOff) :
+                                    Color(.textSecondary)
                     )
                     .foregroundStyle(.white)
                     .font(theme.fonts.caption)
@@ -97,7 +97,7 @@ struct PilgrimageDetailView: View {
 
                     HStack {
                         Image(systemName: "mappin.and.ellipse")
-                            .foregroundStyle(R.color.text_secondary()!.color)
+                            .foregroundStyle(Color(.textSecondary))
                         Text(pilgrimage.address)
                             .font(theme.fonts.bodyLarge)
                     }
@@ -118,7 +118,7 @@ struct PilgrimageDetailView: View {
         }
         .padding(.leading, theme.margins.spacing_m)
         .padding(.trailing, theme.margins.spacing_m)
-        .navigationTitle(R.string.localizable.navbar_pilgrimage_detail())
+        .navigationTitle(String(localized: .navbarPilgrimageDetail))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

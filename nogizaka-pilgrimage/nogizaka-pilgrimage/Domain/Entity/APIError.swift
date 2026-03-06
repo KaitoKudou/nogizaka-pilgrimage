@@ -18,13 +18,13 @@ extension APIError: LocalizedError {
     var localizedDescription: String {
         switch self {
         case .networkError:
-            return R.string.localizable.alert_network()
+            return String(localized: .alertNetwork)
         case .fetchError:
-            return R.string.localizable.alert_fetch_error()
+            return String(localized: .alertFetchError)
         case .updateError:
-            return R.string.localizable.alert_update_error()
+            return String(localized: .alertUpdateError)
         case .unknownError:
-            return R.string.localizable.alert_unknown()
+            return String(localized: .alertUnknown)
         }
     }
 }
