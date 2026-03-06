@@ -11,7 +11,7 @@ import DependenciesMacros
 
 @DependencyClient
 struct CheckInUseCase {
-    var execute: (_ pilgrimage: PilgrimageEntity, _ userCoordinate: CLLocationCoordinate2D) async throws -> Bool
+    var execute: @Sendable (_ pilgrimage: PilgrimageEntity, _ userCoordinate: CLLocationCoordinate2D) async throws -> Bool
 }
 
 extension CheckInUseCase: DependencyKey {

@@ -16,16 +16,18 @@ struct RouteActionClient {
 }
 
 extension RouteActionClient: DependencyKey {
-    static var liveValue = Self(
-        viewOnMap: { latitude, longitude in
-            @Dependency(\.openURL) var openURL
-            let url = URL(string: "http://maps.apple.com/?daddr=\(latitude),\(longitude)&dirflg=r")!
-            await openURL.callAsFunction(url)
-        },
-        viewOnGoogleMaps: { latitude, longitude in
-            @Dependency(\.openURL) var openURL
-            let url = URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(latitude),\(longitude)")!
-            await openURL.callAsFunction(url)
-        }
-    )
+    static var liveValue: Self {
+        @Dependency(\.openURL) var openURL
+
+        return Self(
+            viewOnMap: { latitude, longitude in
+                let url = URL(string: "http://maps.apple.com/?daddr=\(latitude),\(longitude)&dirflg=r")!
+                await openURL.callAsFunction(url)
+            },
+            viewOnGoogleMaps: { latitude, longitude in
+                let url = URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(latitude),\(longitude)")!
+                await openURL.callAsFunction(url)
+            }
+        )
+    }
 }

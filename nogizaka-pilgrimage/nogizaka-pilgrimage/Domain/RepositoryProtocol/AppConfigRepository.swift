@@ -10,5 +10,5 @@ import DependenciesMacros
 
 @DependencyClient
 struct AppConfigRepository {
-    var fetchUpdateInfo: () async throws -> AppUpdateInfoDTO
+    var fetchUpdateInfo: @Sendable () async throws -> AppUpdateInfoDTO
 }

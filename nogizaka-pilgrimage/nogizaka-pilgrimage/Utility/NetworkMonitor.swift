@@ -15,7 +15,7 @@ struct NetworkMonitor {
 }
 
 extension NetworkMonitor: DependencyKey {
-    static var liveValue = Self(
+    static let liveValue = Self(
         monitorNetwork: {
             let (_, response) = try await URLSession.shared.data(from: URL(string: "https://www.google.com")!)
             guard let httpResponse = response as? HTTPURLResponse else {

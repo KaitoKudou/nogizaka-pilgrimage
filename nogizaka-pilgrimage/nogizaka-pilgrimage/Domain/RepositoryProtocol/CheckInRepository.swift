@@ -10,7 +10,7 @@ import DependenciesMacros
 
 @DependencyClient
 struct CheckInRepository {
-    var fetchCheckedInPilgrimages: () async throws -> [PilgrimageEntity]
-    var isCheckedIn: (_ code: String) async throws -> Bool
-    var addCheckIn: (_ pilgrimage: PilgrimageEntity) async throws -> Void
+    var fetchCheckedInPilgrimages: @Sendable () async throws -> [PilgrimageEntity]
+    var isCheckedIn: @Sendable (_ code: String) async throws -> Bool
+    var addCheckIn: @Sendable (_ pilgrimage: PilgrimageEntity) async throws -> Void
 }

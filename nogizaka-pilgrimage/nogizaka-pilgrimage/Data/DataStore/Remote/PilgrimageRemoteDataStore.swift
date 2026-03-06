@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 @DependencyClient
 struct PilgrimageRemoteDataStore {
-    var fetchAll: () async throws -> [PilgrimageDTO]
+    var fetchAll: @Sendable () async throws -> [PilgrimageDTO]
 }
 
 extension PilgrimageRemoteDataStore: DependencyKey {

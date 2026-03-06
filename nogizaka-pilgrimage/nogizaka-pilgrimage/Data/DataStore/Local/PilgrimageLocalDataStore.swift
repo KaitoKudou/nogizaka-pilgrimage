@@ -12,21 +12,20 @@ import SwiftData
 
 @DependencyClient
 struct PilgrimageLocalDataStore {
-    var getAll: () async throws -> [PilgrimageObject]?
-    var save: (_ dtos: [PilgrimageDTO]) async throws -> Void
+    var getAll: @Sendable () async throws -> [PilgrimageObject]?
+    var save: @Sendable (_ dtos: [PilgrimageDTO]) async throws -> Void
 }
 
 extension PilgrimageLocalDataStore: DependencyKey {
     static let liveValue: Self = {
         @Dependency(SwiftDataClient.self) var swiftDataClient
         @Dependency(\.date) var date
+        let sortByCode = SortDescriptor(\PilgrimageObject.code)
 
         return .init(
             getAll: {
                 let context = ModelContext(try swiftDataClient.container())
-                let descriptor = FetchDescriptor<PilgrimageObject>(
-                    sortBy: [SortDescriptor(\.code)]
-                )
+                let descriptor = FetchDescriptor<PilgrimageObject>(sortBy: [sortByCode])
                 let objects = try context.fetch(descriptor)
                 guard !objects.isEmpty else { return nil }
 

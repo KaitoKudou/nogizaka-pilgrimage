@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 @DependencyClient
 struct AppConfigRemoteDataStore {
-    var fetchUpdateInfo: () async throws -> AppUpdateInfoDTO
+    var fetchUpdateInfo: @Sendable () async throws -> AppUpdateInfoDTO
 }
 
 extension AppConfigRemoteDataStore: DependencyKey {

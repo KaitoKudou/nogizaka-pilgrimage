@@ -12,23 +12,24 @@ import SwiftData
 
 @DependencyClient
 struct FavoriteLocalDataStore {
-    var getAll: () async throws -> [String]
+    var getAll: @Sendable () async throws -> [String]
     // TODO: マイグレーション完了後に削除する
-    var setAll: (_ codes: [String]) async throws -> Void
-    var add: (_ code: String) async throws -> Void
-    var remove: (_ code: String) async throws -> Void
-    var contains: (_ code: String) async throws -> Bool
+    var setAll: @Sendable (_ codes: [String]) async throws -> Void
+    var add: @Sendable (_ code: String) async throws -> Void
+    var remove: @Sendable (_ code: String) async throws -> Void
+    var contains: @Sendable (_ code: String) async throws -> Bool
 }
 
 extension FavoriteLocalDataStore: DependencyKey {
     static let liveValue: Self = {
         @Dependency(SwiftDataClient.self) var swiftDataClient
+        let sortByAddedAt = SortDescriptor(\FavoriteObject.addedAt)
 
         return .init(
             getAll: {
                 let context = ModelContext(try swiftDataClient.container())
                 let descriptor = FetchDescriptor<FavoriteObject>(
-                    sortBy: [SortDescriptor(\.addedAt)]
+                    sortBy: [sortByAddedAt]
                 )
                 let objects = try context.fetch(descriptor)
                 return objects.map(\.pilgrimageCode)
