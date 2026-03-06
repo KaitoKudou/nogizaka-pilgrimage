@@ -74,7 +74,7 @@ final class NativeAdvanceViewController: UIViewController {
     }
 }
 
-extension NativeAdvanceViewController: NativeAdDelegate, NativeAdLoaderDelegate {
+extension NativeAdvanceViewController: NativeAdDelegate, @preconcurrency NativeAdLoaderDelegate {
     func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
         nativeAd.delegate = self
 

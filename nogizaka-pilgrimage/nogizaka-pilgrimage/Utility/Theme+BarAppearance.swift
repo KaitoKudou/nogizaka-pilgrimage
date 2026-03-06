@@ -11,7 +11,7 @@ import UIKit
 // MARK: NavigationBarの設定
 extension Theme {
     /// 通常のNavigationBarの外見を設定する
-    func styleNavigationBarGlobalAppearance() {
+    @MainActor func styleNavigationBarGlobalAppearance() {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = R.color.tab_primary()!
@@ -43,7 +43,7 @@ extension Theme {
 // MARK: TabBarの設定
 extension Theme {
     /// アプリ全体のTabBarの外見を設定する
-    func styleTabBarGlobalAppearance() {
+    @MainActor func styleTabBarGlobalAppearance() {
         let tabAppearance = UITabBarAppearance()
         tabAppearance.configureWithOpaqueBackground()
         tabAppearance.backgroundColor = R.color.bg_primary()!
@@ -59,7 +59,7 @@ extension Theme {
         UITabBar.appearance().scrollEdgeAppearance = tabAppearance
     }
 
-    private func tabBarItemAppearanceConfiguration() -> UITabBarItemAppearance {
+    @MainActor private func tabBarItemAppearanceConfiguration() -> UITabBarItemAppearance {
         let itemAppearance = UITabBarItemAppearance()
         let normalColor = R.color.tab_primary_off()!
         let selectedColor = R.color.tab_primary()!
