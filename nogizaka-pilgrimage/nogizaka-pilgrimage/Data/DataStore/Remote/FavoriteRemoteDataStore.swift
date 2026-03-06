@@ -13,7 +13,7 @@ import UIKit
 // MARK: - DEPRECATED: マイグレーション用に残す。次リリースで削除予定。
 @DependencyClient
 struct FavoriteRemoteDataStore {
-    var fetchAll: () async throws -> [PilgrimageDTO]
+    var fetchAll: @Sendable () async throws -> [PilgrimageDTO]
 }
 
 extension FavoriteRemoteDataStore: DependencyKey {

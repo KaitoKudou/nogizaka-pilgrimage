@@ -12,8 +12,8 @@ import UIKit
 
 @DependencyClient
 struct CheckInRemoteDataStore {
-    var fetchAll: () async throws -> [PilgrimageDTO]
-    var add: (_ dto: PilgrimageDTO) async throws -> Void
+    var fetchAll: @Sendable () async throws -> [PilgrimageDTO]
+    var add: @Sendable (_ dto: PilgrimageDTO) async throws -> Void
 }
 
 extension CheckInRemoteDataStore: DependencyKey {

@@ -9,6 +9,7 @@ import AppLogger
 import Dependencies
 import Foundation
 
+@MainActor
 @Observable
 final class PilgrimageListViewModel {
     @ObservationIgnored

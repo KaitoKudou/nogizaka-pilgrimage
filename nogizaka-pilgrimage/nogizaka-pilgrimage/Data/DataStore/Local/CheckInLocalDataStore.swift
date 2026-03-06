@@ -12,10 +12,10 @@ import SwiftData
 
 @DependencyClient
 struct CheckInLocalDataStore {
-    var getAll: () async throws -> [String]?
-    var setAll: (_ codes: [String]) async throws -> Void
-    var add: (_ code: String) async throws -> Void
-    var contains: (_ code: String) async throws -> Bool
+    var getAll: @Sendable () async throws -> [String]?
+    var setAll: @Sendable (_ codes: [String]) async throws -> Void
+    var add: @Sendable (_ code: String) async throws -> Void
+    var contains: @Sendable (_ code: String) async throws -> Bool
 }
 
 extension CheckInLocalDataStore: DependencyKey {
@@ -23,13 +23,14 @@ extension CheckInLocalDataStore: DependencyKey {
 
     static let liveValue: Self = {
         @Dependency(SwiftDataClient.self) var swiftDataClient
+        let sortByCheckedInAt = SortDescriptor(\CheckInObject.checkedInAt)
 
         return .init(
             getAll: {
                 guard UserDefaults.standard.bool(forKey: hasLoadedKey) else { return nil }
                 let context = ModelContext(try swiftDataClient.container())
                 let descriptor = FetchDescriptor<CheckInObject>(
-                    sortBy: [SortDescriptor(\.checkedInAt)]
+                    sortBy: [sortByCheckedInAt]
                 )
                 let objects = try context.fetch(descriptor)
                 return objects.map(\.pilgrimageCode)

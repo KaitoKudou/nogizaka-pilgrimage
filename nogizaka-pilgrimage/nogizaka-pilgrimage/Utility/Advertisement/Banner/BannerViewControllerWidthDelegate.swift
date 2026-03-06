@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 // Delegate methods for receiving width update messages.
-protocol BannerViewControllerWidthDelegate: AnyObject {
+@MainActor protocol BannerViewControllerWidthDelegate: AnyObject {
     func bannerViewController(
         _ bannerViewController: BannerViewController,
         didUpdate width: CGFloat

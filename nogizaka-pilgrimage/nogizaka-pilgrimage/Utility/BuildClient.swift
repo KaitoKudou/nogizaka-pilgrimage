@@ -11,11 +11,11 @@ import Foundation
 
 @DependencyClient
 struct BuildClient {
-    var appVersion: () -> String = { "" }
+    var appVersion: @Sendable () -> String = { "" }
 }
 
 extension BuildClient: DependencyKey {
-    static var liveValue = Self(
+    static let liveValue = Self(
         appVersion: {
             Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         }

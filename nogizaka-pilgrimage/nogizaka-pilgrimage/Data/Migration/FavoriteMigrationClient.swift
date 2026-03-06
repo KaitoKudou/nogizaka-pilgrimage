@@ -12,7 +12,7 @@ import Foundation
 
 @DependencyClient
 struct FavoriteMigrationClient {
-    var migrateIfNeeded: () async -> Void
+    var migrateIfNeeded: @Sendable () async -> Void
 }
 
 extension FavoriteMigrationClient: DependencyKey {

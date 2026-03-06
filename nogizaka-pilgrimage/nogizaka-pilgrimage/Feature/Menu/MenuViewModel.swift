@@ -35,6 +35,7 @@ enum MenuItem: Hashable {
     }
 }
 
+@MainActor
 @Observable
 final class MenuViewModel {
     enum Action {

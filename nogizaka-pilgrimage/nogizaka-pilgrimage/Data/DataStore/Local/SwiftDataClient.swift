@@ -12,7 +12,7 @@ import SwiftData
 
 @DependencyClient
 struct SwiftDataClient {
-    var container: () throws -> ModelContainer
+    var container: @Sendable () throws -> ModelContainer
 }
 
 extension SwiftDataClient: DependencyKey {
