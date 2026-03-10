@@ -5,6 +5,7 @@
 //  Created by 工藤 海斗 on 2023/11/06.
 //
 
+import NukeUI
 import SwiftUI
 
 struct PilgrimageListContentView: View {
@@ -17,15 +18,17 @@ struct PilgrimageListContentView: View {
     var body: some View {
         HStack(alignment: .top, spacing: theme.margins.spacing_m) {
             VStack {
-                AsyncImage(url: pilgrimage.imageURL) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    // 画像取得中のプレースホルダー表示
-                    Image(.placeholder)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+                LazyImage(url: pilgrimage.imageURL) { state in
+                    if let image = state.image {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } else {
+                        // 画像取得中のプレースホルダー表示
+                        Image(.placeholder)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
                 }
 
                 if let copyright = pilgrimage.copyright {
