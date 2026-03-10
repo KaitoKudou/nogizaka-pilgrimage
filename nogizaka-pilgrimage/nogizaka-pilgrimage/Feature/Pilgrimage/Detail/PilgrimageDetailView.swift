@@ -5,8 +5,9 @@
 //  Created by 工藤 海斗 on 2023/11/02.
 //
 
-import SwiftUI
 import CoreLocation
+import NukeUI
+import SwiftUI
 
 struct PilgrimageDetailView: View {
     @Environment(\.theme) private var theme
@@ -20,15 +21,17 @@ struct PilgrimageDetailView: View {
         VStack {
             ScrollView {
                 VStack(alignment: .leading) {
-                    AsyncImage(url: pilgrimage.imageURL) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        // 画像取得中のプレースホルダー表示
-                        Image(.placeholder)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
+                    LazyImage(url: pilgrimage.imageURL) { state in
+                        if let image = state.image {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        } else {
+                            // 画像取得中のプレースホルダー表示
+                            Image(.placeholder)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        }
                     }
                     .padding(.vertical, theme.margins.spacing_m)
 

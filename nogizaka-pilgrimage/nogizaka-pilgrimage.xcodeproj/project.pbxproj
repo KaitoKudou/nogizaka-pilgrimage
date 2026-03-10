@@ -87,6 +87,7 @@
 		E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */; };
 		E7BB04142F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB04132F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift */; };
 		E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E7C72A652E5F517300FC2378 /* CustomDump */; };
+		E7F4023E2F60555500226464 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = E7F4023D2F60555500226464 /* NukeUI */; };
 		E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */; };
 		E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */; };
 		E7FDAA112AE177CB0056AA5B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA102AE177CB0056AA5B /* UIColorExtension.swift */; };
@@ -209,6 +210,7 @@
 				E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */,
 				E795AADA2F51A2AB0062C9CE /* Dependencies in Frameworks */,
 				E710931D2BE13DAA005482F7 /* LicenseList in Frameworks */,
+				E7F4023E2F60555500226464 /* NukeUI in Frameworks */,
 				E795AADC2F51A2AB0062C9CE /* DependenciesMacros in Frameworks */,
 				E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */,
 			);
@@ -691,6 +693,7 @@
 				E7C72A652E5F517300FC2378 /* CustomDump */,
 				E795AAD92F51A2AB0062C9CE /* Dependencies */,
 				E795AADB2F51A2AB0062C9CE /* DependenciesMacros */,
+				E7F4023D2F60555500226464 /* NukeUI */,
 			);
 			productName = "nogizaka-pilgrimage";
 			productReference = E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */;
@@ -771,6 +774,7 @@
 				E7C72A642E5F517300FC2378 /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
 				E795AAD82F51A2AB0062C9CE /* XCRemoteSwiftPackageReference "swift-dependencies" */,
 				E795AAE02F5492490062C9CE /* XCLocalSwiftPackageReference "AppLoggerMacro" */,
+				E76C0D912F60525600893644 /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = E74934432959F20E0045AE39 /* Products */;
 			projectDirPath = "";
@@ -1265,6 +1269,14 @@
 				minimumVersion = 12.8.0;
 			};
 		};
+		E76C0D912F60525600893644 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:kean/Nuke.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 12.9.0;
+			};
+		};
 		E795AAD82F51A2AB0062C9CE /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:pointfreeco/swift-dependencies.git";
@@ -1330,6 +1342,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E7C72A642E5F517300FC2378 /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
 			productName = CustomDump;
+		};
+		E7F4023D2F60555500226464 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E76C0D912F60525600893644 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -126,7 +126,7 @@ Data/             # Data層（Repository実装・DataStore）
     │   ├── CheckInRemoteDataStore.swift
     │   ├── FavoriteRemoteDataStore.swift
     │   └── AppConfigRemoteDataStore.swift
-    └── Local/                    # ローカルキャッシュ（インメモリ → SwiftData予定）
+    └── Local/                    # ローカルキャッシュ（SwiftData）
         ├── FavoriteLocalDataStore.swift
         └── CheckInLocalDataStore.swift
 
@@ -170,6 +170,7 @@ Feature → Domain → Data
 | バックエンド | Firebase (Firestore, Analytics) |
 | 広告 | Google Mobile Ads |
 | DI | swift-dependencies + DependenciesMacros |
+| 画像キャッシュ | Nuke (NukeUI) |
 | リソース管理 | Asset Catalog シンボル + `LocalizedStringResource` extension |
 
 ## パッケージ管理
