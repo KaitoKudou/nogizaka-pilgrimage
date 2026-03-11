@@ -5,7 +5,6 @@
 //  Created by k_kudo on 2026/03/02.
 //
 
-#if DEBUG
 import SwiftCompilerPlugin
 import SwiftSyntax
 import SwiftSyntaxMacros
@@ -48,11 +47,14 @@ public struct LogMacro: ExpressionMacro {
         }
 
         return """
-        Logger(
-            subsystem: Bundle.main.bundleIdentifier ?? "",
-            category: "\(raw: category)"
-        ).\(raw: levelName)(\(messageExpr))
+        {
+            #if DEBUG
+            Logger(
+                subsystem: Bundle.main.bundleIdentifier ?? "",
+                category: "\(raw: category)"
+            ).\(raw: levelName)(\(messageExpr))
+            #endif
+        }()
         """
     }
 }
-#endif
