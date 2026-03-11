@@ -67,7 +67,7 @@ struct PilgrimageListView: View {
         }
         .background(.white)
         .border(Color(.tabPrimary), width: 1)
-        .cornerRadius(8.0)
+        .clipShape(RoundedRectangle(cornerRadius: 8.0))
     }
 
     private func pilgrimageListScrollView(geometry: GeometryProxy) -> some View {
