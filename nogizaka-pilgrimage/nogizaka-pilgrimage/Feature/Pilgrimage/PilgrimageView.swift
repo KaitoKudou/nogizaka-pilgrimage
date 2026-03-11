@@ -26,9 +26,10 @@ struct PilgrimageView: View {
     }
 
     private func requestTrackingAuthorization() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            ATTrackingManager.requestTrackingAuthorization { _ in
-            }
+        Task {
+            // ATTダイアログは画面遷移直後に表示するとシステムに無視される場合があるため、1秒遅延させる
+            try? await Task.sleep(for: .seconds(1))
+            await ATTrackingManager.requestTrackingAuthorization()
         }
     }
 }
