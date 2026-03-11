@@ -19,7 +19,7 @@ struct CheckInContentView: View {
 
             Text(pilgrimageName)
                 .font(theme.fonts.bodyMedium)
-                .foregroundColor(Color(.tabPrimary))
+                .foregroundStyle(Color(.tabPrimary))
                 .lineLimit(2)
         }
     }
