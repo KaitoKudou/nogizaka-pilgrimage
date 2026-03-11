@@ -114,9 +114,9 @@ struct PilgrimageCardView: View {
     }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
+// iPhone 15基準（幅393pt）でカードサイズを算出: 393 - 64 = 329, 393 / 2 - 32 ≈ 164
+#Preview(traits: .fixedLayout(width: 329, height: 164)) {
     PilgrimageCardView(
         pilgrimage: dummyPilgrimageList[0]
     )
-    .frame(width: UIScreen.main.bounds.width - 64, height: UIScreen.main.bounds.width / 2 - 32)
 }
