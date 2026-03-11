@@ -47,12 +47,13 @@ struct BannerViewContainer: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
 
+    func sizeThatFits(_ proposal: ProposedViewSize, uiViewController: UIViewControllerType, context: Context) -> CGSize? {
+        guard let width = proposal.width, width > 0 else { return nil }
+        return currentOrientationAnchoredAdaptiveBanner(width: width).size
+    }
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
-    }
-    
-    static func getAdSize(width: CGFloat) -> AdSize {
-        return currentOrientationAnchoredAdaptiveBanner(width: width)
     }
 
     class Coordinator: NSObject, BannerViewControllerWidthDelegate, BannerViewDelegate {

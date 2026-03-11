@@ -10,7 +10,6 @@ import SwiftUI
 struct CheckInView: View {
     @Environment(\.theme) private var theme
     @State private var viewModel = CheckInViewModel()
-    private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
 
     var body: some View {
         GeometryReader { geometry in
@@ -24,7 +23,6 @@ struct CheckInView: View {
                 Spacer()
 
                 BannerViewContainer(adUnitID: .checkIn)
-                    .frame(width: adSize.size.width, height: adSize.size.height)
             }
         }
         .onAppear {

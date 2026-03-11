@@ -13,7 +13,6 @@ struct MenuView: View {
     @State private var navigationPath: [MenuDestination] = []
     @State private var safariURL: URL?
 
-    private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
     private var sections: [(title: String, items: [MenuItem])] {
         [
             (
@@ -40,7 +39,6 @@ struct MenuView: View {
                     }
                 }
                 BannerViewContainer(adUnitID: .menu)
-                    .frame(width: adSize.size.width, height: adSize.size.height)
             }
             .navigationTitle(String(localized: .tabbarMenu))
             .navigationBarTitleDisplayMode(.inline)
