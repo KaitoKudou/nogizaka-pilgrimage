@@ -14,7 +14,6 @@ struct PilgrimageDetailView: View {
     @State private var isShowAuthorizationAlert = false
     @Environment(LocationManager.self) private var locationManager
     @State private var viewModel = PilgrimageDetailViewModel()
-    private let adSize = BannerViewContainer.getAdSize(width: UIScreen.main.bounds.width)
     let pilgrimage: PilgrimageEntity
 
     var body: some View {
@@ -114,7 +113,6 @@ struct PilgrimageDetailView: View {
             .readableContentGuide()
 
             BannerViewContainer(adUnitID: .pilgrimageDetail)
-                .frame(width: adSize.size.width, height: adSize.size.height)
         }
         .onAppear {
             Task { await viewModel.onAppear(pilgrimage: pilgrimage) }

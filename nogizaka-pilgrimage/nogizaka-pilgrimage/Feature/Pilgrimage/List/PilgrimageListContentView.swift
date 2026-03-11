@@ -87,5 +87,4 @@ struct PilgrimageListContentView: View {
         favorited: true,
         onFavoriteToggle: {}
     )
-    .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width / 3)
 }
