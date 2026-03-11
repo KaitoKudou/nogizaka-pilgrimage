@@ -114,12 +114,9 @@ struct PilgrimageCardView: View {
     }
 }
 
-struct PilgrimageCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        PilgrimageCardView(
-            pilgrimage: dummyPilgrimageList[0]
-        )
-        .frame(width: UIScreen.main.bounds.width - 64, height: UIScreen.main.bounds.width / 2 - 32)
-        .previewLayout(.sizeThatFits)
-    }
+#Preview(traits: .sizeThatFitsLayout) {
+    PilgrimageCardView(
+        pilgrimage: dummyPilgrimageList[0]
+    )
+    .frame(width: UIScreen.main.bounds.width - 64, height: UIScreen.main.bounds.width / 2 - 32)
 }
