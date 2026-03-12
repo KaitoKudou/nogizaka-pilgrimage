@@ -173,6 +173,28 @@ Feature → Domain → Data
 | 画像キャッシュ | Nuke (NukeUI) |
 | リソース管理 | Asset Catalog シンボル + `LocalizedStringResource` extension |
 
+## ビルド・テスト
+
+プロジェクトは `nogizaka-pilgrimage/nogizaka-pilgrimage.xcodeproj` にある。
+
+```bash
+# ビルド
+xcodebuild -project nogizaka-pilgrimage/nogizaka-pilgrimage.xcodeproj \
+  -scheme nogizaka-pilgrimage \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro Max' \
+  build
+
+# ユニットテスト
+xcodebuild test \
+  -project nogizaka-pilgrimage/nogizaka-pilgrimage.xcodeproj \
+  -scheme nogizaka-pilgrimage \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro Max'
+```
+
+コード変更後はビルドが通ることを確認する。
+
 ## パッケージ管理
 
 Swift Package Manager を使用。TCA 廃止後は `Package.swift` に直接 `swift-dependencies` と `swift-dependency-macros` を追加する。
