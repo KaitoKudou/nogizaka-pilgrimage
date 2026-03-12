@@ -71,44 +71,42 @@ struct PilgrimageListView: View {
     }
 
     private func pilgrimageListScrollView(geometry: GeometryProxy) -> some View {
-        NavigationStack {
-            ScrollView {
-                ScrollViewReader { proxy in
-                    LazyVStack(alignment: .leading) {
-                        ForEach(viewModel.searchResults) { pilgrimage in
-                            if pilgrimage.id % 5 == 0 {
-                                NativeAdvanceView()
-                                    .frame(height: geometry.size.width / 3)
-                                    .padding(.vertical, 8)
-                                    .padding(.horizontal, 16)
-                            }
-
-                            NavigationLink(
-                                destination: PilgrimageDetailView(pilgrimage: pilgrimage)
-                                    .onAppear {
-                                        viewModel.updateScrollToIndex(pilgrimage.id)
-                                    }
-                            ) {
-                                PilgrimageListContentView(
-                                    pilgrimage: pilgrimage,
-                                    isLoading: viewModel.isItemLoading(pilgrimage),
-                                    favorited: viewModel.isFavorited(pilgrimage),
-                                    onFavoriteToggle: {
-                                        Task { await viewModel.toggleFavorite(pilgrimage: pilgrimage) }
-                                    }
-                                )
-                                .frame(maxHeight: geometry.size.width / 3)
+        ScrollView {
+            ScrollViewReader { proxy in
+                LazyVStack(alignment: .leading) {
+                    ForEach(viewModel.searchResults) { pilgrimage in
+                        if pilgrimage.id % 5 == 0 {
+                            NativeAdvanceView()
+                                .frame(height: geometry.size.width / 3)
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 16)
-                                .id(pilgrimage.id)
-                            }
+                        }
+
+                        NavigationLink(
+                            destination: PilgrimageDetailView(pilgrimage: pilgrimage)
+                                .onAppear {
+                                    viewModel.updateScrollToIndex(pilgrimage.id)
+                                }
+                        ) {
+                            PilgrimageListContentView(
+                                pilgrimage: pilgrimage,
+                                isLoading: viewModel.isItemLoading(pilgrimage),
+                                favorited: viewModel.isFavorited(pilgrimage),
+                                onFavoriteToggle: {
+                                    Task { await viewModel.toggleFavorite(pilgrimage: pilgrimage) }
+                                }
+                            )
+                            .frame(maxHeight: geometry.size.width / 3)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 16)
+                            .id(pilgrimage.id)
                         }
                     }
-                    .onAppear {
-                        proxy.scrollTo(
-                            viewModel.scrollToIndex, anchor: .center
-                        )
-                    }
+                }
+                .onAppear {
+                    proxy.scrollTo(
+                        viewModel.scrollToIndex, anchor: .center
+                    )
                 }
             }
         }
