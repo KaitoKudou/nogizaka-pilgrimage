@@ -88,65 +88,13 @@ UIImage(resource: .mapPin)
 
 ## レイヤー構成
 
-### ディレクトリ構造
+依存方向: `Feature → Domain → Data`（逆方向の依存は発生しない）
 
-```
-Feature/          # Presentation層（View + ViewModel）
-├── Initial/
-│   ├── InitialView.swift
-│   └── InitialViewModel.swift
-├── PilgrimageList/
-├── PilgrimageDetail/
-├── CheckIn/
-├── Favorite/
-└── Menu/
-
-Domain/           # Domain層（ビジネスエンティティ・ルール）
-├── Model/
-│   ├── PilgrimageInformation.swift
-│   ├── AppUpdateInformation.swift
-│   └── APIError.swift
-├── UseCase/
-│   └── CheckInUseCase.swift      # struct定義 + liveValue
-└── RepositoryProtocol/            # @DependencyClient struct（インターフェース）
-    ├── PilgrimageRepository.swift
-    ├── CheckInRepository.swift
-    ├── FavoriteRepository.swift
-    └── AppConfigRepository.swift
-
-Data/             # Data層（Repository実装・DataStore）
-├── Repository/                   # extension + liveValue（Firestore実装）
-│   ├── PilgrimageRepository+Live.swift
-│   ├── CheckInRepository+Live.swift
-│   ├── FavoriteRepository+Live.swift
-│   └── AppConfigRepository+Live.swift
-└── DataStore/
-    ├── Remote/
-    │   ├── PilgrimageRemoteDataStore.swift
-    │   ├── CheckInRemoteDataStore.swift
-    │   ├── FavoriteRemoteDataStore.swift
-    │   └── AppConfigRemoteDataStore.swift
-    └── Local/                    # ローカルキャッシュ（SwiftData）
-        ├── FavoriteLocalDataStore.swift
-        └── CheckInLocalDataStore.swift
-
-Resource/         # リソース定義
-├── Assets.xcassets/              # 画像リソース
-├── Colors.xcassets/              # カラーリソース
-├── ja.lproj/
-│   └── Localizable.strings       # ローカライズ文字列
-└── LocalizedStringResource+Keys.swift  # 型安全なローカライズキー定義
-
-Utility/          # 既存のまま（LocationManager, Theme等）
-```
-
-### 依存方向
-
-```
-Feature → Domain → Data
-```
-
-上位レイヤーが下位レイヤーに依存し、逆方向の依存は発生しない。
+- **Feature/** — Presentation層（View + ViewModel）
+- **Domain/** — Model、UseCase、RepositoryProtocol（`@DependencyClient` struct）
+- **Data/** — Repository の `liveValue` 実装、Remote/Local DataStore
+- **Resource/** — Asset Catalog、Localizable.strings、型安全キー定義
+- **Utility/** — LocationManager、Theme 等
 
 ### UseCaseの指針
 
