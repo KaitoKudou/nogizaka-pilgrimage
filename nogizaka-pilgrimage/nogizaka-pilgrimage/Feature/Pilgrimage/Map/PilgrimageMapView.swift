@@ -34,7 +34,7 @@ struct PilgrimageMapView: View {
                         withAnimation {
                             centerCommand = .init(
                                 target: location,
-                                yOffset: cardsHeight(geometry: geometry) / 2,
+                                yOffset: cardYOffset(geometry: geometry),
                                 animated: true
                             )
                         }
@@ -56,7 +56,7 @@ struct PilgrimageMapView: View {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         centerCommand = .init(
                             target: pilgrimages[newIndex].coordinate,
-                            yOffset: cardsHeight(geometry: geometry) / 2,
+                            yOffset: cardYOffset(geometry: geometry),
                             animated: true
                         )
                     }
@@ -70,6 +70,8 @@ struct PilgrimageMapView: View {
                 selectedIndex: $selectedIndex,
                 centerCommand: $centerCommand,
                 initialRegion: PilgrimageMapConstant.initialRegion,
+                initialYOffset: cardYOffset(geometry: geometry),
+                mapWidth: geometry.size.width,
                 pilgrimages: pilgrimages,
                 showsUserLocation: true,
                 onAnnotationSelected: { index in
@@ -97,6 +99,10 @@ struct PilgrimageMapView: View {
 
     private func cardsHeight(geometry: GeometryProxy) -> CGFloat {
         return max(0, geometry.size.width / 2 - theme.margins.spacing_m)
+    }
+
+    private func cardYOffset(geometry: GeometryProxy) -> CGFloat {
+        cardsHeight(geometry: geometry) / 2
     }
 }
 
