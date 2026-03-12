@@ -98,7 +98,6 @@ struct ClusterMapView: UIViewRepresentable {
         weak var mapView: MKMapView?
         var lastCenterCommandID: UUID?
         var parent: ClusterMapView
-        var lastAppliedRegion: MKCoordinateRegion?
         var didApplyInitialOffset = false
 
         init(_ parent: ClusterMapView) {
