@@ -70,6 +70,8 @@ struct PilgrimageMapView: View {
                 selectedIndex: $selectedIndex,
                 centerCommand: $centerCommand,
                 initialRegion: PilgrimageMapConstant.initialRegion,
+                initialYOffset: cardsHeight(geometry: geometry) / 2,
+                mapWidth: geometry.size.width,
                 pilgrimages: pilgrimages,
                 showsUserLocation: true,
                 onAnnotationSelected: { index in
