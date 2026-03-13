@@ -12,18 +12,16 @@ struct CheckInView: View {
     @State private var viewModel = CheckInViewModel()
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                if viewModel.checkedInPilgrimages.isEmpty {
-                    emptyCheckInView()
-                } else {
-                    filledCheckInView(geometry: geometry)
-                }
-
-                Spacer()
-
-                BannerViewContainer(adUnitID: .checkIn)
+        VStack {
+            if viewModel.checkedInPilgrimages.isEmpty {
+                emptyCheckInView()
+            } else {
+                filledCheckInView()
             }
+
+            Spacer()
+
+            BannerViewContainer(adUnitID: .checkIn)
         }
         .onAppear {
             Task {
@@ -41,11 +39,11 @@ struct CheckInView: View {
     }
 
     @ViewBuilder
-    private func filledCheckInView(geometry: GeometryProxy) -> some View {
+    private func filledCheckInView() -> some View {
         VStack {
             ScrollView {
                 LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: geometry.size.width / 4))],
+                    columns: Array(repeating: GridItem(.flexible()), count: 3),
                     spacing: theme.margins.spacing_s
                 ) {
                     ForEach(viewModel.checkedInPilgrimages, id: \.self) { pilgrimage in

@@ -109,6 +109,7 @@ struct PilgrimageDetailView: View {
                         .font(theme.fonts.bodyLarge)
                         .padding(.bottom, theme.margins.spacing_xxl)
                 }
+                .padding(.horizontal, theme.margins.spacing_m)
             }
             .readableContentGuide()
 
@@ -117,8 +118,6 @@ struct PilgrimageDetailView: View {
         .onAppear {
             Task { await viewModel.onAppear(pilgrimage: pilgrimage) }
         }
-        .padding(.leading, theme.margins.spacing_m)
-        .padding(.trailing, theme.margins.spacing_m)
         .navigationTitle(String(localized: .navbarPilgrimageDetail))
         .navigationBarTitleDisplayMode(.inline)
     }

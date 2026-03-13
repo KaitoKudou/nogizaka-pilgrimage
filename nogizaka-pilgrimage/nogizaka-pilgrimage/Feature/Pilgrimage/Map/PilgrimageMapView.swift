@@ -13,96 +13,100 @@ struct PilgrimageMapView: View {
     @State private var selectedIndex: Int = 0
     @State private var centerCommand: ClusterMapView.CenterCommand?
     @State private var isShowAlert = false
+    @State private var containerWidth: CGFloat = 0
     @Environment(LocationManager.self) private var locationManager
     let pilgrimages: [PilgrimageEntity]
 
     var body: some View {
-        GeometryReader { geometry in
-            mapView
-                .ignoresSafeArea(edges: [.bottom])
-                .overlay(alignment: .topTrailing) {
-                    CurrentLocationButton {
-                        let isAuthorized = !locationManager.isLocationPermissionDenied
-                        guard isAuthorized else {
-                            // 位置情報が許可されなかった場合
-                            isShowAlert.toggle()
-                            return
-                        }
-                        guard let location = locationManager.userLocation else {
-                            return
-                        }
-                        withAnimation {
-                            centerCommand = .init(
-                                target: location,
-                                yOffset: cardYOffset(geometry: geometry),
-                                animated: true
-                            )
-                        }
+        mapView
+            .ignoresSafeArea(edges: [.bottom])
+            .overlay(alignment: .topTrailing) {
+                CurrentLocationButton {
+                    let isAuthorized = !locationManager.isLocationPermissionDenied
+                    guard isAuthorized else {
+                        // 位置情報が許可されなかった場合
+                        isShowAlert.toggle()
+                        return
                     }
-                    .alert(String(localized: .alertLocation), isPresented: $isShowAlert) {
-                    } message: {
-                        EmptyView()
+                    guard let location = locationManager.userLocation else {
+                        return
                     }
-
-                }
-                .overlay(alignment: .bottom) {
-                    pilgrimageCardsView(geometry: geometry)
-                        .padding(.bottom, theme.margins.spacing_xl)
-                }
-                .onAppear {
-                    locationManager.requestLocation()
-                }
-                .onChange(of: selectedIndex) { _, newIndex in
-                    withAnimation(.easeInOut(duration: 0.3)) {
+                    withAnimation {
                         centerCommand = .init(
-                            target: pilgrimages[newIndex].coordinate,
-                            yOffset: cardYOffset(geometry: geometry),
+                            target: location,
+                            yOffset: cardYOffset(),
                             animated: true
                         )
                     }
                 }
-        }
+                .alert(String(localized: .alertLocation), isPresented: $isShowAlert) {
+                } message: {
+                    EmptyView()
+                }
+
+            }
+            .overlay(alignment: .bottom) {
+                pilgrimageCardsView()
+                    .padding(.bottom, theme.margins.spacing_xl)
+            }
+            .onGeometryChange(for: CGFloat.self) { proxy in
+                proxy.size.width
+            } action: { newValue in
+                containerWidth = newValue
+            }
+            .onAppear {
+                locationManager.requestLocation()
+            }
+            .onChange(of: selectedIndex) { _, newIndex in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    centerCommand = .init(
+                        target: pilgrimages[newIndex].coordinate,
+                        yOffset: cardYOffset(),
+                        animated: true
+                    )
+                }
+            }
     }
 
     private var mapView: some View {
-        GeometryReader { geometry in
-            ClusterMapView(
-                selectedIndex: $selectedIndex,
-                centerCommand: $centerCommand,
-                initialRegion: PilgrimageMapConstant.initialRegion,
-                initialYOffset: cardYOffset(geometry: geometry),
-                mapWidth: geometry.size.width,
-                pilgrimages: pilgrimages,
-                showsUserLocation: true,
-                onAnnotationSelected: { index in
-                    withAnimation {
-                        selectedIndex = index
-                    }
+        ClusterMapView(
+            selectedIndex: $selectedIndex,
+            centerCommand: $centerCommand,
+            initialRegion: PilgrimageMapConstant.initialRegion,
+            initialYOffset: cardYOffset(),
+            mapWidth: containerWidth,
+            pilgrimages: pilgrimages,
+            showsUserLocation: true,
+            onAnnotationSelected: { index in
+                withAnimation {
+                    selectedIndex = index
                 }
-            )
-        }
+            }
+        )
     }
 
-    private func pilgrimageCardsView(geometry: GeometryProxy) -> some View {
+    private func pilgrimageCardsView() -> some View {
         TabView(selection: $selectedIndex) {
             ForEach(Array(pilgrimages.enumerated()), id: \.element.id) { index, pilgrimage in
                 PilgrimageCardView(pilgrimage: pilgrimage)
                 .tag(index)
                 .frame(
-                    width: max(0, geometry.size.width - theme.margins.spacing_l * 2)
+                    width: max(0, containerWidth - theme.margins.spacing_l * 2)
                 )
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .frame(height: cardsHeight(geometry: geometry))
+        .frame(height: cardsHeight())
     }
 
-    private func cardsHeight(geometry: GeometryProxy) -> CGFloat {
-        return max(0, geometry.size.width / 2 - theme.margins.spacing_m)
+    // コンテナ幅の 1/2 からマージンを引いた値をカード高さとして使用
+    private func cardsHeight() -> CGFloat {
+        return max(0, containerWidth / 2 - theme.margins.spacing_m)
     }
 
-    private func cardYOffset(geometry: GeometryProxy) -> CGFloat {
-        cardsHeight(geometry: geometry) / 2
+    // カード高さの半分をマップの Y オフセットとして使用
+    private func cardYOffset() -> CGFloat {
+        cardsHeight() / 2
     }
 }
 

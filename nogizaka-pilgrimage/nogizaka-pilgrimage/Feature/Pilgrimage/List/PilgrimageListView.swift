@@ -11,38 +11,42 @@ struct PilgrimageListView: View {
     @Environment(\.theme) private var theme
     @State private var searchText = ""
     @State private var viewModel = PilgrimageListViewModel()
+    @State private var containerWidth: CGFloat = 0
     let pilgrimages: [PilgrimageEntity]
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                searchTextField()
-                    .padding(.top, theme.margins.spacing_xxs)
-                    .padding(.bottom, theme.margins.spacing_m)
-                    .padding(.horizontal, theme.margins.spacing_m)
-                    .background(Color(.tabPrimary))
+        VStack {
+            searchTextField()
+                .padding(.top, theme.margins.spacing_xxs)
+                .padding(.bottom, theme.margins.spacing_m)
+                .padding(.horizontal, theme.margins.spacing_m)
+                .background(Color(.tabPrimary))
 
-                if viewModel.isLoading {
-                    Spacer()
-                    ProgressView()
-                        .controlSize(.large)
-                    Spacer()
-                } else {
-                    pilgrimageListScrollView(geometry: geometry)
-                }
+            if viewModel.isLoading {
+                Spacer()
+                ProgressView()
+                    .controlSize(.large)
+                Spacer()
+            } else {
+                pilgrimageListScrollView()
             }
-            .onAppear {
-                searchText = viewModel.searchText
-                viewModel.onAppear(pilgrimages: pilgrimages)
-            }
-            .task {
-                await viewModel.loadFavoriteStatuses()
-            }
-            .alert(
-                viewModel.activeAlert?.title ?? "",
-                isPresented: $viewModel.isAlertPresented
-            ) {}
         }
+        .onGeometryChange(for: CGFloat.self) { proxy in
+            proxy.size.width
+        } action: { newValue in
+            containerWidth = newValue
+        }
+        .onAppear {
+            searchText = viewModel.searchText
+            viewModel.onAppear(pilgrimages: pilgrimages)
+        }
+        .task {
+            await viewModel.loadFavoriteStatuses()
+        }
+        .alert(
+            viewModel.activeAlert?.title ?? "",
+            isPresented: $viewModel.isAlertPresented
+        ) {}
         .navigationTitle(String(localized: .navbarPilgrimageList))
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -70,14 +74,15 @@ struct PilgrimageListView: View {
         .clipShape(RoundedRectangle(cornerRadius: 8.0))
     }
 
-    private func pilgrimageListScrollView(geometry: GeometryProxy) -> some View {
+    private func pilgrimageListScrollView() -> some View {
         ScrollView {
             ScrollViewReader { proxy in
                 LazyVStack(alignment: .leading) {
                     ForEach(viewModel.searchResults) { pilgrimage in
                         if pilgrimage.id % 5 == 0 {
                             NativeAdvanceView()
-                                .frame(height: geometry.size.width / 3)
+                                // コンテナ幅の 1/3 を高さとして使用
+                                .frame(height: containerWidth / 3)
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 16)
                         }
@@ -96,7 +101,8 @@ struct PilgrimageListView: View {
                                     Task { await viewModel.toggleFavorite(pilgrimage: pilgrimage) }
                                 }
                             )
-                            .frame(maxHeight: geometry.size.width / 3)
+                            // コンテナ幅の 1/3 を最大高さとして使用
+                            .frame(maxHeight: containerWidth / 3)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 16)
                             .id(pilgrimage.id)
