@@ -10,6 +10,7 @@ import SwiftUI
 struct FavoriteView: View {
     @Environment(\.theme) private var theme
     @State private var viewModel = FavoriteViewModel()
+    @State private var containerWidth: CGFloat = 0
 
     var body: some View {
         VStack {
@@ -20,10 +21,13 @@ struct FavoriteView: View {
                     .controlSize(.large)
                     .frame(alignment: .center)
             } else {
-                GeometryReader { geometry in
-                    favoriteScrollView(geometry: geometry)
-                }
+                favoriteScrollView()
             }
+        }
+        .onGeometryChange(for: CGFloat.self) { proxy in
+            proxy.size.width
+        } action: { newValue in
+            containerWidth = newValue
         }
         .onAppear {
             Task { await viewModel.fetchFavorites() }
@@ -38,14 +42,15 @@ struct FavoriteView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    private func favoriteScrollView(geometry: GeometryProxy) -> some View {
+    private func favoriteScrollView() -> some View {
         ScrollView {
             ScrollViewReader { proxy in
                 LazyVStack(alignment: .leading) {
                     ForEach(viewModel.favoritePilgrimages) { pilgrimage in
                         if pilgrimage.id % 5 == 0 {
                             NativeAdvanceView()
-                                .frame(height: geometry.size.width / 3)
+                                // コンテナ幅の 1/3 を高さとして使用
+                                .frame(height: containerWidth / 3)
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 16)
                         }
@@ -64,7 +69,8 @@ struct FavoriteView: View {
                                     Task { await viewModel.toggleFavorite(pilgrimage) }
                                 }
                             )
-                            .frame(maxHeight: geometry.size.width / 3)
+                            // コンテナ幅の 1/3 を最大高さとして使用
+                            .frame(maxHeight: containerWidth / 3)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 16)
                             .id(pilgrimage.id)
