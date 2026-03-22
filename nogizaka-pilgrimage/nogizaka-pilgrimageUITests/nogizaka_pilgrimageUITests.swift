@@ -7,6 +7,7 @@
 
 import XCTest
 
+@MainActor
 final class nogizaka_pilgrimageUITests: XCTestCase {
 
     override func setUpWithError() throws {

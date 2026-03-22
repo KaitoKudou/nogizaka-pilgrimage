@@ -7,6 +7,7 @@
 
 import XCTest
 
+@MainActor
 final class nogizaka_pilgrimageUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {

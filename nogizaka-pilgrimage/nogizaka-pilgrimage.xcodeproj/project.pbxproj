@@ -81,6 +81,8 @@
 		E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */; };
 		E7A7902B2F701DB20061403A /* MapCameraCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7902A2F701DB20061403A /* MapCameraCommand.swift */; };
 		E7A7902D2F701E1C0061403A /* ClusterMapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7902C2F701E1C0061403A /* ClusterMapViewCoordinator.swift */; };
+		E7A7902F2F7023F50061403A /* PilgrimageMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7902E2F7023F50061403A /* PilgrimageMapViewModel.swift */; };
+		E7A790362F7024600061403A /* PilgrimageMapViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790352F7024600061403A /* PilgrimageMapViewModelTests.swift */; };
 		E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */; };
 		E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931412F46053A00B94C75 /* IconLicenseView.swift */; };
 		E7B931462F473AA900B94C75 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931452F473AA900B94C75 /* MenuViewModel.swift */; };
@@ -192,6 +194,8 @@
 		E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageAnnotation.swift; sourceTree = "<group>"; };
 		E7A7902A2F701DB20061403A /* MapCameraCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCameraCommand.swift; sourceTree = "<group>"; };
 		E7A7902C2F701E1C0061403A /* ClusterMapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterMapViewCoordinator.swift; sourceTree = "<group>"; };
+		E7A7902E2F7023F50061403A /* PilgrimageMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapViewModel.swift; sourceTree = "<group>"; };
+		E7A790352F7024600061403A /* PilgrimageMapViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapViewModelTests.swift; sourceTree = "<group>"; };
 		E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7B931412F46053A00B94C75 /* IconLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseView.swift; sourceTree = "<group>"; };
 		E7B931452F473AA900B94C75 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
@@ -475,6 +479,7 @@
 		E74934552959F2120045AE39 /* nogizaka-pilgrimageTests */ = {
 			isa = PBXGroup;
 			children = (
+				E7A790302F7024120061403A /* Feature */,
 				E74934562959F2120045AE39 /* nogizaka_pilgrimageTests.swift */,
 			);
 			path = "nogizaka-pilgrimageTests";
@@ -571,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				E795AAD32F5055D80062C9CE /* PilgrimageMapView.swift */,
+				E7A7902E2F7023F50061403A /* PilgrimageMapViewModel.swift */,
 				E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */,
 				E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */,
 				E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */,
@@ -631,6 +637,30 @@
 				E795AAEE2F5493210062C9CE /* LogMacroTests.swift */,
 			);
 			path = AppLoggerTests;
+			sourceTree = "<group>";
+		};
+		E7A790302F7024120061403A /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				E7A790342F7024440061403A /* Pilgrimage */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		E7A790332F7024440061403A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				E7A790352F7024600061403A /* PilgrimageMapViewModelTests.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		E7A790342F7024440061403A /* Pilgrimage */ = {
+			isa = PBXGroup;
+			children = (
+				E7A790332F7024440061403A /* Map */,
+			);
+			path = Pilgrimage;
 			sourceTree = "<group>";
 		};
 		E7B931422F46053A00B94C75 /* IconLicense */ = {
@@ -848,6 +878,7 @@
 				E795AAC42F50556B0062C9CE /* PilgrimageDetailViewModel.swift in Sources */,
 				E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */,
 				E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */,
+				E7A7902F2F7023F50061403A /* PilgrimageMapViewModel.swift in Sources */,
 				E72EA3542F5716B2007BFC81 /* AppConfigRemoteDataStore.swift in Sources */,
 				E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */,
 				E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */,
@@ -904,6 +935,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A790362F7024600061403A /* PilgrimageMapViewModelTests.swift in Sources */,
 				E74934572959F2120045AE39 /* nogizaka_pilgrimageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
