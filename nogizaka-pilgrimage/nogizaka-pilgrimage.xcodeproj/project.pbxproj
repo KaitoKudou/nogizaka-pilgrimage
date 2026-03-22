@@ -79,6 +79,8 @@
 		E795AAF12F54A0000062C9CE /* AppLogger in Frameworks */ = {isa = PBXBuildFile; productRef = E795AAF22F54A0000062C9CE /* AppLogger */; };
 		E79D8C922E43859C006170C3 /* ClusterMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D8C912E43859C006170C3 /* ClusterMapView.swift */; };
 		E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */; };
+		E7A7902B2F701DB20061403A /* MapCameraCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7902A2F701DB20061403A /* MapCameraCommand.swift */; };
+		E7A7902D2F701E1C0061403A /* ClusterMapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7902C2F701E1C0061403A /* ClusterMapViewCoordinator.swift */; };
 		E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */; };
 		E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931412F46053A00B94C75 /* IconLicenseView.swift */; };
 		E7B931462F473AA900B94C75 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931452F473AA900B94C75 /* MenuViewModel.swift */; };
@@ -188,6 +190,8 @@
 		E795AAEE2F5493210062C9CE /* LogMacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMacroTests.swift; sourceTree = "<group>"; };
 		E79D8C912E43859C006170C3 /* ClusterMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterMapView.swift; sourceTree = "<group>"; };
 		E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageAnnotation.swift; sourceTree = "<group>"; };
+		E7A7902A2F701DB20061403A /* MapCameraCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCameraCommand.swift; sourceTree = "<group>"; };
+		E7A7902C2F701E1C0061403A /* ClusterMapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterMapViewCoordinator.swift; sourceTree = "<group>"; };
 		E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7B931412F46053A00B94C75 /* IconLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseView.swift; sourceTree = "<group>"; };
 		E7B931452F473AA900B94C75 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
@@ -571,6 +575,8 @@
 				E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */,
 				E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */,
 				E79D8C912E43859C006170C3 /* ClusterMapView.swift */,
+				E7A7902A2F701DB20061403A /* MapCameraCommand.swift */,
+				E7A7902C2F701E1C0061403A /* ClusterMapViewCoordinator.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -847,6 +853,7 @@
 				E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */,
 				E79045B22B0E088100F0936B /* LocationManager.swift in Sources */,
 				E72EA35B2F585C6E007BFC81 /* PilgrimageDTO.swift in Sources */,
+				E7A7902D2F701E1C0061403A /* ClusterMapViewCoordinator.swift in Sources */,
 				E72EA3672F585D20007BFC81 /* PilgrimageEntity.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E72EA3622F585CAE007BFC81 /* CheckInObject.swift in Sources */,
@@ -873,6 +880,7 @@
 				E7B931482F4749AB00B94C75 /* MenuView.swift in Sources */,
 				E7FDAA172AE230310056AA5B /* UINavigationControllerExtension.swift in Sources */,
 				E72EA3582F5716D0007BFC81 /* AppConfigRepository+Live.swift in Sources */,
+				E7A7902B2F701DB20061403A /* MapCameraCommand.swift in Sources */,
 				E72EA33F2F55E7D2007BFC81 /* FavoriteRepository.swift in Sources */,
 				E795AAD02F5055BE0062C9CE /* PilgrimageListContentView.swift in Sources */,
 				E72EA34C2F570852007BFC81 /* CheckInLocalDataStore.swift in Sources */,

@@ -12,7 +12,7 @@ import SwiftUI
 struct PilgrimageMapView: View {
     @Environment(\.theme) private var theme
     @State private var selectedIndex: Int
-    @State private var centerCommand: ClusterMapView.CenterCommand?
+    @State private var centerCommand: MapCameraCommand?
     @State private var isShowAlert = false
     @State private var containerWidth: CGFloat = 0
     @State private var hasSetInitialLocation = false
