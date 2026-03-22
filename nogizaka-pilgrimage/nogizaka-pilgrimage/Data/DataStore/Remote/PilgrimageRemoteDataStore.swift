@@ -5,6 +5,7 @@
 //  Created by k_kudo on 2026/03/03.
 //
 
+import AppLogger
 import Dependencies
 import DependenciesMacros
 import FirebaseFirestore
@@ -24,6 +25,7 @@ extension PilgrimageRemoteDataStore: DependencyKey {
                         .getDocuments()
                     return try snapshot.documents.map { try $0.data(as: PilgrimageDTO.self) }
                 } catch {
+                    #log(.error, "fetch error: \(error)")
                     throw APIError.fetchError
                 }
             }
