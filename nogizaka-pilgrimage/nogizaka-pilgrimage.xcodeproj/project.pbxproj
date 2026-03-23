@@ -46,7 +46,6 @@
 		E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */; };
 		E749344A2959F2120045AE39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E74934492959F2120045AE39 /* Assets.xcassets */; };
 		E749344D2959F2120045AE39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E749344C2959F2120045AE39 /* Preview Assets.xcassets */; };
-		E74934572959F2120045AE39 /* nogizaka_pilgrimageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934562959F2120045AE39 /* nogizaka_pilgrimageTests.swift */; };
 		E74934612959F2120045AE39 /* nogizaka_pilgrimageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934602959F2120045AE39 /* nogizaka_pilgrimageUITests.swift */; };
 		E74934632959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74934622959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift */; };
 		E755E4262F4DD85800EF8E2F /* CheckInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E755E4252F4DD85800EF8E2F /* CheckInViewModel.swift */; };
@@ -83,6 +82,13 @@
 		E7A7902D2F701E1C0061403A /* ClusterMapViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7902C2F701E1C0061403A /* ClusterMapViewCoordinator.swift */; };
 		E7A7902F2F7023F50061403A /* PilgrimageMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7902E2F7023F50061403A /* PilgrimageMapViewModel.swift */; };
 		E7A790362F7024600061403A /* PilgrimageMapViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790352F7024600061403A /* PilgrimageMapViewModelTests.swift */; };
+		E7A790382F7102F40061403A /* CheckInEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790372F7102F40061403A /* CheckInEntity.swift */; };
+		E7A7903A2F7103A80061403A /* CheckInDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790392F7103A80061403A /* CheckInDTO.swift */; };
+		E7A7903E2F715BA90061403A /* CheckInUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7903D2F715BA90061403A /* CheckInUseCaseTests.swift */; };
+		E7A790402F7163B10061403A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7903F2F7163B10061403A /* Constants.swift */; };
+		E7A790442F71659F0061403A /* CheckInRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790432F71659F0061403A /* CheckInRepositoryTests.swift */; };
+		E7A790472F716A8F0061403A /* CheckInDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790462F716A8F0061403A /* CheckInDTOTests.swift */; };
+		E7A790492F7171DF0061403A /* CheckInError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790482F7171DF0061403A /* CheckInError.swift */; };
 		E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */; };
 		E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931412F46053A00B94C75 /* IconLicenseView.swift */; };
 		E7B931462F473AA900B94C75 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931452F473AA900B94C75 /* MenuViewModel.swift */; };
@@ -156,7 +162,6 @@
 		E74934492959F2120045AE39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E749344C2959F2120045AE39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E74934522959F2120045AE39 /* nogizaka-pilgrimageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nogizaka-pilgrimageTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E74934562959F2120045AE39 /* nogizaka_pilgrimageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageTests.swift; sourceTree = "<group>"; };
 		E749345C2959F2120045AE39 /* nogizaka-pilgrimageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nogizaka-pilgrimageUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74934602959F2120045AE39 /* nogizaka_pilgrimageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageUITests.swift; sourceTree = "<group>"; };
 		E74934622959F2120045AE39 /* nogizaka_pilgrimageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -196,6 +201,14 @@
 		E7A7902C2F701E1C0061403A /* ClusterMapViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterMapViewCoordinator.swift; sourceTree = "<group>"; };
 		E7A7902E2F7023F50061403A /* PilgrimageMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapViewModel.swift; sourceTree = "<group>"; };
 		E7A790352F7024600061403A /* PilgrimageMapViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapViewModelTests.swift; sourceTree = "<group>"; };
+		E7A790372F7102F40061403A /* CheckInEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInEntity.swift; sourceTree = "<group>"; };
+		E7A790392F7103A80061403A /* CheckInDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInDTO.swift; sourceTree = "<group>"; };
+		E7A7903D2F715BA90061403A /* CheckInUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInUseCaseTests.swift; sourceTree = "<group>"; };
+		E7A7903F2F7163B10061403A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E7A790432F71659F0061403A /* CheckInRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInRepositoryTests.swift; sourceTree = "<group>"; };
+		E7A790462F716A8F0061403A /* CheckInDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInDTOTests.swift; sourceTree = "<group>"; };
+		E7A790482F7171DF0061403A /* CheckInError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInError.swift; sourceTree = "<group>"; };
+		E7A7904A2F7173C50061403A /* nogizaka-pilgrimage.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "nogizaka-pilgrimage.xctestplan"; sourceTree = "<group>"; };
 		E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7B931412F46053A00B94C75 /* IconLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseView.swift; sourceTree = "<group>"; };
 		E7B931452F473AA900B94C75 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
@@ -268,6 +281,7 @@
 				E71A82782BE200B700C16FEE /* BuildClient.swift */,
 				E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */,
 				E72EA3742F59C948007BFC81 /* SafariView.swift */,
+				E7A7903F2F7163B10061403A /* Constants.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -370,6 +384,7 @@
 			children = (
 				E72EA35A2F585C6E007BFC81 /* PilgrimageDTO.swift */,
 				E72EA36F2F59B1BB007BFC81 /* AppUpdateInfoDTO.swift */,
+				E7A790392F7103A80061403A /* CheckInDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -388,7 +403,9 @@
 			isa = PBXGroup;
 			children = (
 				E72EA3662F585D20007BFC81 /* PilgrimageEntity.swift */,
+				E7A790372F7102F40061403A /* CheckInEntity.swift */,
 				E72EA3712F59B2CC007BFC81 /* APIError.swift */,
+				E7A790482F7171DF0061403A /* CheckInError.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -432,6 +449,7 @@
 		E74934392959F20E0045AE39 = {
 			isa = PBXGroup;
 			children = (
+				E7A7904A2F7173C50061403A /* nogizaka-pilgrimage.xctestplan */,
 				E795AADD2F5490D80062C9CE /* AppLoggerMacro */,
 				E74934442959F20E0045AE39 /* nogizaka-pilgrimage */,
 				E74934552959F2120045AE39 /* nogizaka-pilgrimageTests */,
@@ -479,8 +497,9 @@
 		E74934552959F2120045AE39 /* nogizaka-pilgrimageTests */ = {
 			isa = PBXGroup;
 			children = (
+				E7A7903B2F715B940061403A /* Domain */,
+				E7A790412F7165800061403A /* Data */,
 				E7A790302F7024120061403A /* Feature */,
-				E74934562959F2120045AE39 /* nogizaka_pilgrimageTests.swift */,
 			);
 			path = "nogizaka-pilgrimageTests";
 			sourceTree = "<group>";
@@ -661,6 +680,47 @@
 				E7A790332F7024440061403A /* Map */,
 			);
 			path = Pilgrimage;
+			sourceTree = "<group>";
+		};
+		E7A7903B2F715B940061403A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E7A7903C2F715B9C0061403A /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		E7A7903C2F715B9C0061403A /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				E7A7903D2F715BA90061403A /* CheckInUseCaseTests.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		E7A790412F7165800061403A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E7A790422F7165920061403A /* Repository */,
+				E7A790452F716A740061403A /* DTO */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E7A790422F7165920061403A /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				E7A790432F71659F0061403A /* CheckInRepositoryTests.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		E7A790452F716A740061403A /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				E7A790462F716A8F0061403A /* CheckInDTOTests.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		E7B931422F46053A00B94C75 /* IconLicense */ = {
@@ -864,6 +924,7 @@
 				E795AACE2F5055B40062C9CE /* PilgrimageListView.swift in Sources */,
 				E72EA33D2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift in Sources */,
 				E7FDAA112AE177CB0056AA5B /* UIColorExtension.swift in Sources */,
+				E7A790402F7163B10061403A /* Constants.swift in Sources */,
 				E72EA34E2F57166E007BFC81 /* PilgrimageRemoteDataStore.swift in Sources */,
 				E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */,
 				E72EA3482F57042C007BFC81 /* CheckInRepository+Live.swift in Sources */,
@@ -879,6 +940,7 @@
 				E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */,
 				E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */,
 				E7A7902F2F7023F50061403A /* PilgrimageMapViewModel.swift in Sources */,
+				E7A790382F7102F40061403A /* CheckInEntity.swift in Sources */,
 				E72EA3542F5716B2007BFC81 /* AppConfigRemoteDataStore.swift in Sources */,
 				E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */,
 				E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */,
@@ -888,6 +950,7 @@
 				E72EA3672F585D20007BFC81 /* PilgrimageEntity.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E72EA3622F585CAE007BFC81 /* CheckInObject.swift in Sources */,
+				E7A790492F7171DF0061403A /* CheckInError.swift in Sources */,
 				E755E4282F4DD86900EF8E2F /* CheckInView.swift in Sources */,
 				E72EA3502F571683007BFC81 /* PilgrimageRepository.swift in Sources */,
 				E72EA36B2F5866D0007BFC81 /* PilgrimageLocalDataStore.swift in Sources */,
@@ -896,6 +959,7 @@
 				E71A82792BE200B700C16FEE /* BuildClient.swift in Sources */,
 				E79D8C922E43859C006170C3 /* ClusterMapView.swift in Sources */,
 				E72EA3602F585CA1007BFC81 /* FavoriteObject.swift in Sources */,
+				E7A7903A2F7103A80061403A /* CheckInDTO.swift in Sources */,
 				E795AAC62F5055780062C9CE /* PilgrimageDetailView.swift in Sources */,
 				E72EA3722F59B2CC007BFC81 /* APIError.swift in Sources */,
 				E7738FA32BB45AA700C00F2F /* RouteActionClient.swift in Sources */,
@@ -936,7 +1000,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7A790362F7024600061403A /* PilgrimageMapViewModelTests.swift in Sources */,
-				E74934572959F2120045AE39 /* nogizaka_pilgrimageTests.swift in Sources */,
+				E7A790472F716A8F0061403A /* CheckInDTOTests.swift in Sources */,
+				E7A7903E2F715BA90061403A /* CheckInUseCaseTests.swift in Sources */,
+				E7A790442F71659F0061403A /* CheckInRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,7 @@ struct CheckInUseCase {
 extension CheckInUseCase: DependencyKey {
     static let liveValue: Self = {
         @Dependency(CheckInRepository.self) var checkInRepository
+        @Dependency(\.date) var date
 
         return .init(
             execute: { pilgrimage, userCoordinate in
@@ -30,17 +31,17 @@ extension CheckInUseCase: DependencyKey {
                     throw CheckInError.notNearby
                 }
 
-                guard try await !checkInRepository.isCheckedIn(pilgrimage.code) else {
+                guard try await !checkInRepository.isCheckedIn(code: pilgrimage.code) else {
                     return false
                 }
 
-                try await checkInRepository.addCheckIn(pilgrimage)
+                try await checkInRepository.addCheckIn(
+                    pilgrimage: pilgrimage,
+                    checkedInAt: date.now,
+                    memo: nil
+                )
                 return true
             }
         )
     }()
-}
-
-enum CheckInError: Error {
-    case notNearby
 }

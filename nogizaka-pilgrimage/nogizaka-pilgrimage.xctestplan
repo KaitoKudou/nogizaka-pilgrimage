@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "ED4856A9-BD9A-4204-9947-B0621C0881CE",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "IDELogRedirectionPolicy",
+        "value" : "oslogToStdio"
+      }
+    ],
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:nogizaka-pilgrimage.xcodeproj",
+      "identifier" : "E74934412959F20E0045AE39",
+      "name" : "nogizaka-pilgrimage"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:nogizaka-pilgrimage.xcodeproj",
+        "identifier" : "E74934512959F2120045AE39",
+        "name" : "nogizaka-pilgrimageTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:nogizaka-pilgrimage.xcodeproj",
+        "identifier" : "E749345B2959F2120045AE39",
+        "name" : "nogizaka-pilgrimageUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
