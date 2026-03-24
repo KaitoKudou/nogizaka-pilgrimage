@@ -10,11 +10,17 @@ import SwiftUI
 struct LaunchView: View {
     @Environment(\.openURL) private var openURL
     @State private var viewModel = LaunchViewModel()
+    @State private var locationManager = LocationManager()
+    @State private var isLocationReady = false
 
     var body: some View {
-        if viewModel.isReady {
-            MainView(pilgrimages: viewModel.pilgrimages)
-                .environment(\.theme, .system)
+        if viewModel.isReady && isLocationReady {
+            MainView(
+                pilgrimages: viewModel.pilgrimages,
+                initialLocation: locationManager.userLocation
+            )
+            .environment(\.theme, .system)
+            .environment(locationManager)
         } else {
             ZStack {
                 ProgressView()
@@ -27,8 +33,11 @@ struct LaunchView: View {
                 actions: alertActions,
                 message: alertMessage
             )
-            .onAppear {
-                Task { await viewModel.initialize() }
+            .task {
+                locationManager.requestLocationIfAuthorized()
+                await viewModel.initialize()
+                await locationManager.awaitLocation()
+                isLocationReady = true
             }
         }
     }

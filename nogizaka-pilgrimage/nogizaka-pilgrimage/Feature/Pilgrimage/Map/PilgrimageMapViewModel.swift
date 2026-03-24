@@ -18,9 +18,14 @@ final class PilgrimageMapViewModel {
 
     private static let nogizakaStationCode = "130001"
 
-    init(pilgrimages: [PilgrimageEntity]) {
+    init(pilgrimages: [PilgrimageEntity], userLocation: CLLocationCoordinate2D? = nil) {
         self.pilgrimages = pilgrimages
-        self.selectedIndex = Self.defaultIndex(for: pilgrimages)
+        if let userLocation {
+            self.selectedIndex = Self.nearestIndex(for: pilgrimages, from: userLocation)
+            self.hasSetInitialLocation = true
+        } else {
+            self.selectedIndex = Self.defaultIndex(for: pilgrimages)
+        }
     }
 
     /// 指定された聖地リストから乃木坂駅のインデックスを返す。見つからなければ 0。
@@ -30,6 +35,11 @@ final class PilgrimageMapViewModel {
 
     /// ユーザー位置から最も近い聖地のインデックスを返す。
     func nearestPilgrimageIndex(from userLocation: CLLocationCoordinate2D) -> Int {
+        Self.nearestIndex(for: pilgrimages, from: userLocation)
+    }
+
+    /// 指定位置から最も近い聖地のインデックスを返す。
+    static func nearestIndex(for pilgrimages: [PilgrimageEntity], from userLocation: CLLocationCoordinate2D) -> Int {
         guard !pilgrimages.isEmpty else { return 0 }
         let userCLLocation = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
         var nearestIndex = 0

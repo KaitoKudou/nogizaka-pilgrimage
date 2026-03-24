@@ -15,7 +15,8 @@ final class LocationManager {
     private(set) var userLocation: CLLocationCoordinate2D?
     /// 位置情報の利用許可状態
     private(set) var isLocationPermissionDenied: Bool = true
-
+    /// awaitLocation のタイムアウトが発火したかどうか
+    private var isAwaitTimedOut = false
     private let delegate: Delegate
     private let clLocationManager = CLLocationManager()
 
@@ -24,11 +25,50 @@ final class LocationManager {
         delegate.owner = self
     }
 
+    /// 許可済みの場合のみ位置情報取得を開始する（許可ダイアログは表示しない）
+    func requestLocationIfAuthorized() {
+        let status = clLocationManager.authorizationStatus
+        guard status == .authorizedWhenInUse || status == .authorizedAlways else {
+            if status == .restricted || status == .denied {
+                isLocationPermissionDenied = true
+            }
+            return
+        }
+        configureCLLocationManager()
+        isLocationPermissionDenied = false
+        clLocationManager.startUpdatingLocation()
+    }
+
+    /// userLocation に値が入るまで待機する。許可済みでなければ即座に返す。
+    /// タイムアウト時は userLocation が nil のまま返る。
+    @MainActor
+    func awaitLocation(timeout: Duration = .seconds(5)) async {
+        guard !isLocationPermissionDenied, userLocation == nil else { return }
+
+        isAwaitTimedOut = false
+        let deadline = ContinuousClock.now.advanced(by: timeout)
+
+        let timeoutTask = Task { @MainActor in
+            try? await Task.sleep(for: timeout)
+            isAwaitTimedOut = true
+        }
+
+        while userLocation == nil && ContinuousClock.now < deadline {
+            await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+                withObservationTracking {
+                    _ = self.userLocation
+                    _ = self.isAwaitTimedOut
+                } onChange: {
+                    continuation.resume()
+                }
+            }
+        }
+
+        timeoutTask.cancel()
+    }
+
     func requestLocation() {
-        // initで設定を書くと，アプリ起動時に許可ダイアログが出てしまうためここで設定を行う
-        clLocationManager.desiredAccuracy = kCLLocationAccuracyBest
-        clLocationManager.distanceFilter = 5
-        clLocationManager.delegate = delegate
+        configureCLLocationManager()
 
         if clLocationManager.authorizationStatus == .notDetermined {
             // 位置情報を利用するか未設定の場合に利用許可を求めるアラートを表示
@@ -47,6 +87,12 @@ final class LocationManager {
 }
 
 private extension LocationManager {
+    func configureCLLocationManager() {
+        clLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+        clLocationManager.distanceFilter = 5
+        clLocationManager.delegate = delegate
+    }
+
     final class Delegate: NSObject, CLLocationManagerDelegate {
         weak var owner: LocationManager?
 
