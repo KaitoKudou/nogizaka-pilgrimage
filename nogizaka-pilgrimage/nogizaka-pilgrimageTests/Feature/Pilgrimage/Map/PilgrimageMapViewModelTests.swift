@@ -172,4 +172,30 @@ struct PilgrimageMapViewModelTests {
         viewModel.selectedIndex = 3
         #expect(viewModel.selectedIndex == 3)
     }
+
+    // MARK: - init with userLocation
+
+    @Test("userLocationを渡すと最寄り聖地がselectedIndexになる")
+    func init_withUserLocation_selectsNearest() {
+        let nearAkihabara = CLLocationCoordinate2D(latitude: 35.700, longitude: 139.773)
+        let viewModel = PilgrimageMapViewModel(pilgrimages: dummyPilgrimageList, userLocation: nearAkihabara)
+        #expect(viewModel.selectedIndex == 4)
+    }
+
+    @Test("userLocationを渡した場合、selectNearestPilgrimageIfNeededは無視される")
+    func init_withUserLocation_preventsSubsequentSelect() {
+        let nearAkihabara = CLLocationCoordinate2D(latitude: 35.700, longitude: 139.773)
+        let viewModel = PilgrimageMapViewModel(pilgrimages: dummyPilgrimageList, userLocation: nearAkihabara)
+        let nearShibuya = CLLocationCoordinate2D(latitude: 35.658, longitude: 139.702)
+        let changed = viewModel.selectNearestPilgrimageIfNeeded(userLocation: nearShibuya)
+        #expect(changed == false)
+        #expect(viewModel.selectedIndex == 4)
+    }
+
+    @Test("userLocationがnilの場合、defaultIndexで初期化される")
+    func init_withNilUserLocation_usesDefault() {
+        let viewModel = PilgrimageMapViewModel(pilgrimages: dummyPilgrimageList, userLocation: nil)
+        let expected = PilgrimageMapViewModel.defaultIndex(for: dummyPilgrimageList)
+        #expect(viewModel.selectedIndex == expected)
+    }
 }
