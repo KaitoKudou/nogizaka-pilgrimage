@@ -6,14 +6,16 @@
 //
 
 import AppTrackingTransparency
+import CoreLocation
 import SwiftUI
 
 struct PilgrimageView: View {
     let pilgrimages: [PilgrimageEntity]
+    let initialLocation: CLLocationCoordinate2D?
 
     var body: some View {
         ZStack {
-            PilgrimageMapView(pilgrimages: pilgrimages)
+            PilgrimageMapView(pilgrimages: pilgrimages, initialLocation: initialLocation)
         }
         .navigationTitle(String(localized: .tabbarPilgrimage))
         .navigationBarTitleDisplayMode(.inline)
@@ -51,8 +53,6 @@ extension PilgrimageView {
 }
 
 #Preview {
-    PilgrimageView(
-        pilgrimages: dummyPilgrimageList
-    )
-    .environment(LocationManager())
+    PilgrimageView(pilgrimages: dummyPilgrimageList, initialLocation: nil)
+        .environment(LocationManager())
 }

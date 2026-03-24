@@ -5,17 +5,19 @@
 //  Created by 工藤 海斗 on 2023/01/04.
 //
 
+import CoreLocation
 import SwiftUI
 
 struct MainView: View {
     @Environment(\.theme) private var theme
-    @State private var locationManager = LocationManager()
+    @Environment(LocationManager.self) private var locationManager
     let pilgrimages: [PilgrimageEntity]
+    let initialLocation: CLLocationCoordinate2D?
 
     var body: some View {
         TabView {
             NavigationStack {
-                PilgrimageView(pilgrimages: pilgrimages)
+                PilgrimageView(pilgrimages: pilgrimages, initialLocation: initialLocation)
             }
             .environment(locationManager)
             .tabItem {
@@ -54,5 +56,6 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView(pilgrimages: dummyPilgrimageList)
+    MainView(pilgrimages: dummyPilgrimageList, initialLocation: nil)
+        .environment(LocationManager())
 }

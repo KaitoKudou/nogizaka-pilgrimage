@@ -16,8 +16,8 @@ struct PilgrimageMapView: View {
     @State private var containerWidth: CGFloat = 0
     @Environment(LocationManager.self) private var locationManager
 
-    init(pilgrimages: [PilgrimageEntity]) {
-        viewModel = .init(pilgrimages: pilgrimages)
+    init(pilgrimages: [PilgrimageEntity], initialLocation: CLLocationCoordinate2D? = nil) {
+        viewModel = .init(pilgrimages: pilgrimages, userLocation: initialLocation)
     }
 
     var body: some View {
@@ -58,6 +58,7 @@ struct PilgrimageMapView: View {
                 containerWidth = newValue
             }
             .onAppear {
+                // 権限未許可時のダイアログ表示はここで行う（許可済みの場合は LaunchView で取得済み）
                 locationManager.requestLocation()
                 viewModel.selectNearestPilgrimageIfNeeded(userLocation: locationManager.userLocation)
             }
@@ -75,11 +76,23 @@ struct PilgrimageMapView: View {
             }
     }
 
+    /// selectedIndex の聖地を中心にした初期リージョン。pilgrimages が空の場合は乃木坂駅デフォルト。
+    private var initialRegion: MKCoordinateRegion {
+        guard viewModel.pilgrimages.indices.contains(viewModel.selectedIndex) else {
+            return PilgrimageMapConstant.initialRegion
+        }
+        return MKCoordinateRegion(
+            center: viewModel.pilgrimages[viewModel.selectedIndex].coordinate,
+            latitudinalMeters: PilgrimageMapConstant.initialLatitudinalMeters,
+            longitudinalMeters: PilgrimageMapConstant.initialLongitudinalMeters
+        )
+    }
+
     private var mapView: some View {
         ClusterMapView(
             selectedIndex: $viewModel.selectedIndex,
             centerCommand: $centerCommand,
-            initialRegion: PilgrimageMapConstant.initialRegion,
+            initialRegion: initialRegion,
             initialYOffset: cardYOffset(),
             mapWidth: containerWidth,
             pilgrimages: viewModel.pilgrimages,
@@ -118,8 +131,6 @@ struct PilgrimageMapView: View {
 }
 
 #Preview {
-    PilgrimageMapView(
-        pilgrimages: dummyPilgrimageList
-    )
-    .environment(LocationManager())
+    PilgrimageMapView(pilgrimages: dummyPilgrimageList)
+        .environment(LocationManager())
 }
