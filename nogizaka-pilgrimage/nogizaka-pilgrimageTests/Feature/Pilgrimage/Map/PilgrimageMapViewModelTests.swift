@@ -39,7 +39,8 @@ struct PilgrimageMapViewModelTests {
             address: "",
             imageURL: nil,
             copyright: nil,
-            searchCandidateList: []
+            searchCandidateList: [],
+            relatedMedia: nil
         )
     }
 

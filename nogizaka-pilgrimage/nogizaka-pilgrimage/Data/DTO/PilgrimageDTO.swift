@@ -17,6 +17,7 @@ struct PilgrimageDTO: Codable {
     let imageURL: URL?
     let copyright: String?
     let searchCandidateList: [String]
+    let relatedMedia: [RelatedMediaDTO]?
 
     enum CodingKeys: String, CodingKey {
         case code
@@ -28,6 +29,7 @@ struct PilgrimageDTO: Codable {
         case imageURL = "image_url"
         case copyright
         case searchCandidateList = "search_candidate_list"
+        case relatedMedia = "related_media"
     }
 
     init(from entity: PilgrimageEntity) {
@@ -40,5 +42,10 @@ struct PilgrimageDTO: Codable {
         self.imageURL = entity.imageURL
         self.copyright = entity.copyright
         self.searchCandidateList = entity.searchCandidateList
+        if let media = entity.relatedMedia {
+            self.relatedMedia = [RelatedMediaDTO(from: media)]
+        } else {
+            self.relatedMedia = nil
+        }
     }
 }

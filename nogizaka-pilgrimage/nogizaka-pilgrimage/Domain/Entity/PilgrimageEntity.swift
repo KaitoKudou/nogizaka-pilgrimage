@@ -18,6 +18,7 @@ struct PilgrimageEntity: Hashable, Identifiable {
     let imageURL: URL?
     let copyright: String?
     let searchCandidateList: [String]
+    let relatedMedia: RelatedMediaEntity?
 
     /// 位置座標
     var coordinate: CLLocationCoordinate2D {
@@ -41,7 +42,8 @@ let dummyPilgrimageList: [PilgrimageEntity] = [
         address: "東京都港区南青山１丁目２５−８",
         imageURL: nil,
         copyright: "@2023 Google, 画像提供：たく",
-        searchCandidateList: ["乃木坂駅", "のぎざかえき", "ノギザカエキ", "nogizakaeki"]
+        searchCandidateList: ["乃木坂駅", "のぎざかえき", "ノギザカエキ", "nogizakaeki"],
+        relatedMedia: nil
     ),
     PilgrimageEntity(
         code: "002",
@@ -52,7 +54,8 @@ let dummyPilgrimageList: [PilgrimageEntity] = [
         address: "東京都港区赤坂８丁目１１−２７",
         imageURL: nil,
         copyright: "@2023 Google, 画像提供：ゆるバップ",
-        searchCandidateList: ["乃木神社", "のぎじんじゃ", "ノギジンジャ", "nogijinjya"]
+        searchCandidateList: ["乃木神社", "のぎじんじゃ", "ノギジンジャ", "nogijinjya"],
+        relatedMedia: nil
     ),
     PilgrimageEntity(
         code: "003",
@@ -63,7 +66,8 @@ let dummyPilgrimageList: [PilgrimageEntity] = [
         address: "東京都渋谷区渋谷２丁目",
         imageURL: nil,
         copyright: "@2023 Google, 画像提供：cana kei",
-        searchCandidateList: ["渋谷駅", "しぶやえき", "シブヤエキ", "sibuyaeki"]
+        searchCandidateList: ["渋谷駅", "しぶやえき", "シブヤエキ", "sibuyaeki"],
+        relatedMedia: nil
     ),
     PilgrimageEntity(
         code: "004",
@@ -74,7 +78,8 @@ let dummyPilgrimageList: [PilgrimageEntity] = [
         address: "東京都渋谷区宇田川町１６−１５",
         imageURL: nil,
         copyright: "@2023 Google, 画像提供：I Ar",
-        searchCandidateList: ["スペイン坂", "すぺいんざか", "スペインザカ", "supeinzaka"]
+        searchCandidateList: ["スペイン坂", "すぺいんざか", "スペインザカ", "supeinzaka"],
+        relatedMedia: nil
     ),
     PilgrimageEntity(
         code: "005",
@@ -85,6 +90,7 @@ let dummyPilgrimageList: [PilgrimageEntity] = [
         address: "東京都千代田区外神田４丁目１４−１",
         imageURL: nil,
         copyright: nil,
-        searchCandidateList: ["秋葉原UDX", "あきはばら", "アキハバラ", "akihabara"]
+        searchCandidateList: ["秋葉原UDX", "あきはばら", "アキハバラ", "akihabara"],
+        relatedMedia: nil
     ),
 ]
