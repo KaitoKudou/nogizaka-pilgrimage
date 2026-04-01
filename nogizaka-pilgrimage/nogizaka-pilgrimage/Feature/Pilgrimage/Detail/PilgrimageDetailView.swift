@@ -73,13 +73,12 @@ struct PilgrimageDetailView: View {
                         }
                     } label: {
                         Text(viewModel.hasCheckedIn ?
-                             String(localized: .hasCheckIn) :
+                             String(localized: .checkInButtonAgain) :
                                 String(localized: .checkInButton)
                         )
                         .frame(height: theme.margins.spacing_xl)
                         .frame(maxWidth: .infinity)
                     }
-                    .disabled(viewModel.hasCheckedIn)
                     .alert(
                         viewModel.activeAlert?.title ?? "",
                         isPresented: $viewModel.isAlertPresented
@@ -89,10 +88,7 @@ struct PilgrimageDetailView: View {
                         EmptyView()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(viewModel.hasCheckedIn ?
-                                Color(.tabPrimaryOff) :
-                                    Color(.textSecondary)
-                    )
+                    .background(Color(.textSecondary))
                     .foregroundStyle(.white)
                     .font(theme.fonts.caption)
                     .padding(.bottom, theme.margins.spacing_xl)
@@ -117,6 +113,9 @@ struct PilgrimageDetailView: View {
         }
         .onAppear {
             Task { await viewModel.onAppear(pilgrimage: pilgrimage) }
+        }
+        .fullScreenCover(item: $viewModel.checkInCompletion) { input in
+            CheckInCompletionView(input: input)
         }
         .navigationTitle(String(localized: .navbarPilgrimageDetail))
         .navigationBarTitleDisplayMode(.inline)

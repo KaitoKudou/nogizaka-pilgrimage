@@ -19,10 +19,15 @@ final class PilgrimageDetailViewModel {
     @Dependency(CheckInRepository.self) var checkInRepository
     @ObservationIgnored
     @Dependency(CheckInUseCase.self) var checkInUseCase
+    @ObservationIgnored
+    @Dependency(NetworkMonitor.self) var networkMonitor
+    @ObservationIgnored
+    @Dependency(\.date) var date
 
     var isLoading = false
     var favorited = false
     var hasCheckedIn = false
+    var checkInCompletion: CheckInCompletionInput?
 
     enum AlertType {
         case notNearbyError
@@ -74,10 +79,22 @@ final class PilgrimageDetailViewModel {
         defer { isLoading = false }
 
         do {
-            let isNewCheckIn = try await checkInUseCase.execute(pilgrimage, userCoordinate)
-            if isNewCheckIn {
-                hasCheckedIn = true
+            try await checkInUseCase.execute(pilgrimage, userCoordinate)
+            hasCheckedIn = true
+
+            let isOnline: Bool
+            do {
+                try await networkMonitor.monitorNetwork()
+                isOnline = true
+            } catch {
+                isOnline = false
             }
+
+            checkInCompletion = CheckInCompletionInput(
+                pilgrimage: pilgrimage,
+                checkedInAt: date.now,
+                isOnline: isOnline
+            )
         } catch is CheckInError {
             activeAlert = .notNearbyError
         } catch is APIError {

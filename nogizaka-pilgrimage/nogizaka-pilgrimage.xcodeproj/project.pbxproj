@@ -93,6 +93,10 @@
 		E7A790502F7AB5960061403A /* RelatedMediaDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7904F2F7AB5960061403A /* RelatedMediaDTO.swift */; };
 		E7A790522F7BF0200061403A /* RelatedMediaDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790512F7BF0200061403A /* RelatedMediaDTOTests.swift */; };
 		E7A790562F7BF0F90061403A /* PilgrimageObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790552F7BF0F90061403A /* PilgrimageObjectTests.swift */; };
+		E7A7905A2F7C037F0061403A /* CheckInCompletionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790592F7C037F0061403A /* CheckInCompletionInput.swift */; };
+		E7A7905C2F7C038D0061403A /* CheckInCompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7905B2F7C038D0061403A /* CheckInCompletionViewModel.swift */; };
+		E7A7905E2F7C03A20061403A /* CheckInCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7905D2F7C03A20061403A /* CheckInCompletionView.swift */; };
+		E7A790612F7C03BC0061403A /* CheckInCompletionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790602F7C03BC0061403A /* CheckInCompletionViewModelTests.swift */; };
 		E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */; };
 		E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931412F46053A00B94C75 /* IconLicenseView.swift */; };
 		E7B931462F473AA900B94C75 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931452F473AA900B94C75 /* MenuViewModel.swift */; };
@@ -217,6 +221,10 @@
 		E7A7904F2F7AB5960061403A /* RelatedMediaDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedMediaDTO.swift; sourceTree = "<group>"; };
 		E7A790512F7BF0200061403A /* RelatedMediaDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedMediaDTOTests.swift; sourceTree = "<group>"; };
 		E7A790552F7BF0F90061403A /* PilgrimageObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageObjectTests.swift; sourceTree = "<group>"; };
+		E7A790592F7C037F0061403A /* CheckInCompletionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInCompletionInput.swift; sourceTree = "<group>"; };
+		E7A7905B2F7C038D0061403A /* CheckInCompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInCompletionViewModel.swift; sourceTree = "<group>"; };
+		E7A7905D2F7C03A20061403A /* CheckInCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInCompletionView.swift; sourceTree = "<group>"; };
+		E7A790602F7C03BC0061403A /* CheckInCompletionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInCompletionViewModelTests.swift; sourceTree = "<group>"; };
 		E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7B931412F46053A00B94C75 /* IconLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseView.swift; sourceTree = "<group>"; };
 		E7B931452F473AA900B94C75 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
@@ -265,6 +273,7 @@
 		E7178E832B073863008C85A3 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				E7A790582F7C03550061403A /* CheckInCompletion */,
 				E795AABF2F5055160062C9CE /* Pilgrimage */,
 				E795AAB82F4F372E0062C9CE /* Launch */,
 				E795AAB32F4DEA2C0062C9CE /* Favorite */,
@@ -671,6 +680,7 @@
 		E7A790302F7024120061403A /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				E7A7905F2F7C03AE0061403A /* CheckInCompletion */,
 				E7A790342F7024440061403A /* Pilgrimage */,
 			);
 			path = Feature;
@@ -757,6 +767,24 @@
 				E7A790542F7BF0D50061403A /* Object */,
 			);
 			path = lacal;
+			sourceTree = "<group>";
+		};
+		E7A790582F7C03550061403A /* CheckInCompletion */ = {
+			isa = PBXGroup;
+			children = (
+				E7A790592F7C037F0061403A /* CheckInCompletionInput.swift */,
+				E7A7905B2F7C038D0061403A /* CheckInCompletionViewModel.swift */,
+				E7A7905D2F7C03A20061403A /* CheckInCompletionView.swift */,
+			);
+			path = CheckInCompletion;
+			sourceTree = "<group>";
+		};
+		E7A7905F2F7C03AE0061403A /* CheckInCompletion */ = {
+			isa = PBXGroup;
+			children = (
+				E7A790602F7C03BC0061403A /* CheckInCompletionViewModelTests.swift */,
+			);
+			path = CheckInCompletion;
 			sourceTree = "<group>";
 		};
 		E7B931422F46053A00B94C75 /* IconLicense */ = {
@@ -968,12 +996,15 @@
 				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
 				E755E4262F4DD85800EF8E2F /* CheckInViewModel.swift in Sources */,
 				E72EA3752F59C948007BFC81 /* SafariView.swift in Sources */,
+				E7A7905E2F7C03A20061403A /* CheckInCompletionView.swift in Sources */,
 				E72EA3522F571698007BFC81 /* PilgrimageRepository+Live.swift in Sources */,
 				E795AABE2F4F37B50062C9CE /* LaunchView.swift in Sources */,
 				E72EA3562F5716C2007BFC81 /* AppConfigRepository.swift in Sources */,
 				E72EA35E2F585C93007BFC81 /* PilgrimageObject.swift in Sources */,
 				E7A7904E2F7AA7FA0061403A /* RelatedMediaEntity.swift in Sources */,
 				E795AAC42F50556B0062C9CE /* PilgrimageDetailViewModel.swift in Sources */,
+				E7A7905A2F7C037F0061403A /* CheckInCompletionInput.swift in Sources */,
+				E7A7905C2F7C038D0061403A /* CheckInCompletionViewModel.swift in Sources */,
 				E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */,
 				E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */,
 				E7A7902F2F7023F50061403A /* PilgrimageMapViewModel.swift in Sources */,
@@ -1039,6 +1070,7 @@
 			files = (
 				E7A790362F7024600061403A /* PilgrimageMapViewModelTests.swift in Sources */,
 				E7A790562F7BF0F90061403A /* PilgrimageObjectTests.swift in Sources */,
+				E7A790612F7C03BC0061403A /* CheckInCompletionViewModelTests.swift in Sources */,
 				E7A790472F716A8F0061403A /* CheckInDTOTests.swift in Sources */,
 				E7A790522F7BF0200061403A /* RelatedMediaDTOTests.swift in Sources */,
 				E7A7903E2F715BA90061403A /* CheckInUseCaseTests.swift in Sources */,

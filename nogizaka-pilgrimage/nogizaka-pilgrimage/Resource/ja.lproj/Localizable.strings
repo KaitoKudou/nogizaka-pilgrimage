@@ -25,8 +25,8 @@
 
 // MARK: - 聖地詳細画面のテキスト
 "navbar_pilgrimage_detail" = "聖地詳細";
-"check_in_button" = "スタンプを押す";
-"has_check_in" = "聖地巡礼済み";
+"check_in_button" = "巡礼を記録する";
+"check_in_button_again" = "もう一度巡礼を記録する";
 
 // MARK: - お気に入り画面のテキスト
 "favorites_empty" = "お気に入り聖地はありません。";
@@ -63,3 +63,11 @@
 "menu_section_app" = "アプリについて";
 "icons_by" = "Icons by";
 "icons8" = "Icons8";
+
+// MARK: - チェックイン完了モーダル
+"check_in_completion_first_pilgrimage" = "最初の巡礼です🎉";
+"check_in_completion_nth_pilgrimage" = "%d回目の巡礼！";
+"check_in_completion_cloud_saved" = "記録をクラウドに保存しました";
+"check_in_completion_local_saved" = "記録を端末に保存しました（オンライン時に自動で同期します）";
+"check_in_completion_memo_placeholder" = "メモを残す（任意）";
+"check_in_completion_close" = "閉じる";

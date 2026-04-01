@@ -11,7 +11,7 @@ import DependenciesMacros
 
 @DependencyClient
 struct CheckInUseCase {
-    var execute: @Sendable (_ pilgrimage: PilgrimageEntity, _ userCoordinate: CLLocationCoordinate2D) async throws -> Bool
+    var execute: @Sendable (_ pilgrimage: PilgrimageEntity, _ userCoordinate: CLLocationCoordinate2D) async throws -> Void
 }
 
 extension CheckInUseCase: DependencyKey {
@@ -31,16 +31,11 @@ extension CheckInUseCase: DependencyKey {
                     throw CheckInError.notNearby
                 }
 
-                guard try await !checkInRepository.isCheckedIn(code: pilgrimage.code) else {
-                    return false
-                }
-
                 try await checkInRepository.addCheckIn(
                     pilgrimage: pilgrimage,
                     checkedInAt: date.now,
                     memo: nil
                 )
-                return true
             }
         )
     }()

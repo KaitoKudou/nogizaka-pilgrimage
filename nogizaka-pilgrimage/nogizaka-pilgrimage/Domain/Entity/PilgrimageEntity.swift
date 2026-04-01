@@ -43,7 +43,11 @@ let dummyPilgrimageList: [PilgrimageEntity] = [
         imageURL: nil,
         copyright: "@2023 Google, 画像提供：たく",
         searchCandidateList: ["乃木坂駅", "のぎざかえき", "ノギザカエキ", "nogizakaeki"],
-        relatedMedia: nil
+        relatedMedia: .init(
+            name: "透明な色",
+            contentType: "music",
+            releaseLabel: "アルバム「透明な色」"
+        )
     ),
     PilgrimageEntity(
         code: "002",
