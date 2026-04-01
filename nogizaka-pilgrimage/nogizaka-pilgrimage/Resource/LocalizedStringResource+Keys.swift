@@ -25,7 +25,7 @@ extension LocalizedStringResource {
     // MARK: - 聖地詳細
     static let navbarPilgrimageDetail = LocalizedStringResource("navbar_pilgrimage_detail")
     static let checkInButton = LocalizedStringResource("check_in_button")
-    static let hasCheckIn = LocalizedStringResource("has_check_in")
+    static let checkInButtonAgain = LocalizedStringResource("check_in_button_again")
 
     // MARK: - お気に入り
     static let favoritesEmpty = LocalizedStringResource("favorites_empty")
@@ -61,4 +61,12 @@ extension LocalizedStringResource {
     static let menuSectionApp = LocalizedStringResource("menu_section_app")
     static let iconsBy = LocalizedStringResource("icons_by")
     static let icons8 = LocalizedStringResource("icons8")
+
+    // MARK: - チェックイン完了モーダル
+    static let checkInCompletionFirstPilgrimage = LocalizedStringResource("check_in_completion_first_pilgrimage")
+    static let checkInCompletionNthPilgrimage = LocalizedStringResource("check_in_completion_nth_pilgrimage")
+    static let checkInCompletionCloudSaved = LocalizedStringResource("check_in_completion_cloud_saved")
+    static let checkInCompletionLocalSaved = LocalizedStringResource("check_in_completion_local_saved")
+    static let checkInCompletionMemoPlaceholder = LocalizedStringResource("check_in_completion_memo_placeholder")
+    static let checkInCompletionClose = LocalizedStringResource("check_in_completion_close")
 }

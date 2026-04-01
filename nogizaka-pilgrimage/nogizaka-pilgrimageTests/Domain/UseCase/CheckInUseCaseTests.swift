@@ -14,7 +14,7 @@ import Testing
 
 @Suite(.timeLimit(.minutes(1)))
 struct CheckInUseCaseTests {
-    
+
     private typealias UseCase = CheckInUseCase
 
     // MARK: - テスト用データ
@@ -37,8 +37,7 @@ struct CheckInUseCaseTests {
     func execute_savesCheckedInAt() async throws {
         let savedDate = LockIsolated<Date?>(nil)
 
-        let result = try await withDependencies {
-            $0[CheckInRepository.self].isCheckedIn = { _ in false }
+        try await withDependencies {
             $0[CheckInRepository.self].addCheckIn = { _, checkedInAt, _ in
                 savedDate.setValue(checkedInAt)
             }
@@ -50,7 +49,6 @@ struct CheckInUseCaseTests {
             )
         }
 
-        #expect(result == true)
         #expect(savedDate.value == Self.fixedDate)
     }
 
@@ -58,8 +56,7 @@ struct CheckInUseCaseTests {
     func execute_savesNilMemo() async throws {
         let savedMemo = LockIsolated<String??>(nil) // Optional<Optional<String>> で「呼ばれたか」と「値」を区別
 
-        _ = try await withDependencies {
-            $0[CheckInRepository.self].isCheckedIn = { _ in false }
+        try await withDependencies {
             $0[CheckInRepository.self].addCheckIn = { _, _, memo in
                 savedMemo.setValue(memo)
             }
@@ -80,7 +77,6 @@ struct CheckInUseCaseTests {
     func execute_notNearby_throws() async throws {
         await #expect(throws: CheckInError.notNearby) {
             try await withDependencies {
-                $0[CheckInRepository.self].isCheckedIn = { _ in false }
                 $0[CheckInRepository.self].addCheckIn = { _, _, _ in }
                 $0.date = .constant(Self.fixedDate)
             } operation: {
@@ -90,28 +86,5 @@ struct CheckInUseCaseTests {
                 )
             }
         }
-    }
-
-    // MARK: - 重複チェック
-
-    @Test("既にチェックイン済みの場合falseを返す")
-    func execute_alreadyCheckedIn_returnsFalse() async throws {
-        let addCheckInCalled = LockIsolated(false)
-
-        let result = try await withDependencies {
-            $0[CheckInRepository.self].isCheckedIn = { _ in true }
-            $0[CheckInRepository.self].addCheckIn = { _, _, _ in
-                addCheckInCalled.setValue(true)
-            }
-            $0.date = .constant(Self.fixedDate)
-        } operation: {
-            try await UseCase.liveValue.execute(
-                pilgrimage: Self.nogizakaStation,
-                userCoordinate: Self.nearNogizaka
-            )
-        }
-
-        #expect(result == false)
-        #expect(addCheckInCalled.value == false)
     }
 }
