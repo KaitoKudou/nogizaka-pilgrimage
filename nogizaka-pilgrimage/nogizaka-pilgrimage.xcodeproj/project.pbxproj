@@ -76,6 +76,8 @@
 		E795AADA2F51A2AB0062C9CE /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = E795AAD92F51A2AB0062C9CE /* Dependencies */; };
 		E795AADC2F51A2AB0062C9CE /* DependenciesMacros in Frameworks */ = {isa = PBXBuildFile; productRef = E795AADB2F51A2AB0062C9CE /* DependenciesMacros */; };
 		E795AAF12F54A0000062C9CE /* AppLogger in Frameworks */ = {isa = PBXBuildFile; productRef = E795AAF22F54A0000062C9CE /* AppLogger */; };
+		E79AC7EB2F7D604700754C51 /* confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = E79AC7EA2F7D604700754C51 /* confetti.json */; };
+		E79AC7ED2F7D617700754C51 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E79AC7EC2F7D617700754C51 /* Lottie */; };
 		E79D8C922E43859C006170C3 /* ClusterMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D8C912E43859C006170C3 /* ClusterMapView.swift */; };
 		E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */; };
 		E7A7902B2F701DB20061403A /* MapCameraCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7902A2F701DB20061403A /* MapCameraCommand.swift */; };
@@ -203,6 +205,7 @@
 		E795AAE92F5492F40062C9CE /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
 		E795AAEB2F5493000062C9CE /* LogMacroPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMacroPlugin.swift; sourceTree = "<group>"; };
 		E795AAEE2F5493210062C9CE /* LogMacroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMacroTests.swift; sourceTree = "<group>"; };
+		E79AC7EA2F7D604700754C51 /* confetti.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = confetti.json; sourceTree = "<group>"; };
 		E79D8C912E43859C006170C3 /* ClusterMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterMapView.swift; sourceTree = "<group>"; };
 		E79D8C972E438635006170C3 /* PilgrimageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageAnnotation.swift; sourceTree = "<group>"; };
 		E7A7902A2F701DB20061403A /* MapCameraCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCameraCommand.swift; sourceTree = "<group>"; };
@@ -246,6 +249,7 @@
 				E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */,
 				E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */,
 				E795AADA2F51A2AB0062C9CE /* Dependencies in Frameworks */,
+				E79AC7ED2F7D617700754C51 /* Lottie in Frameworks */,
 				E710931D2BE13DAA005482F7 /* LicenseList in Frameworks */,
 				E7F4023E2F60555500226464 /* NukeUI in Frameworks */,
 				E795AADC2F51A2AB0062C9CE /* DependenciesMacros in Frameworks */,
@@ -457,6 +461,7 @@
 		E73E091C2965CA0A00A1204E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E79AC7E92F7D603000754C51 /* Lottie */,
 				E74934492959F2120045AE39 /* Assets.xcassets */,
 				E73E091A2965C77E00A1204E /* Colors.xcassets */,
 				E73E09302965D18700A1204E /* Localizable.strings */,
@@ -677,6 +682,14 @@
 			path = AppLoggerTests;
 			sourceTree = "<group>";
 		};
+		E79AC7E92F7D603000754C51 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				E79AC7EA2F7D604700754C51 /* confetti.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		E7A790302F7024120061403A /* Feature */ = {
 			isa = PBXGroup;
 			children = (
@@ -854,6 +867,7 @@
 				E795AAD92F51A2AB0062C9CE /* Dependencies */,
 				E795AADB2F51A2AB0062C9CE /* DependenciesMacros */,
 				E7F4023D2F60555500226464 /* NukeUI */,
+				E79AC7EC2F7D617700754C51 /* Lottie */,
 			);
 			productName = "nogizaka-pilgrimage";
 			productReference = E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */;
@@ -935,6 +949,7 @@
 				E795AAD82F51A2AB0062C9CE /* XCRemoteSwiftPackageReference "swift-dependencies" */,
 				E795AAE02F5492490062C9CE /* XCLocalSwiftPackageReference "AppLoggerMacro" */,
 				E76C0D912F60525600893644 /* XCRemoteSwiftPackageReference "Nuke" */,
+				E7A790622F7D5E410061403A /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = E74934432959F20E0045AE39 /* Products */;
 			projectDirPath = "";
@@ -955,6 +970,7 @@
 				E73E091B2965C77E00A1204E /* Colors.xcassets in Resources */,
 				E73E092E2965D18700A1204E /* Localizable.strings in Resources */,
 				E749344D2959F2120045AE39 /* Preview Assets.xcassets in Resources */,
+				E79AC7EB2F7D604700754C51 /* confetti.json in Resources */,
 				E76BF1602BD163E800A1CB97 /* NativeAdView.xib in Resources */,
 				E749344A2959F2120045AE39 /* Assets.xcassets in Resources */,
 				E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */,
@@ -1463,6 +1479,14 @@
 				minimumVersion = 1.11.0;
 			};
 		};
+		E7A790622F7D5E410061403A /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 4.6.0;
+			};
+		};
 		E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1505,6 +1529,11 @@
 		E795AAF22F54A0000062C9CE /* AppLogger */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppLogger;
+		};
+		E79AC7EC2F7D617700754C51 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7A790622F7D5E410061403A /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 		E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
