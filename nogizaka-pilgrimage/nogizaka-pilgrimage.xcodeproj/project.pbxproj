@@ -170,6 +170,7 @@
 		E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nogizaka-pilgrimage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageApp.swift; sourceTree = "<group>"; };
 		E74934492959F2120045AE39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7B1C0052F7E100100AB0005 /* NogizakaStation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NogizakaStation.gpx; sourceTree = "<group>"; };
 		E749344C2959F2120045AE39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E74934522959F2120045AE39 /* nogizaka-pilgrimageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nogizaka-pilgrimageTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E749345C2959F2120045AE39 /* nogizaka-pilgrimageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nogizaka-pilgrimageUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -466,6 +467,7 @@
 				E73E091A2965C77E00A1204E /* Colors.xcassets */,
 				E73E09302965D18700A1204E /* Localizable.strings */,
 				E7BB04132F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift */,
+				E7B1C0052F7E100100AB0005 /* NogizakaStation.gpx */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1130,7 +1132,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		E74934642959F2120045AE39 /* Debug */ = {
+		E74934642959F2120045AE39 /* Debug-Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1193,7 +1195,7 @@
 				SWIFT_EXPLICITLY_BUILT_MODULES = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = "Debug-Prod";
 		};
 		E74934652959F2120045AE39 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1254,7 +1256,7 @@
 			};
 			name = Release;
 		};
-		E74934672959F2120045AE39 /* Debug */ = {
+		E74934672959F2120045AE39 /* Debug-Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1290,7 +1292,7 @@
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = "Debug-Prod";
 		};
 		E74934682959F2120045AE39 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1330,7 +1332,7 @@
 			};
 			name = Release;
 		};
-		E749346A2959F2120045AE39 /* Debug */ = {
+		E749346A2959F2120045AE39 /* Debug-Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1346,7 +1348,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/nogizaka-pilgrimage.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/nogizaka-pilgrimage";
 			};
-			name = Debug;
+			name = "Debug-Prod";
 		};
 		E749346B2959F2120045AE39 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1366,7 +1368,7 @@
 			};
 			name = Release;
 		};
-		E749346D2959F2120045AE39 /* Debug */ = {
+		E749346D2959F2120045AE39 /* Debug-Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1380,7 +1382,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "nogizaka-pilgrimage";
 			};
-			name = Debug;
+			name = "Debug-Prod";
 		};
 		E749346E2959F2120045AE39 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1398,13 +1400,152 @@
 			};
 			name = Release;
 		};
+		E7B1C0012F7E000100AB0001 /* Debug-Dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = DX3FKMWYLL;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EXPLICITLY_BUILT_MODULES = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug-Dev";
+		};
+		E7B1C0022F7E000100AB0002 /* Debug-Dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.8.0.0;
+				DEVELOPMENT_ASSET_PATHS = "\"nogizaka-pilgrimage/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "nogizaka-pilgrimage/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "[Dev] のぎラリー";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "位置情報を使用することで、聖地と現在までの位置関係を把握することができます。";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」すると最適化された広告が表示されます。許可したことによる個人情報へのアクセスはありません。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "kaitokudo2468110921.nogizaka-pilgrimage.dev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-Dev";
+		};
+		E7B1C0032F7E000100AB0003 /* Debug-Dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/nogizaka-pilgrimage.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/nogizaka-pilgrimage";
+			};
+			name = "Debug-Dev";
+		};
+		E7B1C0042F7E000100AB0004 /* Debug-Dev */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.icloud.kaitokudo2468110921.nogizaka-pilgrimageUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "nogizaka-pilgrimage";
+			};
+			name = "Debug-Dev";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		E749343D2959F20E0045AE39 /* Build configuration list for PBXProject "nogizaka-pilgrimage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E74934642959F2120045AE39 /* Debug */,
+				E7B1C0012F7E000100AB0001 /* Debug-Dev */,
+				E74934642959F2120045AE39 /* Debug-Prod */,
 				E74934652959F2120045AE39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1413,7 +1554,8 @@
 		E74934662959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E74934672959F2120045AE39 /* Debug */,
+				E7B1C0022F7E000100AB0002 /* Debug-Dev */,
+				E74934672959F2120045AE39 /* Debug-Prod */,
 				E74934682959F2120045AE39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1422,7 +1564,8 @@
 		E74934692959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E749346A2959F2120045AE39 /* Debug */,
+				E7B1C0032F7E000100AB0003 /* Debug-Dev */,
+				E749346A2959F2120045AE39 /* Debug-Prod */,
 				E749346B2959F2120045AE39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1431,7 +1574,8 @@
 		E749346C2959F2120045AE39 /* Build configuration list for PBXNativeTarget "nogizaka-pilgrimageUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E749346D2959F2120045AE39 /* Debug */,
+				E7B1C0042F7E000100AB0004 /* Debug-Dev */,
+				E749346D2959F2120045AE39 /* Debug-Prod */,
 				E749346E2959F2120045AE39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
