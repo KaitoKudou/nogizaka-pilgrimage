@@ -47,7 +47,6 @@ struct CheckInCompletionView: View {
                     }
                     .resizable()
                     .scaledToFill()
-                    .ignoresSafeArea()
                     .opacity(confettiOpacity)
                     .allowsHitTesting(false)
             }
