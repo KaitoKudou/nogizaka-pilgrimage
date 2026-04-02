@@ -5,6 +5,7 @@
 //  Created by k_kudo on 2026/03/31.
 //
 
+import Lottie
 import SwiftUI
 
 struct CheckInCompletionView: View {
@@ -12,6 +13,8 @@ struct CheckInCompletionView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: CheckInCompletionViewModel
     @State private var showSaveError = false
+    @State private var showConfetti = false
+    @State private var confettiOpacity: Double = 1.0
     @FocusState private var isMemoFocused: Bool
 
     init(input: CheckInCompletionInput) {
@@ -30,9 +33,35 @@ struct CheckInCompletionView: View {
         }
         .padding(.horizontal, 24)
         .background(.white)
+        .overlay {
+            if showConfetti {
+                LottieView(animation: .named("confetti"))
+                    .playing()
+                    .animationDidFinish { _ in
+                        withAnimation(.easeOut(duration: 0.2)) {
+                            confettiOpacity = 0
+                        } completion: {
+                            showConfetti = false
+                            confettiOpacity = 1.0
+                        }
+                    }
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(confettiOpacity)
+                    .allowsHitTesting(false)
+            }
+        }
         .onTapGesture { isMemoFocused = false }
         .interactiveDismissDisabled()
-        .task { await viewModel.onAppear() }
+        .onAppear {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            generator.notificationOccurred(.success)
+            showConfetti = true
+        }
+        .task {
+            await viewModel.onAppear()
+        }
     }
 
     // MARK: - Pilgrimage Info
