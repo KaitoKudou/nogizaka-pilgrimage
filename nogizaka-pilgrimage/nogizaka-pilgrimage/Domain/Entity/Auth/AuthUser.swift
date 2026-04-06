@@ -1,0 +1,14 @@
+//
+//  AuthUser.swift
+//  nogizaka-pilgrimage
+//
+//  Created by k_kudo on 2026/04/02.
+//
+
+import Foundation
+
+struct AuthUser: Equatable, Sendable {
+    let uid: String
+    let email: String?
+    let displayName: String?
+}

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum AuthError: Error {
+    case signInFailed
+    case signOutFailed
+    case missingIDToken
+    case cancelled
+}

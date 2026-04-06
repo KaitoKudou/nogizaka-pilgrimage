@@ -62,6 +62,16 @@ extension LocalizedStringResource {
     static let iconsBy = LocalizedStringResource("icons_by")
     static let icons8 = LocalizedStringResource("icons8")
 
+    // MARK: - アカウント
+    static let menuSectionAccount = LocalizedStringResource("menu_section_account")
+    static let menuSignInWithApple = LocalizedStringResource("menu_sign_in_with_apple")
+    static let menuSignOut = LocalizedStringResource("menu_sign_out")
+    static let menuSignedInAs = LocalizedStringResource("menu_signed_in_as")
+    static let alertSignOutConfirmation = LocalizedStringResource("alert_sign_out_confirmation")
+    static let alertSignInError = LocalizedStringResource("alert_sign_in_error")
+    static let alertSignOutError = LocalizedStringResource("alert_sign_out_error")
+    static let menuSignedInFallback = LocalizedStringResource("menu_signed_in_fallback")
+
     // MARK: - チェックイン完了モーダル
     static let checkInCompletionFirstPilgrimage = LocalizedStringResource("check_in_completion_first_pilgrimage")
     static let checkInCompletionNthPilgrimage = LocalizedStringResource("check_in_completion_nth_pilgrimage")

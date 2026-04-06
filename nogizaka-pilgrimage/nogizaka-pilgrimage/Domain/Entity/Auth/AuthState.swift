@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum AuthState: Equatable, Sendable {
+    /// 起動直後、Firebaseがキャッシュ済みトークンを確認する前
+    case unknown
+    case signedIn(AuthUser)
+    case signedOut
+}
