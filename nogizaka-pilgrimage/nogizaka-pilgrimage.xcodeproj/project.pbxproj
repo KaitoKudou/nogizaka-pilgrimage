@@ -53,6 +53,7 @@
 		E755E42A2F4DD95C00EF8E2F /* CheckInContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E755E4292F4DD95C00EF8E2F /* CheckInContentView.swift */; };
 		E757BB042E8AD58500035318 /* ReadableContentGuideModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */; };
 		E75907A92AD58F5E009327A8 /* ThemeEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */; };
+		E75C9C722F839E51004DEF09 /* MenuViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C9C712F839E51004DEF09 /* MenuViewModelTests.swift */; };
 		E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF15D2BD1630C00A1CB97 /* NativeAdvanceViewController.swift */; };
 		E76BF1602BD163E800A1CB97 /* NativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76BF15F2BD163E800A1CB97 /* NativeAdView.xib */; };
 		E76BF1652BD16FE700A1CB97 /* NativeAdvanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF1642BD16FE700A1CB97 /* NativeAdvanceView.swift */; };
@@ -60,6 +61,14 @@
 		E7738FA32BB45AA700C00F2F /* RouteActionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */; };
 		E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78276082BAC796000AD16CC /* NetworkMonitor.swift */; };
 		E79045B22B0E088100F0936B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79045B12B0E088100F0936B /* LocationManager.swift */; };
+		E79384C32F7EA3F700ED2D11 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C22F7EA3F700ED2D11 /* AuthUser.swift */; };
+		E79384C62F7EA42800ED2D11 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C52F7EA42800ED2D11 /* AuthState.swift */; };
+		E79384C82F7EA43600ED2D11 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C72F7EA43600ED2D11 /* AuthError.swift */; };
+		E79384CA2F7EA5EC00ED2D11 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C92F7EA5EC00ED2D11 /* AuthRepository.swift */; };
+		E79384CC2F7EA60000ED2D11 /* AuthRepository+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384CB2F7EA60000ED2D11 /* AuthRepository+Live.swift */; };
+		E79384CE2F7EA61E00ED2D11 /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384CD2F7EA61E00ED2D11 /* SignInUseCase.swift */; };
+		E79384D02F7EA62900ED2D11 /* SignOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384CF2F7EA62900ED2D11 /* SignOutUseCase.swift */; };
+		E79384D22F7EA73F00ED2D11 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384D12F7EA73F00ED2D11 /* AppleSignInHelper.swift */; };
 		E795AAB52F4DEA390062C9CE /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E795AAB42F4DEA390062C9CE /* FavoriteViewModel.swift */; };
 		E795AAB72F4DEA460062C9CE /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E795AAB62F4DEA460062C9CE /* FavoriteView.swift */; };
 		E795AABC2F4F37830062C9CE /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E795AABB2F4F37830062C9CE /* LaunchViewModel.swift */; };
@@ -99,12 +108,12 @@
 		E7A7905C2F7C038D0061403A /* CheckInCompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7905B2F7C038D0061403A /* CheckInCompletionViewModel.swift */; };
 		E7A7905E2F7C03A20061403A /* CheckInCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7905D2F7C03A20061403A /* CheckInCompletionView.swift */; };
 		E7A790612F7C03BC0061403A /* CheckInCompletionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A790602F7C03BC0061403A /* CheckInCompletionViewModelTests.swift */; };
-		E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */; };
 		E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931412F46053A00B94C75 /* IconLicenseView.swift */; };
 		E7B931462F473AA900B94C75 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931452F473AA900B94C75 /* MenuViewModel.swift */; };
 		E7B931482F4749AB00B94C75 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B931472F4749AB00B94C75 /* MenuView.swift */; };
 		E7B9CD572B8E26E9003FAB19 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */; };
 		E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */; };
+		E7B9CD5B2B8E26E9003FAB20 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD5A2B8E26E9003FAB20 /* FirebaseAuth */; };
 		E7BB04142F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB04132F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift */; };
 		E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E7C72A652E5F517300FC2378 /* CustomDump */; };
 		E7F4023E2F60555500226464 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = E7F4023D2F60555500226464 /* NukeUI */; };
@@ -170,7 +179,6 @@
 		E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nogizaka-pilgrimage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nogizaka_pilgrimageApp.swift; sourceTree = "<group>"; };
 		E74934492959F2120045AE39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E7B1C0052F7E100100AB0005 /* NogizakaStation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NogizakaStation.gpx; sourceTree = "<group>"; };
 		E749344C2959F2120045AE39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E74934522959F2120045AE39 /* nogizaka-pilgrimageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nogizaka-pilgrimageTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E749345C2959F2120045AE39 /* nogizaka-pilgrimageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nogizaka-pilgrimageUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +189,7 @@
 		E755E4292F4DD95C00EF8E2F /* CheckInContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInContentView.swift; sourceTree = "<group>"; };
 		E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableContentGuideModifier.swift; sourceTree = "<group>"; };
 		E75907A82AD58F5E009327A8 /* ThemeEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEnvironmentKey.swift; sourceTree = "<group>"; };
+		E75C9C712F839E51004DEF09 /* MenuViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModelTests.swift; sourceTree = "<group>"; };
 		E76BF15D2BD1630C00A1CB97 /* NativeAdvanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdvanceViewController.swift; sourceTree = "<group>"; };
 		E76BF15F2BD163E800A1CB97 /* NativeAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAdView.xib; sourceTree = "<group>"; };
 		E76BF1642BD16FE700A1CB97 /* NativeAdvanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdvanceView.swift; sourceTree = "<group>"; };
@@ -188,6 +197,15 @@
 		E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteActionClient.swift; sourceTree = "<group>"; };
 		E78276082BAC796000AD16CC /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E79045B12B0E088100F0936B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E79384C22F7EA3F700ED2D11 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
+		E79384C52F7EA42800ED2D11 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
+		E79384C72F7EA43600ED2D11 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		E79384C92F7EA5EC00ED2D11 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		E79384CB2F7EA60000ED2D11 /* AuthRepository+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthRepository+Live.swift"; sourceTree = "<group>"; };
+		E79384CD2F7EA61E00ED2D11 /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
+		E79384CF2F7EA62900ED2D11 /* SignOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutUseCase.swift; sourceTree = "<group>"; };
+		E79384D12F7EA73F00ED2D11 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
+		E79384D52F839A5200ED2D11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E795AAB42F4DEA390062C9CE /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		E795AAB62F4DEA460062C9CE /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		E795AABB2F4F37830062C9CE /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
@@ -230,6 +248,8 @@
 		E7A7905D2F7C03A20061403A /* CheckInCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInCompletionView.swift; sourceTree = "<group>"; };
 		E7A790602F7C03BC0061403A /* CheckInCompletionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInCompletionViewModelTests.swift; sourceTree = "<group>"; };
 		E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E7B1C0052F7E100100AB0005 /* NogizakaStation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NogizakaStation.gpx; sourceTree = "<group>"; };
+		E7B1C0062F7E200100AB0006 /* nogizaka-pilgrimage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "nogizaka-pilgrimage.entitlements"; sourceTree = "<group>"; };
 		E7B931412F46053A00B94C75 /* IconLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLicenseView.swift; sourceTree = "<group>"; };
 		E7B931452F473AA900B94C75 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		E7B931472F4749AB00B94C75 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -248,6 +268,7 @@
 				E795AAF12F54A0000062C9CE /* AppLogger in Frameworks */,
 				E747728F2D958B0100F659EF /* GoogleMobileAds in Frameworks */,
 				E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */,
+				E7B9CD5B2B8E26E9003FAB20 /* FirebaseAuth in Frameworks */,
 				E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */,
 				E795AADA2F51A2AB0062C9CE /* Dependencies in Frameworks */,
 				E79AC7ED2F7D617700754C51 /* Lottie in Frameworks */,
@@ -304,6 +325,7 @@
 				E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */,
 				E72EA3742F59C948007BFC81 /* SafariView.swift */,
 				E7A7903F2F7163B10061403A /* Constants.swift */,
+				E79384D12F7EA73F00ED2D11 /* AppleSignInHelper.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -325,6 +347,7 @@
 				E72EA3472F57042C007BFC81 /* CheckInRepository+Live.swift */,
 				E72EA3512F571698007BFC81 /* PilgrimageRepository+Live.swift */,
 				E72EA3572F5716D0007BFC81 /* AppConfigRepository+Live.swift */,
+				E79384CB2F7EA60000ED2D11 /* AuthRepository+Live.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -347,6 +370,7 @@
 				E72EA3452F5703C7007BFC81 /* CheckInRepository.swift */,
 				E72EA34F2F571683007BFC81 /* PilgrimageRepository.swift */,
 				E72EA3552F5716C2007BFC81 /* AppConfigRepository.swift */,
+				E79384C92F7EA5EC00ED2D11 /* AuthRepository.swift */,
 			);
 			path = RepositoryProtocol;
 			sourceTree = "<group>";
@@ -397,6 +421,8 @@
 			isa = PBXGroup;
 			children = (
 				E72EA3492F570441007BFC81 /* CheckInUseCase.swift */,
+				E79384CD2F7EA61E00ED2D11 /* SignInUseCase.swift */,
+				E79384CF2F7EA62900ED2D11 /* SignOutUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -425,6 +451,7 @@
 		E72EA3652F585D12007BFC81 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				E79384C42F7EA41500ED2D11 /* Auth */,
 				E72EA3662F585D20007BFC81 /* PilgrimageEntity.swift */,
 				E7A7904D2F7AA7FA0061403A /* RelatedMediaEntity.swift */,
 				E7A790372F7102F40061403A /* CheckInEntity.swift */,
@@ -498,6 +525,7 @@
 		E74934442959F20E0045AE39 /* nogizaka-pilgrimage */ = {
 			isa = PBXGroup;
 			children = (
+				E7B1C0062F7E200100AB0006 /* nogizaka-pilgrimage.entitlements */,
 				E72505702BB710F6002BFB34 /* Info.plist */,
 				E7B9CD502B8E2586003FAB19 /* Enviroment */,
 				E74934452959F20E0045AE39 /* nogizaka_pilgrimageApp.swift */,
@@ -549,6 +577,14 @@
 			path = CheckIn;
 			sourceTree = "<group>";
 		};
+		E75C9C702F839E41004DEF09 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				E75C9C712F839E51004DEF09 /* MenuViewModelTests.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		E76BF15C2BD162C200A1CB97 /* NativeAdvance */ = {
 			isa = PBXGroup;
 			children = (
@@ -557,6 +593,32 @@
 				E76BF1642BD16FE700A1CB97 /* NativeAdvanceView.swift */,
 			);
 			path = NativeAdvance;
+			sourceTree = "<group>";
+		};
+		E79384C42F7EA41500ED2D11 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				E79384C22F7EA3F700ED2D11 /* AuthUser.swift */,
+				E79384C52F7EA42800ED2D11 /* AuthState.swift */,
+				E79384C72F7EA43600ED2D11 /* AuthError.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		E79384D32F8399EF00ED2D11 /* Prod */ = {
+			isa = PBXGroup;
+			children = (
+				E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */,
+			);
+			path = Prod;
+			sourceTree = "<group>";
+		};
+		E79384D42F8399F800ED2D11 /* Dev */ = {
+			isa = PBXGroup;
+			children = (
+				E79384D52F839A5200ED2D11 /* GoogleService-Info.plist */,
+			);
+			path = Dev;
 			sourceTree = "<group>";
 		};
 		E795AAB32F4DEA2C0062C9CE /* Favorite */ = {
@@ -695,6 +757,7 @@
 		E7A790302F7024120061403A /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				E75C9C702F839E41004DEF09 /* Menu */,
 				E7A7905F2F7C03AE0061403A /* CheckInCompletion */,
 				E7A790342F7024440061403A /* Pilgrimage */,
 			);
@@ -822,7 +885,8 @@
 		E7B9CD502B8E2586003FAB19 /* Enviroment */ = {
 			isa = PBXGroup;
 			children = (
-				E7A9640F2BE291AB005338F3 /* GoogleService-Info.plist */,
+				E79384D42F8399F800ED2D11 /* Dev */,
+				E79384D32F8399EF00ED2D11 /* Prod */,
 			);
 			path = Enviroment;
 			sourceTree = "<group>";
@@ -853,6 +917,7 @@
 				E749343E2959F20E0045AE39 /* Sources */,
 				E749343F2959F20E0045AE39 /* Frameworks */,
 				E74934402959F20E0045AE39 /* Resources */,
+				E7B1C0072F7E300100AB0007 /* Copy GoogleService-Info.plist */,
 			);
 			buildRules = (
 			);
@@ -862,6 +927,7 @@
 			packageProductDependencies = (
 				E795AAF22F54A0000062C9CE /* AppLogger */,
 				E7B9CD562B8E26E9003FAB19 /* FirebaseAnalytics */,
+				E7B9CD5A2B8E26E9003FAB20 /* FirebaseAuth */,
 				E7B9CD582B8E26E9003FAB19 /* FirebaseFirestore */,
 				E710931C2BE13DAA005482F7 /* LicenseList */,
 				E747728E2D958B0100F659EF /* GoogleMobileAds */,
@@ -975,7 +1041,6 @@
 				E79AC7EB2F7D604700754C51 /* confetti.json in Resources */,
 				E76BF1602BD163E800A1CB97 /* NativeAdView.xib in Resources */,
 				E749344A2959F2120045AE39 /* Assets.xcassets in Resources */,
-				E7A964102BE291AB005338F3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -995,6 +1060,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E7B1C0072F7E300100AB0007 /* Copy GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(PROJECT_DIR)/nogizaka-pilgrimage/Enviroment/Dev/GoogleService-Info.plist",
+				"$(PROJECT_DIR)/nogizaka-pilgrimage/Enviroment/Prod/GoogleService-Info.plist",
+			);
+			name = "Copy GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).app/GoogleService-Info.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug-Dev\" ]; then\n    cp \"${PROJECT_DIR}/nogizaka-pilgrimage/Enviroment/Dev/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nelse\n    cp \"${PROJECT_DIR}/nogizaka-pilgrimage/Enviroment/Prod/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E749343E2959F20E0045AE39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1010,6 +1099,7 @@
 				E72EA34E2F57166E007BFC81 /* PilgrimageRemoteDataStore.swift in Sources */,
 				E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */,
 				E72EA3482F57042C007BFC81 /* CheckInRepository+Live.swift in Sources */,
+				E79384C62F7EA42800ED2D11 /* AuthState.swift in Sources */,
 				E795AAC82F50558E0062C9CE /* PilgrimageCardViewModel.swift in Sources */,
 				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
 				E755E4262F4DD85800EF8E2F /* CheckInViewModel.swift in Sources */,
@@ -1028,6 +1118,7 @@
 				E7A7902F2F7023F50061403A /* PilgrimageMapViewModel.swift in Sources */,
 				E7A790382F7102F40061403A /* CheckInEntity.swift in Sources */,
 				E72EA3542F5716B2007BFC81 /* AppConfigRemoteDataStore.swift in Sources */,
+				E79384D02F7EA62900ED2D11 /* SignOutUseCase.swift in Sources */,
 				E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */,
 				E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */,
 				E79045B22B0E088100F0936B /* LocationManager.swift in Sources */,
@@ -1036,9 +1127,11 @@
 				E72EA3672F585D20007BFC81 /* PilgrimageEntity.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E72EA3622F585CAE007BFC81 /* CheckInObject.swift in Sources */,
+				E79384CA2F7EA5EC00ED2D11 /* AuthRepository.swift in Sources */,
 				E7A790492F7171DF0061403A /* CheckInError.swift in Sources */,
 				E755E4282F4DD86900EF8E2F /* CheckInView.swift in Sources */,
 				E72EA3502F571683007BFC81 /* PilgrimageRepository.swift in Sources */,
+				E79384CC2F7EA60000ED2D11 /* AuthRepository+Live.swift in Sources */,
 				E72EA36B2F5866D0007BFC81 /* PilgrimageLocalDataStore.swift in Sources */,
 				E795AACC2F5055AA0062C9CE /* PilgrimageListViewModel.swift in Sources */,
 				E72EA3702F59B1BB007BFC81 /* AppUpdateInfoDTO.swift in Sources */,
@@ -1055,13 +1148,17 @@
 				E795AAB72F4DEA460062C9CE /* FavoriteView.swift in Sources */,
 				E755E42A2F4DD95C00EF8E2F /* CheckInContentView.swift in Sources */,
 				E72EA34A2F570441007BFC81 /* CheckInUseCase.swift in Sources */,
+				E79384CE2F7EA61E00ED2D11 /* SignInUseCase.swift in Sources */,
+				E79384C82F7EA43600ED2D11 /* AuthError.swift in Sources */,
 				E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */,
 				E72EA3642F585CF2007BFC81 /* SwiftDataClient.swift in Sources */,
 				E795AAB52F4DEA390062C9CE /* FavoriteViewModel.swift in Sources */,
+				E79384C32F7EA3F700ED2D11 /* AuthUser.swift in Sources */,
 				E72EA3462F5703C7007BFC81 /* CheckInRepository.swift in Sources */,
 				E7B931482F4749AB00B94C75 /* MenuView.swift in Sources */,
 				E7FDAA172AE230310056AA5B /* UINavigationControllerExtension.swift in Sources */,
 				E72EA3582F5716D0007BFC81 /* AppConfigRepository+Live.swift in Sources */,
+				E79384D22F7EA73F00ED2D11 /* AppleSignInHelper.swift in Sources */,
 				E7A7902B2F701DB20061403A /* MapCameraCommand.swift in Sources */,
 				E72EA33F2F55E7D2007BFC81 /* FavoriteRepository.swift in Sources */,
 				E795AAD02F5055BE0062C9CE /* PilgrimageListContentView.swift in Sources */,
@@ -1093,6 +1190,7 @@
 				E7A790522F7BF0200061403A /* RelatedMediaDTOTests.swift in Sources */,
 				E7A7903E2F715BA90061403A /* CheckInUseCaseTests.swift in Sources */,
 				E7A790442F71659F0061403A /* CheckInRepositoryTests.swift in Sources */,
+				E75C9C722F839E51004DEF09 /* MenuViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1262,6 +1360,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "nogizaka-pilgrimage/nogizaka-pilgrimage.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.8.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"nogizaka-pilgrimage/Preview Content\"";
@@ -1300,6 +1399,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "nogizaka-pilgrimage/nogizaka-pilgrimage.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.8.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"nogizaka-pilgrimage/Preview Content\"";
@@ -1469,9 +1569,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "nogizaka-pilgrimage/nogizaka-pilgrimage.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.8.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"nogizaka-pilgrimage/Preview Content\"";
@@ -1688,6 +1789,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		E7B9CD5A2B8E26E9003FAB20 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 		E7C72A652E5F517300FC2378 /* CustomDump */ = {
 			isa = XCSwiftPackageProductDependency;

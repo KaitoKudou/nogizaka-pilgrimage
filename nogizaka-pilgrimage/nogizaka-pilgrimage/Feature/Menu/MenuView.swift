@@ -30,6 +30,8 @@ struct MenuView: View {
         NavigationStack(path: $navigationPath) {
             VStack(spacing: .zero) {
                 List {
+                    accountSection
+
                     ForEach(sections, id: \.title) { section in
                         Section(section.title) {
                             ForEach(section.items, id: \.self) { item in
@@ -58,6 +60,47 @@ struct MenuView: View {
         .fullScreenCover(item: $safariURL) { url in
             SafariView(url: url)
                 .ignoresSafeArea()
+        }
+        .alert(
+            viewModel.activeAlert?.title ?? "",
+            isPresented: Binding(
+                get: { viewModel.activeAlert != nil },
+                set: { if !$0 { viewModel.activeAlert = nil } }
+            )
+        ) {
+            if viewModel.activeAlert == .signOutConfirmation {
+                Button(String(localized: .menuSignOut), role: .destructive) {
+                    viewModel.signOut()
+                }
+                Button(String(localized: .confirmationDialogCancel), role: .cancel) {}
+            }
+        }
+        .task {
+            await viewModel.observeAuthState()
+        }
+    }
+
+    // MARK: - Account
+
+    private var accountSection: some View {
+        Section(String(localized: .menuSectionAccount)) {
+            switch viewModel.authState {
+            case .unknown:
+                ProgressView()
+            case .signedOut:
+                Button(String(localized: .menuSignInWithApple)) {
+                    Task { await viewModel.signInWithApple() }
+                }
+                .disabled(viewModel.isSigningIn)
+            case .signedIn(let user):
+                let displayName = user.displayName ?? user.email ?? String(localized: .menuSignedInFallback)
+                Text(String(format: String(localized: .menuSignedInAs), displayName))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                Button(String(localized: .menuSignOut), role: .destructive) {
+                    viewModel.confirmSignOut()
+                }
+            }
         }
     }
 

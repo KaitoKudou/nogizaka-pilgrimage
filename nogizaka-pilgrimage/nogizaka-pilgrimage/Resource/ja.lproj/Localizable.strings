@@ -64,6 +64,16 @@
 "icons_by" = "Icons by";
 "icons8" = "Icons8";
 
+// MARK: - アカウント
+"menu_section_account" = "アカウント";
+"menu_sign_in_with_apple" = "Appleでサインイン";
+"menu_sign_out" = "サインアウト";
+"menu_signed_in_as" = "%@でサインイン中";
+"alert_sign_out_confirmation" = "サインアウトしますか？";
+"alert_sign_in_error" = "サインインに失敗しました。\n再度お試しください。";
+"alert_sign_out_error" = "サインアウトに失敗しました。";
+"menu_signed_in_fallback" = "Apple ID";
+
 // MARK: - チェックイン完了モーダル
 "check_in_completion_first_pilgrimage" = "最初の巡礼です🎉";
 "check_in_completion_nth_pilgrimage" = "%d回目の巡礼！";

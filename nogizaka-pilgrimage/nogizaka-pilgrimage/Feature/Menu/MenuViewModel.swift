@@ -43,11 +43,65 @@ final class MenuViewModel {
         case openURL(URL)
     }
 
+    enum AlertType: Equatable {
+        case signInError
+        case signOutError
+        case signOutConfirmation
+
+        var title: String {
+            switch self {
+            case .signInError: return String(localized: .alertSignInError)
+            case .signOutError: return String(localized: .alertSignOutError)
+            case .signOutConfirmation: return String(localized: .alertSignOutConfirmation)
+            }
+        }
+    }
+
     @ObservationIgnored
     @Dependency(BuildClient.self) private var buildClient
+    @ObservationIgnored
+    @Dependency(AuthRepository.self) private var authRepository
+    @ObservationIgnored
+    @Dependency(SignInUseCase.self) private var signInUseCase
+    @ObservationIgnored
+    @Dependency(SignOutUseCase.self) private var signOutUseCase
 
     var appVersion: String {
         buildClient.appVersion()
+    }
+
+    var authState: AuthState = .unknown
+    var activeAlert: AlertType?
+    var isSigningIn = false
+
+    func observeAuthState() async {
+        for await state in authRepository.observeAuthState() {
+            self.authState = state
+        }
+    }
+
+    func signInWithApple() async {
+        isSigningIn = true
+        defer { isSigningIn = false }
+        do {
+            _ = try await signInUseCase.execute()
+        } catch AuthError.cancelled {
+            // ユーザーがキャンセルした場合は何もしない
+        } catch {
+            activeAlert = .signInError
+        }
+    }
+
+    func confirmSignOut() {
+        activeAlert = .signOutConfirmation
+    }
+
+    func signOut() {
+        do {
+            try signOutUseCase.execute()
+        } catch {
+            activeAlert = .signOutError
+        }
     }
 
     func action(for item: MenuItem) -> Action? {
