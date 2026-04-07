@@ -85,11 +85,8 @@ struct PilgrimageDetailViewModelTests {
         await viewModel.checkIn(pilgrimage: testPilgrimage, userCoordinate: testCoordinate)
         #expect(viewModel.showSignInPromotion == true)
 
-        // サインイン成功で促進画面を閉じる
-        viewModel.onSignInPromotionCompleted(signedIn: true)
-
-        // pendingCheckInが実行されるまで待つ
-        try? await Task.sleep(for: .milliseconds(100))
+        // サインイン成功で促進画面を閉じる → pendingCheckInが実行される
+        await viewModel.onSignInPromotionCompleted(signedIn: true)
 
         #expect(viewModel.showSignInPromotion == false)
         #expect(checkInCalled.value == true)
@@ -112,7 +109,7 @@ struct PilgrimageDetailViewModelTests {
         await viewModel.checkIn(pilgrimage: testPilgrimage, userCoordinate: testCoordinate)
 
         // サインインせずに閉じる
-        viewModel.onSignInPromotionCompleted(signedIn: false)
+        await viewModel.onSignInPromotionCompleted(signedIn: false)
 
         #expect(viewModel.showSignInPromotion == false)
         #expect(checkInCalled.value == false)
