@@ -72,6 +72,13 @@ extension LocalizedStringResource {
     static let alertSignOutError = LocalizedStringResource("alert_sign_out_error")
     static let menuSignedInFallback = LocalizedStringResource("menu_signed_in_fallback")
 
+    // MARK: - サインイン促進
+    static let signInPromotionLaunchMessage = LocalizedStringResource("sign_in_promotion_launch_message")
+    static let signInPromotionLaunchDescription = LocalizedStringResource("sign_in_promotion_launch_description")
+    static let signInPromotionCheckInMessage = LocalizedStringResource("sign_in_promotion_check_in_message")
+    static let signInPromotionCheckInDescription = LocalizedStringResource("sign_in_promotion_check_in_description")
+    static let signInPromotionSkip = LocalizedStringResource("sign_in_promotion_skip")
+
     // MARK: - チェックイン完了モーダル
     static let checkInCompletionFirstPilgrimage = LocalizedStringResource("check_in_completion_first_pilgrimage")
     static let checkInCompletionNthPilgrimage = LocalizedStringResource("check_in_completion_nth_pilgrimage")

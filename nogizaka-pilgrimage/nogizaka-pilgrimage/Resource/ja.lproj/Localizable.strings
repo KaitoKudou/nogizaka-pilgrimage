@@ -74,6 +74,13 @@
 "alert_sign_out_error" = "サインアウトに失敗しました。";
 "menu_signed_in_fallback" = "Apple ID";
 
+// MARK: - サインイン促進
+"sign_in_promotion_launch_message" = "記録を守るために\nサインインしませんか？";
+"sign_in_promotion_launch_description" = "サインインすると、アプリを削除しても\n巡礼の記録が消えません。";
+"sign_in_promotion_check_in_message" = "巡礼を記録するには\nサインインが必要です";
+"sign_in_promotion_check_in_description" = "サインインすると記録がクラウドに保存され、\n機種変更やアプリの再インストール後も\n巡礼の記録を引き継げます。";
+"sign_in_promotion_skip" = "あとで";
+
 // MARK: - チェックイン完了モーダル
 "check_in_completion_first_pilgrimage" = "最初の巡礼です🎉";
 "check_in_completion_nth_pilgrimage" = "%d回目の巡礼！";

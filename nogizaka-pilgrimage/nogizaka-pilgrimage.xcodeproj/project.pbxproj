@@ -116,6 +116,14 @@
 		E7B9CD5B2B8E26E9003FAB20 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E7B9CD5A2B8E26E9003FAB20 /* FirebaseAuth */; };
 		E7BB04142F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB04132F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift */; };
 		E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E7C72A652E5F517300FC2378 /* CustomDump */; };
+		E7D0DC8F2F84080C002C877E /* SignInPromotionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0DC8E2F84080C002C877E /* SignInPromotionContext.swift */; };
+		E7D0DC922F84082F002C877E /* SignInPromotionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0DC912F84082F002C877E /* SignInPromotionClient.swift */; };
+		E7D0DC952F84096F002C877E /* SignInPromotionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0DC942F84096F002C877E /* SignInPromotionViewModel.swift */; };
+		E7D0DC972F840979002C877E /* SignInPromotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0DC962F840979002C877E /* SignInPromotionView.swift */; };
+		E7D0DC9A2F840D6B002C877E /* SignInPromotionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0DC992F840D6B002C877E /* SignInPromotionViewModelTests.swift */; };
+		E7D0DC9D2F840D84002C877E /* PilgrimageDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0DC9C2F840D84002C877E /* PilgrimageDetailViewModelTests.swift */; };
+		E7D0DCA02F8501EF002C877E /* DebugMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0DC9F2F8501EF002C877E /* DebugMenuView.swift */; };
+		E7D0DCA32F850349002C877E /* ShakeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0DCA22F850349002C877E /* ShakeDetector.swift */; };
 		E7F4023E2F60555500226464 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = E7F4023D2F60555500226464 /* NukeUI */; };
 		E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */; };
 		E7FDAA062AE029190056AA5B /* CurrentLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */; };
@@ -254,6 +262,14 @@
 		E7B931452F473AA900B94C75 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		E7B931472F4749AB00B94C75 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		E7BB04132F5B25A8008EFAAE /* LocalizedStringResource+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalizedStringResource+Keys.swift"; sourceTree = "<group>"; };
+		E7D0DC8E2F84080C002C877E /* SignInPromotionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPromotionContext.swift; sourceTree = "<group>"; };
+		E7D0DC912F84082F002C877E /* SignInPromotionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPromotionClient.swift; sourceTree = "<group>"; };
+		E7D0DC942F84096F002C877E /* SignInPromotionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPromotionViewModel.swift; sourceTree = "<group>"; };
+		E7D0DC962F840979002C877E /* SignInPromotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPromotionView.swift; sourceTree = "<group>"; };
+		E7D0DC992F840D6B002C877E /* SignInPromotionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPromotionViewModelTests.swift; sourceTree = "<group>"; };
+		E7D0DC9C2F840D84002C877E /* PilgrimageDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageDetailViewModelTests.swift; sourceTree = "<group>"; };
+		E7D0DC9F2F8501EF002C877E /* DebugMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenuView.swift; sourceTree = "<group>"; };
+		E7D0DCA22F850349002C877E /* ShakeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeDetector.swift; sourceTree = "<group>"; };
 		E7FDAA032ADFEB7E0056AA5B /* PilgrimageMapConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilgrimageMapConstant.swift; sourceTree = "<group>"; };
 		E7FDAA052AE029190056AA5B /* CurrentLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationButton.swift; sourceTree = "<group>"; };
 		E7FDAA102AE177CB0056AA5B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -299,6 +315,8 @@
 		E7178E832B073863008C85A3 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				E7D0DC9E2F8501E2002C877E /* Debug */,
+				E7D0DC932F840961002C877E /* SignInPromotion */,
 				E7A790582F7C03550061403A /* CheckInCompletion */,
 				E795AABF2F5055160062C9CE /* Pilgrimage */,
 				E795AAB82F4F372E0062C9CE /* Launch */,
@@ -314,6 +332,8 @@
 		E7235A70297D75B000E1339A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				E7D0DCA12F85033D002C877E /* Debug */,
+				E7D0DC902F840816002C877E /* Auth */,
 				E72EA3732F59B632007BFC81 /* Advertisement */,
 				E7235A71297D75D500E1339A /* Theme.swift */,
 				E76D0BD32AD557F000D6BB2B /* Theme+BarAppearance.swift */,
@@ -325,7 +345,6 @@
 				E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */,
 				E72EA3742F59C948007BFC81 /* SafariView.swift */,
 				E7A7903F2F7163B10061403A /* Constants.swift */,
-				E79384D12F7EA73F00ED2D11 /* AppleSignInHelper.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -601,6 +620,7 @@
 				E79384C22F7EA3F700ED2D11 /* AuthUser.swift */,
 				E79384C52F7EA42800ED2D11 /* AuthState.swift */,
 				E79384C72F7EA43600ED2D11 /* AuthError.swift */,
+				E7D0DC8E2F84080C002C877E /* SignInPromotionContext.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -757,6 +777,7 @@
 		E7A790302F7024120061403A /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				E7D0DC982F840D5A002C877E /* SignInPromotion */,
 				E75C9C702F839E41004DEF09 /* Menu */,
 				E7A7905F2F7C03AE0061403A /* CheckInCompletion */,
 				E7A790342F7024440061403A /* Pilgrimage */,
@@ -775,6 +796,7 @@
 		E7A790342F7024440061403A /* Pilgrimage */ = {
 			isa = PBXGroup;
 			children = (
+				E7D0DC9B2F840D78002C877E /* Detail */,
 				E7A790332F7024440061403A /* Map */,
 			);
 			path = Pilgrimage;
@@ -889,6 +911,56 @@
 				E79384D32F8399EF00ED2D11 /* Prod */,
 			);
 			path = Enviroment;
+			sourceTree = "<group>";
+		};
+		E7D0DC902F840816002C877E /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				E79384D12F7EA73F00ED2D11 /* AppleSignInHelper.swift */,
+				E7D0DC912F84082F002C877E /* SignInPromotionClient.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		E7D0DC932F840961002C877E /* SignInPromotion */ = {
+			isa = PBXGroup;
+			children = (
+				E7D0DC942F84096F002C877E /* SignInPromotionViewModel.swift */,
+				E7D0DC962F840979002C877E /* SignInPromotionView.swift */,
+			);
+			path = SignInPromotion;
+			sourceTree = "<group>";
+		};
+		E7D0DC982F840D5A002C877E /* SignInPromotion */ = {
+			isa = PBXGroup;
+			children = (
+				E7D0DC992F840D6B002C877E /* SignInPromotionViewModelTests.swift */,
+			);
+			path = SignInPromotion;
+			sourceTree = "<group>";
+		};
+		E7D0DC9B2F840D78002C877E /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E7D0DC9C2F840D84002C877E /* PilgrimageDetailViewModelTests.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		E7D0DC9E2F8501E2002C877E /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				E7D0DC9F2F8501EF002C877E /* DebugMenuView.swift */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		E7D0DCA12F85033D002C877E /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				E7D0DCA22F850349002C877E /* ShakeDetector.swift */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 		E7FD73D52959FDD000347BA4 /* Frameworks */ = {
@@ -1093,6 +1165,7 @@
 				E72EA33B2F55E7A3007BFC81 /* FavoriteLocalDataStore.swift in Sources */,
 				E757BB042E8AD58500035318 /* ReadableContentGuideModifier.swift in Sources */,
 				E795AACE2F5055B40062C9CE /* PilgrimageListView.swift in Sources */,
+				E7D0DC972F840979002C877E /* SignInPromotionView.swift in Sources */,
 				E72EA33D2F55E7B4007BFC81 /* FavoriteRemoteDataStore.swift in Sources */,
 				E7FDAA112AE177CB0056AA5B /* UIColorExtension.swift in Sources */,
 				E7A790402F7163B10061403A /* Constants.swift in Sources */,
@@ -1100,10 +1173,12 @@
 				E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */,
 				E72EA3482F57042C007BFC81 /* CheckInRepository+Live.swift in Sources */,
 				E79384C62F7EA42800ED2D11 /* AuthState.swift in Sources */,
+				E7D0DC8F2F84080C002C877E /* SignInPromotionContext.swift in Sources */,
 				E795AAC82F50558E0062C9CE /* PilgrimageCardViewModel.swift in Sources */,
 				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
 				E755E4262F4DD85800EF8E2F /* CheckInViewModel.swift in Sources */,
 				E72EA3752F59C948007BFC81 /* SafariView.swift in Sources */,
+				E7D0DCA02F8501EF002C877E /* DebugMenuView.swift in Sources */,
 				E7A7905E2F7C03A20061403A /* CheckInCompletionView.swift in Sources */,
 				E72EA3522F571698007BFC81 /* PilgrimageRepository+Live.swift in Sources */,
 				E795AABE2F4F37B50062C9CE /* LaunchView.swift in Sources */,
@@ -1111,6 +1186,7 @@
 				E72EA35E2F585C93007BFC81 /* PilgrimageObject.swift in Sources */,
 				E7A7904E2F7AA7FA0061403A /* RelatedMediaEntity.swift in Sources */,
 				E795AAC42F50556B0062C9CE /* PilgrimageDetailViewModel.swift in Sources */,
+				E7D0DCA32F850349002C877E /* ShakeDetector.swift in Sources */,
 				E7A7905A2F7C037F0061403A /* CheckInCompletionInput.swift in Sources */,
 				E7A7905C2F7C038D0061403A /* CheckInCompletionViewModel.swift in Sources */,
 				E74934462959F20E0045AE39 /* nogizaka_pilgrimageApp.swift in Sources */,
@@ -1124,6 +1200,7 @@
 				E79045B22B0E088100F0936B /* LocationManager.swift in Sources */,
 				E72EA35B2F585C6E007BFC81 /* PilgrimageDTO.swift in Sources */,
 				E7A7902D2F701E1C0061403A /* ClusterMapViewCoordinator.swift in Sources */,
+				E7D0DC952F84096F002C877E /* SignInPromotionViewModel.swift in Sources */,
 				E72EA3672F585D20007BFC81 /* PilgrimageEntity.swift in Sources */,
 				E7FDAA042ADFEB7E0056AA5B /* PilgrimageMapConstant.swift in Sources */,
 				E72EA3622F585CAE007BFC81 /* CheckInObject.swift in Sources */,
@@ -1151,6 +1228,7 @@
 				E79384CE2F7EA61E00ED2D11 /* SignInUseCase.swift in Sources */,
 				E79384C82F7EA43600ED2D11 /* AuthError.swift in Sources */,
 				E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */,
+				E7D0DC922F84082F002C877E /* SignInPromotionClient.swift in Sources */,
 				E72EA3642F585CF2007BFC81 /* SwiftDataClient.swift in Sources */,
 				E795AAB52F4DEA390062C9CE /* FavoriteViewModel.swift in Sources */,
 				E79384C32F7EA3F700ED2D11 /* AuthUser.swift in Sources */,
@@ -1183,12 +1261,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7D0DC9D2F840D84002C877E /* PilgrimageDetailViewModelTests.swift in Sources */,
 				E7A790362F7024600061403A /* PilgrimageMapViewModelTests.swift in Sources */,
 				E7A790562F7BF0F90061403A /* PilgrimageObjectTests.swift in Sources */,
 				E7A790612F7C03BC0061403A /* CheckInCompletionViewModelTests.swift in Sources */,
 				E7A790472F716A8F0061403A /* CheckInDTOTests.swift in Sources */,
 				E7A790522F7BF0200061403A /* RelatedMediaDTOTests.swift in Sources */,
 				E7A7903E2F715BA90061403A /* CheckInUseCaseTests.swift in Sources */,
+				E7D0DC9A2F840D6B002C877E /* SignInPromotionViewModelTests.swift in Sources */,
 				E7A790442F71659F0061403A /* CheckInRepositoryTests.swift in Sources */,
 				E75C9C722F839E51004DEF09 /* MenuViewModelTests.swift in Sources */,
 			);

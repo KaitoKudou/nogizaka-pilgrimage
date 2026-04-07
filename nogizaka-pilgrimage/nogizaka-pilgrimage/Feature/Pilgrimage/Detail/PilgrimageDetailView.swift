@@ -87,6 +87,11 @@ struct PilgrimageDetailView: View {
                     } message: {
                         EmptyView()
                     }
+                    .fullScreenCover(isPresented: $viewModel.showSignInPromotion) {
+                        SignInPromotionView(context: .checkIn) { signedIn in
+                            Task { await viewModel.onSignInPromotionCompleted(signedIn: signedIn) }
+                        }
+                    }
                     .frame(maxWidth: .infinity)
                     .background(Color(.textSecondary))
                     .foregroundStyle(.white)

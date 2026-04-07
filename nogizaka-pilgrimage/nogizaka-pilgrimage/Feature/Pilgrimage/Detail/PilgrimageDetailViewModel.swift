@@ -22,12 +22,16 @@ final class PilgrimageDetailViewModel {
     @ObservationIgnored
     @Dependency(NetworkMonitor.self) var networkMonitor
     @ObservationIgnored
+    @Dependency(SignInPromotionClient.self) var signInPromotionClient
+    @ObservationIgnored
     @Dependency(\.date) var date
 
     var isLoading = false
     var favorited = false
     var hasCheckedIn = false
     var checkInCompletion: CheckInCompletionInput?
+    var showSignInPromotion = false
+    private var pendingCheckIn: (pilgrimage: PilgrimageEntity, userCoordinate: CLLocationCoordinate2D)?
 
     enum AlertType {
         case notNearbyError
@@ -75,6 +79,25 @@ final class PilgrimageDetailViewModel {
     }
 
     func checkIn(pilgrimage: PilgrimageEntity, userCoordinate: CLLocationCoordinate2D) async {
+        if signInPromotionClient.shouldShowOnCheckIn() {
+            pendingCheckIn = (pilgrimage, userCoordinate)
+            showSignInPromotion = true
+            return
+        }
+        await performCheckIn(pilgrimage: pilgrimage, userCoordinate: userCoordinate)
+    }
+
+    func onSignInPromotionCompleted(signedIn: Bool) async {
+        showSignInPromotion = false
+        if signedIn, let pending = pendingCheckIn {
+            pendingCheckIn = nil
+            await performCheckIn(pilgrimage: pending.pilgrimage, userCoordinate: pending.userCoordinate)
+        } else {
+            pendingCheckIn = nil
+        }
+    }
+
+    private func performCheckIn(pilgrimage: PilgrimageEntity, userCoordinate: CLLocationCoordinate2D) async {
         isLoading = true
         defer { isLoading = false }
 
