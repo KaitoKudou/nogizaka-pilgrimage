@@ -13,6 +13,9 @@ struct MainView: View {
     @Environment(LocationManager.self) private var locationManager
     let pilgrimages: [PilgrimageEntity]
     let initialLocation: CLLocationCoordinate2D?
+    #if DEBUG
+    @State private var showDebugMenu = false
+    #endif
 
     var body: some View {
         TabView {
@@ -52,6 +55,14 @@ struct MainView: View {
             theme.styleTabBarGlobalAppearance()
             theme.styleNavigationBarGlobalAppearance()
         }
+        #if DEBUG
+        .onShake {
+            showDebugMenu = true
+        }
+        .sheet(isPresented: $showDebugMenu) {
+            DebugMenuView()
+        }
+        #endif
     }
 }
 

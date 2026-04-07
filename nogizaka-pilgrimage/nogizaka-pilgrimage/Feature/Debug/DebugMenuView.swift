@@ -19,7 +19,7 @@ struct DebugMenuView: View {
 
     private var userDefaultsItems: [(key: String, value: String)] {
         let keys = [
-            "lastSignInPromptVersion",
+            Constants.UserDefaultsKey.lastSignInPromptVersion,
             "hasMigratedFavoritesToLocal",
             "hasLoadedCheckInsOnce",
         ]
@@ -43,7 +43,7 @@ struct DebugMenuView: View {
                         showSignInPromotion = true
                     }
                     Button("表示済みフラグをリセット") {
-                        UserDefaults.standard.removeObject(forKey: "lastSignInPromptVersion")
+                        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.lastSignInPromptVersion)
                     }
                 }
 
