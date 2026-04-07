@@ -20,8 +20,6 @@ struct SignInPromotionClient {
 }
 
 extension SignInPromotionClient: DependencyKey {
-    private static let lastSignInPromptVersionKey = "lastSignInPromptVersion"
-
     static let liveValue: Self = {
         @Dependency(AuthRepository.self) var authRepository
         @Dependency(BuildClient.self) var buildClient
@@ -29,7 +27,7 @@ extension SignInPromotionClient: DependencyKey {
         return .init(
             shouldShowOnLaunch: {
                 guard authRepository.currentUser() == nil else { return false }
-                let lastVersion = UserDefaults.standard.string(forKey: lastSignInPromptVersionKey)
+                let lastVersion = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.lastSignInPromptVersion)
                 return lastVersion != buildClient.appVersion()
             },
             shouldShowOnCheckIn: {
@@ -37,7 +35,7 @@ extension SignInPromotionClient: DependencyKey {
             },
             markPromptShown: {
                 let version = buildClient.appVersion()
-                UserDefaults.standard.set(version, forKey: lastSignInPromptVersionKey)
+                UserDefaults.standard.set(version, forKey: Constants.UserDefaultsKey.lastSignInPromptVersion)
             }
         )
     }()

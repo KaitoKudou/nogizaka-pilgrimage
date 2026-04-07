@@ -21,10 +21,13 @@ final class LaunchViewModel {
     @Dependency(AppConfigRepository.self) var appConfigRepository
     @ObservationIgnored
     @Dependency(FavoriteMigrationClient.self) var favoriteMigration
+    @ObservationIgnored
+    @Dependency(SignInPromotionClient.self) var signInPromotionClient
 
     var pilgrimages: [PilgrimageEntity] = []
     var isLoading = true
     var pendingUpdate: AppUpdateInfoDTO?
+    var shouldShowSignInPromotion = false
 
     enum AlertType {
         case updatePromotion(AppUpdateInfoDTO)
@@ -53,6 +56,12 @@ final class LaunchViewModel {
         await checkForUpdate()
         await favoriteMigration.migrateIfNeeded()
         await fetchAllPilgrimages()
+        shouldShowSignInPromotion = signInPromotionClient.shouldShowOnLaunch()
+    }
+
+    func dismissSignInPromotion() {
+        shouldShowSignInPromotion = false
+        signInPromotionClient.markPromptShown()
     }
 
     func fetchAllPilgrimages() async {

@@ -8,6 +8,34 @@
 import AuthenticationServices
 import SwiftUI
 
+// MARK: - SignInWithAppleButtonWrapper
+
+/// HIG準拠のSignInWithAppleButtonをSignInUseCase経由で動作させるラッパー
+struct SignInWithAppleButtonWrapper: View {
+    let isDisabled: Bool
+    let action: () async -> Void
+
+    var body: some View {
+        SignInWithAppleButton(.signIn) { request in
+            request.requestedScopes = [.email, .fullName]
+        } onCompletion: { _ in }
+            .signInWithAppleButtonStyle(.black)
+            .frame(height: Constants.Layout.Button.signInWithAppleHeight)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .disabled(isDisabled)
+            .overlay {
+                Color.clear
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        Task { await action() }
+                    }
+            }
+            .accessibilityLabel(String(localized: .menuSignInWithApple))
+    }
+}
+
+// MARK: - SignInPromotionView
+
 struct SignInPromotionView: View {
     @State private var viewModel: SignInPromotionViewModel
     let onCompleted: (Bool) -> Void
@@ -65,22 +93,10 @@ struct SignInPromotionView: View {
 
             // ボタンエリア
             VStack(spacing: 12) {
-                SignInWithAppleButton(.signIn) { request in
-                    request.requestedScopes = [.email, .fullName]
-                } onCompletion: { _ in }
-                    .signInWithAppleButtonStyle(.black)
-                    .frame(height: 50)
-                    .cornerRadius(12)
-                    .disabled(viewModel.isSigningIn)
-                    .overlay {
-                        // SignInWithAppleButton のデフォルト動作を無効化し、
-                        // SignInUseCase 経由で認証を行う
-                        Color.clear
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                Task { await viewModel.signInWithApple() }
-                            }
-                    }
+                SignInWithAppleButtonWrapper(
+                    isDisabled: viewModel.isSigningIn,
+                    action: { await viewModel.signInWithApple() }
+                )
 
                 if viewModel.context.isDismissible {
                     Button(String(localized: .signInPromotionSkip)) {
@@ -95,7 +111,7 @@ struct SignInPromotionView: View {
             .padding(.bottom, 40)
         }
         .foregroundStyle(.primary)
-        .background(.white)
+        .background(Color(.systemBackground))
         .interactiveDismissDisabled()
         .alert(
             viewModel.activeAlert?.title ?? "",

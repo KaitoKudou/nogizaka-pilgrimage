@@ -88,10 +88,10 @@ struct MenuView: View {
             case .unknown:
                 ProgressView()
             case .signedOut:
-                Button(String(localized: .menuSignInWithApple)) {
-                    Task { await viewModel.signInWithApple() }
-                }
-                .disabled(viewModel.isSigningIn)
+                SignInWithAppleButtonWrapper(
+                    isDisabled: viewModel.isSigningIn,
+                    action: { await viewModel.signInWithApple() }
+                )
             case .signedIn(let user):
                 let displayName = user.displayName ?? user.email ?? String(localized: .menuSignedInFallback)
                 Text(String(format: String(localized: .menuSignedInAs), displayName))

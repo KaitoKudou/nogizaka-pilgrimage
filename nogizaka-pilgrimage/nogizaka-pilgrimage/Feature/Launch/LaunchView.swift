@@ -21,6 +21,11 @@ struct LaunchView: View {
             )
             .environment(\.theme, .system)
             .environment(locationManager)
+            .fullScreenCover(isPresented: $viewModel.shouldShowSignInPromotion) {
+                SignInPromotionView(context: .launch) { _ in
+                    viewModel.dismissSignInPromotion()
+                }
+            }
         } else {
             ZStack {
                 ProgressView()
