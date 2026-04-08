@@ -27,7 +27,7 @@ extension SignInPromotionClient: DependencyKey {
         return .init(
             shouldShowOnLaunch: {
                 guard authRepository.currentUser() == nil else { return false }
-                let lastVersion = UserDefaults.standard.string(forKey: Constants.UserDefaultsKey.lastSignInPromptVersion)
+                let lastVersion = UserDefaults.standard.string(forKey: UserDefaultsKey.lastSignInPromptVersion.rawValue)
                 return lastVersion != buildClient.appVersion()
             },
             shouldShowOnCheckIn: {
@@ -35,7 +35,7 @@ extension SignInPromotionClient: DependencyKey {
             },
             markPromptShown: {
                 let version = buildClient.appVersion()
-                UserDefaults.standard.set(version, forKey: Constants.UserDefaultsKey.lastSignInPromptVersion)
+                UserDefaults.standard.set(version, forKey: UserDefaultsKey.lastSignInPromptVersion.rawValue)
             }
         )
     }()

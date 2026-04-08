@@ -16,20 +16,18 @@ struct FavoriteMigrationClient {
 }
 
 extension FavoriteMigrationClient: DependencyKey {
-    private static let hasMigratedKey = "hasMigratedFavoritesToLocal"
-
     static let liveValue: Self = {
         @Dependency(FavoriteRemoteDataStore.self) var remoteDataStore
         @Dependency(FavoriteLocalDataStore.self) var localDataStore
 
         return .init(
             migrateIfNeeded: {
-                guard !UserDefaults.standard.bool(forKey: hasMigratedKey) else { return }
+                guard !UserDefaults.standard.bool(forKey: UserDefaultsKey.hasMigratedFavoritesToLocal.rawValue) else { return }
                 do {
                     let dtos = try await remoteDataStore.fetchAll()
                     let codes = dtos.map(\.code)
                     try await localDataStore.setAll(codes)
-                    UserDefaults.standard.set(true, forKey: hasMigratedKey)
+                    UserDefaults.standard.set(true, forKey: UserDefaultsKey.hasMigratedFavoritesToLocal.rawValue)
                 } catch {
                     #log(.error, "Favorite migration failed: \(error.localizedDescription)")
                 }

@@ -29,15 +29,13 @@ struct CheckInLocalDataStore {
 }
 
 extension CheckInLocalDataStore: DependencyKey {
-    private static let hasLoadedKey = "hasLoadedCheckInsOnce"
-
     static let liveValue: Self = {
         @Dependency(SwiftDataClient.self) var swiftDataClient
         let sortByCheckedInAt = SortDescriptor(\CheckInObject.checkedInAt)
 
         return .init(
             getAll: {
-                guard UserDefaults.standard.bool(forKey: hasLoadedKey) else { return nil }
+                guard UserDefaults.standard.bool(forKey: UserDefaultsKey.hasLoadedCheckInsOnce.rawValue) else { return nil }
                 let context = ModelContext(try swiftDataClient.container())
                 let descriptor = FetchDescriptor<CheckInObject>(
                     sortBy: [sortByCheckedInAt]
@@ -57,7 +55,7 @@ extension CheckInLocalDataStore: DependencyKey {
                     )
                 }
                 try context.save()
-                UserDefaults.standard.set(true, forKey: hasLoadedKey)
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.hasLoadedCheckInsOnce.rawValue)
             },
             add: { code, checkedInAt, memo in
                 let context = ModelContext(try swiftDataClient.container())
