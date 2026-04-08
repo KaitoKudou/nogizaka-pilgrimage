@@ -23,6 +23,9 @@ struct CheckInRemoteDataStore {
 }
 
 extension CheckInRemoteDataStore: DependencyKey {
+    static let rootCollection = "checked-in-list"
+    static let listSubcollection = "list"
+
     static let liveValue: Self = {
         return .init(
             fetchAll: {
@@ -65,10 +68,16 @@ extension CheckInRemoteDataStore: DependencyKey {
     }()
 
     private static func collectionRef() async -> CollectionReference {
-        let uuid = await UIDevice.current.identifierForVendor!.uuidString
+        @Dependency(AuthRepository.self) var authRepository
+        let documentId: String
+        if let user = authRepository.currentUser() {
+            documentId = user.uid
+        } else {
+            documentId = await UIDevice.current.identifierForVendor!.uuidString
+        }
         return Firestore.firestore()
-            .collection("checked-in-list")
-            .document(uuid)
-            .collection("list")
+            .collection(rootCollection)
+            .document(documentId)
+            .collection(listSubcollection)
     }
 }

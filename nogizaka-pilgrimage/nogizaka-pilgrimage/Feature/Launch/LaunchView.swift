@@ -23,7 +23,7 @@ struct LaunchView: View {
             .environment(locationManager)
             .fullScreenCover(isPresented: $viewModel.shouldShowSignInPromotion) {
                 SignInPromotionView(context: .launch) { _ in
-                    viewModel.dismissSignInPromotion()
+                    Task { await viewModel.dismissSignInPromotion() }
                 }
             }
         } else {
