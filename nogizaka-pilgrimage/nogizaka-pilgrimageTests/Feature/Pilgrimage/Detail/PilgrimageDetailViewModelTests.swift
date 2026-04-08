@@ -75,6 +75,7 @@ struct PilgrimageDetailViewModelTests {
             $0[CheckInUseCase.self].execute = { _, _ in
                 checkInCalled.setValue(true)
             }
+            $0[CheckInMigrationClient.self].migrateIfNeeded = {}
             $0[NetworkMonitor.self].monitorNetwork = {}
             $0.date = .constant(Date(timeIntervalSince1970: 1_700_000_000))
         } operation: {
@@ -90,6 +91,30 @@ struct PilgrimageDetailViewModelTests {
 
         #expect(viewModel.showSignInPromotion == false)
         #expect(checkInCalled.value == true)
+    }
+
+    @Test("サインイン成功後にマイグレーションがチェックインより先に実行される")
+    func onPromotionCompleted_signedIn_migratesBeforeCheckIn() async {
+        let callOrder = LockIsolated<[String]>([])
+
+        let viewModel = withDependencies {
+            $0[SignInPromotionClient.self].shouldShowOnCheckIn = { true }
+            $0[CheckInMigrationClient.self].migrateIfNeeded = {
+                callOrder.withValue { $0.append("migration") }
+            }
+            $0[CheckInUseCase.self].execute = { _, _ in
+                callOrder.withValue { $0.append("checkIn") }
+            }
+            $0[NetworkMonitor.self].monitorNetwork = {}
+            $0.date = .constant(Date(timeIntervalSince1970: 1_700_000_000))
+        } operation: {
+            PilgrimageDetailViewModel()
+        }
+
+        await viewModel.checkIn(pilgrimage: testPilgrimage, userCoordinate: testCoordinate)
+        await viewModel.onSignInPromotionCompleted(signedIn: true)
+
+        #expect(callOrder.value == ["migration", "checkIn"])
     }
 
     @Test("サインイン失敗後はpendingCheckInがクリアされる")
