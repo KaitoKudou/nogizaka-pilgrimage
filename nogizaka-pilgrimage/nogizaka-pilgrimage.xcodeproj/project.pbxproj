@@ -61,6 +61,9 @@
 		E7738FA32BB45AA700C00F2F /* RouteActionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */; };
 		E78276092BAC796000AD16CC /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78276082BAC796000AD16CC /* NetworkMonitor.swift */; };
 		E79045B22B0E088100F0936B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79045B12B0E088100F0936B /* LocationManager.swift */; };
+		E79352E72F867F8200940B3B /* CheckInMigrationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79352E62F867F8200940B3B /* CheckInMigrationClient.swift */; };
+		E79352E92F8682E600940B3B /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79352E82F8682E600940B3B /* UserDefaultsKey.swift */; };
+		E79352EC2F86843E00940B3B /* LaunchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79352EB2F86843E00940B3B /* LaunchViewModelTests.swift */; };
 		E79384C32F7EA3F700ED2D11 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C22F7EA3F700ED2D11 /* AuthUser.swift */; };
 		E79384C62F7EA42800ED2D11 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C52F7EA42800ED2D11 /* AuthState.swift */; };
 		E79384C82F7EA43600ED2D11 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C72F7EA43600ED2D11 /* AuthError.swift */; };
@@ -205,6 +208,9 @@
 		E7738FA22BB45AA700C00F2F /* RouteActionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteActionClient.swift; sourceTree = "<group>"; };
 		E78276082BAC796000AD16CC /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E79045B12B0E088100F0936B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E79352E62F867F8200940B3B /* CheckInMigrationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInMigrationClient.swift; sourceTree = "<group>"; };
+		E79352E82F8682E600940B3B /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		E79352EB2F86843E00940B3B /* LaunchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModelTests.swift; sourceTree = "<group>"; };
 		E79384C22F7EA3F700ED2D11 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		E79384C52F7EA42800ED2D11 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
 		E79384C72F7EA43600ED2D11 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -345,6 +351,7 @@
 				E757BB032E8AD58500035318 /* ReadableContentGuideModifier.swift */,
 				E72EA3742F59C948007BFC81 /* SafariView.swift */,
 				E7A7903F2F7163B10061403A /* Constants.swift */,
+				E79352E82F8682E600940B3B /* UserDefaultsKey.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -484,6 +491,7 @@
 			isa = PBXGroup;
 			children = (
 				E72EA36D2F586FEF007BFC81 /* FavoriteMigrationClient.swift */,
+				E79352E62F867F8200940B3B /* CheckInMigrationClient.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -612,6 +620,14 @@
 				E76BF1642BD16FE700A1CB97 /* NativeAdvanceView.swift */,
 			);
 			path = NativeAdvance;
+			sourceTree = "<group>";
+		};
+		E79352EA2F86843100940B3B /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				E79352EB2F86843E00940B3B /* LaunchViewModelTests.swift */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		E79384C42F7EA41500ED2D11 /* Auth */ = {
@@ -777,6 +793,7 @@
 		E7A790302F7024120061403A /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				E79352EA2F86843100940B3B /* Launch */,
 				E7D0DC982F840D5A002C877E /* SignInPromotion */,
 				E75C9C702F839E41004DEF09 /* Menu */,
 				E7A7905F2F7C03AE0061403A /* CheckInCompletion */,
@@ -1194,6 +1211,7 @@
 				E7A7902F2F7023F50061403A /* PilgrimageMapViewModel.swift in Sources */,
 				E7A790382F7102F40061403A /* CheckInEntity.swift in Sources */,
 				E72EA3542F5716B2007BFC81 /* AppConfigRemoteDataStore.swift in Sources */,
+				E79352E72F867F8200940B3B /* CheckInMigrationClient.swift in Sources */,
 				E79384D02F7EA62900ED2D11 /* SignOutUseCase.swift in Sources */,
 				E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */,
 				E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */,
@@ -1254,6 +1272,7 @@
 				E72EA3412F55E7DF007BFC81 /* FavoriteRepository+Live.swift in Sources */,
 				E76BF1652BD16FE700A1CB97 /* NativeAdvanceView.swift in Sources */,
 				E72EA3442F5703B1007BFC81 /* CheckInRemoteDataStore.swift in Sources */,
+				E79352E92F8682E600940B3B /* UserDefaultsKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1269,6 +1288,7 @@
 				E7A790522F7BF0200061403A /* RelatedMediaDTOTests.swift in Sources */,
 				E7A7903E2F715BA90061403A /* CheckInUseCaseTests.swift in Sources */,
 				E7D0DC9A2F840D6B002C877E /* SignInPromotionViewModelTests.swift in Sources */,
+				E79352EC2F86843E00940B3B /* LaunchViewModelTests.swift in Sources */,
 				E7A790442F71659F0061403A /* CheckInRepositoryTests.swift in Sources */,
 				E75C9C722F839E51004DEF09 /* MenuViewModelTests.swift in Sources */,
 			);

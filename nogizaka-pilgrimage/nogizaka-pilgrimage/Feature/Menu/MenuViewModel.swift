@@ -65,6 +65,8 @@ final class MenuViewModel {
     @Dependency(SignInUseCase.self) private var signInUseCase
     @ObservationIgnored
     @Dependency(SignOutUseCase.self) private var signOutUseCase
+    @ObservationIgnored
+    @Dependency(CheckInMigrationClient.self) private var checkInMigration
 
     var appVersion: String {
         buildClient.appVersion()
@@ -85,6 +87,7 @@ final class MenuViewModel {
         defer { isSigningIn = false }
         do {
             _ = try await signInUseCase.execute()
+            await checkInMigration.migrateIfNeeded()
         } catch AuthError.cancelled {
             // ユーザーがキャンセルした場合は何もしない
         } catch {

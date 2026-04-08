@@ -22,6 +22,8 @@ final class LaunchViewModel {
     @ObservationIgnored
     @Dependency(FavoriteMigrationClient.self) var favoriteMigration
     @ObservationIgnored
+    @Dependency(CheckInMigrationClient.self) var checkInMigration
+    @ObservationIgnored
     @Dependency(SignInPromotionClient.self) var signInPromotionClient
 
     var pilgrimages: [PilgrimageEntity] = []
@@ -55,13 +57,15 @@ final class LaunchViewModel {
     func initialize() async {
         await checkForUpdate()
         await favoriteMigration.migrateIfNeeded()
+        await checkInMigration.migrateIfNeeded()
         await fetchAllPilgrimages()
         shouldShowSignInPromotion = signInPromotionClient.shouldShowOnLaunch()
     }
 
-    func dismissSignInPromotion() {
+    func dismissSignInPromotion() async {
         shouldShowSignInPromotion = false
         signInPromotionClient.markPromptShown()
+        await checkInMigration.migrateIfNeeded()
     }
 
     func fetchAllPilgrimages() async {

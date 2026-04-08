@@ -24,6 +24,8 @@ final class PilgrimageDetailViewModel {
     @ObservationIgnored
     @Dependency(SignInPromotionClient.self) var signInPromotionClient
     @ObservationIgnored
+    @Dependency(CheckInMigrationClient.self) var checkInMigration
+    @ObservationIgnored
     @Dependency(\.date) var date
 
     var isLoading = false
@@ -91,6 +93,7 @@ final class PilgrimageDetailViewModel {
         showSignInPromotion = false
         if signedIn, let pending = pendingCheckIn {
             pendingCheckIn = nil
+            await checkInMigration.migrateIfNeeded()
             await performCheckIn(pilgrimage: pending.pilgrimage, userCoordinate: pending.userCoordinate)
         } else {
             pendingCheckIn = nil

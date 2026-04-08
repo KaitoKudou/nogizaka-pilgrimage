@@ -13,19 +13,17 @@ struct DebugMenuView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showSignInPromotion = false
     @State private var signInPromotionContext: SignInPromotionContext = .launch
+    // UserDefaultsや認証状態の変更後にViewの再描画を強制するためのカウンター
+    @State private var refreshCounter = 0
 
     @Dependency(SignInPromotionClient.self) private var signInPromotionClient
     @Dependency(AuthRepository.self) private var authRepository
 
     private var userDefaultsItems: [(key: String, value: String)] {
-        let keys = [
-            Constants.UserDefaultsKey.lastSignInPromptVersion,
-            "hasMigratedFavoritesToLocal",
-            "hasLoadedCheckInsOnce",
-        ]
-        return keys.map { key in
-            let value = UserDefaults.standard.object(forKey: key)
-            return (key: key, value: value.map { "\($0)" } ?? "(nil)")
+        _ = refreshCounter
+        return UserDefaultsKey.allCases.map { key in
+            let value = UserDefaults.standard.object(forKey: key.rawValue)
+            return (key: key.rawValue, value: value.map { "\($0)" } ?? "(nil)")
         }
     }
 
@@ -43,7 +41,16 @@ struct DebugMenuView: View {
                         showSignInPromotion = true
                     }
                     Button("表示済みフラグをリセット") {
-                        UserDefaults.standard.removeObject(forKey: Constants.UserDefaultsKey.lastSignInPromptVersion)
+                        UserDefaults.standard.removeObject(forKey: UserDefaultsKey.lastSignInPromptVersion.rawValue)
+                        refreshCounter += 1
+                    }
+                }
+
+                // MARK: - データ移行
+                Section("データ移行") {
+                    Button("チェックイン移行フラグをリセット") {
+                        UserDefaults.standard.removeObject(forKey: UserDefaultsKey.hasCompletedCheckInMigration.rawValue)
+                        refreshCounter += 1
                     }
                 }
 
@@ -58,6 +65,7 @@ struct DebugMenuView: View {
                             .foregroundStyle(Color(.secondaryLabel))
                         Button("サインアウト", role: .destructive) {
                             try? authRepository.signOut()
+                            refreshCounter += 1
                         }
                     } else {
                         Text("未サインイン")

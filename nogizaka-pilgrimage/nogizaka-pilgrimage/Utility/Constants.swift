@@ -17,10 +17,6 @@ enum Constants {
         }
     }
 
-    enum UserDefaultsKey {
-        static let lastSignInPromptVersion = "lastSignInPromptVersion"
-    }
-
     #if DEBUG
     enum Notification {
         static let deviceDidShake = NSNotification.Name("deviceDidShake")

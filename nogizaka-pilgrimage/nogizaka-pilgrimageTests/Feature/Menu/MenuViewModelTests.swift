@@ -71,6 +71,7 @@ struct MenuViewModelTests {
     func signIn_success_resetsIsSigningIn() async {
         let viewModel = withDependencies {
             $0[SignInUseCase.self].execute = { testUser }
+            $0[CheckInMigrationClient.self].migrateIfNeeded = {}
         } operation: {
             MenuViewModel()
         }
@@ -79,6 +80,24 @@ struct MenuViewModelTests {
 
         #expect(viewModel.isSigningIn == false)
         #expect(viewModel.activeAlert == nil)
+    }
+
+    @Test("signInWithAppleで成功時にチェックインマイグレーションが実行される")
+    func signIn_success_callsMigration() async {
+        let migrationCalled = LockIsolated(false)
+
+        let viewModel = withDependencies {
+            $0[SignInUseCase.self].execute = { testUser }
+            $0[CheckInMigrationClient.self].migrateIfNeeded = {
+                migrationCalled.setValue(true)
+            }
+        } operation: {
+            MenuViewModel()
+        }
+
+        await viewModel.signInWithApple()
+
+        #expect(migrationCalled.value == true)
     }
 
     @Test("signInWithAppleでキャンセル時にアラートが表示されない")
@@ -95,6 +114,24 @@ struct MenuViewModelTests {
         #expect(viewModel.isSigningIn == false)
     }
 
+    @Test("signInWithAppleでキャンセル時にマイグレーションは実行されない")
+    func signIn_cancelled_doesNotCallMigration() async {
+        let migrationCalled = LockIsolated(false)
+
+        let viewModel = withDependencies {
+            $0[SignInUseCase.self].execute = { throw AuthError.cancelled }
+            $0[CheckInMigrationClient.self].migrateIfNeeded = {
+                migrationCalled.setValue(true)
+            }
+        } operation: {
+            MenuViewModel()
+        }
+
+        await viewModel.signInWithApple()
+
+        #expect(migrationCalled.value == false)
+    }
+
     @Test("signInWithAppleでエラー時にsignInErrorアラートが表示される")
     func signIn_error_showsAlert() async {
         let viewModel = withDependencies {
@@ -107,6 +144,24 @@ struct MenuViewModelTests {
 
         #expect(viewModel.activeAlert == .signInError)
         #expect(viewModel.isSigningIn == false)
+    }
+
+    @Test("signInWithAppleでエラー時にマイグレーションは実行されない")
+    func signIn_error_doesNotCallMigration() async {
+        let migrationCalled = LockIsolated(false)
+
+        let viewModel = withDependencies {
+            $0[SignInUseCase.self].execute = { throw AuthError.signInFailed }
+            $0[CheckInMigrationClient.self].migrateIfNeeded = {
+                migrationCalled.setValue(true)
+            }
+        } operation: {
+            MenuViewModel()
+        }
+
+        await viewModel.signInWithApple()
+
+        #expect(migrationCalled.value == false)
     }
 
     // MARK: - signOut
