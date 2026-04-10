@@ -8,15 +8,8 @@
 import Foundation
 
 enum SignInPromotionContext: Equatable, Sendable {
-    /// アプリ起動時（スキップ可）
+    /// アプリ起動時のサインイン促進
     case launch
-    /// チェックイン時（スキップ不可）
+    /// チェックイン時のサインイン促進
     case checkIn
-
-    var isDismissible: Bool {
-        switch self {
-        case .launch: return true
-        case .checkIn: return false
-        }
-    }
 }

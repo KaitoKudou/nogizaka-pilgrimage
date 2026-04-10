@@ -13,8 +13,15 @@ import Foundation
 final class SignInPromotionViewModel {
     @ObservationIgnored
     @Dependency(SignInUseCase.self) private var signInUseCase
+    @ObservationIgnored
+    @Dependency(RemoteConfigClient.self) private var remoteConfigClient
 
     let context: SignInPromotionContext
+
+    var isDismissible: Bool {
+        guard case .launch = context else { return false }
+        return remoteConfigClient.canDismissSignInPrompt()
+    }
     var isSigningIn = false
     var isCompleted = false
     var isSignedIn = false

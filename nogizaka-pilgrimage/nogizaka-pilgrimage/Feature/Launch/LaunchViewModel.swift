@@ -25,6 +25,8 @@ final class LaunchViewModel {
     @Dependency(CheckInMigrationClient.self) var checkInMigration
     @ObservationIgnored
     @Dependency(SignInPromotionClient.self) var signInPromotionClient
+    @ObservationIgnored
+    @Dependency(RemoteConfigClient.self) var remoteConfigClient
 
     var pilgrimages: [PilgrimageEntity] = []
     var isLoading = true
@@ -55,6 +57,7 @@ final class LaunchViewModel {
     }
 
     func initialize() async {
+        await remoteConfigClient.fetchAndActivate()
         await checkForUpdate()
         await favoriteMigration.migrateIfNeeded()
         await checkInMigration.migrateIfNeeded()

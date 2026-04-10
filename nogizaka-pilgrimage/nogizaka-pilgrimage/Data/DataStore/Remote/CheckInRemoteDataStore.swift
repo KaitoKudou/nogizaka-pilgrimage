@@ -29,36 +29,39 @@ extension CheckInRemoteDataStore: DependencyKey {
     static let liveValue: Self = {
         return .init(
             fetchAll: {
+                guard let ref = await collectionRef() else { return [] }
                 do {
-                    let snapshot = try await collectionRef().getDocuments()
+                    let snapshot = try await ref.getDocuments()
                     return try snapshot.documents.map { try $0.data(as: CheckInDTO.self) }
                 } catch {
                     throw APIError.fetchError
                 }
             },
             add: { dto in
+                guard let ref = await collectionRef() else { throw APIError.updateError }
                 do {
-                    let ref = await collectionRef().document(dto.pilgrimageDTO.code)
-                    try ref.setData(from: dto)
+                    let docRef = ref.document(dto.pilgrimageDTO.code)
+                    try docRef.setData(from: dto)
                 } catch {
                     throw APIError.updateError
                 }
             },
             updateCheckedInAt: { code, newDate in
+                guard let ref = await collectionRef() else { throw APIError.updateError }
                 do {
-                    let ref = await collectionRef().document(code)
-                    try await ref.updateData(["checked_in_at": Timestamp(date: newDate)])
+                    try await ref.document(code).updateData(["checked_in_at": Timestamp(date: newDate)])
                 } catch {
                     throw APIError.updateError
                 }
             },
             updateMemo: { code, memo in
+                guard let ref = await collectionRef() else { throw APIError.updateError }
                 do {
-                    let ref = await collectionRef().document(code)
+                    let docRef = ref.document(code)
                     if let memo {
-                        try await ref.updateData(["memo": memo])
+                        try await docRef.updateData(["memo": memo])
                     } else {
-                        try await ref.updateData(["memo": FieldValue.delete()])
+                        try await docRef.updateData(["memo": FieldValue.delete()])
                     }
                 } catch {
                     throw APIError.updateError
@@ -67,12 +70,14 @@ extension CheckInRemoteDataStore: DependencyKey {
         )
     }()
 
-    private static func collectionRef() async -> CollectionReference {
+    private static func collectionRef() async -> CollectionReference? {
         @Dependency(AuthRepository.self) var authRepository
+        @Dependency(RemoteConfigClient.self) var remoteConfigClient
         let documentId: String
         if let user = authRepository.currentUser() {
             documentId = user.uid
         } else {
+            guard remoteConfigClient.isUUIDAccessEnabled() else { return nil }
             documentId = await UIDevice.current.identifierForVendor!.uuidString
         }
         return Firestore.firestore()
