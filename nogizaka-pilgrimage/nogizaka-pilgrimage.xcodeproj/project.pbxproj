@@ -64,6 +64,10 @@
 		E79352E72F867F8200940B3B /* CheckInMigrationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79352E62F867F8200940B3B /* CheckInMigrationClient.swift */; };
 		E79352E92F8682E600940B3B /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79352E82F8682E600940B3B /* UserDefaultsKey.swift */; };
 		E79352EC2F86843E00940B3B /* LaunchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79352EB2F86843E00940B3B /* LaunchViewModelTests.swift */; };
+		E79352EF2F87FB2600940B3B /* RemoteConfigClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79352EE2F87FB2600940B3B /* RemoteConfigClient.swift */; };
+		E79352F12F87FC2800940B3B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = E79352F02F87FC2800940B3B /* FirebaseRemoteConfig */; };
+		E79352F42F87FED600940B3B /* RemoteConfigParameterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79352F32F87FED600940B3B /* RemoteConfigParameterKey.swift */; };
+		E79352F62F8936BD00940B3B /* DebugRemoteConfigClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79352F52F8936BD00940B3B /* DebugRemoteConfigClient.swift */; };
 		E79384C32F7EA3F700ED2D11 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C22F7EA3F700ED2D11 /* AuthUser.swift */; };
 		E79384C62F7EA42800ED2D11 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C52F7EA42800ED2D11 /* AuthState.swift */; };
 		E79384C82F7EA43600ED2D11 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79384C72F7EA43600ED2D11 /* AuthError.swift */; };
@@ -211,6 +215,9 @@
 		E79352E62F867F8200940B3B /* CheckInMigrationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInMigrationClient.swift; sourceTree = "<group>"; };
 		E79352E82F8682E600940B3B /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		E79352EB2F86843E00940B3B /* LaunchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModelTests.swift; sourceTree = "<group>"; };
+		E79352EE2F87FB2600940B3B /* RemoteConfigClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigClient.swift; sourceTree = "<group>"; };
+		E79352F32F87FED600940B3B /* RemoteConfigParameterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigParameterKey.swift; sourceTree = "<group>"; };
+		E79352F52F8936BD00940B3B /* DebugRemoteConfigClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugRemoteConfigClient.swift; sourceTree = "<group>"; };
 		E79384C22F7EA3F700ED2D11 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		E79384C52F7EA42800ED2D11 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
 		E79384C72F7EA43600ED2D11 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -290,6 +297,7 @@
 				E795AAF12F54A0000062C9CE /* AppLogger in Frameworks */,
 				E747728F2D958B0100F659EF /* GoogleMobileAds in Frameworks */,
 				E7B9CD592B8E26E9003FAB19 /* FirebaseFirestore in Frameworks */,
+				E79352F12F87FC2800940B3B /* FirebaseRemoteConfig in Frameworks */,
 				E7B9CD5B2B8E26E9003FAB20 /* FirebaseAuth in Frameworks */,
 				E7C72A662E5F517300FC2378 /* CustomDump in Frameworks */,
 				E795AADA2F51A2AB0062C9CE /* Dependencies in Frameworks */,
@@ -381,6 +389,7 @@
 		E72EA3342F55D514007BFC81 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				E79352ED2F87FB1300940B3B /* RemoteConfig */,
 				E72EA36C2F586FE4007BFC81 /* Migration */,
 				E72EA3592F585C5B007BFC81 /* DTO */,
 				E72EA3372F55E75A007BFC81 /* DataStore */,
@@ -628,6 +637,24 @@
 				E79352EB2F86843E00940B3B /* LaunchViewModelTests.swift */,
 			);
 			path = Launch;
+			sourceTree = "<group>";
+		};
+		E79352ED2F87FB1300940B3B /* RemoteConfig */ = {
+			isa = PBXGroup;
+			children = (
+				E79352F22F87FEC100940B3B /* RemoteConfigParameter */,
+				E79352EE2F87FB2600940B3B /* RemoteConfigClient.swift */,
+				E79352F52F8936BD00940B3B /* DebugRemoteConfigClient.swift */,
+			);
+			path = RemoteConfig;
+			sourceTree = "<group>";
+		};
+		E79352F22F87FEC100940B3B /* RemoteConfigParameter */ = {
+			isa = PBXGroup;
+			children = (
+				E79352F32F87FED600940B3B /* RemoteConfigParameterKey.swift */,
+			);
+			path = RemoteConfigParameter;
 			sourceTree = "<group>";
 		};
 		E79384C42F7EA41500ED2D11 /* Auth */ = {
@@ -1025,6 +1052,7 @@
 				E795AADB2F51A2AB0062C9CE /* DependenciesMacros */,
 				E7F4023D2F60555500226464 /* NukeUI */,
 				E79AC7EC2F7D617700754C51 /* Lottie */,
+				E79352F02F87FC2800940B3B /* FirebaseRemoteConfig */,
 			);
 			productName = "nogizaka-pilgrimage";
 			productReference = E74934422959F20E0045AE39 /* nogizaka-pilgrimage.app */;
@@ -1190,6 +1218,7 @@
 				E7B931432F46053A00B94C75 /* IconLicenseView.swift in Sources */,
 				E72EA3482F57042C007BFC81 /* CheckInRepository+Live.swift in Sources */,
 				E79384C62F7EA42800ED2D11 /* AuthState.swift in Sources */,
+				E79352F62F8936BD00940B3B /* DebugRemoteConfigClient.swift in Sources */,
 				E7D0DC8F2F84080C002C877E /* SignInPromotionContext.swift in Sources */,
 				E795AAC82F50558E0062C9CE /* PilgrimageCardViewModel.swift in Sources */,
 				E73E09122965C21E00A1204E /* MainView.swift in Sources */,
@@ -1214,6 +1243,7 @@
 				E79352E72F867F8200940B3B /* CheckInMigrationClient.swift in Sources */,
 				E79384D02F7EA62900ED2D11 /* SignOutUseCase.swift in Sources */,
 				E76BF15E2BD1630C00A1CB97 /* NativeAdvanceViewController.swift in Sources */,
+				E79352F42F87FED600940B3B /* RemoteConfigParameterKey.swift in Sources */,
 				E79D8C982E438635006170C3 /* PilgrimageAnnotation.swift in Sources */,
 				E79045B22B0E088100F0936B /* LocationManager.swift in Sources */,
 				E72EA35B2F585C6E007BFC81 /* PilgrimageDTO.swift in Sources */,
@@ -1230,6 +1260,7 @@
 				E72EA36B2F5866D0007BFC81 /* PilgrimageLocalDataStore.swift in Sources */,
 				E795AACC2F5055AA0062C9CE /* PilgrimageListViewModel.swift in Sources */,
 				E72EA3702F59B1BB007BFC81 /* AppUpdateInfoDTO.swift in Sources */,
+				E79352EF2F87FB2600940B3B /* RemoteConfigClient.swift in Sources */,
 				E71A82792BE200B700C16FEE /* BuildClient.swift in Sources */,
 				E79D8C922E43859C006170C3 /* ClusterMapView.swift in Sources */,
 				E72EA3602F585CA1007BFC81 /* FavoriteObject.swift in Sources */,
@@ -1860,6 +1891,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E747728D2D958B0100F659EF /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		E79352F02F87FC2800940B3B /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7B9CD552B8E26E9003FAB19 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
 		};
 		E795AAD92F51A2AB0062C9CE /* Dependencies */ = {
 			isa = XCSwiftPackageProductDependency;

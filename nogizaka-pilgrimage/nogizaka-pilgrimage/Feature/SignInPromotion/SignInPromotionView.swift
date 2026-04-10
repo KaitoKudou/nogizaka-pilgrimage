@@ -98,7 +98,7 @@ struct SignInPromotionView: View {
                     action: { await viewModel.signInWithApple() }
                 )
 
-                if viewModel.context.isDismissible {
+                if viewModel.isDismissible {
                     Button(String(localized: .signInPromotionSkip)) {
                         viewModel.skip()
                     }

@@ -22,8 +22,6 @@ final class PilgrimageDetailViewModel {
     @ObservationIgnored
     @Dependency(NetworkMonitor.self) var networkMonitor
     @ObservationIgnored
-    @Dependency(SignInPromotionClient.self) var signInPromotionClient
-    @ObservationIgnored
     @Dependency(CheckInMigrationClient.self) var checkInMigration
     @ObservationIgnored
     @Dependency(\.date) var date
@@ -81,11 +79,6 @@ final class PilgrimageDetailViewModel {
     }
 
     func checkIn(pilgrimage: PilgrimageEntity, userCoordinate: CLLocationCoordinate2D) async {
-        if signInPromotionClient.shouldShowOnCheckIn() {
-            pendingCheckIn = (pilgrimage, userCoordinate)
-            showSignInPromotion = true
-            return
-        }
         await performCheckIn(pilgrimage: pilgrimage, userCoordinate: userCoordinate)
     }
 
@@ -121,6 +114,9 @@ final class PilgrimageDetailViewModel {
                 checkedInAt: date.now,
                 isOnline: isOnline
             )
+        } catch CheckInError.signInRequired {
+            pendingCheckIn = (pilgrimage, userCoordinate)
+            showSignInPromotion = true
         } catch is CheckInError {
             activeAlert = .notNearbyError
         } catch is APIError {

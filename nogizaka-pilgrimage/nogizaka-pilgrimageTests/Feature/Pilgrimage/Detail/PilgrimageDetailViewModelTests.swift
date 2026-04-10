@@ -29,7 +29,6 @@ struct PilgrimageDetailViewModelTests {
         let checkInCalled = LockIsolated(false)
 
         let viewModel = withDependencies {
-            $0[SignInPromotionClient.self].shouldShowOnCheckIn = { false }
             $0[CheckInUseCase.self].execute = { _, _ in
                 checkInCalled.setValue(true)
             }
@@ -45,14 +44,11 @@ struct PilgrimageDetailViewModelTests {
         #expect(viewModel.showSignInPromotion == false)
     }
 
-    @Test("未サインインでcheckInするとサインイン促進が表示される")
-    func checkIn_notSignedIn_showsPromotion() async {
-        let checkInCalled = LockIsolated(false)
-
+    @Test("UseCaseがsignInRequiredをスローするとサインイン促進が表示される")
+    func checkIn_signInRequired_showsPromotion() async {
         let viewModel = withDependencies {
-            $0[SignInPromotionClient.self].shouldShowOnCheckIn = { true }
             $0[CheckInUseCase.self].execute = { _, _ in
-                checkInCalled.setValue(true)
+                throw CheckInError.signInRequired
             }
         } operation: {
             PilgrimageDetailViewModel()
@@ -61,7 +57,6 @@ struct PilgrimageDetailViewModelTests {
         await viewModel.checkIn(pilgrimage: testPilgrimage, userCoordinate: testCoordinate)
 
         #expect(viewModel.showSignInPromotion == true)
-        #expect(checkInCalled.value == false)
     }
 
     // MARK: - サインイン促進完了後
@@ -69,10 +64,14 @@ struct PilgrimageDetailViewModelTests {
     @Test("サインイン成功後にpendingCheckInが実行される")
     func onPromotionCompleted_signedIn_resumesCheckIn() async {
         let checkInCalled = LockIsolated(false)
+        let callCount = LockIsolated(0)
 
         let viewModel = withDependencies {
-            $0[SignInPromotionClient.self].shouldShowOnCheckIn = { true }
             $0[CheckInUseCase.self].execute = { _, _ in
+                let count = callCount.withValue { $0 += 1; return $0 }
+                if count == 1 {
+                    throw CheckInError.signInRequired
+                }
                 checkInCalled.setValue(true)
             }
             $0[CheckInMigrationClient.self].migrateIfNeeded = {}
@@ -82,7 +81,7 @@ struct PilgrimageDetailViewModelTests {
             PilgrimageDetailViewModel()
         }
 
-        // チェックイン試行 → 促進画面表示
+        // チェックイン試行 → signInRequired → 促進画面表示
         await viewModel.checkIn(pilgrimage: testPilgrimage, userCoordinate: testCoordinate)
         #expect(viewModel.showSignInPromotion == true)
 
@@ -96,13 +95,17 @@ struct PilgrimageDetailViewModelTests {
     @Test("サインイン成功後にマイグレーションがチェックインより先に実行される")
     func onPromotionCompleted_signedIn_migratesBeforeCheckIn() async {
         let callOrder = LockIsolated<[String]>([])
+        let callCount = LockIsolated(0)
 
         let viewModel = withDependencies {
-            $0[SignInPromotionClient.self].shouldShowOnCheckIn = { true }
             $0[CheckInMigrationClient.self].migrateIfNeeded = {
                 callOrder.withValue { $0.append("migration") }
             }
             $0[CheckInUseCase.self].execute = { _, _ in
+                let count = callCount.withValue { $0 += 1; return $0 }
+                if count == 1 {
+                    throw CheckInError.signInRequired
+                }
                 callOrder.withValue { $0.append("checkIn") }
             }
             $0[NetworkMonitor.self].monitorNetwork = {}
@@ -122,9 +125,8 @@ struct PilgrimageDetailViewModelTests {
         let checkInCalled = LockIsolated(false)
 
         let viewModel = withDependencies {
-            $0[SignInPromotionClient.self].shouldShowOnCheckIn = { true }
             $0[CheckInUseCase.self].execute = { _, _ in
-                checkInCalled.setValue(true)
+                throw CheckInError.signInRequired
             }
         } operation: {
             PilgrimageDetailViewModel()
