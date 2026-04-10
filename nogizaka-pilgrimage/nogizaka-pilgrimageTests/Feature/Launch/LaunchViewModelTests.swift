@@ -22,6 +22,7 @@ struct LaunchViewModelTests {
         let migrationCalled = LockIsolated(false)
 
         let viewModel = withDependencies {
+            $0[RemoteConfigClient.self].fetchAndActivate = {}
             $0[BuildClient.self].appVersion = { "1.0.0" }
             $0[FavoriteMigrationClient.self].migrateIfNeeded = {}
             $0[CheckInMigrationClient.self].migrateIfNeeded = {

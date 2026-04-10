@@ -31,6 +31,27 @@ struct CheckInUseCaseTests {
     /// テスト用の固定日時
     private static let fixedDate = Date(timeIntervalSince1970: 1_700_000_000)
 
+    /// テスト用の認証ユーザー
+    private static let testUser = AuthUser(uid: "test-uid", email: "test@example.com", displayName: "テスト")
+
+    // MARK: - サインイン必須
+
+    @Test("未認証ではCheckInError.signInRequiredがスローされる")
+    func execute_notSignedIn_throws() async {
+        await #expect(throws: CheckInError.signInRequired) {
+            try await withDependencies {
+                $0[AuthRepository.self].currentUser = { nil }
+                $0[CheckInRepository.self].addCheckIn = { _, _, _ in }
+                $0.date = .constant(Self.fixedDate)
+            } operation: {
+                try await UseCase.liveValue.execute(
+                    pilgrimage: Self.nogizakaStation,
+                    userCoordinate: Self.nearNogizaka
+                )
+            }
+        }
+    }
+
     // MARK: - チェックイン成功
 
     @Test("チェックイン成功時にcheckedInAtが自動保存される")
@@ -38,6 +59,7 @@ struct CheckInUseCaseTests {
         let savedDate = LockIsolated<Date?>(nil)
 
         try await withDependencies {
+            $0[AuthRepository.self].currentUser = { Self.testUser }
             $0[CheckInRepository.self].addCheckIn = { _, checkedInAt, _ in
                 savedDate.setValue(checkedInAt)
             }
@@ -57,6 +79,7 @@ struct CheckInUseCaseTests {
         let savedMemo = LockIsolated<String??>(nil) // Optional<Optional<String>> で「呼ばれたか」と「値」を区別
 
         try await withDependencies {
+            $0[AuthRepository.self].currentUser = { Self.testUser }
             $0[CheckInRepository.self].addCheckIn = { _, _, memo in
                 savedMemo.setValue(memo)
             }
@@ -74,9 +97,10 @@ struct CheckInUseCaseTests {
     // MARK: - 距離バリデーション
 
     @Test("200m圏外ではCheckInError.notNearbyがスローされる")
-    func execute_notNearby_throws() async throws {
+    func execute_notNearby_throws() async {
         await #expect(throws: CheckInError.notNearby) {
             try await withDependencies {
+                $0[AuthRepository.self].currentUser = { Self.testUser }
                 $0[CheckInRepository.self].addCheckIn = { _, _, _ in }
                 $0.date = .constant(Self.fixedDate)
             } operation: {

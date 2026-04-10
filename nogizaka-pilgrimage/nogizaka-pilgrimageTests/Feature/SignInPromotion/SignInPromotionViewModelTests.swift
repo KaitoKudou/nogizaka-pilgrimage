@@ -90,15 +90,38 @@ struct SignInPromotionViewModelTests {
         #expect(viewModel.isSignedIn == false)
     }
 
-    // MARK: - context
+    // MARK: - isDismissible
 
-    @Test("launchコンテキストはスキップ可能")
-    func launch_isDismissible() {
-        #expect(SignInPromotionContext.launch.isDismissible == true)
+    @Test("launchコンテキスト + canDismiss=true → スキップ可能")
+    func launch_canDismiss_isDismissible() {
+        let viewModel = withDependencies {
+            $0[RemoteConfigClient.self].canDismissSignInPrompt = { true }
+        } operation: {
+            SignInPromotionViewModel(context: .launch)
+        }
+
+        #expect(viewModel.isDismissible == true)
     }
 
-    @Test("checkInコンテキストはスキップ不可")
+    @Test("launchコンテキスト + canDismiss=false → スキップ不可")
+    func launch_cannotDismiss_isNotDismissible() {
+        let viewModel = withDependencies {
+            $0[RemoteConfigClient.self].canDismissSignInPrompt = { false }
+        } operation: {
+            SignInPromotionViewModel(context: .launch)
+        }
+
+        #expect(viewModel.isDismissible == false)
+    }
+
+    @Test("checkInコンテキストはcanDismissに関わらずスキップ不可")
     func checkIn_isNotDismissible() {
-        #expect(SignInPromotionContext.checkIn.isDismissible == false)
+        let viewModel = withDependencies {
+            $0[RemoteConfigClient.self].canDismissSignInPrompt = { true }
+        } operation: {
+            SignInPromotionViewModel(context: .checkIn)
+        }
+
+        #expect(viewModel.isDismissible == false)
     }
 }
