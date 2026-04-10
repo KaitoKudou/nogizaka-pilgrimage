@@ -17,10 +17,15 @@ struct CheckInUseCase {
 extension CheckInUseCase: DependencyKey {
     static let liveValue: Self = {
         @Dependency(CheckInRepository.self) var checkInRepository
+        @Dependency(AuthRepository.self) var authRepository
         @Dependency(\.date) var date
 
         return .init(
             execute: { pilgrimage, userCoordinate in
+                guard authRepository.currentUser() != nil else {
+                    throw CheckInError.signInRequired
+                }
+
                 let distanceThreshold = 200.0
                 let userLocation = CLLocation(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
                 let pilgrimageLocation = CLLocation(

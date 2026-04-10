@@ -10,4 +10,5 @@ import Foundation
 enum CheckInError: Error {
     case notNearby
     case memoTooLong
+    case signInRequired
 }
