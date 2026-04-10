@@ -18,6 +18,13 @@ struct DebugMenuView: View {
 
     @Dependency(SignInPromotionClient.self) private var signInPromotionClient
     @Dependency(AuthRepository.self) private var authRepository
+    @Dependency(DebugRemoteConfigClient.self) private var debugRemoteConfigClient
+
+    private var remoteConfigItems: [(key: String, value: String)] {
+        debugRemoteConfigClient.allConfig()
+            .sorted { $0.key < $1.key }
+            .map { (key: $0.key, value: $0.value) }
+    }
 
     private var userDefaultsItems: [(key: String, value: String)] {
         _ = refreshCounter
@@ -43,6 +50,30 @@ struct DebugMenuView: View {
                     Button("表示済みフラグをリセット") {
                         UserDefaults.standard.removeObject(forKey: UserDefaultsKey.lastSignInPromptVersion.rawValue)
                         refreshCounter += 1
+                    }
+                }
+
+                // MARK: - Remote Config
+                Section("Remote Config") {
+                    if let lastFetchTime = debugRemoteConfigClient.lastFetchTime() {
+                        HStack {
+                            Text("lastFetchTime")
+                                .font(.caption)
+                            Spacer()
+                            Text(lastFetchTime.formatted(date: .abbreviated, time: .standard))
+                                .font(.caption)
+                                .foregroundStyle(Color(.secondaryLabel))
+                        }
+                    }
+                    ForEach(remoteConfigItems, id: \.key) { item in
+                        HStack {
+                            Text(item.key)
+                                .font(.caption)
+                            Spacer()
+                            Text(item.value)
+                                .font(.caption)
+                                .foregroundStyle(Color(.secondaryLabel))
+                        }
                     }
                 }
 
